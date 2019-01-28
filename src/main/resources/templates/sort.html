@@ -1,0 +1,8 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div th:replace="fragments/header :: cabecera"><p>Hello!</p></div>
+<div><p><span th:text="${size}"/> items sorted <span th:text="${times}"/> times in <span th:text="${elapsed}"/>ms</p></div>
+</body>
+</html>
