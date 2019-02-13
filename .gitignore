@@ -1,61 +1,44 @@
-*.class
-.idea
-*.iml
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Package Files #
-*.jar
-*.war
-*.ear
-.classpath
-.settings/*
-/target
+# compiled output
+/dist
+/tmp
+/out-tsc
 
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
+# dependencies
+/node_modules
 
-# Eclipse Core
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+# IDEs and editors
+/.idea
 .project
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
-
-# CDT-specific (C/C++ Development Tooling)
-.cproject
-
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# Java annotation processor (APT)
-.factorypath
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
-# PDT-specific (PHP Development Tools)
-.buildpath
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
 
-# sbteclipse plugin
-.target
-
-# Tern plugin
-.tern-project
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
-.springBeans
-
-# Code Recommenders
-.recommenders/
+# System Files
+.DS_Store
+Thumbs.db
