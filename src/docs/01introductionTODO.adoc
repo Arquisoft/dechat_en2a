@@ -28,8 +28,7 @@ Short textual description, probably in tabular use-case format.
 If requirements documents exist this overview should refer to these documents.
 
 Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
-
-*Requirements:
+Requirements:
     * Chat between at least two different users.
     * Use of distributed computing system.
     * Good performace sending and receiving information.
