@@ -28,6 +28,15 @@ Short textual description, probably in tabular use-case format.
 If requirements documents exist this overview should refer to these documents.
 
 Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
+
+*Requirements:
+    * Chat between at least two different users.
+    * Use of distributed computing system.
+    * Good performace sending and receiving information.
+    * Possibility of deleting own messages of the store location.
+    * Multi-platform. 
+    
+    
 ****
 
 === Quality Goals
@@ -43,6 +52,12 @@ If you as an architect do not know how the quality of your work will be judged â
 
 .Form
 A table with quality goals and concrete scenarios, ordered by priorities
+[options="header",cols="1,2,2"]
+|===
+|Role/Name|Contact|Expectations
+| _<Goal-1>_ | _<Scenarios-1>_ | _<Priority-1>_
+| _<Goal-2>_ | _<Scenarios-2>_ | _<Priority-2>_
+|===
 ****
 
 === Stakeholders
