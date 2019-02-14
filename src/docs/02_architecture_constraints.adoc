@@ -1,19 +1,42 @@
 [[section-architecture-constraints]]
 == Architecture Constraints
 
+In this section the constraints put on the project are shown subdivided in the three main groups. All our architectural decisions will be discussed taking this list into account.
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+.Technical Constraints
+[width="100%",cols="1,5,10",options="header"]
+|=========================================================
+||Constraint |Background/motivation
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****
+|TC1 | SOLID | The main goal of SOLID is decentralization and ownership of our own data. This affects our choices of data storage and limits them to the SOLID PODs.
+
+|TC2 | OS independent | The app must run on any OS with minimal changes, thus ensuring maximum market coverage.
+
+|TC3 | Linked Data Principles | If we follow the principles and standards a completely different chat application could use the conversation data seamlessly.
+
+|=========================================================
+
+
+.Organizational Constraints
+[width="100%",cols="1,5,10",options="header"]
+|=========================================================
+||Constraint |Background/motivation
+
+|OC1 | Time-frame | Limited development time given by the duration of the course.
+
+|OC2 | License | All the contents included in the project should be Open Source published under the MIT license.
+
+|=========================================================
+
+
+.Conventions
+[width="100%",cols="1,5,10",options="header"]
+|=========================================================
+||Constraint |Background/motivation
+
+|C1 | Documentation | Usage of the arc42 templates written in AsciiDoc.
+
+|C2 | Language | All the project resources be it code, comments, documentation or GitHub issues must be written in english.
+
+|=========================================================
