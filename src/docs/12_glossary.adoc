@@ -5,27 +5,17 @@
 
 [role="arc42help"]
 ****
-.Contents
-The most important domain and technical terms that your stakeholders use when discussing the system.
-
-You can also see the glossary as source for translations if you work in multi-language teams.
-
-.Motivation
-You should clearly define your terms, so that all stakeholders
-
-* have an identical understanding of these terms
-* do not use synonyms and homonyms
-
-.Form
-A table with columns <Term> and <Definition>.
-
-Potentially more columns in case you need translations.
+.About
+Small index of terms commonly seen in the project. It is supposed to serve as a dictionary of terms for readers not familiarized with them.
+Should you happen to be interested in a further reading and understanding, useful links are provided.
 
 ****
 
 [options="header"]
 |===
-| Term         | Definition
-| <Term-1>     | <definition-1>
-| <Term-2>     | <definition-2>
+| Term         | Definition | Further reading
+| Solid     | A project to create a decentralized web, on which user's data, and the services and applications using it are separated. Therefore, the user is always in control of its own data. | https://solid.inrupt.com/how-it-works[Solid's web page]
+| Pod     | A repository on which the user's data is stored. I can be located where the user decides, even in her/his own device. | https://solid.inrupt.com/get-a-solid-pod[Getting your own pod]
+| JavaScript     | Interpreted programming language designed to provide dynamic behaviour to web pages which otherwise would be static documents. | https://developer.mozilla.org/es/docs/Web/JavaScript[Mozilla JavaScript reference]
+| Angular     | JavaScript framework to develop web pages offering the functionality of desktop programs. An example of this could be Google Docs. | https://angularjs.org/[Angular's web page]
 |===
