@@ -12,6 +12,10 @@ then from the root folder execute
 ```
  $ .\generate_doc.bat
 ```
+in Unix systems 
+```
+ $ sh ./generate_doc.sh
+```
 the generated html files will be under `.\target\docs\`
 
 ## Development server
