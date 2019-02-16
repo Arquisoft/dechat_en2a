@@ -8,9 +8,13 @@ The final product we aim to achieve over the course of four months of developmen
 
 .Technology Decisions
 Solid: Solid will act as the framework for supporting the decentralization of the data flow of the application. It will provide the necessary tools to enable users to control the release and destination of their data without the use of a centralized entity.
+
 Angular 7: Angular 7 will act as the framework for the web-application. It will allow for an organized and streamlined development process as the team constructs the front-end of the client and facilitates communication with the back-end logic of the system.
+
 TypeScript: TypeScript will act as the primary development language for the project. The language interfaces well with the other tools the team has elected to use, ensuring a simplified and efficient development process.
+
 HTML and CSS: With tools provided by Angular 7, HTML and CSS will allow for the development of the design and functionality of the web-application.
+
 Arc42: Arc42 will act as the documentation framework, allowing for ease and organization in the process of continually updating the documentation for the project as it progresses.
 
 .Architectural Pattern
