@@ -4,21 +4,20 @@
 
 [role="arc42help"]
 ****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+The final product we aim to achieve over the course of four months of development is a decentralized chat web-application that allows peer to peer communication without a centralized entity processing the data transfered from sender to recipient. The decentralization aspect of the application is the central motivation for its completion with the use and learning of Solid at the core of the development.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+.Technology Decisions
+Solid: Solid will act as the framework for supporting the decentralization of the data flow of the application. It will provide the necessary tools to enable users to control the release and destination of their data without the use of a centralized entity.
+Angular 7: Angular 7 will act as the framework for the web-application. It will allow for an organized and streamlined development process as the team constructs the front-end of the client and facilitates communication with the back-end logic of the system.
+TypeScript: TypeScript will act as the primary development language for the project. The language interfaces well with the other tools the team has elected to use, ensuring a simplified and efficient development process.
+HTML and CSS: With tools provided by Angular 7, HTML and CSS will allow for the development of the design and functionality of the web-application.
+Arc42: Arc42 will act as the documentation framework, allowing for ease and organization in the process of continually updating the documentation for the project as it progresses.
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+.Architectural Pattern
+The team will follow a peer-to-peer architectural pattern. This will be advantageous for the product as it supports a decentralized system and will allow for relative ease in scalability (i.e. scaling from one-on-one chat to group messaging). A disadvantage of this system is ensuring data security for users, however with the use of Solid, a preexisting security system will be in place to protect and control the flow of user data. 
 
-.Form
-Keep the explanation of these key decisions short.
+.Development Process
+The team is yet to concretely determine a development process to be implemented for the creation of the product, however it is likely we will use a waterfall development model, allowing us to focus specifically on one phase of development at a time and ensuring organization and structure within the development process.
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
+As more of the development and design decisions for the application become apparent within the team, this section will continue to update and grow more elaborative.
 ****
