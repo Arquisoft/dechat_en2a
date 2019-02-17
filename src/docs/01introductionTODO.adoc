@@ -3,11 +3,7 @@
 
 [role="arc42help"]
 ****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. These include
-
-* underlying business goals, essential features and functional requirements for the system
-* quality goals for the architecture
-* relevant stakeholders and their expectations
+This is a decentralized Chat Proyect based on Solid in which no central sever is required to run or set up a conversation and all the personal data is stored in your POD.
 ****
 
 === Requirements Overview
@@ -18,7 +14,7 @@ Describes the relevant requirements and the driving forces that software archite
 * Chat between at least two different users.
 * Use of a distributed computing system.
 * Good performace sending and receiving information.
-* Manage your store data.
+* Manage your own data.
 * Multi-platform.  
 ****
 
@@ -26,20 +22,12 @@ Describes the relevant requirements and the driving forces that software archite
 
 [role="arc42help"]
 ****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don't confuse them with project goals. They are not necessarily identical.
-
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
-
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2"]
 |===
-|Role/Name|Contact|Expectations
-| _<Goal-1>_ | _<Scenarios-1>_ | _<Priority-1>_
-| _<Goal-2>_ | _<Scenarios-2>_ | _<Priority-2>_
+|Goal|Scenarios
+| Privacy | As a user you should be able to have a full control of your data in every moment in order to know who can or cannot access to it.
+| Usability | The app should be intuitive, it should be designed for any kind of user providing them a friendly interface to interact with.
+| Availability | The app should always work even if there is no Internet conexion, in this case it should create a draft, that would be sended when conexion come back.
 |===
 ****
 
