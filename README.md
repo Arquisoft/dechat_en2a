@@ -1,5 +1,10 @@
 # Dechat
 
+image:https://travis-ci.org/Arquisoft/dechat_en2a.svg?branch=master["Build Status", link="https://travis-ci.org/Arquisoft/dechat_en2a"]
+image:https://codecov.io/gh/Arquisoft/dechat_en2a/branch/master/graph/badge.svg["Codecov",link="https://codecov.io/gh/Arquisoft/dechat_en2a"]
+image:https://coveralls.io/repos/github/Arquisoft/dechat_en2a/badge.svg["Coverage",link="https://coveralls.io/github/Arquisoft/dechat_en2a"]
+image:https://api.codacy.com/project/badge/Grade/fc7dc1da60ee4e9fb67ccff782625794["Codacy code quality", link="https://www.codacy.com/app/jelabra/dechat_en2a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en2a&utm_campaign=Badge_Grade"]
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
 
 ## Documentation
