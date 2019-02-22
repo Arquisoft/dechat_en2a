@@ -17,29 +17,68 @@ solid.auth.trackSession(session => {
       $('#profile').val(session.webId);
       if (!$('#public').val())
       $('#public').val(String(session.webId).replace(/profile.*$/,"")+"public");
+
+    loadProfile();
   }
 });
-//onclick="fileClient.createFile('https://luispastrana.inrupt.net/public/content.json','hola q tal')"
-$('#create').click(async function createOwnFile(){
-  SolidFileClient.createFile($('#public').val()+'/chat01.txt','hola q tal');
-});
 
-$('#enviar').click(async function enviar(){
-        
-          var texto=$("#content").val();
-          SolidFileClient.updateFile($('#public').val()+'/chat01.txt',texto);
-          
-});
+/**
+ * Event function to create a new file
+ */
+async function createOwnFile(){
+  //creates a new empty chat file
+  SolidFileClient.updateFile($('#public').val()+'/chat01.txt','');
+  //clears the screen messages
+  $(".chat_container").empty();
+}
+$('#create').click(createOwnFile);
 
+/**
+ * Event function to send the message.
+ */
+async function send(){
+  var texto=$("#content").val(); //get the text from the input box
+  if(texto != ""){ //if there there are messages to send
+    SolidFileClient.readFile($('#public').val()+'/chat01.txt').then(function(value) {
+      //read the file, and update it with the nex messages
+      SolidFileClient.updateFile($('#public').val()+'/chat01.txt',value + texto+"\n");
+    });
+    //append the message to the chat pannel
+    $(".chat_container" ).append( generateMessage(texto));
+    //set the input box to blank
+    $("#content").val("");
+  }          
+}
+$('#enviar').click(send);
 
-$('#readFile').click(async function readChatFile(){
-  //$('#content').val(SolidFileClient.readFile($('#public').val()+'/chat01.txt'));
-  //console.log(SolidFileClient.readFile($('#public').val()+'/chat01.txt'));
+/**
+ * Auxiliary method to generate the messages in html
+ * @param {*} text the message to be created
+ */
+function generateMessage(text){
+  return "<div class=\"container\"><p>"+text+"</p></div>"
+}
+
+/**
+ * Event function to retrieve the messages from the file
+ */
+async function readChatFile(){
   SolidFileClient.readFile($('#public').val()+'/chat01.txt').then(function(value) {
-    $('#content').val(value);
-  })
-});
-$('#view').click(async function loadProfile() {
+    $("#content").val(""); //empty the text area
+    value.split("\n").forEach(function(line){
+      //for each of the lines in the find, create a chat message.
+      if(line != ""){
+        $(".chat_container" ).append( generateMessage(line) );
+      }
+    });
+  });
+}
+$('#readFile').click(readChatFile);
+
+/**
+ * Event function view profile details
+ */
+async function loadProfile() {
   // Set up a local data store and associated data fetcher
   const store = $rdf.graph();
   const fetcher = new $rdf.Fetcher(store);
@@ -64,4 +103,5 @@ $('#view').click(async function loadProfile() {
                 .click(() => $('#profile').val(friend.value))
                 .click(loadProfile)));
   });
-});
+}
+$('#view').click(loadProfile);
