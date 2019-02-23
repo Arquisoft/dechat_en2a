@@ -2,7 +2,7 @@ const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 
 // Log the user in and out on click
 const popupUri = 'popup.html';
-$('#login  button').click(() => solid.auth.popupLogin({  popupUri }));
+$('#login  button').click(() => solid.auth.popupLogin({ popupUri }));
 $('#logout button').click(() => solid.auth.logout());
 
 // Update components to match the user's login status
@@ -90,12 +90,12 @@ function generateMessage(text) {
  * Event function to retrieve the messages from the file
  */
 async function readChatFile() {
-  SolidFileClient.readFile($('#public').val()+'/chat01.json').then(function(value) {
+  SolidFileClient.readFile($('#public').val() + '/chat01.json').then(function (value) {
     $("#content").val(""); //empty the text area
     $(".chat_container").empty(); //dont show same messages twice
-    var chat = JSON.parse(value);
-    chat.messages.forEach(function(msg) {
-      $(".chat_container" ).append( generateMessage(msg.message) );
+    var chat = JSON.parse(value); //parse JSON contents to object
+    chat.messages.forEach(function (msg) {
+      $(".chat_container").append(generateMessage(msg.message));
     });
   });
 }
