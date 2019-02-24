@@ -3,7 +3,7 @@
 
 
 [role="arc42help"]
-****
+**** 
 === What are the goals of the system?
 
 The main idea of this project is to create a decentralised chat, in other words, creating a plamtform independent of someone or something that stores the data of the users. This concept focuses on the idea of nobody obtaining or taking advantage of the information that they manage, the users must take control of who is allowed to use and see their data and where it is stored.
@@ -14,7 +14,7 @@ Our main goal is to allow this communication process posible. In order to do so,
 
 ==== Use case
 
-image:images/03_CaseOfUse.png
+image:images/03_CaseOfUse.png[]
       
 As we can see our application validates the permissions of the receiver to show the data to the receiver and after that check, if passed then the data is displayed.
 
