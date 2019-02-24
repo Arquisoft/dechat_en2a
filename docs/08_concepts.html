@@ -1,0 +1,523 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Crosscutting Concepts · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="09_design_decisions.html" />
+    
+    
+    <link rel="prev" href="07_deployment_view.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="01_introduction_and_goals.html">
+            
+                <a href="01_introduction_and_goals.html">
+            
+                    
+                    Introduction and Goals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="02_architecture_constraints.html">
+            
+                <a href="02_architecture_constraints.html">
+            
+                    
+                    Architecture Constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="03_system_scope_and_context.html">
+            
+                <a href="03_system_scope_and_context.html">
+            
+                    
+                    Context and scope
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="04_solution_strategy.html">
+            
+                <a href="04_solution_strategy.html">
+            
+                    
+                    Solution Strategy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="05_building_block_view.html">
+            
+                <a href="05_building_block_view.html">
+            
+                    
+                    Building Block View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="06_runtime_view.html">
+            
+                <a href="06_runtime_view.html">
+            
+                    
+                    Runtime View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="07_deployment_view.html">
+            
+                <a href="07_deployment_view.html">
+            
+                    
+                    Deployment View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="08_concepts.html">
+            
+                <a href="08_concepts.html">
+            
+                    
+                    Crosscutting Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="09_design_decisions.html">
+            
+                <a href="09_design_decisions.html">
+            
+                    
+                    Architecture Decisions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="10_quality_scenarios.html">
+            
+                <a href="10_quality_scenarios.html">
+            
+                    
+                    Quality Requirements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="11_technical_risks.html">
+            
+                <a href="11_technical_risks.html">
+            
+                    
+                    Risks and Technical Debt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="12_glossary.html">
+            
+                <a href="12_glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="about-arc42.html">
+            
+                <a href="about-arc42.html">
+            
+                    
+                    About arc42
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Crosscutting Concepts</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div class="sect1">
+<h2 id="section-concepts">Cross-cutting Concepts</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Content</div>
+<p>This section describes overall, principal regulations and solution ideas that are
+relevant in multiple parts (= cross-cutting) of your system.
+Such concepts are often related to multiple building blocks.
+They can include many different topics, such as</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>domain models</p>
+</li>
+<li>
+<p>architecture patterns or design patterns</p>
+</li>
+<li>
+<p>rules for using specific technology</p>
+</li>
+<li>
+<p>principal, often technical decisions of overall decisions</p>
+</li>
+<li>
+<p>implementation rules</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>Concepts form the basis for <em>conceptual integrity</em> (consistency, homogeneity)
+of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.</p>
+</div>
+<div class="paragraph">
+<p>Some of these concepts cannot be assigned to individual building blocks
+(e.g. security or safety). This is the place in the template that we provided for a
+cohesive specification of such concepts.</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>The form can be varied:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>concept papers with any kind of structure</p>
+</li>
+<li>
+<p>cross-cutting model excerpts or scenarios using notations of the architecture views</p>
+</li>
+<li>
+<p>sample implementations, especially for technical concepts</p>
+</li>
+<li>
+<p>reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Structure</div>
+<p>A potential (but not mandatory) structure for this section could be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Domain concepts</p>
+</li>
+<li>
+<p>User Experience concepts (UX)</p>
+</li>
+<li>
+<p>Safety and security concepts</p>
+</li>
+<li>
+<p>Architecture and design patterns</p>
+</li>
+<li>
+<p>&quot;Under-the-hood&quot;</p>
+</li>
+<li>
+<p>development concepts</p>
+</li>
+<li>
+<p>operational concepts</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note: it might be difficult to assign individual concepts to one specific topic
+on this list.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/08-Crosscutting-Concepts-Structure-EN.png" alt="Possible topics for crosscutting concepts"></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_concept_1_em"><em>&lt;Concept 1&gt;</em></h3>
+<div class="paragraph">
+<p><em>&lt;explanation&gt;</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_concept_2_em"><em>&lt;Concept 2&gt;</em></h3>
+<div class="paragraph">
+<p><em>&lt;explanation&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>&#x2026;&#x200B;</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_concept_n_em"><em>&lt;Concept n&gt;</em></h3>
+<div class="paragraph">
+<p><em>&lt;explanation&gt;</em></p>
+</div>
+</div>
+</div>
+</div>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="07_deployment_view.html" class="navigation navigation-prev " aria-label="Previous page: Deployment View">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="09_design_decisions.html" class="navigation navigation-next " aria-label="Next page: Architecture Decisions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Crosscutting Concepts","level":"1.9","depth":1,"next":{"title":"Architecture Decisions","level":"1.10","depth":1,"path":"09_design_decisions.adoc","ref":"09_design_decisions.adoc","articles":[]},"previous":{"title":"Deployment View","level":"1.8","depth":1,"path":"07_deployment_view.adoc","ref":"07_deployment_view.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"08_concepts.adoc","mtime":"2019-02-14T19:33:45.226Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-02-24T01:06:37.918Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

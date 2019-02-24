@@ -1,0 +1,699 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Building Block View · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="06_runtime_view.html" />
+    
+    
+    <link rel="prev" href="04_solution_strategy.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="01_introduction_and_goals.html">
+            
+                <a href="01_introduction_and_goals.html">
+            
+                    
+                    Introduction and Goals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="02_architecture_constraints.html">
+            
+                <a href="02_architecture_constraints.html">
+            
+                    
+                    Architecture Constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="03_system_scope_and_context.html">
+            
+                <a href="03_system_scope_and_context.html">
+            
+                    
+                    Context and scope
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="04_solution_strategy.html">
+            
+                <a href="04_solution_strategy.html">
+            
+                    
+                    Solution Strategy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="05_building_block_view.html">
+            
+                <a href="05_building_block_view.html">
+            
+                    
+                    Building Block View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="06_runtime_view.html">
+            
+                <a href="06_runtime_view.html">
+            
+                    
+                    Runtime View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="07_deployment_view.html">
+            
+                <a href="07_deployment_view.html">
+            
+                    
+                    Deployment View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="08_concepts.html">
+            
+                <a href="08_concepts.html">
+            
+                    
+                    Crosscutting Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="09_design_decisions.html">
+            
+                <a href="09_design_decisions.html">
+            
+                    
+                    Architecture Decisions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="10_quality_scenarios.html">
+            
+                <a href="10_quality_scenarios.html">
+            
+                    
+                    Quality Requirements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="11_technical_risks.html">
+            
+                <a href="11_technical_risks.html">
+            
+                    
+                    Risks and Technical Debt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="12_glossary.html">
+            
+                <a href="12_glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="about-arc42.html">
+            
+                <a href="about-arc42.html">
+            
+                    
+                    About arc42
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Building Block View</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div class="sect1">
+<h2 id="section-building-block-view">Building Block View</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Content</div>
+<p>The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes,
+interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations,
+datas structures, &#x2026;&#x200B;) as well as their dependencies (relationships, associations, &#x2026;&#x200B;)</p>
+</div>
+<div class="paragraph">
+<p>This view is mandatory for every architecture documentation.
+In analogy to a house this is the <em>floor plan</em>.</p>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>Maintain an overview of your source code by making its structure understandable through
+abstraction.</p>
+</div>
+<div class="paragraph">
+<p>This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>The building block view is a hierarchical collection of black boxes and white boxes
+(see figure below) and their descriptions.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/05_building_blocks-EN.png" alt="Hierarchy of building blocks"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Level 1</strong> is the white box description of the overall system together with black
+box descriptions of all contained building blocks.</p>
+</div>
+<div class="paragraph">
+<p><strong>Level 2</strong> zooms into some building blocks of level 1.
+Thus it contains the white box description of selected building blocks of level 1, together with black box descriptions of their internal building blocks.</p>
+</div>
+<div class="paragraph">
+<p><strong>Level 3</strong> zooms into selected building blocks of level 2, and so on.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_whitebox_overall_system">Whitebox Overall System</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you describe the decomposition of the overall system using the following white box template. It contains</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>an overview diagram</p>
+</li>
+<li>
+<p>a motivation for the decomposition</p>
+</li>
+<li>
+<p>black box descriptions of the contained building blocks. For these we offer you alternatives:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>use <em>one</em> table for a short and pragmatic overview of all contained building blocks and their interfaces</p>
+</li>
+<li>
+<p>use a list of black box descriptions of the building blocks according to the black box template (see below).
+Depending on your choice of tool this list could be sub-chapters (in text files), sub-pages (in a Wiki) or nested elements (in a modeling tool).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>(optional:) important interfaces, that are not explained in the black box templates of a building block, but are very important for understanding the white box.
+Since there are so many ways to specify interfaces why do not provide a specific template for them.
+ In the worst case you have to specify and describe syntax, semantics, protocols, error handling,
+ restrictions, versions, qualities, necessary compatibilities and many things more.
+In the best case you will get away with examples or simple signatures.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Motivation</dt>
+<dd>
+<p><em>&lt;text explanation&gt;</em></p>
+</dd>
+<dt class="hdlist1">Contained Building Blocks</dt>
+<dd>
+<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
+</dd>
+<dt class="hdlist1">Important Interfaces</dt>
+<dd>
+<p><em>&lt;Description of important interfaces&gt;</em></p>
+</dd>
+</dl>
+</div>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Insert your explanations of black boxes from level 1:</p>
+</div>
+<div class="paragraph">
+<p>If you use tabular form you will only describe your black boxes with name and
+responsibility according to the following schema:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Text&gt;</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Text&gt;</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
+Its headline is the name of the black box.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="__name_black_box_1">&lt;Name black box 1&gt;</h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you describe &lt;black box 1&gt;
+according the the following black box template:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Purpose/Responsibility</p>
+</li>
+<li>
+<p>Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.</p>
+</li>
+<li>
+<p>(Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, &#x2026;&#x200B;.</p>
+</li>
+<li>
+<p>(Optional) directory/file location</p>
+</li>
+<li>
+<p>(Optional) Fulfilled requirements (if you need traceability to requirements).</p>
+</li>
+<li>
+<p>(Optional) Open issues/problems/risks</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>&lt;Purpose/Responsibility&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Interface(s)&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="__name_black_box_2">&lt;Name black box 2&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;black box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="__name_black_box_n">&lt;Name black box n&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;black box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="__name_interface_1">&lt;Name interface 1&gt;</h4>
+<div class="paragraph">
+<p>&#x2026;&#x200B;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="__name_interface_m">&lt;Name interface m&gt;</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_2">Level 2</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.</p>
+</div>
+<div class="paragraph">
+<p>You have to decide which building blocks of your system are important enough to justify such a detailed description.
+Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
+Leave out normal, simple, boring or standardized parts of your system</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_em_building_block_1_em">White Box <em>&lt;building block 1&gt;</em></h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>&#x2026;&#x200B;describes the internal structure of <em>building block 1</em>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_em_building_block_2_em">White Box <em>&lt;building block 2&gt;</em></h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>&#x2026;&#x200B;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_em_building_block_m_em">White Box <em>&lt;building block m&gt;</em></h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_3">Level 3</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
+</div>
+<div class="paragraph">
+<p>When you need more detailed levels of your architecture please copy this
+part of arc42 for additional levels.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_x_1">White Box &lt;_building block x.1_&gt;</h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Specifies the internal structure of <em>building block x.1</em>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_x_2">White Box &lt;_building block x.2_&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_y_1">White Box &lt;_building block y.1_&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="04_solution_strategy.html" class="navigation navigation-prev " aria-label="Previous page: Solution Strategy">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="06_runtime_view.html" class="navigation navigation-next " aria-label="Next page: Runtime View">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Building Block View","level":"1.6","depth":1,"next":{"title":"Runtime View","level":"1.7","depth":1,"path":"06_runtime_view.adoc","ref":"06_runtime_view.adoc","articles":[]},"previous":{"title":"Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"05_building_block_view.adoc","mtime":"2019-02-14T19:32:31.302Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-02-24T01:06:37.918Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

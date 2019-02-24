@@ -1,0 +1,497 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Quality Requirements · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="11_technical_risks.html" />
+    
+    
+    <link rel="prev" href="09_design_decisions.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="01_introduction_and_goals.html">
+            
+                <a href="01_introduction_and_goals.html">
+            
+                    
+                    Introduction and Goals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="02_architecture_constraints.html">
+            
+                <a href="02_architecture_constraints.html">
+            
+                    
+                    Architecture Constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="03_system_scope_and_context.html">
+            
+                <a href="03_system_scope_and_context.html">
+            
+                    
+                    Context and scope
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="04_solution_strategy.html">
+            
+                <a href="04_solution_strategy.html">
+            
+                    
+                    Solution Strategy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="05_building_block_view.html">
+            
+                <a href="05_building_block_view.html">
+            
+                    
+                    Building Block View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="06_runtime_view.html">
+            
+                <a href="06_runtime_view.html">
+            
+                    
+                    Runtime View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="07_deployment_view.html">
+            
+                <a href="07_deployment_view.html">
+            
+                    
+                    Deployment View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="08_concepts.html">
+            
+                <a href="08_concepts.html">
+            
+                    
+                    Crosscutting Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="09_design_decisions.html">
+            
+                <a href="09_design_decisions.html">
+            
+                    
+                    Architecture Decisions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.11" data-path="10_quality_scenarios.html">
+            
+                <a href="10_quality_scenarios.html">
+            
+                    
+                    Quality Requirements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="11_technical_risks.html">
+            
+                <a href="11_technical_risks.html">
+            
+                    
+                    Risks and Technical Debt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="12_glossary.html">
+            
+                <a href="12_glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="about-arc42.html">
+            
+                <a href="about-arc42.html">
+            
+                    
+                    About arc42
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Quality Requirements</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div class="sect1">
+<h2 id="section-quality-scenarios">Quality Requirements</h2>
+<div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Content</div>
+<p>This section contains all quality requirements as quality tree with scenarios. The most important ones have already been described in section 1.2. (quality goals)</p>
+</div>
+<div class="paragraph">
+<p>Here you can also capture quality requirements with lesser priority,
+which will not create high risks when they are not fully achieved.</p>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>Since quality requirements will have a lot of influence on architectural
+decisions you should know for every stakeholder what is really important to them,
+concrete and measurable.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quality_tree">Quality Tree</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Content</div>
+<p>The quality tree (as defined in ATAM &#x2013; Architecture Tradeoff Analysis Method) with quality/evaluation scenarios as leafs.</p>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>The tree structure with priorities provides an overview for a sometimes large number of quality requirements.</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>The quality tree is a high-level overview of the quality goals and requirements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>tree-like refinement of the term &quot;quality&quot;. Use &quot;quality&quot; or &quot;usefulness&quot; as a root</p>
+</li>
+<li>
+<p>a mind map with quality categories as main branches</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In any case the tree should include links to the scenarios of the following section.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quality_scenarios">Quality Scenarios</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Contents</div>
+<p>Concretization of (sometimes vague or implicit) quality requirements using (quality) scenarios.</p>
+</div>
+<div class="paragraph">
+<p>These scenarios describe what should happen when a stimulus arrives at the system.</p>
+</div>
+<div class="paragraph">
+<p>For architects, two kinds of scenarios are important:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Usage scenarios (also called application scenarios or use case scenarios) describe the system&#x2019;s runtime reaction to a certain stimulus. This also includes scenarios that describe the system&#x2019;s efficiency or performance. Example: The system reacts to a user&#x2019;s request within one second.</p>
+</li>
+<li>
+<p>Change scenarios describe a modification of the system or of its immediate environment. Example: Additional functionality is implemented or requirements for a quality attribute change.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>Scenarios make quality requirements concrete and allow to
+more easily measure or decide whether they are fulfilled.</p>
+</div>
+<div class="paragraph">
+<p>Especially when you want to assess your architecture using methods like
+ATAM you need to describe your quality goals (from section 1.2)
+more precisely down to a level of scenarios that can be discussed and evaluated.</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>Tabular or free form text.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="09_design_decisions.html" class="navigation navigation-prev " aria-label="Previous page: Architecture Decisions">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="11_technical_risks.html" class="navigation navigation-next " aria-label="Next page: Risks and Technical Debt">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Quality Requirements","level":"1.11","depth":1,"next":{"title":"Risks and Technical Debt","level":"1.12","depth":1,"path":"11_technical_risks.adoc","ref":"11_technical_risks.adoc","articles":[]},"previous":{"title":"Architecture Decisions","level":"1.10","depth":1,"path":"09_design_decisions.adoc","ref":"09_design_decisions.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"10_quality_scenarios.adoc","mtime":"2019-02-06T18:44:12.240Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-02-24T01:06:37.918Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
