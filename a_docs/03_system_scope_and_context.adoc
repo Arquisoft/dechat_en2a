@@ -25,6 +25,8 @@ This section shows a representation of the communication partners and stakeholde
 
 === Business Context
 
+This is our business context:
+
 image::https://i.imgur.com/Z1cNz5E.jpg[]
 
 .DeChat
@@ -43,20 +45,7 @@ image::https://i.imgur.com/Z1cNz5E.jpg[]
 
 [role="arc42help"]
 ****
-.Contents
-Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation with I/O uses which channel.
 
-.Motivation
-Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.
-
-.Form
-E.g. UML deployment diagram describing channels to neighboring systems,
-together with a mapping table showing the relationships between channels and input/output.
+*At this stage of the project we can't describe the technical context, this page will be modified in another moment.*
 
 ****
-
-**<Diagram or Table>**
-
-**<optionally: Explanation of technical interfaces>**
-
-**<Mapping Input/Output to Channels>**
