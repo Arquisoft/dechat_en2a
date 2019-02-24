@@ -4,6 +4,7 @@
 
 [role="arc42help"]
 **** 
+[]
 === What are the goals of the system?
 
 The main idea of this project is to create a decentralised chat, in other words, creating a plamtform independent of someone or something that stores the data of the users. This concept focuses on the idea of nobody obtaining or taking advantage of the information that they manage, the users must take control of who is allowed to use and see their data and where it is stored.
