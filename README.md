@@ -17,7 +17,7 @@
 
 ## Documentation
 
-The documentation is available [here](https://arquisoft.github.io/dechat_en2b/) 
+The documentation is available [here](https://arquisoft.github.io/dechat_en2a/) 
 
 ## Development
 
