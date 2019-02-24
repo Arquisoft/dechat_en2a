@@ -1,9 +1,9 @@
 # Dechat EN2A
 
-[![Build Status](https://travis-ci.com/josecurioso/dechat_en2a_test.svg?token=B2w4zmeyJGcasrzxynjP&branch=master)](https://travis-ci.com/josecurioso/dechat_en2a_test)
+[![Build Status](https://travis-ci.org/Arquisoft/dechat_en2a.svg?branch=master)](https://travis-ci.org/Arquisoft/dechat_en2a)
 [![Codecov](https://codecov.io/gh/Arquisoft/dechat_en2a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/dechat_en2a)
 [![Coverage](https://coveralls.io/repos/github/Arquisoft/dechat_en2a/badge.svg)](https://coveralls.io/github/Arquisoft/dechat_en2a)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b31d4f4909854b2a89563ae4e967628e)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josecurioso/dechat_en2a_test&amp;utm_campaign=Badge_Grade)
+[![Codacy code quality](https://api.codacy.com/project/badge/Grade/fc7dc1da60ee4e9fb67ccff782625794)](https://www.codacy.com/app/jelabra/dechat_en2a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en2a&utm_campaign=Badge_Grade)
 
 ## Contributors
 
@@ -17,7 +17,7 @@
 
 ## Documentation
 
-The documentation is available [here](https://josecurioso.github.io/dechat_en2a_test) 
+The documentation is available [here](https://arquisoft.github.io/dechat_en2b/) 
 
 ## Development
 
