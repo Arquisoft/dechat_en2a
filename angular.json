@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dechat": {
+    "solid-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dechat",
+            "outputPath": "dist/solid-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,10 +23,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/purecss/build/grids-core-min.css",
+              "node_modules/purecss/build/grids-min.css",
+              "node_modules/purecss/build/grids-responsive-min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": [
+              "node_modules/solid-auth-client/dist-lib/solid-auth-client.bundle.js",
+              "src/assets/js/libs/rdflib.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -44,32 +51,25 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "buildOptimizer": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "dechat:build"
+            "browserTarget": "solid-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "dechat:build:production"
+              "browserTarget": "solid-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dechat:build"
+            "browserTarget": "solid-app:build"
           }
         },
         "test": {
@@ -80,7 +80,9 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "assets": [
@@ -103,20 +105,19 @@
         }
       }
     },
-    "dechat-e2e": {
+    "solid-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "dechat:serve"
+            "devServerTarget": "solid-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "dechat:serve:production"
+              "devServerTarget": "solid-app:serve:production"
             }
           }
         },
@@ -132,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "dechat"
+  "defaultProject": "solid-app"
 }
