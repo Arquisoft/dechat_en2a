@@ -4,7 +4,7 @@
 
 [role="arc42help"]
 ****
-===What are the goals of the system?
+**What are the goals of the system?
 
 The main idea of this project is to create a decentralised chat, in other words, creating a plamtform independent of someone or something that stores the data of the users. This concept focuses on the idea of nobody obtaining or taking advantage of the information that they manage, the users must take control of who is allowed to use and see their data and where it is stored.
 
@@ -12,9 +12,10 @@ As software engineers we must contribute to create a platform that fulfils this 
 
 Our main goal is to allow this communication process posible. In order to do so, we must use some sort of secure communication system and adapt it to the point it can be usable. We also must take into account other systems that may interact with the platform such as other storage systems such as image hosting services.
 
-==== Use case
+*** Use case
 
-
+image:dechat_en2a/a_docs/images/03_CaseOfUse.png
+      
 
 ****
 
