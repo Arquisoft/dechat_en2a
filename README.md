@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Arquisoft/dechat_en2a.svg?branch=master)](https://travis-ci.org/Arquisoft/dechat_en2a)
 [![Codecov](https://codecov.io/gh/Arquisoft/dechat_en2a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/dechat_en2a)
 [![Coverage](https://coveralls.io/repos/github/Arquisoft/dechat_en2a/badge.svg)](https://coveralls.io/github/Arquisoft/dechat_en2a)
-[![Codacy code quality](https://api.codacy.com/project/badge/Grade/fc7dc1da60ee4e9fb67ccff782625794)](https://www.codacy.com/app/jelabra/dechat_en2a?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechat_en2a&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/03c3085c32754718868dadea59607494)](https://www.codacy.com/app/josecurioso/dechat_en2a?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/dechat_en2a&amp;utm_campaign=Badge_Grade)
 
 ## Contributors
 
