@@ -25,9 +25,12 @@ This section shows a representation of the communication partners and stakeholde
 
 === Business Context
 
-This is our business context:
+[role="arc42help"]
+****
 
-image::https://i.imgur.com/Z1cNz5E.jpg[]
+Simple diagram representing the business context:
+
+image:images/03_business_context.png[]
 
 .DeChat
 [%header, cols="2, 5, 5"]
@@ -40,6 +43,8 @@ image::https://i.imgur.com/Z1cNz5E.jpg[]
 |Receiver Pod/s|Message, notification|Message
 |Receiver|Message|X
 |===
+
+****
 
 === Technical Context
 
