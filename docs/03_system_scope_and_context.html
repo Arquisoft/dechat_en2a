@@ -343,13 +343,13 @@
 </div>
 <div class="sect2">
 <h3 id="_business_context">Business Context</h3>
-<div class="paragraph">
-<p>This is our business context:</p>
-</div>
-<div class="imageblock">
+<div class="sidebarblock arc42help">
 <div class="content">
-<img src="https://i.imgur.com/Z1cNz5E.jpg" alt="Z1cNz5E.jpg">
+<div class="paragraph">
+<p>Simple diagram representing the business context:</p>
 </div>
+<div class="paragraph">
+<p><span class="image"><img src="images/03_business_context.png" alt="03 business context.png"></span></p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 1. DeChat</caption>
@@ -368,36 +368,38 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sender</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Message, notification, data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages (to DeChat)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sender storage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeChat (Sender part)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sent messages (from Sender)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New data (to Sender Pod), Sent messages (to Receiver Pod inbox)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sender Pod</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Message</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Notification, message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New data (from DeChat)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DeChat</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Notification from Sender Pod</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Notification to Receiver Pod</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Receiver Pod</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages (from sender DeChat)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages (to receiver DeChat)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Receiver Pod/s</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Message, notification</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeChat (Receiver part)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received messages (from Receiver Pod)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received messages (show visually to Receiver)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Receiver</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Message</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received messages (from DeChat)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_technical_context">Technical Context</h3>
@@ -453,7 +455,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Context and scope","level":"1.4","depth":1,"next":{"title":"Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"previous":{"title":"Architecture Constraints","level":"1.3","depth":1,"path":"02_architecture_constraints.adoc","ref":"02_architecture_constraints.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"03_system_scope_and_context.adoc","mtime":"2019-02-25T08:44:06.601Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-02-25T10:30:01.407Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Context and scope","level":"1.4","depth":1,"next":{"title":"Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"previous":{"title":"Architecture Constraints","level":"1.3","depth":1,"path":"02_architecture_constraints.adoc","ref":"02_architecture_constraints.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"03_system_scope_and_context.adoc","mtime":"2019-03-01T18:22:49.514Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-03-01T18:29:58.958Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
