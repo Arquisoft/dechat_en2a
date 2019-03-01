@@ -36,12 +36,12 @@ image:images/03_business_context.png[]
 [%header, cols="2, 5, 5"]
 |===
 |Name|Inputs|Outputs
-|Sender|X|Message, notification, data
-|Sender storage|Data|X
-|Sender Pod|Message|Notification, message
-|DeChat|Notification from Sender Pod|Notification to Receiver Pod
-|Receiver Pod/s|Message, notification|Message
-|Receiver|Message|X
+|Sender|None|Messages (to DeChat)
+|DeChat (Sender part)|Sent messages (from Sender)|New data (to Sender Pod), Sent messages (to Receiver Pod inbox)
+|Sender Pod|New data (from DeChat)|None
+|Receiver Pod|Messages (from sender DeChat)|Messages (to receiver DeChat)
+|DeChat (Receiver part)|Received messages (from Receiver Pod)|Received messages (show visually to Receiver)
+|Receiver|Received messages (from DeChat)|None
 |===
 
 ****
