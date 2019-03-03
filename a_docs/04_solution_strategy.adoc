@@ -4,24 +4,5 @@
 
 [role="arc42help"]
 ****
-The final product we aim to achieve over the course of four months of development is a decentralized chat web-application that allows peer to peer communication without a centralized entity processing the data transfered from sender to recipient. The decentralization aspect of the application is the central motivation for its completion with the use and learning of Solid at the core of the development.
-
-.Technology Decisions
-Solid: Solid will act as the framework for supporting the decentralization of the data flow of the application. It will provide the necessary tools to enable users to control the release and destination of their data without the use of a centralized entity.
-
-Angular 7: Angular 7 will act as the framework for the web-application. It will allow for an organized and streamlined development process as the team constructs the front-end of the client and facilitates communication with the back-end logic of the system.
-
-TypeScript: TypeScript will act as the primary development language for the project. The language interfaces well with the other tools the team has elected to use, ensuring a simplified and efficient development process.
-
-HTML and CSS: With tools provided by Angular 7, HTML and CSS will allow for the development of the design and functionality of the web-application.
-
-Arc42: Arc42 will act as the documentation framework, allowing for ease and organization in the process of continually updating the documentation for the project as it progresses.
-
-.Architectural Pattern
-The team will follow a peer-to-peer architectural pattern. This will be advantageous for the product as it supports a decentralized system and will allow for relative ease in scalability (i.e. scaling from one-on-one chat to group messaging). A disadvantage of this system is ensuring data security for users, however with the use of Solid, a preexisting security system will be in place to protect and control the flow of user data. 
-
-.Development Process
-The team is yet to concretely determine a development process to be implemented for the creation of the product, however it is likely we will use a waterfall development model, allowing us to focus specifically on one phase of development at a time and ensuring organization and structure within the development process.
-
-As more of the development and design decisions for the application become apparent within the team, this section will continue to update and grow more elaborative.
+During our allotted four months of development time we plan to build our decentralized chat application through an agile style of development, allowing for an iterative methodology with time to consider testing and improvements in functionality, aesthetics, and security. Through weekly meetings in designated laboratory sessions as well as additional meetings called as the team sees fit, we will be able to meet and collaborate in person as well as over the internet through GitHub and WhatsApp. As the application's development progresses and a functional prototype is developed, we will draw upon each individual team member's personal strengths (security, back end logic, UI design, etc) to push the project into a release stage.
 ****
