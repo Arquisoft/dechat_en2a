@@ -5,6 +5,7 @@
 [role="arc42help"]
 ****
 As the project progresses, it is possible that the tools we initially decide to use will change in favor of methods that interface in an easier way. The following table lists the tools we are currently using as well as our rationale for electing them.
+****
 
 === Development Tools
 
