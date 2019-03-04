@@ -68,7 +68,6 @@ export class TestingService {
 
     if (rdfjsSource) {
       const engine = newEngine();
-      console.log("sdfsdfsfd")
       engine.query(`SELECT ?o {
     <${url}> <${predicate}> ?o.
   }`,
