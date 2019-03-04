@@ -9,9 +9,10 @@ import { User } from '../models/user.model';
 export class ChatService {
 
   chatMessages: Observable<ChatMessage[]>;
+  users: Array<User> = new Array<User>();
 
-  constructor(private rdf : RdfService) {
-        
+  constructor(private rdf : RdfService) {   
+    this.loadUsers();
   }
 
   getUser() {
@@ -19,11 +20,15 @@ export class ChatService {
   }
 
   getUsers() : Observable<User[]> {
-    var users = new Array<User>();
-    users.push(new User("Fulanito"));
-    users.push(new User("Menganito"));
-    users.push(new User("Adolfito"));
-    return of(users);
+    return of(this.users);
+  }
+
+  private async loadUsers() {
+    await this.rdf.getSession();
+    (await this.rdf.getFriends()).forEach(async element => {
+      await this.rdf.fetcher.load(element.value);
+      this.users.push(new User(this.rdf.getValueFromVcard('fn', element.value)));
+    });
   }
 
   sendMessage(msg: string) {

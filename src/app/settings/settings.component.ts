@@ -10,7 +10,8 @@ export class SettingsComponent implements OnInit {
   webId: string;
   message: string;
 
-  constructor(private testingService: TestingService) { }
+  constructor(private testingService: TestingService) {
+   }
 
   ngOnInit() {
   }
@@ -23,5 +24,9 @@ export class SettingsComponent implements OnInit {
 
   check() {
     
+  }
+
+  listFriends() {
+    this.testingService.listFriends(this.webId);
   }
 }
