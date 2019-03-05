@@ -9,7 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { CardComponent } from './card/card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChatFormComponent } from './chat-form/chat-form.component';
-import { ChatroomComponent } from './chatroom/chatroom.component';
+import { ChatComponent } from './chat/chat.component';
 import { FeedComponent } from './feed/feed.component';
 import { MessageComponent } from './message/message.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -52,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'chat',
-    component: ChatroomComponent,
+    component: ChatComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -75,7 +75,7 @@ const routes: Routes = [
     CardComponent,
     RegisterComponent,
     ChatFormComponent,
-    ChatroomComponent,
+    ChatComponent,
     FeedComponent,
     MessageComponent,
     NavbarComponent,
