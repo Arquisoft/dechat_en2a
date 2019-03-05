@@ -7,9 +7,11 @@ declare let $rdf: any;
 // TODO: Remove any UI interaction from this service
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { NamedNode } from 'src/assets/types/rdflib';
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
+const LDP = $rdf.Namespace('http://www.w3.org/ns/ldp#');
 
 /**
  * A service layer for RDF data manipulation using rdflib.js
@@ -77,6 +79,16 @@ export class RdfService {
    */
   getValueFromFoaf = (node: string, webId?: string) => {
     return this.getValueFromNamespace(node, FOAF, webId);
+  }; 
+
+  /**
+   * Gets a node that matches the specified pattern using the LDP onthology
+   * @param {string} node LDP predicate to apply to the $rdf.any()
+   * @param {string?} webId The webId URL (e.g. https://yourpod.solid.community/profile/card#me)
+   * @return {string} The value of the fetched node or an emtpty string
+   */
+  getValueFromLdp = (node: string, webId?: string) => {
+    return this.getValueFromNamespace(node, LDP, webId);
   };
  
   transformDataForm = (form: NgForm, me: any, doc: any) => {
@@ -313,6 +325,27 @@ export class RdfService {
       console.log(`Error fetching data: ${error}`);
     }
   };
+
+
+  getContents = async (webId: string = 'none') => {
+    if (!this.session) {
+      await this.getSession();
+    }
+    if(webId == 'none'){
+      webId = this.session.webId;
+    }
+    await this.fetcher.load(webId);
+  }
+
+  async getFriends(webId: string = this.session.webId): Promise<Array<NamedNode>> {
+    try {
+      await this.fetcher.load(this.store.sym(webId).doc());
+      return this.store.each(this.store.sym(webId), FOAF("knows"));
+      
+    } catch (error) {
+      console.log(`Error fetching data: ${error}`);
+    }
+  }
 
   /**
    * Gets any resource that matches the node, using the provided Namespace

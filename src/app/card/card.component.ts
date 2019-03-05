@@ -46,7 +46,6 @@ export class CardComponent implements OnInit  {
     } catch (error) {
       console.log(`Error: ${error}`);
     }
-
   }
 
   // Submits the form, and saves the profile data using the auth/rdf service

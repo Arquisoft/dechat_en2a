@@ -3,21 +3,29 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import {LoginPopupComponent} from './login-popup/login-popup.component';
-import {LoginComponent} from './login/login.component';
+import { LoginPopupComponent } from './login-popup/login-popup.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { CardComponent } from './card/card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChatFormComponent } from './chat-form/chat-form.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
+import { FeedComponent } from './feed/feed.component';
+import { MessageComponent } from './message/message.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UserItemComponent } from './user-item/user-item.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { SettingsComponent } from './settings/settings.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
+import { ChatService } from './services/chat.service';
+import { TestingService } from './services/testing.service';
 import { AuthGuard } from './services/auth.guard.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 
 const routes: Routes = [
   {
@@ -43,6 +51,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'chat',
+    component: ChatroomComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'register',
     component: RegisterComponent
   }
@@ -55,7 +73,15 @@ const routes: Routes = [
     LoginPopupComponent,
     DashboardComponent,
     CardComponent,
-    RegisterComponent
+    RegisterComponent,
+    ChatFormComponent,
+    ChatroomComponent,
+    FeedComponent,
+    MessageComponent,
+    NavbarComponent,
+    UserItemComponent,
+    UserListComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +91,7 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     BrowserAnimationsModule //required for toastr
   ],
-  providers: [AuthService],
+  providers: [AuthService , ChatService, TestingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
