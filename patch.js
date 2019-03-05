@@ -24,7 +24,7 @@ fs.readFile(f2, "utf8", function (err,data) {
   }
   var result = data.replace(/operation = (await this.mediatorOptimizeQueryOperation.mediate({ context, operation })).operation;/g, "//operation = (await this.mediatorOptimizeQueryOperation.mediate({ context, operation })).operation;");
 
-  fs.writeFile(f, result, "utf8", function (err) {
+  fs.writeFile(f2, result, "utf8", function (err) {
     if (err){
       return;
     }
