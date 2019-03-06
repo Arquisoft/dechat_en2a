@@ -23,7 +23,10 @@ export class SettingsComponent implements OnInit {
   }
 
   check() {
-    
+    this.testingService.checkInbox();
+    /*this.testingService.checkInbox().forEach(element => {
+      console.log(element);
+    });*/
   }
 
   listFriends() {

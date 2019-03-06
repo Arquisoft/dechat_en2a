@@ -347,6 +347,37 @@ export class RdfService {
     }
   }
 
+  async getInboxContents(): Promise<Array<string>> {
+    const inboxFolder = this.store.sym("https://josecurioso.inrupt.net/inbox/");
+    await this.fetcher.load(inboxFolder)
+    let files: Array<NamedNode> = this.store.any(inboxFolder, LDP('contains'));
+    //console.log(files)
+    let uris: string[] = files.map(x => x.value);
+    return uris;
+  }
+
+  async concreteContents(uri: string) {
+    const el = this.store.sym(uri);
+    const content = el.doc();
+    this.fetcher.load(content).then(() => )
+  }
+
+
+  testsMethod() {
+    const me = this.store.sym('https://josecurioso.inrupt.net/profile/card#me');
+    const profile = me.doc();
+    this.fetcher.load(profile);
+    //this.store.add(me, VCARD('fn'), "John Bloggs", profile);
+    let name = this.store.any(me, VCARD('fn'), null, profile);
+    console.log(name)
+
+    let ins = $rdf.st(me, VCARD('test'), "Cosas", profile);
+    this.updateManager.update([], ins, (uri, ok, message) => {
+      if (ok) console.log('Name changed to '+ "Cosas")
+      else alert(message)
+    })
+  }
+
   /**
    * Gets any resource that matches the node, using the provided Namespace
    * @param {string} node The name of the predicate to be applied using the provided Namespace 

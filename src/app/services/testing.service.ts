@@ -17,14 +17,26 @@ export class TestingService {
     this.inboxUrls = {};
   }
 
+
+  //Listing friends
+
   async listFriends(webId: string = this.opponentWebId){
-    var friends = (await this.rdfService.getFriends())
-        
+    var friends = (await this.rdfService.getFriends())    
     friends.forEach(friend => console.log(friend.value)); 
   }
   
+  //Checking inbox
+
+  async checkInbox() {
+    let uris = await this.rdfService.getInboxContents();
+    uris.forEach(element => {
+      this.rdfService.concreteContents(element);
+    });
 
 
+  }
+
+  //Sending messages
 
   async sendMessage(oWId: string = this.opponentWebId, msg: string) {
     await this.rdfService.getContents(oWId).then(result => this.sendToInbox(oWId, msg));
