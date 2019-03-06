@@ -25,10 +25,9 @@ export class ChatService {
 
   private async loadUsers() {
     await this.rdf.getSession();
-    (await this.rdf.getFriends()).forEach(async element => {
-      await this.rdf.fetcher.load(element.value);
-      this.users.push(new User(this.rdf.getValueFromVcard('fn', element.value)));
-    });
+    this.rdf.getFriends().then(res => res.map(e => e.value).forEach(async element => {
+      this.users.push(new User((await this.rdf.getName(element)).value));
+    }));
   }
 
   sendMessage(msg: string) {

@@ -326,43 +326,6 @@ export class RdfService {
     }
   };
 
-
-  getContents = async (webId: string = 'none') => {
-    if (!this.session) {
-      await this.getSession();
-    }
-    if(webId == 'none'){
-      webId = this.session.webId;
-    }
-    await this.fetcher.load(webId);
-  }
-
-  async getFriends(webId: string = this.session.webId): Promise<Array<NamedNode>> {
-    try {
-      await this.fetcher.load(this.store.sym(webId).doc());
-      return this.store.each(this.store.sym(webId), FOAF("knows"));
-      
-    } catch (error) {
-      console.log(`Error fetching data: ${error}`);
-    }
-  }
-
-  async getInboxContents(): Promise<Array<string>> {
-    const inboxFolder = this.store.sym("https://josecurioso.inrupt.net/inbox/");
-    await this.fetcher.load(inboxFolder)
-    let files: Array<NamedNode> = this.store.any(inboxFolder, LDP('contains'));
-    //console.log(files)
-    let uris: string[] = files.map(x => x.value);
-    return uris;
-  }
-
-  async concreteContents(uri: string) {
-    const el = this.store.sym(uri);
-    const content = el.doc();
-    this.fetcher.load(content).then(() => )
-  }
-
-
   testsMethod() {
     const me = this.store.sym('https://josecurioso.inrupt.net/profile/card#me');
     const profile = me.doc();
@@ -391,4 +354,42 @@ export class RdfService {
     }
     return '';
   }
+
+
+  // MY METHODS
+
+
+  async getArray(term: any, uri: string = this.session.webId): Promise<Array<NamedNode>> {
+    try {
+      let d = this.store.sym(uri);
+      await this.fetcher.load(d.doc());
+      return this.store.each(d, term);
+      
+    } catch (error) {
+      console.log(`Error fetching data: ${error}`);
+    }
+  }
+
+  async getSingle(term: any, uri: string = this.session.webId): Promise<NamedNode> {
+    let d = this.store.sym(uri);
+    await this.fetcher.load(d.doc());
+    return this.store.any(d, term);
+  }
+
+  async getFriends(uri: string = this.session.webId): Promise<Array<NamedNode>> {
+    return this.getArray(FOAF('knows'), uri);
+  }
+
+  async getName(uri: string = this.session.webId): Promise<NamedNode> {
+    return this.getSingle(VCARD('fn'), uri);
+  }
+
+  async getInboxUrl(webId: string): Promise<NamedNode> {
+    return this.getSingle(LDP('inbox'), webId);
+  }
+
+  async getInboxContents(webId: string = this.session.webId): Promise<Array<NamedNode>> {
+    return this.getArray(LDP('contains'), (await this.getInboxUrl(webId)).value);
+  }
+
 }

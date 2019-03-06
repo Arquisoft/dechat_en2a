@@ -10,7 +10,8 @@ let dataSync = new DataSync(solid.auth.fetch);
 })
 export class TestingService {
   inboxUrls: any;
-  opponentWebId: string = "https://josecuriosoalternativo.inrupt.net/profile/card#me";
+  opponentWebId: string = "https://josecuriosoalternativo.inrupt.net/profile/card#me";  
+  myWebId: string = "https://josecurioso.inrupt.net/profile/card#me";
   
 
   constructor(private rdfService: RdfService) {
@@ -28,24 +29,24 @@ export class TestingService {
   //Checking inbox
 
   async checkInbox() {
+    await this.rdfService.getSession();
     let uris = await this.rdfService.getInboxContents();
-    uris.forEach(element => {
-      this.rdfService.concreteContents(element);
+    console.log(uris)
+    uris.map(e => e.value).forEach(element => {
     });
-
+    
 
   }
 
   //Sending messages
 
   async sendMessage(oWId: string = this.opponentWebId, msg: string) {
-    await this.rdfService.getContents(oWId).then(result => this.sendToInbox(oWId, msg));
+    this.sendToInbox(oWId, msg);
   }
 
   async sendToInbox(opponentWebId: string, message: string = ""){
-    var inboxUrl = this.getInboxUrl(opponentWebId);
     var content = await this.generateContent(message);
-    dataSync.sendToOpponentsInbox(inboxUrl, content);
+    dataSync.sendToOpponentsInbox(this.getInboxUrl(opponentWebId), content);
   }
 
   async generateContent(msg: string) {
@@ -53,9 +54,9 @@ export class TestingService {
     return `<${session.webId}> ${msg} <${namespaces.schema}Message>.`;
   }
 
-  getInboxUrl(webId) {
+  async getInboxUrl(webId) {
     if (!this.inboxUrls[webId]) {
-      this.inboxUrls[webId] = this.rdfService.getValueFromLdp('inbox', webId);
+      this.inboxUrls[webId] = (await this.rdfService.getInboxUrl(webId)).value;
     }
     return this.inboxUrls[webId];
   }
