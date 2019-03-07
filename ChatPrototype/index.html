@@ -2,61 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Profile Viewer</title>
+  <title>Chat prototype</title>
   <link rel="stylesheet" href="styles/main.css">
-
-  
-  
 </head>
 <body>
-    
-  <h1>Profile viewer</h1>
-  <p id="login">
-    You are not logged in.
-    <button>Log in</button>
-  </p>
-  <p id="logout">
-    You are logged in as <span id="user"></span>.
-    <button>Log out</button>
-  </p>
-  <p>
-    <label for="profile">Profile:</label>
-    <input id="profile"><br>
-    <label for="public">Profile:</label>
-    <input id="public">
-    <button id="view">View</button>
-  </p>
-  <dl id="viewer">
-    <dt>Full name</dt>
-    <dd id="fullName"></dd>
-    <dt>Friends</dt>
-    <dd>
-      <ul id="friends"></ul>
-    </dd>
-  </dl>
-  <br>
-  <button id="create" >Create file</button><br>
+  <section>
+    <h1>Chat prototype</h1>
+    <p id="login">
+      You are not logged in.
+      <button>Log in</button>
+    </p>
+    <p id="logout">
+      You are logged in as <span id="user"></span>.
+      <button>Log out</button>
+    </p>
+  </section>
+<section>
+  <h2>User's information</h2>
+    <p>
+      <label for="profile">Profile:</label>
+      <input id="profile"><br>
+      <label for="public">Profile:</label>
+      <input id="public">
+      <button id="view">View</button>
+    </p>
+    <dl id="viewer">
+      <dt>Full name</dt>
+      <dd id="fullName"></dd>
+      <dt>Friends</dt>
+      <dd>
+        <ul id="friends"></ul>
+      </dd>
+    </dl>
+    <br>
+</section>
+  <section class="file_options">
+    <h2>Chat options</h2>
+      <button id="create" >New chat</button><br>
+      <button id="readFile">Get chat</button><br>
+  </section>
   
-  <button id="readFile">Leer</button><br>
-  <textarea id="content" rows="8" cols="80">
-    texto
-    </textarea>
-    <button id="enviar">Actualizar</button> 
+  <div class="chat_container"></div> 
+  
+  <div>
+    <input id="content" type="text" placeholder="Type a message" />
+    <button id="enviar">Send</button> 
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/solid-file-client/dist/browser/solid-file-client.bundle.js"></script>
   <script src="scripts/jquery.js"></script>
-    <script src="scripts/solid-auth-client.bundle.js"></script>
-    <script src="scripts/rdflib.min.js"></script>
-    <script src="scripts/main.js"></script>
-    <script>
-        const fileClient = SolidFileClient;
+  <script src="scripts/solid-auth-client.bundle.js"></script>
+  <script src="scripts/rdflib.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <script>
+      const fileClient = SolidFileClient;
           function mandar(){
           var texto=document.getElementById("text1").value;
           fileClient.updateFile('https://luispastrana.inrupt.net/public/content.json',texto);
-          }
-        </script>
-    
-  
+        }
+  </script>
 
-  
+  <footer>
+    <a href="https://validator.w3.org/check?uri=referer">
+    <img src="https://www.w3.org/html/logo/badge/html5-badge-h-solo.png"alt="HTML5 Válido!" height="64"width="63"/></a>
+  </footer>
 </body>
 </html>
