@@ -29,11 +29,15 @@ export class TestingService {
   //Checking inbox
 
   async checkInbox() {
+    /*
     await this.rdfService.getSession();
     let uris = await this.rdfService.getInboxContents();
     console.log(uris)
     uris.map(e => e.value).forEach(element => {
     });
+    */
+    await this.rdfService.getSession();
+    this.rdfService.testGetMessages();
     
 
   }

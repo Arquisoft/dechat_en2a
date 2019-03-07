@@ -8,10 +8,11 @@ import { User } from '../models/user.model';
 @Injectable()
 export class ChatService {
 
-  chatMessages: Observable<ChatMessage[]>;
-  users: Array<User> = new Array<User>();
+  users: User[] = new Array<User>();
+  messages: ChatMessage[] = new Array<ChatMessage>();
 
   constructor(private rdf : RdfService) {   
+    this.loadMessages();
     this.loadUsers();
   }
 
@@ -23,6 +24,16 @@ export class ChatService {
     return of(this.users);
   }
 
+  sendMessage(msg: string) {
+    const timestamp = this.getTimeStamp();
+    //TO-DO
+  }
+
+  getMessages() : Observable<ChatMessage[]> {
+    this.addMessage(new ChatMessage("Jose Manuel", "Hola caracola"))
+    return of(this.messages);
+  }
+
   private async loadUsers() {
     await this.rdf.getSession();
     this.rdf.getFriends().then(res => res.map(e => e.value).forEach(async element => {
@@ -30,17 +41,22 @@ export class ChatService {
     }));
   }
 
-  sendMessage(msg: string) {
-    const timestamp = this.getTimeStamp();
-    this.chatMessages = this.getMessages();
+  private async loadMessages() {
+    await this.rdf.getSession();
+
+    let chatUri = 'https://josecurioso.inrupt.net/public/chatDePruebas.ttl';
+    let chatFileUri = this.rdf.getChatFileUriForDate('2019', '03', '07', chatUri);
+    
+    this.rdf.getMessageUrisForFile(chatFileUri, chatUri).then(res => {
+      res.forEach(async el => {
+        this.addMessage((await this.rdf.getMessageData(el.value, chatFileUri)));
+      })
+    })
+
   }
 
-  getMessages(): Observable<ChatMessage[]> {
-    var messages = new Array<ChatMessage>();
-    messages.push(new ChatMessage("Miguel", "Hola"));
-    messages.push(new ChatMessage("Adolfito", "Que tal?"));
-    messages.push(new ChatMessage("Miguel", "Bien"));
-    return of(messages);
+  private addMessage(msg: ChatMessage) {
+    this.messages.push(msg);
   }
 
   getTimeStamp() {

@@ -11,14 +11,19 @@ import { ChatMessage } from '../models/chat-message.model';
 export class FeedComponent implements OnInit, OnChanges {
   feed: Observable<ChatMessage[]>;
 
-  constructor(private chat: ChatService) { }
-
+  constructor(private chat: ChatService) {}
+    
   ngOnInit() {
+    
     this.feed = this.chat.getMessages();
+    
   }
 
   ngOnChanges() {
+    
     this.feed = this.chat.getMessages();
+    
   }
+  
 
 }

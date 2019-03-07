@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SolidSession } from '../models/solid-session.model';
+import { ChatMessage } from '../models/chat-message.model';
 declare let solid: any;
 declare let $rdf: any;
 //import * as $rdf from 'rdflib'
@@ -12,6 +13,8 @@ import { NamedNode } from 'src/assets/types/rdflib';
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 const LDP = $rdf.Namespace('http://www.w3.org/ns/ldp#');
+const FLOW = $rdf.Namespace('http://www.w3.org/2005/01/wf/flow#');
+const SIOC = $rdf.Namespace('http://rdfs.org/sioc/ns#');
 
 /**
  * A service layer for RDF data manipulation using rdflib.js
@@ -392,4 +395,49 @@ export class RdfService {
     return this.getArray(LDP('contains'), (await this.getInboxUrl(webId)).value);
   }
 
+  /**
+   * Gets all the message uris for a chat.ttl file
+   * @param {string} year Year
+   * @param {string} month Month
+   * @param {string} day Day
+   * @param {string} chatUri The uri of the root folder for the chat
+   * @return {string} The uri of the chat.ttl file
+   */
+  getChatFileUriForDate(year: string, month: string, day: string, chatUri: string) {
+    return chatUri + '/' + year + '/' + month + '/' + day + '/' + 'chat.ttl';
+  }
+
+  /**
+   * Gets all the message uris for a chat.ttl file
+   * @param {string} chatFileUri The uri of the chat.ttl file 
+   * @param {string} chatUri The uri of the root folder for the chat
+   * @return {Promise<Array<NamedNode>>} NamedNode objects containing the uris of each message 
+   */
+  async getMessageUrisForFile(chatFileUri: string, chatUri: string): Promise<Array<NamedNode>> {
+    let d = this.store.sym(chatFileUri);
+    await this.fetcher.load(d.doc());
+    let indexUri = chatUri + '/index.ttl#this';
+    let indexd = this.store.sym(indexUri);
+    let messagesIdsList = (await this.store.match(indexd, FLOW('message'), null, d.doc())).map(e => e.object);
+    return messagesIdsList;
+  }
+
+  /**
+   * Gets all the message data for a given message uri in a chat.ttl file
+   * @param {string} msgUri The uri of the message
+   * @param {string} chatFileUri The uri of the chat.ttl file
+   * @return {ChatMessage} ChatMessage object for a given uri
+   */
+  async getMessageData(msgUri: string, chatFileUri: string) {
+    let subject = this.store.sym(msgUri);
+    let d = this.store.sym(chatFileUri);
+    await this.fetcher.load(d.doc());
+    let msgObj = await this.store.match(subject, SIOC('content'), null, d.doc());
+    let msgData = {
+      content: msgObj[0].object.value,
+      maker: (await this.getName((await this.getSingle(FOAF('maker'), msgUri)).value)).value,
+      uri: msgUri
+    }
+    return new ChatMessage(msgData.maker, msgData.content);
+  }
 }
