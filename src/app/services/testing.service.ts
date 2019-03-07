@@ -36,9 +36,8 @@ export class TestingService {
     uris.map(e => e.value).forEach(element => {
     });
     */
-    await this.rdfService.getSession();
-    this.rdfService.testGetMessages();
-    
+    let curi = await this.rdfService.getChannelUri('https://josecurioso.inrupt.net/profile/card#me', 'https://josecuriosoalternativo.inrupt.net/profile/card#me');
+    console.log(curi);
 
   }
 

@@ -9,12 +9,15 @@ declare let $rdf: any;
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NamedNode } from 'src/assets/types/rdflib';
+import { stringify } from '@angular/core/src/util';
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 const LDP = $rdf.Namespace('http://www.w3.org/ns/ldp#');
 const FLOW = $rdf.Namespace('http://www.w3.org/2005/01/wf/flow#');
 const SIOC = $rdf.Namespace('http://rdfs.org/sioc/ns#');
+const MEE = $rdf.Namespace('http://www.w3.org/ns/pim/meeting#');
+const TERMS = $rdf.Namespace('http://purl.org/dc/terms/');
 
 /**
  * A service layer for RDF data manipulation using rdflib.js
@@ -435,9 +438,46 @@ export class RdfService {
     let msgObj = await this.store.match(subject, SIOC('content'), null, d.doc());
     let msgData = {
       content: msgObj[0].object.value,
-      maker: (await this.getName((await this.getSingle(FOAF('maker'), msgUri)).value)).value,
+      maker: (await this.getSingle(FOAF('maker'), msgUri)).value,
       uri: msgUri
     }
     return new ChatMessage(msgData.maker, msgData.content);
+  }
+
+  async getChannelUri(myWebId: string, otherWebId: string): Promise<string> {
+    let d = this.store.sym(myWebId.replace('#me', ''));
+    await this.fetcher.load(d.doc());
+    let other = this.store.sym(otherWebId);
+    let coinc = await this.store.match(null, MEE('LongChat'), other, d.doc())
+    return coinc[0].subject.value;
+  }
+
+  async appendMessage(chatFileUri: string, message: ChatMessage) {
+    let tStampCode = +new Date;
+    let msgUri = chatFileUri + '#Msg' + tStampCode;
+    let indexUri = chatFileUri.split('/').slice(0,5).join('/') + '/index.ttl#this';
+    const msgUriSym = this.store.sym(msgUri);
+    const indexUriSym = this.store.sym(indexUri);
+
+    let ins = [];
+    
+    const cFile = this.store.sym(chatFileUri);
+    this.fetcher.load(cFile.doc());
+    ins.push($rdf.st(msgUriSym, TERMS('created'), message.timeSent, cFile.doc()));
+    ins.push($rdf.st(msgUriSym, SIOC('content'), message.message, cFile.doc()));
+    ins.push($rdf.st(msgUriSym, FOAF('maker'), message.webId, cFile.doc()));
+
+    ins.push($rdf.st(indexUriSym, FLOW('message'), msgUriSym, cFile.doc()));
+
+     
+    this.updateManager.update([], ins, (uri, ok, message, response) => {
+      if (ok) console.log('Message sent')
+      else console.log(message, response)
+    })
+  }
+  
+  async addListener(chatFileUri: string, callback: any ) {
+    const cFile = this.store.sym(chatFileUri);
+    this.updateManager.addDownstreamChangeListener(cFile.doc(), callback);
   }
 }
