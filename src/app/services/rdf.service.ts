@@ -425,25 +425,54 @@ export class RdfService {
     return messagesIdsList;
   }
 
-  /**
-   * Gets all the message data for a given message uri in a chat.ttl file
+   /**
+   * Gets the maker of a given message
    * @param {string} msgUri The uri of the message
    * @param {string} chatFileUri The uri of the chat.ttl file
-   * @return {ChatMessage} ChatMessage object for a given uri
+   * @return {string} webId of the maker
    */
-  async getMessageData(msgUri: string, chatFileUri: string) {
+  async getMessageMaker(msgUri: string, chatFileUri: string) {
     let subject = this.store.sym(msgUri);
-    let d = this.store.sym(chatFileUri);
-    await this.fetcher.load(d.doc());
-    let msgObj = await this.store.match(subject, SIOC('content'), null, d.doc());
-    let msgData = {
-      content: msgObj[0].object.value,
-      maker: (await this.getSingle(FOAF('maker'), msgUri)).value,
-      uri: msgUri
-    }
-    return new ChatMessage(msgData.maker, msgData.content);
+    let chatFile = this.store.sym(chatFileUri);
+    await this.fetcher.load(chatFile.doc());
+    let msgMaker = await this.store.match(subject, FOAF('maker'), null, chatFile.doc());
+    return msgMaker[0].object.value;
   }
 
+   /**
+   * Gets the date of a given message
+   * @param {string} msgUri The uri of the message
+   * @param {string} chatFileUri The uri of the chat.ttl file
+   * @return {Date} date the message was sent
+   */
+  async getMessageDate(msgUri: string, chatFileUri: string) {
+    let subject = this.store.sym(msgUri);
+    let chatFile = this.store.sym(chatFileUri);
+    await this.fetcher.load(chatFile.doc());
+    let msgDate = await this.store.match(subject, TERMS('created'), null, chatFile.doc());
+    return msgDate[0].object.value;
+  }
+
+   /**
+   * Gets the content of a given message.
+   * @param {string} msgUri The uri of the message
+   * @param {string} chatFileUri The uri of the chat.ttl file
+   * @return {string} content of the messahge
+   */
+  async getMessageContent(msgUri: string, chatFileUri: string) {
+    let subject = this.store.sym(msgUri);
+    let chatFile = this.store.sym(chatFileUri);
+    await this.fetcher.load(chatFile.doc());
+    let msgContent = await this.store.match(subject, SIOC('content'), null, chatFile.doc());
+    return msgContent[0].object.value;
+  }
+
+   /**
+   * Returns the uri of the chat channel used for a conversation between two webids
+   * @param {string} myWebId My webId
+   * @param {string} otherWebId The webId of the other person
+   * @return {Promise<string>} Promise resolving to the uri of the chanel
+   */
   async getChannelUri(myWebId: string, otherWebId: string): Promise<string> {
     let d = this.store.sym(myWebId.replace('#me', ''));
     await this.fetcher.load(d.doc());
@@ -452,6 +481,12 @@ export class RdfService {
     return coinc[0].subject.value;
   }
 
+   /**
+   * Adds the new message to the given chat file
+   * @param {string} chatFileUri uri of the chat file where we want to append the message
+   * @param {ChatMessage} message Chat message we want to append
+   * @return {Promise<string>} Promise resolving to the uri of the chanel
+   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
     let tStampCode = +new Date;
     let msgUri = chatFileUri + '#Msg' + tStampCode;
@@ -465,7 +500,7 @@ export class RdfService {
     this.fetcher.load(cFile.doc());
     ins.push($rdf.st(msgUriSym, TERMS('created'), message.timeSent, cFile.doc()));
     ins.push($rdf.st(msgUriSym, SIOC('content'), message.message, cFile.doc()));
-    ins.push($rdf.st(msgUriSym, FOAF('maker'), message.webId, cFile.doc()));
+    ins.push($rdf.st(msgUriSym, FOAF('maker'), this.store.sym(message.webId), cFile.doc()));
 
     ins.push($rdf.st(indexUriSym, FLOW('message'), msgUriSym, cFile.doc()));
 
@@ -475,9 +510,41 @@ export class RdfService {
       else console.log(message, response)
     })
   }
-  
+
+  /**
+  * Adds a listener to a file for when it changes
+  * @param {string} chatFileUri the uri of the resource we want to listen to
+  * @param {function} callback function to call onUpdate
+  */
   async addListener(chatFileUri: string, callback: any ) {
     const cFile = this.store.sym(chatFileUri);
     this.updateManager.addDownstreamChangeListener(cFile.doc(), callback);
+  }
+
+  async addFriend(addWebId: string) {
+    await this.getSession();
+    let card = this.store.sym(this.session.webId.replace('#me', ''));
+    let me = this.store.sym(this.session.webId);
+    let newFriend = this.store.sym(addWebId);
+    await this.fetcher.load(newFriend.doc());
+
+    let checks = await this.store.match(null, null, FOAF('PersonalProfileDocument'), newFriend.doc())
+    
+
+    if(checks.length > 0 && addWebId != ''){
+      try{
+        let ins = $rdf.st(me, FOAF('knows'), newFriend, card.doc());
+    
+        this.updateManager.update([], ins, (uri, ok, message, response) => {
+          if (ok) console.log('Friend added')
+          else console.log(message, response)
+      })
+      }catch{
+        throw new Error('Not a valid profile URI');
+      }
+    }
+    else {
+      throw new Error('Not a valid profile URI');
+    }
   }
 }

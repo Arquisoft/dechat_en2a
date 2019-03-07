@@ -55,7 +55,9 @@ export class ChatService {
   sendMessage(msg: string) {
     let fileToWrite = this.getCurrentDateChatUri(this.currentChannelUri);
     const timestamp = this.getTimeStamp();
-    this.rdf.appendMessage(fileToWrite, new ChatMessage(this.me.webId, msg));
+    let m = new ChatMessage(this.me.username, msg);
+    m.webId = this.me.webId;
+    this.rdf.appendMessage(fileToWrite, m);
     this.reloadMessages();
   }
 
@@ -82,11 +84,18 @@ export class ChatService {
     let chatFileUri = this.getCurrentDateChatUri(this.currentChannelUri);    
     this.rdf.getMessageUrisForFile(chatFileUri, this.currentChannelUri).then(res => {
       res.forEach(async el => {
-        this.addMessage((await this.rdf.getMessageData(el.value, chatFileUri)));
+        let maker = await this.rdf.getMessageMaker(el.value, chatFileUri);
+        let content = await this.rdf.getMessageContent(el.value, chatFileUri);
+        let date = await this.rdf.getMessageDate(el.value, chatFileUri);
+        let m = new ChatMessage(this.getUsernameFromWebID(maker), content);
+        m.timeSent = date;
+        m.webId = maker;
+        this.addMessage(m);
       })
     })
     //this.setupListener();  Not supported by server
   }
+
 
   private addMessage(msg: ChatMessage) {
     this.messages.push(msg);

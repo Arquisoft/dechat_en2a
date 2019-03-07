@@ -19,6 +19,7 @@ export class MessageComponent implements OnInit {
   constructor(private chatService : ChatService) {
     chatService.getUser().subscribe(user => {
       this.userName = user.username;
+
       this.isOwnMessage = user.username === "Miguel";
     }); 
   }
@@ -26,6 +27,7 @@ export class MessageComponent implements OnInit {
   ngOnInit(chatMessage = this.chatMessage) {
     this.messageContent = chatMessage.message;
     this.timeStamp = chatMessage.timeSent;
+    this.isOwnMessage = (this.userName == chatMessage.userName);
     this.userName = chatMessage.userName;
   }
 }
