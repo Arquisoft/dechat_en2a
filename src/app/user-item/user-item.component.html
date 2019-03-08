@@ -1,7 +1,7 @@
-<div class="userItem">
+<div class="userItem" (click)="userClicked()">
   <span class="status" [ngClass]=(user.status)>
   </span>
   <span class="userName">
-    {{user.username}}
+    {{user.fullName}}
   </span>
 </div>

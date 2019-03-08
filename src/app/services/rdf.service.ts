@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SolidSession } from '../models/solid-session.model';
 import { ChatMessage } from '../models/chat-message.model';
+import * as fileClient from 'solid-file-client';
 declare let solid: any;
 declare let $rdf: any;
 //import * as $rdf from 'rdflib'
@@ -18,7 +19,10 @@ const FLOW = $rdf.Namespace('http://www.w3.org/2005/01/wf/flow#');
 const SIOC = $rdf.Namespace('http://rdfs.org/sioc/ns#');
 const MEE = $rdf.Namespace('http://www.w3.org/ns/pim/meeting#');
 const TERMS = $rdf.Namespace('http://purl.org/dc/terms/');
-
+const RDFSYN = $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+const ICAL = $rdf.Namespace('http://www.w3.org/2002/12/cal/ical#');
+const UI = $rdf.Namespace('http://www.w3.org/ns/ui#');
+const DCEL = $rdf.Namespace('http://purl.org/dc/elements/1.1/');
 /**
  * A service layer for RDF data manipulation using rdflib.js
  * @see https://solid.inrupt.com/docs/manipulating-ld-with-rdflib
@@ -477,7 +481,7 @@ export class RdfService {
     let d = this.store.sym(myWebId.replace('#me', ''));
     await this.fetcher.load(d.doc());
     let other = this.store.sym(otherWebId);
-    let coinc = await this.store.match(null, MEE('LongChat'), other, d.doc())
+    let coinc = await this.store.match(null, MEE('LongChat'), other, d.doc());
     return coinc[0].subject.value;
   }
 
@@ -547,4 +551,91 @@ export class RdfService {
       throw new Error('Not a valid profile URI');
     }
   }
+
+  async createNewChat(myWebId: string, otherWebId: string, chatFolder: string) {
+    let indexFileUri = chatFolder + '/index.ttl';
+    let pId = 'id' + (+new Date);
+    
+    const pIdUriSym = this.store.sym(indexFileUri + '#pId' + pId);
+    const thisUriSym = this.store.sym(indexFileUri + '#this');
+    const sPrefUriSym = this.store.sym(indexFileUri + '#SharedPreferences');
+    const meUriSym = this.store.sym(myWebId);
+    const otherUiSym = this.store.sym(otherWebId);
+
+    let currDate = new Date();
+
+    let ins = [];    
+    
+    const indexFile = this.store.sym(indexFileUri);
+    const myCardFile = this.store.sym(myWebId.replace('#me', ''));
+    const chatFolderFile = this.store.sym(chatFolder);
+    this.fetcher.load(myCardFile.doc());
+    
+
+    ins.push($rdf.st(pIdUriSym, ICAL('dtstart'), currDate, indexFile.doc()));
+    ins.push($rdf.st(pIdUriSym, FLOW('participant'), meUriSym, indexFile.doc()));
+    ins.push($rdf.st(pIdUriSym, FLOW('participant'), otherUiSym, indexFile.doc()));
+    ins.push($rdf.st(pIdUriSym, UI('backgroundColor'), '#f0d3e3', indexFile.doc()));
+
+    ins.push($rdf.st(thisUriSym, RDFSYN('type'), MEE('LongChat'), indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('author'), meUriSym, indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('created'), currDate, indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('title'), 'Chat Channel', indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, FLOW('participation'), pIdUriSym, indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, UI('sharedPreferences'), sPrefUriSym, indexFile.doc()));
+
+    
+    await this.updateManager.put(indexFile.doc(), ins, "text/turtle", (uri, ok, message, response) => {
+      if(ok)
+        console.log(`File [${this.urlLogFilter(uri)}] PUT with message [${message}].`)
+      else
+        console.error(`File [${this.urlLogFilter(uri)}] failed PUT with message [${message}].`)
+    });
+
+    let cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherUiSym, myCardFile.doc());
+    
+    await this.updateManager.update([], cardNote, (uri, ok, message, response) => {
+      if (ok) 
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] UPDATED with message [${message}].`)
+      else 
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`)
+    })
+  }
+
+  async createChatFileForDay(uri: string) {
+    //fileClient.createFile(uri.replace('.ttl', ''), '', "text/turtle");
+    let chatDayFile = this.store.sym(uri);
+    let chatFolder = uri.replace('/chat.ttl', '');
+    let chatDayFolder = this.store.sym(chatFolder);
+    await this.fetcher.load(chatDayFolder.doc());
+    let matches = await this.store.match(chatDayFolder, LDP('contains'), null, chatDayFolder.doc())
+    
+    if(matches.length == 0){
+      console.log(`    Chat file [${this.urlLogFilter(uri)}] in folder [${this.urlLogFilter(chatFolder)}] NOT FOUND, creating it...`)
+      await this.updateManager.put(chatDayFile.doc(), '',"text/turtle",function(o,s,c){});
+      console.log(`    Chat file [${this.urlLogFilter(uri)}] in folder [${this.urlLogFilter(chatFolder)}] CREATED`)
+    }
+    else{
+      console.log(`    Chat file [${this.urlLogFilter(uri)}] in folder [${this.urlLogFilter(chatFolder)}] FOUND, skipping creation`)
+    }
+  }
+
+  async createStructure(uri: string) {
+    console.log('Creating folder structure')
+    let splitted = uri.split('/');
+    for (let i = 4; i > 0; i--) {
+      let newUri = splitted.slice(0, splitted.length-i).join('/');
+      console.log(`    Creating folder [${this.urlLogFilter(newUri)}]`)
+      await fileClient.createFolder(newUri);
+    }
+    console.log('Folder structure done, proceeding with chat file.')
+    await this.createChatFileForDay(uri)
+  }
+
+  
+
+  urlLogFilter(url: string) {
+    return url.replace('https://josecuriosoalternativo.inrupt.net', '')
+  }
+
 }
