@@ -19,7 +19,6 @@ import { SettingsComponent } from './settings/settings.component';
 // Services
 import { AuthService } from './services/solid.auth.service';
 import { ChatService } from './services/chat.service';
-import { TestingService } from './services/testing.service';
 import { AuthGuard } from './services/auth.guard.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
@@ -84,7 +83,7 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     BrowserAnimationsModule // required for toastr
   ],
-  providers: [AuthService , ChatService, TestingService],
+  providers: [AuthService , ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TestingService } from '../services/testing.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +9,7 @@ export class SettingsComponent implements OnInit {
   webId: string;
   message: string;
 
-  constructor(private testingService: TestingService) {
+  constructor() {
    }
 
   ngOnInit() {
@@ -19,17 +18,14 @@ export class SettingsComponent implements OnInit {
 
 
   send() {
-    this.testingService.sendMessage(this.webId, this.message);
+
   }
 
   check() {
-    this.testingService.checkInbox();
-    /*this.testingService.checkInbox().forEach(element => {
-      console.log(element);
-    });*/
+
   }
 
   listFriends() {
-    this.testingService.listFriends(this.webId);
+
   }
 }
