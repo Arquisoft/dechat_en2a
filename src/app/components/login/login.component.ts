@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // Auth Service
-import { AuthService } from '../services/solid.auth.service';
-import { SolidProvider } from '../models/solid-provider.model';
+import { AuthService } from '../../services/solid.auth.service';
+import { SolidProvider } from '../../models/solid-provider.model';
 
 
 @Component({

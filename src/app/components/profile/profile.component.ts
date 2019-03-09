@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { SolidProfile } from '../models/solid-profile.model';
-import { RdfService } from '../services/rdf.service';
-import { AuthService } from '../services/solid.auth.service';
+import { SolidProfile } from '../../models/solid-profile.model';
+import { RdfService } from '../../services/rdf.service';
+import { AuthService } from '../../services/solid.auth.service';
 
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
 })
-export class CardComponent implements OnInit  {
+export class ProfileComponent implements OnInit  {
 
   profile: SolidProfile;
   profileImage: string;

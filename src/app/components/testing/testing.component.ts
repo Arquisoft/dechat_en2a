@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  selector: 'app-testing',
+  templateUrl: './testing.component.html',
+  styleUrls: ['./testing.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class TestingComponent implements OnInit {
   webId: string;
   message: string;
 

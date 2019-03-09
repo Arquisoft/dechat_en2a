@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/solid.auth.service';
-import { SolidSession } from '../models/solid-session.model';
+import { AuthService } from '../../services/solid.auth.service';
+import { SolidSession } from '../../models/solid-session.model';
 
 @Component({
   selector: 'app-navbar',
