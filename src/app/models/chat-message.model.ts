@@ -1,8 +1,9 @@
 export class ChatMessage {
 
-    constructor(userName, message) {
+    constructor(userName, message, webId) {
         this.userName = userName;
         this.message = message;
+        this.webId = webId;
     }
 
     $uri?: string;

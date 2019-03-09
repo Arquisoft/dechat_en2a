@@ -7,7 +7,6 @@ import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CardComponent } from './card/card.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChatFormComponent } from './chat-form/chat-form.component';
 import { ChatComponent } from './chat/chat.component';
 import { FeedComponent } from './feed/feed.component';
@@ -41,11 +40,6 @@ const routes: Routes = [
     component: LoginPopupComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'card',
     component: CardComponent,
     canActivate: [AuthGuard],
@@ -71,7 +65,6 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     LoginPopupComponent,
-    DashboardComponent,
     CardComponent,
     RegisterComponent,
     ChatFormComponent,
@@ -89,7 +82,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgSelectModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule //required for toastr
+    BrowserAnimationsModule // required for toastr
   ],
   providers: [AuthService , ChatService, TestingService],
   bootstrap: [AppComponent]

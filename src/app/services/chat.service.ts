@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ChatMessage } from '../models/chat-message.model';
-import { SolidSession } from '../models/solid-session.model';
 import { RdfService } from './rdf.service';
 import { User } from '../models/user.model';
-
-import * as fileClient from 'solid-file-client';
 
 @Injectable()
 export class ChatService {
@@ -20,21 +17,18 @@ export class ChatService {
   me: User;
   other: User;
 
-  constructor(private rdf : RdfService) {  
-    this.loadUserData(); 
+  constructor(private rdf: RdfService) {
+    this.loadUserData();
     this.loadFriends();
-    //Temporary
-    //this.setOther(new User('josecurioso2', 'Jose Alternativo', 'https://josecuriosoalternativo.inrupt.net/profile/card#me'));
-    //this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
+    // Temporary
+    // this.setOther(new User('josecurioso2', 'Jose Alternativo', 'https://josecuriosoalternativo.inrupt.net/profile/card#me'));
+    // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
 
   }
 
   async loadUserData() {
     await this.rdf.getSession();
-    let currentSession = this.rdf.session
-    let name = this.rdf.getName(currentSession.webId);
-    let username = this.getUsernameFromWebID(currentSession.webId);
-    this.me = new User(username, name, currentSession.webId);
+    this.me = new User(this.getUsernameFromWebID(this.rdf.session.webId), this.rdf.getName(this.rdf.session.webId), this.rdf.session.webId);
   }
 
   /* DEPRECATED
@@ -48,28 +42,28 @@ export class ChatService {
     return of(this.me);
   }
 
-  getFriends() : Observable<User[]> {
+  getFriends(): Observable<User[]> {
     return of(this.friends);
   }
 
   setOther(other: User) {
+    if (this.other != null) {
+      this.other.isCurrent = false;
+    }
+    other.isCurrent = true;
     console.log('Other is ' + other.username);
-    if(this.other == null || this.other.username != other.username){
+    if (this.other == null || this.other.username !== other.username) {
       this.other = other;
       this.reloadMessages();
     }
   }
 
   async sendMessage(msg: string) {
-    let fileToWrite = await this.getCurrentChatUri(this.currentChannelUri);
-    const timestamp = this.getTimeStamp();
-    let m = new ChatMessage(this.me.username, msg);
-    m.webId = this.me.webId;
-    this.rdf.appendMessage(fileToWrite, m);
+    this.rdf.appendMessage(await this.getCurrentChatUri(this.currentChannelUri), new ChatMessage(this.me.username, msg, this.me.webId));
     this.reloadMessages();
   }
 
-  getMessages() : Observable<ChatMessage[]> {
+  getMessages(): Observable<ChatMessage[]> {
     return of(this.messages);
   }
 
@@ -93,37 +87,36 @@ export class ChatService {
       this.currentChannelUri = await this.rdf.getChannelUri(this.me.webId, this.other.webId);
       this.currentChatFileUri = this.getCurrentChatUri(this.currentChannelUri);
       await this.rdf.createStructure(this.currentChatFileUri);
+    } catch (error) {
+      console.log('Chat not initialised, initializing...');
+
+      this.currentChannelUri = this.getNewChannelUri();
+      this.currentChatFileUri = this.getCurrentChatUri(this.currentChannelUri);
+      await this.rdf.createStructure(this.currentChatFileUri);
+      await this.rdf.createNewChat(this.me.webId, this.other.webId, this.currentChannelUri);
+
     }
-    catch(error) {
-        console.log('Chat not initialised, initializing...');
-
-        this.currentChannelUri = this.getNewChannelUri();
-        this.currentChatFileUri = this.getCurrentChatUri(this.currentChannelUri);
-        await this.rdf.createStructure(this.currentChatFileUri);
-        await this.rdf.createNewChat(this.me.webId, this.other.webId, this.currentChannelUri);
-
-    }
 
 
-    console.log(`Channel URI [${this.urlLogFilter(this.currentChannelUri)}] FOUND`)
-    console.log(`Chat file URI [${this.urlLogFilter(this.currentChatFileUri)}] FOUND`)
+    console.log(`Channel URI [${this.urlLogFilter(this.currentChannelUri)}] FOUND`);
+    console.log(`Chat file URI [${this.urlLogFilter(this.currentChatFileUri)}] FOUND`);
 
   }
 
   private async loadMessages() {
-    console.log(`Getting messages from file [${this.urlLogFilter(this.currentChatFileUri)}] in channel [${this.urlLogFilter(this.currentChannelUri)}]`)
+    console.log(`Getting messages from file [${this.urlLogFilter(this.currentChatFileUri)}]` +
+                ` in channel [${this.urlLogFilter(this.currentChannelUri)}]`);
     this.rdf.getMessageUrisForFile(this.currentChatFileUri, this.currentChannelUri).then(res => {
       res.forEach(async el => {
-        let maker = await this.rdf.getMessageMaker(el.value, this.currentChatFileUri);
-        let content = await this.rdf.getMessageContent(el.value, this.currentChatFileUri);
-        let date = await this.rdf.getMessageDate(el.value, this.currentChatFileUri);
-        let m = new ChatMessage(this.getUsernameFromWebID(maker), content);
-        m.timeSent = date;
-        m.webId = maker;
+        const maker = await this.rdf.getMessageMaker(el.value, this.currentChatFileUri);
+        const m = new ChatMessage(this.getUsernameFromWebID(maker),
+                                  await this.rdf.getMessageContent(el.value, this.currentChatFileUri),
+                                  maker);
+        m.timeSent = await this.rdf.getMessageDate(el.value, this.currentChatFileUri);
         this.addMessage(m);
-      })
-    })
-    //this.setupListener();  Not supported by server
+      });
+    });
+    // this.setupListener();  Not supported by server
   }
 
 
@@ -135,32 +128,31 @@ export class ChatService {
   getTimeStamp() {
     const now = new Date();
     const date = now.getUTCFullYear() + '/' +
-                 (now.getUTCMonth() + 1) + '/' +
-                 now.getUTCDate();
+      (now.getUTCMonth() + 1) + '/' +
+      now.getUTCDate();
     const time = now.getUTCHours() + ':' +
-                 now.getUTCMinutes() + ':' +
-                 now.getUTCSeconds();
+      now.getUTCMinutes() + ':' +
+      now.getUTCSeconds();
 
     return (date + ' ' + time);
   }
 
   getCurrentChatUri(channelUri: string) {
     const now = new Date();
-    return channelUri + '/' + now.getUTCFullYear() + '/' + ('0' + (now.getUTCMonth() + 1)).slice(-2) + '/' + ('0' + now.getUTCDate()).slice(-2) + '/' + 'chat.ttl';
+    return channelUri + '/' +
+      now.getUTCFullYear() + '/' +
+      ('0' + (now.getUTCMonth() + 1)).slice(-2) + '/' +
+      ('0' + now.getUTCDate()).slice(-2) + '/' + 'chat.ttl';
   }
 
-  private getUsernameFromWebID(webId: string) : string {
-    let username: string = '';
-    if(webId.includes('https://')){
+  private getUsernameFromWebID(webId: string): string {
+    let username = '';
+    if (webId.includes('https://')) {
       username = webId.replace('https://', '');
-    }
-    else {
+    } else {
       username = webId.replace('http://', '');
     }
-    let usr = username.split('.')[0];
-    return usr;
-
-
+    return username.split('.')[0];
   }
 
   getNewChannelUri() {
@@ -172,6 +164,7 @@ export class ChatService {
   }
 
   urlLogFilter(url: string) {
-    return url.replace('https://josecuriosoalternativo.inrupt.net', '')
+    return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
   }
+
 }

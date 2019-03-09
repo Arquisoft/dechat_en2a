@@ -9,4 +9,5 @@ export class User {
     username?: string;
     fullName?: string;
     webId?: string;
+    isCurrent?: boolean;
 }
