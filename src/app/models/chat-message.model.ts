@@ -1,12 +1,14 @@
 export class ChatMessage {
 
-    constructor(userName, message) {
+    constructor(userName, message, webId) {
         this.userName = userName;
         this.message = message;
+        this.webId = webId;
     }
 
-    $key?: string;
+    $uri?: string;
     userName?: string;
+    webId?: string;
     message?: string;
     timeSent?: Date = new Date();
 }

@@ -1,0 +1,99 @@
+.profile-container {
+  font-family: 'Roboto', sans-serif;
+}
+
+.profile-container h1 {
+  font-size: 24px;
+  color: rgb(20, 96, 236);
+  font-weight: bold;
+  line-height: 32px;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-top: 82px;
+  text-transform: uppercase;
+}
+
+.profile-fields-container {
+  max-width: 740px;
+  min-height: 500px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  box-shadow: #ccc 1px 1px 4px;
+  position: relative;
+}
+
+.profile-fields-container .profile-image-container {
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+  background: rgb(20, 96, 236);
+}
+
+.profile-fields-container .profile-image-container img {
+  height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right:auto;
+  position: relative;
+  top:40px;
+  display: block;
+}
+
+.profile-fields-container i {
+  font-size: 14px;
+  color: #89969F;
+  padding-left: 26px;
+  padding-right: 10px;
+  margin-top: 24px;
+}
+
+.profile-fields-container input[type=text].field-text {
+  height: 12px;
+  width: 280px;
+  border: 1px solid #89969F;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.profile-fields-container input[type=text].field-text::placeholder {
+  color: rgba(102,102,102,0.2);
+}
+
+.profile-save-button-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: auto;
+  height: 100px;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.profile-save-button {
+  background-color: rgb(20, 96, 236);
+  margin-left: auto;
+  margin-right: auto;
+  width: 280px;
+}
+
+.profile-save-button:disabled {
+  background-color: #F0EEEB;
+  border-color: #F0EEEB;
+  cursor: not-allowed;
+}
+
+.loading-image {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.addfriends {
+  margin: 20px;
+}
+
+.addfriends h2 {
+  color: rgb(20, 96, 236);
+}
+
+.addfriends input {
+  margin-right: 10px;
+}

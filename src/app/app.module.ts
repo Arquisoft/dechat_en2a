@@ -2,25 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// Components
 import { AppComponent } from './app.component';
-import { LoginPopupComponent } from './login-popup/login-popup.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { CardComponent } from './card/card.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ChatFormComponent } from './chat-form/chat-form.component';
-import { ChatComponent } from './chat/chat.component';
-import { FeedComponent } from './feed/feed.component';
-import { MessageComponent } from './message/message.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { UserItemComponent } from './user-item/user-item.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { SettingsComponent } from './settings/settings.component';
+import { LoginPopupComponent } from './components/login-popup/login-popup.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ChatFormComponent } from './components/chat-form/chat-form.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { FeedComponent } from './components/feed/feed.component';
+import { MessageComponent } from './components/message/message.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FriendItemComponent } from './components/friend-item/friend-item.component';
+import { FriendListComponent } from './components/friend-list/friend-list.component';
+import { TestingComponent } from './components/testing/testing.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
 import { ChatService } from './services/chat.service';
-import { TestingService } from './services/testing.service';
 import { AuthGuard } from './services/auth.guard.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
@@ -41,13 +40,8 @@ const routes: Routes = [
     component: LoginPopupComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'card',
-    component: CardComponent,
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -57,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent,
+    component: TestingComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -71,17 +65,16 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     LoginPopupComponent,
-    DashboardComponent,
-    CardComponent,
+    ProfileComponent,
     RegisterComponent,
     ChatFormComponent,
     ChatComponent,
     FeedComponent,
     MessageComponent,
     NavbarComponent,
-    UserItemComponent,
-    UserListComponent,
-    SettingsComponent
+    FriendItemComponent,
+    FriendListComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -89,9 +82,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgSelectModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule //required for toastr
+    BrowserAnimationsModule // required for toastr
   ],
-  providers: [AuthService , ChatService, TestingService],
+  providers: [AuthService , ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

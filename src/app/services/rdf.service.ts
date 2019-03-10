@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
 import { SolidSession } from '../models/solid-session.model';
+import { ChatMessage } from '../models/chat-message.model';
+import * as fileClient from 'solid-file-client';
 declare let solid: any;
 declare let $rdf: any;
-//import * as $rdf from 'rdflib'
 
 // TODO: Remove any UI interaction from this service
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NamedNode } from 'src/assets/types/rdflib';
+import { stringify } from '@angular/core/src/util';
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 const LDP = $rdf.Namespace('http://www.w3.org/ns/ldp#');
-
+const FLOW = $rdf.Namespace('http://www.w3.org/2005/01/wf/flow#');
+const SIOC = $rdf.Namespace('http://rdfs.org/sioc/ns#');
+const MEE = $rdf.Namespace('http://www.w3.org/ns/pim/meeting#');
+const TERMS = $rdf.Namespace('http://purl.org/dc/terms/');
+const RDFSYN = $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+const ICAL = $rdf.Namespace('http://www.w3.org/2002/12/cal/ical#');
+const UI = $rdf.Namespace('http://www.w3.org/ns/ui#');
+const DCEL = $rdf.Namespace('http://purl.org/dc/elements/1.1/');
+const NONE = $rdf.Namespace('http://example.org/ns/none#');
 /**
  * A service layer for RDF data manipulation using rdflib.js
  * @see https://solid.inrupt.com/docs/manipulating-ld-with-rdflib
@@ -42,7 +52,7 @@ export class RdfService {
    */
   updateManager = $rdf.UpdateManager;
 
-  constructor (private toastr: ToastrService) {
+  constructor(private toastr: ToastrService) {
     const fetcherOptions = {};
     this.fetcher = new $rdf.Fetcher(this.store, fetcherOptions);
     this.updateManager = new $rdf.UpdateManager(this.store);
@@ -52,7 +62,7 @@ export class RdfService {
   /**
    * Fetches the session from Solid, and store results in localStorage
    */
-  getSession = async() => {
+  getSession = async () => {
     this.session = await solid.auth.currentSession(localStorage);
   }
 
@@ -69,7 +79,7 @@ export class RdfService {
    */
   getValueFromVcard = (node: string, webId?: string): string | any => {
     return this.getValueFromNamespace(node, VCARD, webId);
-  };
+  }
 
   /**
    * Gets a node that matches the specified pattern using the FOAF onthology
@@ -79,7 +89,7 @@ export class RdfService {
    */
   getValueFromFoaf = (node: string, webId?: string) => {
     return this.getValueFromNamespace(node, FOAF, webId);
-  }; 
+  }
 
   /**
    * Gets a node that matches the specified pattern using the LDP onthology
@@ -89,8 +99,8 @@ export class RdfService {
    */
   getValueFromLdp = (node: string, webId?: string) => {
     return this.getValueFromNamespace(node, LDP, webId);
-  };
- 
+  }
+
   transformDataForm = (form: NgForm, me: any, doc: any) => {
     const insertions = [];
     const deletions = [];
@@ -104,31 +114,29 @@ export class RdfService {
     // These are separate codepaths because the system needs to know what to do in each case
     fields.map(field => {
 
-      let predicate = VCARD(this.getFieldName(field));
-      let subject = this.getUriForField(field, me);
-      let why = doc;
+      const predicate = VCARD(this.getFieldName(field));
+      const subject = this.getUriForField(field, me);
+      const why = doc;
 
-      let fieldValue = this.getFieldValue(form, field);
-      let oldFieldValue = this.getOldFieldValue(field, oldProfileData);
+      const fieldValue = this.getFieldValue(form, field);
+      const oldFieldValue = this.getOldFieldValue(field, oldProfileData);
 
       // if there's no existing home phone number or email address, we need to add one, then add the link for hasTelephone or hasEmail
-      if(!oldFieldValue && fieldValue && (field === 'phone' || field==='email')) {
+      if (!oldFieldValue && fieldValue && (field === 'phone' || field === 'email')) {
         this.addNewLinkedField(field, insertions, predicate, fieldValue, why, me);
       } else {
 
-        //Add a value to be updated
+        // Add a value to be updated
         if (oldProfileData[field] && form.value[field] && !form.controls[field].pristine) {
           deletions.push($rdf.st(subject, predicate, oldFieldValue, why));
           insertions.push($rdf.st(subject, predicate, fieldValue, why));
-        }
 
-        //Add a value to be deleted
-        else if (oldProfileData[field] && !form.value[field] && !form.controls[field].pristine) {
+          // Add a value to be deleted
+        } else if (oldProfileData[field] && !form.value[field] && !form.controls[field].pristine) {
           deletions.push($rdf.st(subject, predicate, oldFieldValue, why));
-        }
 
-        //Add a value to be inserted
-        else if (!oldProfileData[field] && form.value[field] && !form.controls[field].pristine) {
+          // Add a value to be inserted
+        } else if (!oldProfileData[field] && form.value[field] && !form.controls[field].pristine) {
           insertions.push($rdf.st(subject, predicate, fieldValue, why));
         }
       }
@@ -138,27 +146,27 @@ export class RdfService {
       insertions: insertions,
       deletions: deletions
     };
-  };
+  }
 
   private addNewLinkedField(field, insertions, predicate, fieldValue, why, me: any) {
-    //Generate a new ID. This id can be anything but needs to be unique.
-    let newId = field + ':' + Date.now();
+    // Generate a new ID. This id can be anything but needs to be unique.
+    const newId = field + ':' + Date.now();
 
-    //Get a new subject, using the new ID
-    let newSubject = $rdf.sym(this.session.webId.split('#')[0] + '#' + newId);
+    // Get a new subject, using the new ID
+    const newSubject = $rdf.sym(this.session.webId.split('#')[0] + '#' + newId);
 
-    //Set new predicate, based on email or phone fields
-    let newPredicate = field === 'phone' ? $rdf.sym(VCARD('hasTelephone')) : $rdf.sym(VCARD('hasEmail'));
+    // Set new predicate, based on email or phone fields
+    const newPredicate = field === 'phone' ? $rdf.sym(VCARD('hasTelephone')) : $rdf.sym(VCARD('hasEmail'));
 
-    //Add new phone or email to the pod
+    // Add new phone or email to the pod
     insertions.push($rdf.st(newSubject, predicate, fieldValue, why));
 
-    //Set the type (defaults to Home/Personal for now) and insert it into the pod as well
-    //Todo: Make this dynamic
-    let type = field === 'phone' ? $rdf.literal('Home') : $rdf.literal('Personal');
+    // Set the type (defaults to Home/Personal for now) and insert it into the pod as well
+    // Todo: Make this dynamic
+    const type = field === 'phone' ? $rdf.literal('Home') : $rdf.literal('Personal');
     insertions.push($rdf.st(newSubject, VCARD('type'), type, why));
 
-    //Add a link in #me to the email/phone number (by id)
+    // Add a link in #me to the email/phone number (by id)
     insertions.push($rdf.st(me, newPredicate, newSubject, why));
   }
 
@@ -166,16 +174,16 @@ export class RdfService {
     let uriString: string;
     let uri: any;
 
-    switch(field) {
+    switch (field) {
       case 'phone':
         uriString = this.getValueFromVcard('hasTelephone');
-        if(uriString) {
+        if (uriString) {
           uri = $rdf.sym(uriString);
         }
         break;
       case 'email':
         uriString = this.getValueFromVcard('hasEmail');
-        if(uriString) {
+        if (uriString) {
           uri = $rdf.sym(uriString);
         }
         break;
@@ -196,16 +204,16 @@ export class RdfService {
   private getFieldValue(form: NgForm, field: string): any {
     let fieldValue: any;
 
-    if(!form.value[field]) {
+    if (!form.value[field]) {
       return;
     }
 
-    switch(field) {
+    switch (field) {
       case 'phone':
-        fieldValue = $rdf.sym('tel:+'+form.value[field]);
+        fieldValue = $rdf.sym('tel:+' + form.value[field]);
         break;
       case 'email':
-        fieldValue = $rdf.sym('mailto:'+form.value[field]);
+        fieldValue = $rdf.sym('mailto:' + form.value[field]);
         break;
       default:
         fieldValue = form.value[field];
@@ -218,16 +226,16 @@ export class RdfService {
   private getOldFieldValue(field, oldProfile): any {
     let oldValue: any;
 
-    if(!oldProfile || !oldProfile[field]) {
+    if (!oldProfile || !oldProfile[field]) {
       return;
     }
 
-    switch(field) {
+    switch (field) {
       case 'phone':
-        oldValue = $rdf.sym('tel:+'+oldProfile[field]);
+        oldValue = $rdf.sym('tel:+' + oldProfile[field]);
         break;
       case 'email':
-        oldValue = $rdf.sym('mailto:'+oldProfile[field]);
+        oldValue = $rdf.sym('mailto:' + oldProfile[field]);
         break;
       default:
         oldValue = oldProfile[field];
@@ -254,19 +262,19 @@ export class RdfService {
     const doc = $rdf.NamedNode.fromValue(this.session.webId.split('#')[0]);
     const data = this.transformDataForm(form, me, doc);
 
-    //Update existing values
-    if(data.insertions.length > 0 || data.deletions.length > 0) {
+    // Update existing values
+    if (data.insertions.length > 0 || data.deletions.length > 0) {
       this.updateManager.update(data.deletions, data.insertions, (response, success, message) => {
-        if(success) {
+        if (success) {
           this.toastr.success('Your Solid profile has been successfully updated', 'Success!');
           form.form.markAsPristine();
           form.form.markAsTouched();
         } else {
-          this.toastr.error('Message: '+ message, 'An error has occurred');
+          this.toastr.error('Message: ' + message, 'An error has occurred');
         }
       });
     }
-  };
+  }
 
   getAddress = () => {
     const linkedUri = this.getValueFromVcard('hasAddress');
@@ -281,9 +289,9 @@ export class RdfService {
     }
 
     return {};
-  };
+  }
 
-  //Function to get email. This returns only the first email, which is temporary
+  // Function to get email. This returns only the first email, which is temporary
   getEmail = () => {
     const linkedUri = this.getValueFromVcard('hasEmail');
 
@@ -294,14 +302,14 @@ export class RdfService {
     return '';
   }
 
-  //Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
+  // Function to get phone number. This returns only the first phone number, which is temporary. It also ignores the type.
   getPhone = () => {
     const linkedUri = this.getValueFromVcard('hasTelephone');
 
-    if(linkedUri) {
+    if (linkedUri) {
       return this.getValueFromVcard('value', linkedUri).split('tel:+')[1];
     }
-  };
+  }
 
   getProfile = async () => {
 
@@ -313,8 +321,8 @@ export class RdfService {
       await this.fetcher.load(this.session.webId);
 
       return {
-        fn : this.getValueFromVcard('fn'),
-        company : this.getValueFromVcard('organization-name'),
+        fn: this.getValueFromVcard('fn'),
+        company: this.getValueFromVcard('organization-name'),
         phone: this.getPhone(),
         role: this.getValueFromVcard('role'),
         image: this.getValueFromVcard('hasPhoto'),
@@ -324,34 +332,13 @@ export class RdfService {
     } catch (error) {
       console.log(`Error fetching data: ${error}`);
     }
-  };
-
-
-  getContents = async (webId: string = 'none') => {
-    if (!this.session) {
-      await this.getSession();
-    }
-    if(webId == 'none'){
-      webId = this.session.webId;
-    }
-    await this.fetcher.load(webId);
-  }
-
-  async getFriends(webId: string = this.session.webId): Promise<Array<NamedNode>> {
-    try {
-      await this.fetcher.load(this.store.sym(webId).doc());
-      return this.store.each(this.store.sym(webId), FOAF("knows"));
-      
-    } catch (error) {
-      console.log(`Error fetching data: ${error}`);
-    }
   }
 
   /**
    * Gets any resource that matches the node, using the provided Namespace
-   * @param {string} node The name of the predicate to be applied using the provided Namespace 
+   * @param {string} node The name of the predicate to be applied using the provided Namespace
    * @param {$rdf.namespace} namespace The RDF Namespace
-   * @param {string?} webId The webId URL (e.g. https://yourpod.solid.community/profile/card#me) 
+   * @param {string?} webId The webId URL (e.g. https://yourpod.solid.community/profile/card#me)
    */
   private getValueFromNamespace(node: string, namespace: any, webId?: string): string | any {
     const store = this.store.any($rdf.sym(webId || this.session.webId), namespace(node));
@@ -360,4 +347,415 @@ export class RdfService {
     }
     return '';
   }
+
+
+  //  //  //  //  //  //  //   //   //  //
+  //  //  //  //  //  //  //   //   //  //
+  // NEW METHODS ADDED BELOW THIS POINT //
+  //  //  //  //  //  //  //   //   //  //
+  //  //  //  //  //  //  //   //   //  //
+
+  /**
+  * Returns an array of NamedNode objects matching the term in a uri
+  * @param {any} term term to look for in the document
+  * @param {string} uri uri where you want to look (defaults to your webId)
+  * @return {Promise<Array<NamedNode>>} A promise cntaining the array of NamedNode objects
+  */
+  async getArray(term: any, uri: string = this.session.webId): Promise<Array<NamedNode>> {
+    try {
+      const d = this.store.sym(uri);
+      await this.fetcher.load(d.doc());
+      return this.store.each(d, term);
+
+    } catch (error) {
+      console.log(`Error fetching data: ${error}`);
+    }
+  }
+
+  /**
+  * Returns a NamedNode object matching the term in a uri
+  * @param {any} term term to look for in the document
+  * @param {string} uri uri where you want to look (defaults to your webId)
+  * @return {Promise<NamedNode>} A promise cntaining the NamedNode object
+  */
+  async getSingle(term: any, uri: string = this.session.webId): Promise<NamedNode> {
+    const d = this.store.sym(uri);
+    await this.fetcher.load(d.doc());
+    return this.store.any(d, term);
+  }
+
+  /**
+  * Returns an array of NamedNode objects of your friends
+  * @param {string} uri webId where you want to look (defaults to your webId)
+  * @return {Promise<Array<NamedNode>>} A promise cntaining the array of NamedNode objects
+  */
+  async getFriends(uri: string = this.session.webId): Promise<Array<NamedNode>> {
+    return this.getArray(FOAF('knows'), uri);
+  }
+
+  /**
+  * Returns a NamedNode object containing the name of a webId
+  * @param {string} uri webId where you want to look (defaults to your webId)
+  * @return {Promise<Array<NamedNode>>} A promise cntaining the NamedNode object
+  */
+  async getName(uri: string = this.session.webId): Promise<NamedNode> {
+    return this.getSingle(VCARD('fn'), uri);
+  }
+
+  /**
+  * Returns a NamedNode object containing the url of the inbox of a webId
+  * @param {string} webId webId where you want to look (defaults to your webId)
+  * @return {Promise<Array<NamedNode>>} A promise cntaining the NamedNode object
+  */
+  async getInboxUrl(webId: string = this.session.webId): Promise<NamedNode> {
+    return this.getSingle(LDP('inbox'), webId);
+  }
+
+  /**
+  * Returns an array of NamedNode objects with the contents of the inbox
+  * @param {string} webId webId where you want to look (defaults to your webId)
+  * @return {Promise<Array<NamedNode>>} A promise cntaining the array of NamedNode objects
+  */
+  async getInboxContents(webId: string = this.session.webId): Promise<Array<NamedNode>> {
+    return this.getArray(LDP('contains'), (await this.getInboxUrl(webId)).value);
+  }
+
+  /**
+   * Gets all the message uris for a chat.ttl file
+   * @param {string} year Year
+   * @param {string} month Month
+   * @param {string} day Day
+   * @param {string} chatUri The uri of the root folder for the chat
+   * @return {string} The uri of the chat.ttl file
+   */
+  getChatFileUriForDate(year: string, month: string, day: string, chatUri: string) {
+    return chatUri + '/' + year + '/' + month + '/' + day + '/' + 'chat.ttl';
+  }
+
+  /**
+   * Gets all the message uris for a chat.ttl file
+   * @param {string} chatFileUri The uri of the chat.ttl file
+   * @param {string} chatUri The uri of the root folder for the chat
+   * @return {Promise<Array<NamedNode>>} NamedNode objects containing the uris of each message
+   */
+  async getMessageUrisForFile(chatFileUri: string, chatUri: string): Promise<Array<NamedNode>> {
+    const d = this.store.sym(chatFileUri);
+    await this.fetcher.load(d.doc());
+    const indexUri = chatUri + '/index.ttl#this';
+    const indexd = this.store.sym(indexUri);
+    const messagesIdsList = (await this.store.match(indexd, FLOW('message'), null, d.doc())).map(e => e.object);
+    return messagesIdsList;
+  }
+
+  /**
+  * Gets the maker of a given message
+  * @param {string} msgUri The uri of the message
+  * @param {string} chatFileUri The uri of the chat.ttl file
+  * @return {string} webId of the maker
+  */
+  async getMessageMaker(msgUri: string, chatFileUri: string) {
+    const subject = this.store.sym(msgUri);
+    const chatFile = this.store.sym(chatFileUri);
+    await this.fetcher.load(chatFile.doc());
+    const msgMaker = await this.store.match(subject, FOAF('maker'), null, chatFile.doc());
+    return msgMaker[0].object.value;
+  }
+
+  /**
+  * Gets the date of a given message
+  * @param {string} msgUri The uri of the message
+  * @param {string} chatFileUri The uri of the chat.ttl file
+  * @return {Date} date the message was sent
+  */
+  async getMessageDate(msgUri: string, chatFileUri: string) {
+    const subject = this.store.sym(msgUri);
+    const chatFile = this.store.sym(chatFileUri);
+    await this.fetcher.load(chatFile.doc());
+    const msgDate = await this.store.match(subject, TERMS('created'), null, chatFile.doc());
+    return msgDate[0].object.value;
+  }
+
+  /**
+  * Gets the content of a given message.
+  * @param {string} msgUri The uri of the message
+  * @param {string} chatFileUri The uri of the chat.ttl file
+  * @return {string} content of the messahge
+  */
+  async getMessageContent(msgUri: string, chatFileUri: string) {
+    const subject = this.store.sym(msgUri);
+    const chatFile = this.store.sym(chatFileUri);
+    await this.fetcher.load(chatFile.doc());
+    const msgContent = await this.store.match(subject, SIOC('content'), null, chatFile.doc());
+    return msgContent[0].object.value;
+  }
+
+  /**
+  * Returns the uri of the chat channel used for a conversation between two webids
+  * @param {string} myWebId My webId
+  * @param {string} otherWebId The webId of the other person
+  * @return {Promise<string>} Promise resolving to the uri of the chanel
+  */
+  async getChannelUri(myWebId: string, otherWebId: string): Promise<string> {
+    const d = this.store.sym(myWebId.replace('#me', ''));
+    await this.fetcher.load(d.doc());
+    const other = this.store.sym(otherWebId);
+    const coinc = await this.store.match(null, MEE('LongChat'), other, d.doc());
+    return coinc[0].subject.value;
+  }
+
+  /**
+  * Adds the new message to the given chat file
+  * @param {string} chatFileUri uri of the chat file where we want to append the message
+  * @param {ChatMessage} message Chat message we want to append
+  * @return {Promise<string>} Promise resolving to the uri of the chanel
+  */
+  async appendMessage(chatFileUri: string, message: ChatMessage) {
+    const tStampCode = +new Date;
+    const msgUri = chatFileUri + '#Msg' + tStampCode;
+    const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
+    const msgUriSym = this.store.sym(msgUri);
+    const indexUriSym = this.store.sym(indexUri);
+
+    const ins = [];
+
+    const cFile = this.store.sym(chatFileUri);
+    this.fetcher.load(cFile.doc());
+    ins.push($rdf.st(msgUriSym, TERMS('created'), message.timeSent, cFile.doc()));
+    ins.push($rdf.st(msgUriSym, SIOC('content'), message.message, cFile.doc()));
+    ins.push($rdf.st(msgUriSym, FOAF('maker'), this.store.sym(message.webId), cFile.doc()));
+
+    ins.push($rdf.st(indexUriSym, FLOW('message'), msgUriSym, cFile.doc()));
+
+
+    this.updateManager.update([], ins, (uri, ok, msg, response) => {
+      if (ok) {
+        console.log('Message sent');
+      } else {
+        console.log(msg, response);
+      }
+    });
+
+    const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
+
+    this.sendNotifNewMessage(message.webId, chatFolder, msgUri);
+  }
+
+  /**
+  * Adds a listener to a file for when it changes
+  * @param {string} chatFileUri the uri of the resource we want to listen to
+  * @param {function} callback function to call onUpdate
+  */
+  async addListener(chatFileUri: string, callback: any) {
+    const cFile = this.store.sym(chatFileUri);
+    this.updateManager.addDownstreamChangeListener(cFile.doc(), callback);
+  }
+
+  /**
+  * Adds a user to your friends list
+  * @param {string} addWebId the webId of the friend you want to add
+  */
+  async addFriend(addWebId: string) {
+    await this.getSession();
+    const card = this.store.sym(this.session.webId.replace('#me', ''));
+    const me = this.store.sym(this.session.webId);
+    const newFriend = this.store.sym(addWebId);
+    await this.fetcher.load(newFriend.doc());
+
+    const checks = await this.store.match(null, null, FOAF('PersonalProfileDocument'), newFriend.doc());
+
+
+    if (checks.length > 0 && addWebId !== '') {
+      try {
+        const ins = $rdf.st(me, FOAF('knows'), newFriend, card.doc());
+
+        this.updateManager.update([], ins, (uri, ok, message, response) => {
+          if (ok) {
+            console.log('Friend added');
+          } else {
+            console.log(message, response);
+          }
+        });
+      } catch {
+        throw new Error('Not a valid profile URI');
+      }
+    } else {
+      throw new Error('Not a valid profile URI');
+    }
+  }
+
+  /**
+  * Creates a new chat folder and its index, also adds the info on the user's card
+  * @param {string} myWebId the webId of the user creating the chat
+  * @param {string} otherWebId the other person webId
+  * @param {string} chatFolder folder to contain the chat data
+  */
+  async createNewChat(myWebId: string, otherWebId: string, chatFolder: string) {
+    const indexFileUri = chatFolder + '/index.ttl';
+    const pId = 'id' + (+new Date);
+
+    const pIdUriSym = this.store.sym(indexFileUri + '#pId' + pId);
+    const thisUriSym = this.store.sym(indexFileUri + '#this');
+    const sPrefUriSym = this.store.sym(indexFileUri + '#SharedPreferences');
+    const meUriSym = this.store.sym(myWebId);
+    const otherUiSym = this.store.sym(otherWebId);
+
+    const currDate = new Date();
+
+    const ins = [];
+
+    const indexFile = this.store.sym(indexFileUri);
+    const myCardFile = this.store.sym(myWebId.replace('#me', ''));
+    const chatFolderFile = this.store.sym(chatFolder);
+    this.fetcher.load(myCardFile.doc());
+
+
+    ins.push($rdf.st(pIdUriSym, ICAL('dtstart'), currDate, indexFile.doc()));
+    ins.push($rdf.st(pIdUriSym, FLOW('participant'), meUriSym, indexFile.doc()));
+    ins.push($rdf.st(pIdUriSym, FLOW('participant'), otherUiSym, indexFile.doc()));
+    ins.push($rdf.st(pIdUriSym, UI('backgroundColor'), '#f0d3e3', indexFile.doc()));
+
+    ins.push($rdf.st(thisUriSym, RDFSYN('type'), MEE('LongChat'), indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('author'), meUriSym, indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('created'), currDate, indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('title'), 'Chat Channel', indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, FLOW('participation'), pIdUriSym, indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, UI('sharedPreferences'), sPrefUriSym, indexFile.doc()));
+
+
+    await this.updateManager.put(indexFile.doc(), ins, 'text/turtle', (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`File [${this.urlLogFilter(uri)}] PUT with message [${message}].`);
+      } else {
+        console.error(`File [${this.urlLogFilter(uri)}] failed PUT with message [${message}].`);
+      }
+    });
+
+    const cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherUiSym, myCardFile.doc());
+
+    await this.updateManager.update([], cardNote, (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] UPDATED with message [${message}].`);
+      } else {
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`);
+      }
+    });
+
+    // this.sendNotifNewConv(myWebId, chatFolder);  // Commented to avoid spamming the other person while testing
+  }
+
+  /**
+  * Creates the chat file only if it doesn't exist
+  * @param {string} uri the uri of the chat file
+  */
+  async createChatFileForDay(uri: string) {
+    const chatDayFile = this.store.sym(uri);
+    const chatFolder = uri.replace('/chat.ttl', '');
+    const chatDayFolder = this.store.sym(chatFolder);
+    await this.fetcher.load(chatDayFolder.doc());
+    const matches = await this.store.match(chatDayFolder, LDP('contains'), null, chatDayFolder.doc());
+
+    if (matches.length === 0) {
+      console.log(`    Chat file [${this.urlLogFilter(uri)}] in folder [${this.urlLogFilter(chatFolder)}] NOT FOUND, creating it...`);
+      await this.updateManager.put(chatDayFile.doc(), '', 'text/turtle', function (o, s, c) { });
+      console.log(`    Chat file [${this.urlLogFilter(uri)}] in folder [${this.urlLogFilter(chatFolder)}] CREATED`);
+    } else {
+      console.log(`    Chat file [${this.urlLogFilter(uri)}] in folder [${this.urlLogFilter(chatFolder)}] FOUND, skipping creation`);
+    }
+  }
+
+  /**
+  * Creates the folder structure
+  * @param {string} uri the uri of the chat file that needs the structure
+  */
+  async createStructure(uri: string) {
+    console.log('Creating folder structure');
+    const splitted = uri.split('/');
+    for (let i = 4; i > 0; i--) {
+      const newUri = splitted.slice(0, splitted.length - i).join('/');
+      console.log(`    Creating folder [${this.urlLogFilter(newUri)}]`);
+      await fileClient.createFolder(newUri);
+    }
+    console.log('Folder structure done, proceeding with chat file.');
+    await this.createChatFileForDay(uri);
+  }
+
+  /**
+  * Formats the uris for the console output, removing unnecesary parts
+  * @param {string} uri uri that needs formatting
+  */
+  urlLogFilter(url: string) {
+    return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
+  }
+
+  /**
+   * Sends a notification to the webId's inbox informing of the newly created chat
+   * @param {string} webId webId of the other person
+   * @param {string} chatFolderUri URI of the folder containing the chat
+   */
+  async sendNotifNewConv(webId: string, chatFolderUri: string) {
+    const inboxUrl = (await this.getInboxUrl(webId)).value;
+    const notiFile = this.store.sym(inboxUrl + 'dechatnotifications.ttl');
+
+    const chatFolderFile = this.store.sym(chatFolderUri);
+    const meWebIdFile = this.store.sym(webId);
+
+    const ins = [];
+
+    ins.push($rdf.st(meWebIdFile, MEE('LongChat'), chatFolderFile, notiFile.doc()));
+
+    this.pushNotification(inboxUrl, ins);
+
+  }
+
+  /**
+   * Sends a notification to the webId's inbox about a new message being received
+   * @param {string} webId webId of the other person
+   * @param {string} chatFolderUri URI of the folder containing the chat
+   * @param {string} messageUri URI of the message the wbId is being notified of
+   */
+  async sendNotifNewMessage(webId: string, chatFolderUri: string, messageUri: string) {
+    const inboxUrl = (await this.getInboxUrl(webId)).value;
+    const notiFile = this.store.sym(inboxUrl + 'dechatnotifications.ttl');
+    const messageUriFile = this.store.sym(messageUri);
+    const chatFolderFile = this.store.sym(chatFolderUri);
+
+    const ins = [];
+
+    ins.push($rdf.st(chatFolderFile, NONE('NewMessage'), messageUriFile, notiFile.doc()));
+
+    this.pushNotification(inboxUrl, ins);
+  }
+  /**
+   * Pushes a given notification to the given user with the given content
+   * @param {inboxUrl} chatUri Uri of the inbox of the recipient
+   * @param {Array<any>} ins The inserts to be made
+   */
+  async pushNotification(inboxUrl: string, ins: Array<any>) {
+    const notiUri = inboxUrl + 'dechatnotifications.ttl';
+
+    const notiFile = this.store.sym(notiUri);
+    const inboxFolder = this.store.sym(inboxUrl);
+
+    await this.fetcher.load(inboxFolder.doc());
+    const matches = await this.store.match(inboxFolder, LDP('contains'), notiFile, inboxFolder.doc());
+
+    if (matches.length === 0) {
+      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] NOT FOUND, creating it...`);
+      await this.updateManager.put(notiFile.doc(), '', 'text/turtle', function (o, s, c) { });
+      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] CREATED`);
+    } else {
+      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] FOUND, updating it...`);
+    }
+    await this.fetcher.load(notiFile.doc());
+    await this.updateManager.update([], ins, (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}]` +
+                        ` UPDATED with message [${message}].`);
+      } else {
+        console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}]` +
+                        ` FAILED UPDATED with message [${message}].`);
+      }
+    });
+  }
+
 }

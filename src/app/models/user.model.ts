@@ -1,10 +1,13 @@
 export class User {
 
-    constructor(username) {
+    constructor(username, fullName, webId) {
         this.username = username;
+        this.fullName = fullName;
+        this.webId = webId;
     }
 
-    uid?: string;
     username?: string;
-    status?: string;
+    fullName?: string;
+    webId?: string;
+    isCurrent?: boolean;
 }
