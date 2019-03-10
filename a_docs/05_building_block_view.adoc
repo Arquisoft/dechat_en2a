@@ -5,7 +5,7 @@
 
 .Major view of the system:
 [caption="Global Scope"]
-image::images/05_Major_Scope[]
+image::images/05_Major_Scope.png[]
 
 .Legend
 ===
@@ -17,7 +17,7 @@ image::images/user_pod.png[] | User's POD
 
 .Message management:
 [caption="Level 1 Scope"]
-image::images/05_Level1[]
+image::images/05_Level1.png[]
 
 .Legend
 ===
