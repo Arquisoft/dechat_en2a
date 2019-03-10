@@ -12,5 +12,3 @@ The receiver user would check the application for new messages, so it would read
 Here is a sequence diagram representing the runtime process:
 
 image:images/06_runtime_view.png[]
-
-*TO-DO*
