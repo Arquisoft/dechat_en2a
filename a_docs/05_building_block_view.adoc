@@ -3,7 +3,7 @@
 
 == Building Block View
 
-.Major view of the system:
+.Major view of the system: +
 image::images/05_Major_Scope.png[]
 
 .Legend
@@ -15,8 +15,8 @@ image::images/05_Major_Scope.png[]
 |image::images/user_pod.png[] | User's POD
 |===
 
-.Message management:
-image::images/05_Level1.png[]
+.Message management: +
+image::images/05_level1.png[]
 
 .Legend
 [options="header",cols="1,2"]
