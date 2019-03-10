@@ -9,4 +9,8 @@ The application would then store the new messages in the user's personal storage
 
 The receiver user would check the application for new messages, so it would read the inbox and load the conversation in order to show it to the user. The receiver user would read the messages and the process would be finished.
 
+Here is a sequence diagram representing the runtime process:
+
+image:images/06_runtime_view.png[]
+
 *TO-DO*
