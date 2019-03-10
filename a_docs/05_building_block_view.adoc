@@ -5,25 +5,25 @@
 
 .Major view of the system:
 [caption="Global Scope"]
-image::05_Major_Scope[]
+image::images/05_Major_Scope[]
 
 .Legend
 ===
 Item | Meaning 
-image::red_arrow.png[] | Information being transmitted
-image::user.png[] | User
-image:user_pod.png[] | User's POD
+image::images/red_arrow.png[] | Information being transmitted
+image::images/user.png[] | User
+image::images/user_pod.png[] | User's POD
 ===
 
 .Message management:
 [caption="Level 1 Scope"]
-image::05_Level1[]
+image::images/05_Level1[]
 
 .Legend
 ===
 Item | Meaning 
-image::red_arrow.png[] | Information being transmitted
-image::user.png[] | User
-image:user_pod.png[] | User's POD
-image::doc.png[] | Document generated
+image::images/red_arrow.png[] | Information being transmitted
+image::images/user.png[] | User
+image::images/user_pod.png[] | User's POD
+image::images/doc.png[] | Document generated
 ===
