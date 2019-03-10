@@ -7,7 +7,7 @@
 image::images/05_Major_Scope.png[]
 
 .Legend
-[options="header",cols="1,2"]
+[options="header",cols="1a,2"]
 |===
 |Item | Meaning 
 |image::images/red_arrow.png[] | Information being transmitted
@@ -19,7 +19,7 @@ image::images/05_Major_Scope.png[]
 image::images/05_level1.png[]
 
 .Legend
-[options="header",cols="1,2"]
+[options="header",cols="1a,2"]
 |===
 |Item | Meaning 
 |image::images/red_arrow.png[] | Information being transmitted
