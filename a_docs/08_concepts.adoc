@@ -1,5 +1,38 @@
 [[section-concepts]]
 == Cross-cutting Concepts
+This section is intended to describe the general ideas, regulations and concepts that apply, either to to the whole system, or to several parts of it.
+
+[domain-concepts]
+=== Domain Concepts
+****
+* Message: piece of text to communicate with other user, expressed in turtle syntax for RDF.
+* Pod: user repository, following the SOLID specification. It can be located anywhere, not on a single platform.
+* Client: the de_chat program running on the user's browser. Its responsability is to give the functionality, not to store the data. 
+****
+
+[ux]
+=== User Experience
+
+[arch_patterns]
+===Architecture and design patterns
 
 
+[pers]
+=== Persistency
+
+
+[session]
+=== Session handling
+
+
+[Communication]
+=== Communication
+
+
+[test]
+=== Testing
+
+
+[build]
+=== Building
 *TO-DO*
