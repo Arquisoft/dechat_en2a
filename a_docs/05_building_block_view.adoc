@@ -4,26 +4,24 @@
 == Building Block View
 
 .Major view of the system:
-[caption="Global Scope"]
 image::images/05_Major_Scope.png[]
 
 .Legend
 ===
 Item | Meaning 
-image::images/red_arrow.png[] | Information being transmitted
-image::images/user.png[] | User
-image::images/user_pod.png[] | User's POD
+red arrow | Information being transmitted
+user | User
+pod | User's POD
 ===
 
 .Message management:
-[caption="Level 1 Scope"]
 image::images/05_Level1.png[]
 
 .Legend
 ===
 Item | Meaning 
-image::images/red_arrow.png[] | Information being transmitted
-image::images/user.png[] | User
-image::images/user_pod.png[] | User's POD
-image::images/doc.png[] | Document generated
+red arrow | Information being transmitted
+user | User
+pod | User's POD
+doc | Document generated
 ===
