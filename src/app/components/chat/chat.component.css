@@ -30,7 +30,7 @@
 
 .chatFormWrapper {
     height: 50px;
-    background-color: #7C4DFF;
+    background-color: rgb(20, 96, 236);
 }
 
 #scroll-style::-webkit-scrollbar-track
