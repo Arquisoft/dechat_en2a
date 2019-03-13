@@ -7,10 +7,10 @@
     "build": "ng build",
     "test": "nyc ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "nyc ng e2e",
     "postinstall": "node patch.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "setup:install": "npm install coveralls nyc --save-dev",
+    "setup:install": "npm install && npm install -g @angular/cli && npm install coveralls nyc --save-dev",
     "docs:prepare": "npm install gitbook-cli -g && gitbook install",
     "docs:watch": "npm run docs:prepare && gitbook serve ./a_docs ./docs --open",
     "docs:build": "npm run docs:prepare && gitbook build ./a_docs ./docs"
