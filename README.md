@@ -24,13 +24,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ### Getting started
 
-Execute `npm run setup:install` to install all the dependencies needed from now on
+First of all install node (& npm) and then execute `npm run setup:install` to install all the dependencies needed from now on. To view a live version of the app check out the Development Server section.
 
 ### Generating the documentation
 
-Execute `npm run docs:build` to generate the html documents and dependencies (will end up in `/docs`)
+Execute `npm run docs:build` to generate the html documents and dependencies (will end up in `/docs`).
 
-You can also use `npm run docs:watch` if you want a local version served on `http://localhost:4000/`
+You can also use `npm run docs:watch` if you want a local version served on `http://localhost:4000/`.
 
 ### Development server
 
