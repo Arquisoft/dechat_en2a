@@ -320,7 +320,72 @@
 <h2 id="section-concepts">Cross-cutting Concepts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>TO-DO</strong></p>
+<p>This section is intended to describe the general ideas, regulations and concepts that apply, either to to the whole system, or to several parts of it.</p>
+</div>
+<div class="sect2">
+<h3 id="_domain_concepts">Domain Concepts</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Message: piece of text to communicate with other user, expressed in turtle syntax for RDF.</p>
+</li>
+<li>
+<p>Pod: user repository, following the SOLID specification. It can be located anywhere, not on a single platform.</p>
+</li>
+<li>
+<p>Client: the de_chat program running on the user&#x2019;s browser. Its responsability is to give the functionality, not to store the data.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_experience">User Experience</h3>
+<div class="paragraph">
+<p>One of the keypoint of the application. The user should not notice any difference from using other chats, like Facebook or WhatsApp.
+There two main reasons for this:
+* Facilitate the migration from other chat systems easy for any kind of user.
+* Prove that it is posible to have the very same services that we currently enjoy using the SOLID system</p>
+</div>
+<div class="paragraph">
+<p>===Architecture and design patterns
+Up until know, the de_chat is an Angular-based system, therefore following the Model View Controller architectural pattern.
+However, all our application would not store any of the user&#x2019;s data. It will access it via SOLID pods.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_persistency">Persistency</h3>
+<div class="paragraph">
+<p>On the current stage of the project, persistency is secondary, although it will supported in the future. All users&apos; data will be avaliable in their pods</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_session_handling">Session handling</h3>
+<div class="paragraph">
+<p>No session handling is implemented whatsoever, as the information is ultimately retrieved from the pods themselves.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_communication">Communication</h3>
+<div class="paragraph">
+<p>Two chats would not communicate directly. I will occur via SOLID pods, which are the ones storing the messages.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing">Testing</h3>
+<div class="paragraph">
+<p>No proper testing is currently being performed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_building">Building</h3>
+<div class="paragraph">
+<p>The building of the project, considering that it is an Angular application, is done via the Node.js package manages, <strong>npm</strong>.
+<strong>TO-DO</strong></p>
+</div>
 </div>
 </div>
 </div>
@@ -366,7 +431,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Crosscutting Concepts","level":"1.9","depth":1,"next":{"title":"Architecture Decisions","level":"1.10","depth":1,"path":"09_design_decisions.adoc","ref":"09_design_decisions.adoc","articles":[]},"previous":{"title":"Deployment View","level":"1.8","depth":1,"path":"07_deployment_view.adoc","ref":"07_deployment_view.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"08_concepts.adoc","mtime":"2019-03-04T00:48:07.933Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-03-04T11:01:25.702Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Crosscutting Concepts","level":"1.9","depth":1,"next":{"title":"Architecture Decisions","level":"1.10","depth":1,"path":"09_design_decisions.adoc","ref":"09_design_decisions.adoc","articles":[]},"previous":{"title":"Deployment View","level":"1.8","depth":1,"path":"07_deployment_view.adoc","ref":"07_deployment_view.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"08_concepts.adoc","mtime":"2019-03-11T10:06:38.981Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-03-11T11:16:44.631Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

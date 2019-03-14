@@ -23,6 +23,7 @@ const ICAL = $rdf.Namespace('http://www.w3.org/2002/12/cal/ical#');
 const UI = $rdf.Namespace('http://www.w3.org/ns/ui#');
 const DCEL = $rdf.Namespace('http://purl.org/dc/elements/1.1/');
 const NONE = $rdf.Namespace('http://example.org/ns/none#');
+const ACL = $rdf.Namespace('http://www.w3.org/ns/auth/acl#');
 /**
  * A service layer for RDF data manipulation using rdflib.js
  * @see https://solid.inrupt.com/docs/manipulating-ld-with-rdflib
@@ -756,6 +757,40 @@ export class RdfService {
                         ` FAILED UPDATED with message [${message}].`);
       }
     });
+  }
+
+  /**  WARNING: UNTESTED
+   * Sets the edit permissions on a given URI for a given WebId
+   * @param {string} resourceUri the URI of the resource we want to grant permissions of
+   * @param {string} webId the user that is getting access rights
+   */
+  async setPermissions(resourceUri: string, webId: string) {
+    const aclUri = resourceUri + '.acl';
+    const aclFile = this.store.sym(aclUri);
+    const file = this.store.sym(resourceUri);
+    const webIdFile = this.store.sym(webId);
+
+    const ins = [];
+
+    ins.push($rdf.st(webIdFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('agent'), webIdFile, aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('accessTo'), file, aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('mode'), ACL('Read'), aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('mode'), ACL('Write'), aclFile.doc()));
+
+
+    await this.updateManager.put(aclFile.doc(), ins, 'text/turtle', function (o, s, c) { });
+    await this.fetcher.load(aclFile.doc());
+    await this.updateManager.update([], ins, (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
+                        ` CREATED with message [${message}].`);
+      } else {
+        console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
+                        ` FAILED CREATION with message [${message}].`);
+      }
+    });
+
   }
 
 }

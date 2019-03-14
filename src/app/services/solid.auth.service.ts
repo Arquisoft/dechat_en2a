@@ -49,7 +49,7 @@ export class AuthService {
       await this.isSessionActive();
 
       // popupLogin success redirect to profile
-      this.router.navigate(['/card']);
+      this.router.navigate(['/chat']);
     } catch (error) {
       console.log(`Error: ${error}`);
     }
@@ -87,7 +87,7 @@ export class AuthService {
   */
   solidLogin = async (idp: string) => {
     await solid.auth.login(idp, {
-      callbackUri: `${window.location.href}card`,
+      callbackUri: `${window.location.href}chat`,
       storage: localStorage,
     });
   }
