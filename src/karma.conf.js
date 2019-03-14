@@ -3,7 +3,12 @@
 
 module.exports = function (config) {
   config.set({
-    basePath: "",
+    //base path from which karma looks for tests.
+    basePath: "./",
+    //this array is used to specify the test files to load in the browser
+    files: [
+      'app/components/**/chat.component.spec.ts'
+    ],
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
       require("karma-jasmine"),
