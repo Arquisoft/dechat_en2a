@@ -1,0 +1,7 @@
+@startuml
+component Client 
+component Server
+interface " " as CS 
+Client -( CS
+CS - Server
+@enduml

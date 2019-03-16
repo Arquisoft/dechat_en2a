@@ -1,0 +1,39 @@
+= dechatjs_0
+
+image:https://travis-ci.org/Arquisoft/dechatjs_0.svg?branch=master["Build Status", link="https://travis-ci.org/Arquisoft/dechatjs_0"]
+image:https://coveralls.io/repos/github/Arquisoft/dechatjs_0/badge.svg["Coverage status", link="https://coveralls.io/github/Arquisoft/dechatjs_0"]
+image:https://api.codacy.com/project/badge/Grade/da6fef0ea42a4139b6a7535530ce3466["Codacy code quality", link="https://www.codacy.com/app/jelabra/dechatjs_0?utm_source=github.com&utm_medium=referral&utm_content=Arquisoft/dechatjs_0&utm_campaign=Badge_Grade"]
+image:https://inch-ci.org/github/arquisoft/dechatjs_0.svg?branch=master["Docs", link="https://inch-ci.org/github/arquisoft/dechatjs_0"]
+
+Skeleton of application using Javascript technologies
+
+== Running tests
+
+It requires link:http://nodejs.org[NodeJs] and `npm` (npm comes with NodeJs).
+
+----
+npm test
+----
+
+== Generating documentation
+
+The skeleton documentation is based on link:http://arc42.org[arc42] templates.
+Some diagrams are created using link:http://plantuml.com/[PlantUML].
+
+Pre-requisites
+
+- Install link:https://www.graphviz.org/[Graphviz] and ensure that the `dot` executable can be found in the PATH.
+
+- Install `gulp` using:
+
+----
+npm install -g gulp
+----
+
+Once installed, running `gulp` creates the documentation.
+
+----
+gulp
+----
+
+Generates documentation in `docs` folder.
