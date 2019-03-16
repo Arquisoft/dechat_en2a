@@ -15,4 +15,7 @@
         [ngClass]="{'isOwnMessageContent':isOwnMessage}">
         {{ messageContent }}
     </div>
+    <div class="messageDelete">
+        <button class="deleteButton" (click)=delete()>Delete</button>
+    </div>
 </div>

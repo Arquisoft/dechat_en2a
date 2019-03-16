@@ -511,7 +511,7 @@ export class RdfService {
   * @return {Promise<string>} Promise resolving to the uri of the chanel
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampCode = +new Date;
+    const tStampCode = message.message; //new Date(message.timeSent).getTime(); THIS NEEDS TO BE CHANGED TO ACTUAL TIMESTAMP CODE
     const msgUri = chatFileUri + '#Msg' + tStampCode;
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
@@ -539,6 +539,28 @@ export class RdfService {
     const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
 
     this.sendNotifNewMessage(message.webId, chatFolder, msgUri);
+  }
+
+  async deleteMessage(chatFileUri: string, message: ChatMessage) {
+    const tStampCode = message.message; //new Date(message.timeSent).getTime(); THIS NEEDS TO BE CHANGED TO ACTUAL TIMESTAMP CODE
+    const msgUri = chatFileUri + '#Msg' + tStampCode;
+    const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
+    const msgUriSym = this.store.sym(msgUri);
+    const indexUriSym = this.store.sym(indexUri);
+
+    const cFile = this.store.sym(chatFileUri);
+    this.fetcher.load(cFile.doc());
+    const del = this.store.statementsMatching(msgUriSym, null, null, cFile.doc());
+    del.concat(this.store.statementsMatching(indexUriSym, null, null, cFile.doc()));
+    //const del = this.store.statementsMatching(null, null, null, cFile.doc()); delete all messages (testing purposes)
+
+    this.updateManager.update(del, [], (uri, ok, msg, response) => {
+      if (ok) {
+        console.log('Message deleted: ' + message.message + ' (' + message.timeSent + ')');
+      } else {
+        console.log(msg, response);
+      }
+    });
   }
 
   /**
