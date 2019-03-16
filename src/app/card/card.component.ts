@@ -1,22 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { SolidProfile } from '../../models/solid-profile.model';
-import { RdfService } from '../../services/rdf.service';
-import { AuthService } from '../../services/solid.auth.service';
+import { SolidProfile } from '../models/solid-profile.model';
+import { RdfService } from '../services/rdf.service';
+import { AuthService } from '../services/solid.auth.service';
 
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css'],
 })
-export class ProfileComponent implements OnInit  {
+export class CardComponent implements OnInit  {
 
   profile: SolidProfile;
   profileImage: string;
   loadingProfile: Boolean;
-  addWebId: string;
 
   @ViewChild('f') cardForm: NgForm;
 
@@ -47,6 +46,7 @@ export class ProfileComponent implements OnInit  {
     } catch (error) {
       console.log(`Error: ${error}`);
     }
+
   }
 
   // Submits the form, and saves the profile data using the auth/rdf service
@@ -74,13 +74,5 @@ export class ProfileComponent implements OnInit  {
   // Example of logout functionality. Normally wouldn't be triggered by clicking the profile picture.
   logout() {
     this.auth.solidSignOut();
-  }
-
-  async addFriend() {
-    try{
-      this.rdf.addFriend(this.addWebId);
-    }catch {
-      console.log("The URI provided is not well-formed or does not point to a profile")
-    }
   }
 }

@@ -6,47 +6,47 @@
 }
 
 .login-page h1 {
-  font-size: 38px;
+  font-size: 3em;
   text-transform: uppercase;
   font-weight: bold;
-  line-height: 50px;
-  letter-spacing: 1.9px;
-  padding-top: 12px;
-  margin-top: 0px;
+  line-height: 1.5em;
+  letter-spacing: 0.05em;
+  padding-top: 0.05em;
+  margin-top: 0.05em;
 }
 
 .login-page h2 {
   color: #666;
-
-  font-size: 16px;
+  font-size: 1.5em;
   font-weight: 500;
-  letter-spacing: 1px;
-  line-height: 21px;
-  margin-top: 48px;
+  letter-spacing: 0.05em;
+  line-height: 0.75em;
+  margin-top: 0.15em;
 }
 
 .login-page .small-link {
-  font-size: 12px;
+  font-size: 0.85em;
   color: #666;
-  letter-spacing: 0.75px;
-  line-height: 16px;
+  letter-spacing: 0.15em;
+  line-height: 0.4em;
 }
 
 .login-page .registration-link {
-  margin-top: 38px;
+  margin-top: 0.25em;
 }
 
 .login-page .registration-link p {
-  font-size: 16px;
+  font-size: 1em;
   color: #666;
-  letter-spacing: 1px;
+  letter-spacing: 0.15em;
 }
 
 .login-page .item-divider {
   box-sizing:border-box;
-  height: 1px;
-  width: 354px;
-  border-bottom: 1px solid #E0E0E0;
+  height: 0.20em;
+  width: 30em;
+  border-bottom: 0.2em solid #E0E0E0;
   position: absolute;
   bottom:-8px; left:-9px;
+  
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // Auth Service
-import { AuthService } from '../../services/solid.auth.service';
-import { SolidProvider } from '../../models/solid-provider.model';
+import { AuthService } from '../services/solid.auth.service';
+import { SolidProvider } from '../models/solid-provider.model';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // If we're authenticated, go to profile
     if (localStorage.getItem('solid-auth-client')) {
-      this.router.navigateByUrl('/chat');
+      this.router.navigateByUrl('/card');
     }
 
     this.identityProviders = this.auth.getIdentityProviders();
