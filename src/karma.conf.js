@@ -7,11 +7,18 @@ module.exports = function (config) {
     basePath: "./",
     //this array is used to specify the test files to load in the browser
     
-//   files: [
-//      'app/components/**/*.spec.ts',
-//      'app/models/**/*.spec.ts',
-//      'app/services/**/*.spec.ts'
-//    ], 
+   files: [
+    'src/**/*.js',
+    'test/**/*.js'
+    ], 
+
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'src/**/*.js': ['coverage']
+    },
+
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
       require("karma-jasmine"),
