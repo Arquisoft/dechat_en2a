@@ -1,11 +1,11 @@
 [[section-quality-scenarios]]
 == Quality Requirements
 
+=== Quality Requirements Tree
+
 [role="arc42help"]
 ****
-
-=== Quality Requirements Tree
-****
+Below is a tree representing the quality requirements and their specifications for the project. 
 
 image:images/10_quality_requirements_tree.png[]
 
