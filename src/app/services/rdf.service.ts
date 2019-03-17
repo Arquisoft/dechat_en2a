@@ -473,7 +473,7 @@ export class RdfService {
     const chatFile = this.store.sym(chatFileUri);
     await this.fetcher.load(chatFile.doc());
     const msgDate = await this.store.match(subject, TERMS('created'), null, chatFile.doc());
-    return msgDate[0].object.value;
+    return new Date(msgDate[0].object.value);
   }
 
   /**
@@ -511,7 +511,8 @@ export class RdfService {
   * @return {Promise<string>} Promise resolving to the uri of the chanel
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampCode = message.message; //new Date(message.timeSent).getTime(); THIS NEEDS TO BE CHANGED TO ACTUAL TIMESTAMP CODE
+    const tStampMs = new Date(message.timeSent).getTime(); 
+    const tStampCode = Math.floor(tStampMs / 1000); // This could be improved
     const msgUri = chatFileUri + '#Msg' + tStampCode;
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
@@ -542,7 +543,8 @@ export class RdfService {
   }
 
   async deleteMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampCode = message.message; //new Date(message.timeSent).getTime(); THIS NEEDS TO BE CHANGED TO ACTUAL TIMESTAMP CODE
+    const tStampMs = new Date(message.timeSent).getTime(); 
+    const tStampCode = Math.floor(tStampMs / 1000); // This could be improved
     const msgUri = chatFileUri + '#Msg' + tStampCode;
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
@@ -552,7 +554,6 @@ export class RdfService {
     this.fetcher.load(cFile.doc());
     const del = this.store.statementsMatching(msgUriSym, null, null, cFile.doc());
     del.concat(this.store.statementsMatching(indexUriSym, null, null, cFile.doc()));
-    //const del = this.store.statementsMatching(null, null, null, cFile.doc()); delete all messages (testing purposes)
 
     this.updateManager.update(del, [], (uri, ok, msg, response) => {
       if (ok) {
