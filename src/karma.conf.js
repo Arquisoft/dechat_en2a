@@ -4,12 +4,11 @@
 module.exports = function (config) {
   config.set({
     //base path from which karma looks for tests.
-    basePath: "./",
+    basePath: "",
     //this array is used to specify the test files to load in the browser
     
    files: [
-    'src/**/*.js',
-    'test/**/*.js'
+    '/**/*.js'
     ], 
 
     preprocessors: {
@@ -21,6 +20,7 @@ module.exports = function (config) {
 
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
+      require ("karma-coverage"),
       require("karma-jasmine"),
       require("karma-chrome-launcher"),
       require("karma-jasmine-html-reporter"),
@@ -42,7 +42,7 @@ module.exports = function (config) {
         functions: 70
       }
     },
-    reporters: ["progress", "kjhtml", "coverage-istambul"],
+    reporters: ["progress", "kjhtml", "coverage"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
