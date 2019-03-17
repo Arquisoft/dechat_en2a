@@ -21,6 +21,7 @@ install:
  
 script:
   - npm run setup:install
+  - ng serve
   - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
   - npm run docs:build
   

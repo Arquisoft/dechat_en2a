@@ -7,7 +7,9 @@ module.exports = function (config) {
     basePath: "./",
     //this array is used to specify the test files to load in the browser
     files: [
-      'app/components/**/chat.component.spec.ts'
+      'app/components/**/*.spec.ts',
+      'app/models/**/*.spec.ts',
+      'app/services/**/*.spec.ts'
     ],
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
