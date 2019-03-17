@@ -33,7 +33,7 @@ module.exports = function (config) {
         functions: 70
       }
     },
-    reporters: ["progress", "kjhtml"],
+    reporters: ["progress", "kjhtml", "coverage-istambul"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
