@@ -6,11 +6,12 @@ module.exports = function (config) {
     //base path from which karma looks for tests.
     basePath: "./",
     //this array is used to specify the test files to load in the browser
-    files: [
-      'app/components/**/*.spec.ts',
-      'app/models/**/*.spec.ts',
-      'app/services/**/*.spec.ts'
-    ],
+    
+//   files: [
+//      'app/components/**/*.spec.ts',
+//      'app/models/**/*.spec.ts',
+//      'app/services/**/*.spec.ts'
+//    ], 
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
       require("karma-jasmine"),
@@ -24,8 +25,9 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require("path").join(__dirname, "../coverage"),
-      reports: ["html", "lcovonly"],
+      reports: ["html", "lcovonly", "text-summary"],
       fixWebpackSourcePaths: true,
+      verbose: true,
       thresholds: {
         statements: 70,
         lines: 70,
