@@ -1,6 +1,6 @@
 # Summary
 
-* link:README.adoc[Introduction]
+* link:README.md[Introduction]
 * link:01_introduction_and_goals.adoc[Introduction and Goals]
 * link:02_architecture_constraints.adoc[Architecture Constraints]
 * link:03_system_scope_and_context.adoc[Context and scope]
