@@ -511,9 +511,7 @@ export class RdfService {
   * @return {Promise<string>} Promise resolving to the uri of the chanel
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampMs = new Date(message.timeSent).getTime(); 
-    const tStampCode = Math.floor(tStampMs / 1000); // This could be improved
-    const msgUri = chatFileUri + '#Msg' + tStampCode;
+    const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
     const indexUriSym = this.store.sym(indexUri);
@@ -542,10 +540,14 @@ export class RdfService {
     this.sendNotifNewMessage(message.webId, chatFolder, msgUri);
   }
 
+  /**
+  * Removes the specified message from the given chat file
+  * @param {string} chatFileUri uri of the chat file from which we want to delete the message
+  * @param {ChatMessage} message Chat message we want to delete
+  * @return {Promise}
+  */
   async deleteMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampMs = new Date(message.timeSent).getTime(); 
-    const tStampCode = Math.floor(tStampMs / 1000); // This could be improved
-    const msgUri = chatFileUri + '#Msg' + tStampCode;
+    const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
     const indexUriSym = this.store.sym(indexUri);
@@ -562,6 +564,17 @@ export class RdfService {
         console.log(msg, response);
       }
     });
+  }
+
+  /**
+   * Builds the URI of the message from the URI of its chat and the sent date 
+   * @param {string} chatFileUri uri of the chat to which the message belongs
+   * @param {Date} timeSent Date in which the message was sent
+   * @return {string} the uri of the message
+   */
+  buildMsgUri(chatFileUri: string, timeSent: Date) {
+    var msgUri = chatFileUri + "#Msg" + timeSent.getTime();
+    return msgUri.substring(0, msgUri.length - 3);
   }
 
   /**
