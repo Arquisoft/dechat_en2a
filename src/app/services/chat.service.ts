@@ -21,7 +21,7 @@ export class ChatService {
     this.loadUserData();
     this.loadFriends();
     // Temporary
-    // this.setOther(new User('josecurioso2', 'Jose Alternativo', 'https://josecuriosoalternativo.inrupt.net/profile/card#me'));
+    this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
     // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
 
   }
@@ -60,6 +60,11 @@ export class ChatService {
 
   async sendMessage(msg: string) {
     this.rdf.appendMessage(await this.getCurrentChatUri(this.currentChannelUri), new ChatMessage(this.me.username, msg, this.me.webId));
+    this.reloadMessages();
+  }
+
+  async deleteMessage(message: ChatMessage) {
+    this.rdf.deleteMessage(await this.getCurrentChatUri(this.currentChannelUri), message);
     this.reloadMessages();
   }
 
