@@ -16,6 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FriendItemComponent } from './components/friend-item/friend-item.component';
 import { FriendListComponent } from './components/friend-list/friend-list.component';
 import { TestingComponent } from './components/testing/testing.component';
+import { PermissionsComponent } from './components/permissions/permissions.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
@@ -25,6 +26,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const routes: Routes = [
   {
@@ -57,6 +59,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'permissions',
+    component: PermissionsComponent
   }
 ];
 
@@ -74,7 +80,8 @@ const routes: Routes = [
     NavbarComponent,
     FriendItemComponent,
     FriendListComponent,
-    TestingComponent
+    TestingComponent,
+    PermissionsComponent
   ],
   imports: [
     BrowserModule,
