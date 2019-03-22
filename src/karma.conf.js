@@ -6,7 +6,7 @@ module.exports = function (config) {
     //base path from which karma looks for tests.
     basePath: "",
     //this array is used to specify the test files to load in the browser
-    
+    frameworks:["jasmine"],
    files: [
     '/**/*.js'
     ], 
@@ -30,9 +30,22 @@ module.exports = function (config) {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    coverageIstanbulReporter: {
+    coverageReporter: {
+      includeAllSources: true,
       dir: require("path").join(__dirname, "../coverage"),
       reports: ["html", "lcovonly", "text-summary"],
+      reporters: [
+        {
+          type: 'html',
+          subdir: 'html',
+          watermarks:{
+            statements: [50, 75],
+            functions:  [50, 75],
+            branches:   [50, 75],
+            lines:      [50, 75]
+          }
+        }
+      ],
       fixWebpackSourcePaths: true,
       verbose: true,
       thresholds: {
@@ -42,7 +55,7 @@ module.exports = function (config) {
         functions: 70
       }
     },
-    reporters: ["progress", "kjhtml", "coverage"],
+    reporters: ["progress", "coverage"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
