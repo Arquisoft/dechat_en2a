@@ -117,6 +117,7 @@ export class ChatService {
         const m = new ChatMessage(this.getUsernameFromWebID(maker),
                                   await this.rdf.getMessageContent(el.value, this.currentChatFileUri),
                                   maker);
+        m.uri = el.value;
         m.timeSent = await this.rdf.getMessageDate(el.value, this.currentChatFileUri);
         this.addMessage(m);
       });

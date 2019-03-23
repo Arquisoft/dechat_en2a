@@ -547,17 +547,20 @@ export class RdfService {
   * @return {Promise}
   */
   async deleteMessage(chatFileUri: string, message: ChatMessage) {
-    const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
+    const msgUri = message.uri;
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
     const indexUriSym = this.store.sym(indexUri);
 
     const cFile = this.store.sym(chatFileUri);
     this.fetcher.load(cFile.doc());
-    const del = this.store.statementsMatching(msgUriSym, null, null, cFile.doc());
-    del.concat(this.store.statementsMatching(indexUriSym, null, null, cFile.doc()));
+    const dels = this.store.statementsMatching(msgUriSym, null, null, cFile.doc());
 
-    this.updateManager.update(del, [], (uri, ok, msg, response) => {
+    this.store.statementsMatching(indexUriSym, null, msgUriSym, cFile.doc()).forEach(element => {
+      dels.push(element);
+    });
+
+    this.updateManager.update(dels, [], (uri, ok, msg, response) => {
       if (ok) {
         console.log('Message deleted: ' + message.message + ' (' + message.timeSent + ')');
       } else {
