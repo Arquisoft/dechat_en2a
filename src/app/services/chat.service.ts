@@ -21,7 +21,7 @@ export class ChatService {
 
   constructor(private rdf: RdfService) {
     this.loadUserData().then(() => {
-      this.notificationsDaemon(rdf, this.me.webId);
+      // this.notificationsDaemon(rdf, this.me.webId);
     });
     this.loadFriends();
     // Temporary
@@ -63,9 +63,9 @@ export class ChatService {
   }
 
   async sendMessage(msg: string) {
-    this.rdf.appendMessage(await this.getCurrentChatUri(this.currentChannelUri),
-                          new ChatMessage(this.me.username, msg, this.me.webId, this.other.webId));
-    this.reloadMessages();
+    const m = new ChatMessage(this.me.username, msg, this.me.webId, this.other.webId);
+    m.uri = await this.rdf.appendMessage(await this.getCurrentChatUri(this.currentChannelUri), m);
+    this.addMessage(m);
   }
 
   async deleteMessage(message: ChatMessage) {
@@ -178,20 +178,31 @@ export class ChatService {
     return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
   }
 
-  checkInbox(rdfService: RdfService) {
-    rdfService.checkInbox(this.me.webId, this.callbackForNotificationProcessing);
+  checkInbox() {
+    this.rdf.checkInbox(this.me.webId, this);
   }
 
-  async notificationsDaemon(rdfService: RdfService, webId: string) {
-    this.interval = setInterval(function() {
-      rdfService.checkInbox(webId, this.callbackForNotificationProcessing);
-    }, 5000, rdfService); // Executes checkInbox every 5 seconds
+  async notificationsDaemon() {
+    this.interval = setInterval(() => {
+      this.checkInbox();
+    }, 5000); // Executes checkInbox every 5 seconds
   }
 
-  callbackForNotificationProcessing(notification: Notification) {
+  async callbackForNotificationProcessing(notification: Notification) {
     console.log('Notification callback executed:');
     console.log(notification);
-    // TODO: act upon the information retorned from the process.
+    if (notification.type === 'NewMessage') {
+      const maker = await this.rdf.getMessageMaker(notification.fromWebId, this.currentChatFileUri);
+        const m = new ChatMessage(this.getUsernameFromWebID(maker),
+                                  await this.rdf.getMessageContent(notification.fromWebId, this.currentChatFileUri),
+                                  maker);
+        m.uri = notification.fromWebId;
+        m.timeSent = await this.rdf.getMessageDate(notification.fromWebId, this.currentChatFileUri);
+        this.addMessage(m);
+    }
+    if (notification.type === 'LongChat') {
+      // Add to my card
+    }
   }
 
   stopInterval() {

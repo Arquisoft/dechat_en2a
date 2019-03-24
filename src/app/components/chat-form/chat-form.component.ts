@@ -19,8 +19,12 @@ export class ChatFormComponent implements OnInit {
     this.message = '';
   }
 
-  check() {
+  stop() {
     this.chat.stopInterval();
+  }
+
+  start() {
+    this.chat.notificationsDaemon();
   }
 
   handleSubmit(event) {

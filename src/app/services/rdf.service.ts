@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SolidSession } from '../models/solid-session.model';
 import { ChatMessage } from '../models/chat-message.model';
 import { Notification } from '../models/notification.model';
+import { ChatService } from '../services/chat.service';
 import * as fileClient from 'solid-file-client';
 declare let solid: any;
 declare let $rdf: any;
@@ -463,7 +464,7 @@ export class RdfService {
   async getMessageMaker(msgUri: string, chatFileUri: string) {
     const subject = this.store.sym(msgUri);
     const chatFile = this.store.sym(chatFileUri);
-    await this.fetcher.load(chatFile.doc());
+    await this.fetcher.load(chatFile.doc(), {force: true, clearPreviousData: true});
     const msgMaker = await this.store.match(subject, FOAF('maker'), null, chatFile.doc());
     return msgMaker[0].object.value;
   }
@@ -514,7 +515,7 @@ export class RdfService {
   * Adds the new message to the given chat file
   * @param {string} chatFileUri uri of the chat file where we want to append the message
   * @param {ChatMessage} message Chat message we want to append
-  * @return {Promise<string>} Promise resolving to the uri of the chanel
+  * @return {Promise<string>} Promise resolving to the uri of the message
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
     const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
@@ -544,6 +545,7 @@ export class RdfService {
     const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
 
     this.sendNotifNewMessage(message.other, chatFolder, msgUri);
+    return msgUri;
   }
 
   /**
@@ -858,14 +860,14 @@ export class RdfService {
    * @param {string} webId The webIf of the owner of the inbox of intrest (usually the logged in user)
    * @param {function} callback The callback function in chatservice that we have to call whenever we find and interesting notification
    */
-  async checkInbox(webId: string, callback: any) {
+  async checkInbox(webId: string, caller: ChatService) {
     console.log('Checking inbox...');
+    console.log(webId);
     const inboxUri = await this.getInboxUrl(webId);
     const inboxUriSym = this.store.sym(inboxUri);
 
     const processed: Array<Notification> = [];
-
-    await this.fetcher.load(inboxUriSym.doc());
+    await this.fetcher.load(inboxUriSym.doc(), {force: true, clearPreviousData: true});
     const contentUris = (await this.store.match(null, RDFSYN('type'), PL('Resource'), inboxUriSym.doc())).map(e => e.subject);
     console.log(`    Elements found: ${contentUris.length}`);
     await contentUris.forEach(async element => {
@@ -875,7 +877,7 @@ export class RdfService {
           if (result.type !== 'none') {
             processed.push(result);
             this.deleteNotification(element).then(end => {
-              callback(result);
+              caller.callbackForNotificationProcessing(result);
             });
           } else {
             alreadychecked.push(element); // Only save on checked the ones we have not deleted.
