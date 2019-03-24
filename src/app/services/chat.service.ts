@@ -27,6 +27,7 @@ export class ChatService {
     // Temporary
     this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
     // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
+    this.startNotificationsDaemon();
 
   }
 
@@ -130,7 +131,6 @@ export class ChatService {
     // this.setupListener();  Not supported by server
   }
 
-
   private addMessage(msg: ChatMessage) {
     this.messages.push(msg);
   }
@@ -182,7 +182,7 @@ export class ChatService {
     this.rdf.checkInbox(this.me.webId, this);
   }
 
-  async notificationsDaemon() {
+  async startNotificationsDaemon() {
     this.interval = setInterval(() => {
       this.checkInbox();
     }, 5000); // Executes checkInbox every 5 seconds
@@ -205,7 +205,7 @@ export class ChatService {
     }
   }
 
-  stopInterval() {
+  stopNotificationsDaemon() {
     clearInterval(this.interval);
   }
 

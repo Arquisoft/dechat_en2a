@@ -20,11 +20,11 @@ export class ChatFormComponent implements OnInit {
   }
 
   stop() {
-    this.chat.stopInterval();
+    this.chat.stopNotificationsDaemon();
   }
 
   start() {
-    this.chat.notificationsDaemon();
+    this.chat.startNotificationsDaemon();
   }
 
   handleSubmit(event) {
