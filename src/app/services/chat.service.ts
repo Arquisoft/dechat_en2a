@@ -14,16 +14,18 @@ export class ChatService {
 
   currentChannelUri: string;
   currentChatFileUri: string;
+  interval: any;
 
   me: User;
   other: User;
 
   constructor(private rdf: RdfService) {
-    this.loadUserData();
+    this.loadUserData().then(() => {
+      this.notificationsDaemon(rdf, this.me.webId);
+    });
     this.loadFriends();
     // Temporary
     this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
-    // this.notificationsDaemon();
     // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
 
   }
@@ -176,22 +178,24 @@ export class ChatService {
     return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
   }
 
-  checkInbox() {
-    this.rdf.checkInbox(this.me.webId, this.callbackForNotificationProcessing);
+  checkInbox(rdfService: RdfService) {
+    rdfService.checkInbox(this.me.webId, this.callbackForNotificationProcessing);
   }
 
-  async notificationsDaemon() {
-    while (1 === 1) {
-      setTimeout(function () {
-        this.rdf.checkInbox(this.me.webId, this.callbackForNotificationProcessing);
-      }, 5000); // Executes checkInbox every 5 seconds
-    }
+  async notificationsDaemon(rdfService: RdfService, webId: string) {
+    this.interval = setInterval(function() {
+      rdfService.checkInbox(webId, this.callbackForNotificationProcessing);
+    }, 5000, rdfService); // Executes checkInbox every 5 seconds
   }
 
   callbackForNotificationProcessing(notification: Notification) {
     console.log('Notification callback executed:');
     console.log(notification);
     // TODO: act upon the information retorned from the process.
+  }
+
+  stopInterval() {
+    clearInterval(this.interval);
   }
 
 }

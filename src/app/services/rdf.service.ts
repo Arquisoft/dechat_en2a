@@ -869,8 +869,8 @@ export class RdfService {
     const contentUris = (await this.store.match(null, RDFSYN('type'), PL('Resource'), inboxUriSym.doc())).map(e => e.subject);
     console.log(`    Elements found: ${contentUris.length}`);
     await contentUris.forEach(async element => {
-      console.log(`    Checking: ${element}`);
       if (alreadychecked.indexOf(element) === -1) {
+        console.log(`    Checking: ${element}`);
         this.processNotification(element).then(result => {
           if (result.type !== 'none') {
             processed.push(result);
@@ -883,6 +883,7 @@ export class RdfService {
         });
       }
     });
+    console.log(`    All ${contentUris.length} elements checked`);
   }
 
   /**
@@ -899,17 +900,22 @@ export class RdfService {
       } else {
         const body = res.responseText;
         const doc = $rdf.sym(notificationUri);
-        await $rdf.parse(body, this.store, doc.uri, 'text/turtle');
-        let content = await this.store.match(null, NONE('NewMessage'), null, doc.doc());
-        if (content.length > 0) {
-          notification = new Notification(content[0].subject.value, 'NewMessage', content[0].object.value);
-        } else {
-          content = await this.store.match(null, MEE('LongChat'), null, doc.doc());
+        try {
+          await $rdf.parse(body, this.store, doc.uri, 'text/turtle');
+          let content = await this.store.match(null, NONE('NewMessage'), null, doc.doc());
           if (content.length > 0) {
-            notification = new Notification(content[0].subject.value, 'LongChat', content[0].object.value);
+            notification = new Notification(content[0].subject.value, 'NewMessage', content[0].object.value);
           } else {
-            notification = new Notification('error', 'none', 'error');
+            content = await this.store.match(null, MEE('LongChat'), null, doc.doc());
+            if (content.length > 0) {
+              notification = new Notification(content[0].subject.value, 'LongChat', content[0].object.value);
+            } else {
+              notification = new Notification('error', 'none', 'error');
+            }
           }
+        } catch (error) {
+          notification = new Notification('error', 'none', 'error');
+          console.log(`    Unable to parse: ${notificationUri}`);
         }
       }
     });

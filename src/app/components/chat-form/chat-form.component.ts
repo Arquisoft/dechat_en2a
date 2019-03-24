@@ -20,7 +20,7 @@ export class ChatFormComponent implements OnInit {
   }
 
   check() {
-    this.chat.checkInbox();
+    this.chat.stopInterval();
   }
 
   handleSubmit(event) {
