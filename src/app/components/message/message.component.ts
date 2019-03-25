@@ -22,6 +22,10 @@ export class MessageComponent implements OnInit {
     });
   }
 
+  delete() {
+    this.chatService.deleteMessage(this.chatMessage);
+  }
+
   ngOnInit(chatMessage = this.chatMessage) {
     this.messageContent = chatMessage.message;
     this.timeStamp = chatMessage.timeSent;

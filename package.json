@@ -11,8 +11,8 @@
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "setup:install": "npm install coveralls --save-dev",
     "docs:prepare": "npm install gitbook-cli -g && gitbook install",
-    "docs:watch": "npm run docs:prepare && gitbook serve ./a_docs ./docs --open",
-    "docs:build": "npm run docs:prepare && gitbook build ./a_docs ./docs"
+    "docs:watch": "gitbook serve ./a_docs ./docs --open",
+    "docs:build": "gitbook build ./a_docs ./docs"
   },
   "browser": {
     "crypto": false,

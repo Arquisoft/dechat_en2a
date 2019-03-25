@@ -23,6 +23,7 @@ const ICAL = $rdf.Namespace('http://www.w3.org/2002/12/cal/ical#');
 const UI = $rdf.Namespace('http://www.w3.org/ns/ui#');
 const DCEL = $rdf.Namespace('http://purl.org/dc/elements/1.1/');
 const NONE = $rdf.Namespace('http://example.org/ns/none#');
+const ACL = $rdf.Namespace('http://www.w3.org/ns/auth/acl#');
 /**
  * A service layer for RDF data manipulation using rdflib.js
  * @see https://solid.inrupt.com/docs/manipulating-ld-with-rdflib
@@ -472,7 +473,7 @@ export class RdfService {
     const chatFile = this.store.sym(chatFileUri);
     await this.fetcher.load(chatFile.doc());
     const msgDate = await this.store.match(subject, TERMS('created'), null, chatFile.doc());
-    return msgDate[0].object.value;
+    return new Date(msgDate[0].object.value);
   }
 
   /**
@@ -510,8 +511,7 @@ export class RdfService {
   * @return {Promise<string>} Promise resolving to the uri of the chanel
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampCode = +new Date;
-    const msgUri = chatFileUri + '#Msg' + tStampCode;
+    const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
     const indexUriSym = this.store.sym(indexUri);
@@ -538,6 +538,46 @@ export class RdfService {
     const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
 
     this.sendNotifNewMessage(message.webId, chatFolder, msgUri);
+  }
+
+  /**
+  * Removes the specified message from the given chat file
+  * @param {string} chatFileUri uri of the chat file from which we want to delete the message
+  * @param {ChatMessage} message Chat message we want to delete
+  * @return {Promise}
+  */
+  async deleteMessage(chatFileUri: string, message: ChatMessage) {
+    const msgUri = message.uri;
+    const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
+    const msgUriSym = this.store.sym(msgUri);
+    const indexUriSym = this.store.sym(indexUri);
+
+    const cFile = this.store.sym(chatFileUri);
+    this.fetcher.load(cFile.doc());
+    const dels = this.store.statementsMatching(msgUriSym, null, null, cFile.doc());
+
+    this.store.statementsMatching(indexUriSym, null, msgUriSym, cFile.doc()).forEach(element => {
+      dels.push(element);
+    });
+
+    this.updateManager.update(dels, [], (uri, ok, msg, response) => {
+      if (ok) {
+        console.log('Message deleted: ' + message.message + ' (' + message.timeSent + ')');
+      } else {
+        console.log(msg, response);
+      }
+    });
+  }
+
+  /**
+   * Builds the URI of the message from the URI of its chat and the sent date 
+   * @param {string} chatFileUri uri of the chat to which the message belongs
+   * @param {Date} timeSent Date in which the message was sent
+   * @return {string} the uri of the message
+   */
+  buildMsgUri(chatFileUri: string, timeSent: Date) {
+    var msgUri = chatFileUri + "#Msg" + timeSent.getTime();
+    return msgUri.substring(0, msgUri.length - 3);
   }
 
   /**
@@ -756,6 +796,40 @@ export class RdfService {
                         ` FAILED UPDATED with message [${message}].`);
       }
     });
+  }
+
+  /**  WARNING: UNTESTED
+   * Sets the edit permissions on a given URI for a given WebId
+   * @param {string} resourceUri the URI of the resource we want to grant permissions of
+   * @param {string} webId the user that is getting access rights
+   */
+  async setPermissions(resourceUri: string, webId: string) {
+    const aclUri = resourceUri + '.acl';
+    const aclFile = this.store.sym(aclUri);
+    const file = this.store.sym(resourceUri);
+    const webIdFile = this.store.sym(webId);
+
+    const ins = [];
+
+    ins.push($rdf.st(webIdFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('agent'), webIdFile, aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('accessTo'), file, aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('mode'), ACL('Read'), aclFile.doc()));
+    ins.push($rdf.st(webIdFile, ACL('mode'), ACL('Write'), aclFile.doc()));
+
+
+    await this.updateManager.put(aclFile.doc(), ins, 'text/turtle', function (o, s, c) { });
+    await this.fetcher.load(aclFile.doc());
+    await this.updateManager.update([], ins, (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
+                        ` CREATED with message [${message}].`);
+      } else {
+        console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
+                        ` FAILED CREATION with message [${message}].`);
+      }
+    });
+
   }
 
 }

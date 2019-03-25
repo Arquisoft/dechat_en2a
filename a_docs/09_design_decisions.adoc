@@ -9,7 +9,6 @@ As the project progresses, it is possible that the tools we initially decide to 
 
 === Development Tools
 
-[role="arc42help"]
 ****
 [options="header",cols="1,5"]
 |===
@@ -20,4 +19,15 @@ As the project progresses, it is possible that the tools we initially decide to 
 | HTML/CSS | With tools provided by Angular 6, HTML and CSS will allow for the development of the design and functionality of the web-application.
 | Arc42 | Arc42 will act as the documentation framework, allowing for ease and organization in the process of continually updating the documentation for the project as it progresses.
 |===
+****
+
+=== Syntax for the storage
+****
+Storing the conversations is one of the biggest hurdles for this project. At first we were pointing at a JSON file stored in a POD and reading/writing the whole file each acces.
+This not only proved hard and resource-intensive but, after more deliberation, we realised it broke the "data reusability" SOLID principle.
+This prompted us to look for a different way and we ended up with turtle and a structure equivalent to that used by the native data browser.
+****
+==== Namespaces
+****
+We mainly use the basic RDF syntax, ical for "LongChat", meeting for the participants section and flow to manage the message flow. We will also need to use acl for editing permissions on the POD.
 ****

@@ -328,7 +328,7 @@
 </div>
 <div class="sect2">
 <h3 id="_development_tools">Development Tools</h3>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -364,6 +364,28 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_syntax_for_the_storage">Syntax for the storage</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Storing the conversations is one of the biggest hurdles for this project. At first we were pointing at a JSON file stored in a POD and reading/writing the whole file each acces.
+This not only proved hard and resource-intensive but, after more deliberation, we realised it broke the &quot;data reusability&quot; SOLID principle.
+This prompted us to look for a different way and we ended up with turtle and a structure equivalent to that used by the native data browser.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_namespaces">Namespaces</h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>We mainly use the basic RDF syntax, ical for &quot;LongChat&quot;, meeting for the participants section and flow to manage the message flow. We will also need to use acl for editing permissions on the POD.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -411,7 +433,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Architecture Decisions","level":"1.10","depth":1,"next":{"title":"Quality Requirements","level":"1.11","depth":1,"path":"10_quality_scenarios.adoc","ref":"10_quality_scenarios.adoc","articles":[]},"previous":{"title":"Crosscutting Concepts","level":"1.9","depth":1,"path":"08_concepts.adoc","ref":"08_concepts.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"09_design_decisions.adoc","mtime":"2019-03-04T11:00:14.383Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-03-04T11:01:25.702Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Architecture Decisions","level":"1.10","depth":1,"next":{"title":"Quality Requirements","level":"1.11","depth":1,"path":"10_quality_scenarios.adoc","ref":"10_quality_scenarios.adoc","articles":[]},"previous":{"title":"Crosscutting Concepts","level":"1.9","depth":1,"path":"08_concepts.adoc","ref":"08_concepts.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"09_design_decisions.adoc","mtime":"2019-03-18T08:56:40.595Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-03-18T08:57:04.734Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

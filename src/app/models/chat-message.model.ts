@@ -6,7 +6,7 @@ export class ChatMessage {
         this.webId = webId;
     }
 
-    $uri?: string;
+    uri?: string;
     userName?: string;
     webId?: string;
     message?: string;

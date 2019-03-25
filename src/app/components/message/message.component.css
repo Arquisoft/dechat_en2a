@@ -45,11 +45,27 @@
     flex: 9;
     background-color: #fff;
     padding: 10px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
 }
 
 .isOwnMessageContent{
     background-color: #E3F2FD;
     color: #01579B;
+}
+
+.messageDelete {
+    background-color: #01579B;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.deleteButton {
+    background-color: #01579B;
+    border: none;
+    border-top-right-radius: 5px;
+}
+
+.imgDelete {
+    width: 2em;
+    height: 2em;
+    margin-top: 0.5em;
 }
