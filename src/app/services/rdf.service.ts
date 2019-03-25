@@ -827,7 +827,7 @@ export class RdfService {
    * @param {string} webId the user that is getting access rights
    */
   async setPermissions(resourceUri: string, webId: string) {
-    const aclUri = resourceUri + '.acl';
+    const aclUri = resourceUri + '/.acl';
     const aclFile = this.store.sym(aclUri);
     const file = this.store.sym(resourceUri);
     const webIdFile = this.store.sym(webId);

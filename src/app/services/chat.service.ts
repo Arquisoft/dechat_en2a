@@ -213,7 +213,7 @@ export class ChatService {
   }
 
   testSendReference() {
-    this.rdf.addChatToCard(this.me.webId, 'https://josecuriosoalternativo.inrupt.net/profile/card#me', 'https://josecurioso.inrupt.net/public/chatDePruebas.ttl');
+    this.rdf.addChatToCard(this.me.webId, 'https://josecurioso.inrupt.net/profile/card#me', 'https://josecurioso.inrupt.net/public/chatDePruebas.ttl');
   }
 
 }
