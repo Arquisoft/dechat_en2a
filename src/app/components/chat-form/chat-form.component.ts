@@ -27,6 +27,10 @@ export class ChatFormComponent implements OnInit {
     this.chat.startNotificationsDaemon();
   }
 
+  testSend() {
+    this.chat.testSendReference();
+  }
+
   handleSubmit(event) {
     if (event.keyCode === 13) {
       this.send();

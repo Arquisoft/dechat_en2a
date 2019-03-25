@@ -15,6 +15,7 @@ export class ChatService {
   currentChannelUri: string;
   currentChatFileUri: string;
   interval: any;
+  inboxDaemonTimer = 3000;
 
   me: User;
   other: User;
@@ -71,7 +72,8 @@ export class ChatService {
 
   async deleteMessage(message: ChatMessage) {
     this.rdf.deleteMessage(await this.getCurrentChatUri(this.currentChannelUri), message);
-    this.reloadMessages();
+    this.messages.splice(this.messages.indexOf(message), 1);
+    //this.reloadMessages();
   }
 
   getMessages(): Observable<ChatMessage[]> {
@@ -88,7 +90,7 @@ export class ChatService {
 
   private async reloadMessages() {
     this.messages.length = 0;
-    this.reloadChatData().then(() => this.loadMessages());
+    this.checkInbox().then(() => this.reloadChatData().then(() => this.loadMessages()));
   }
 
   private async reloadChatData() {
@@ -178,14 +180,14 @@ export class ChatService {
     return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
   }
 
-  checkInbox() {
-    this.rdf.checkInbox(this.me.webId, this);
+  async checkInbox() {
+    await this.rdf.checkInbox(this.me.webId, this);
   }
 
   async startNotificationsDaemon() {
     this.interval = setInterval(() => {
       this.checkInbox();
-    }, 5000); // Executes checkInbox every 5 seconds
+    }, this.inboxDaemonTimer); // Executes checkInbox every 5 seconds
   }
 
   async callbackForNotificationProcessing(notification: Notification) {
@@ -201,12 +203,17 @@ export class ChatService {
         this.addMessage(m);
     }
     if (notification.type === 'LongChat') {
+      this.rdf.addChatToCard(this.me.webId, notification.resourceUri, notification.fromWebId);
       // Add to my card
     }
   }
 
   stopNotificationsDaemon() {
     clearInterval(this.interval);
+  }
+
+  testSendReference() {
+    this.rdf.addChatToCard(this.me.webId, 'https://josecuriosoalternativo.inrupt.net/profile/card#me', 'https://josecurioso.inrupt.net/public/chatDePruebas.ttl');
   }
 
 }

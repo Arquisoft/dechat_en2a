@@ -688,7 +688,7 @@ export class RdfService {
       }
     });
 
-    // this.sendNotifNewConv(myWebId, chatFolder);  // Commented to avoid spamming the other person while testing
+    this.sendNotifNewConv(otherWebId, chatFolder);  // Commented to avoid spamming the other person while testing
   }
 
   /**
@@ -934,6 +934,25 @@ export class RdfService {
                       .then(e => {
                         console.log(`    Deleted: ${notificationUri}`);
                       });
+  }
+
+  async addChatToCard(myWebId: string, otherWebId: string, chatFolder: string) {
+    const myCardFile = this.store.sym(myWebId.replace('#me', '#'));
+    const chatFolderFile = this.store.sym(chatFolder);
+    const otherWebIdFile = this.store.sym(otherWebId);
+
+    this.fetcher.load(myCardFile.doc(), {force: true, clearPreviousData: true});
+
+    const cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherWebIdFile, myCardFile.doc());
+
+    await this.updateManager.update([], cardNote, (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] UPDATED with message [${message}].`);
+      } else {
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`);
+      }
+    });
+
   }
 
 }
