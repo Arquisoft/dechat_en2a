@@ -473,7 +473,7 @@ export class RdfService {
     const chatFile = this.store.sym(chatFileUri);
     await this.fetcher.load(chatFile.doc());
     const msgDate = await this.store.match(subject, TERMS('created'), null, chatFile.doc());
-    return msgDate[0].object.value;
+    return new Date(msgDate[0].object.value);
   }
 
   /**
@@ -511,8 +511,7 @@ export class RdfService {
   * @return {Promise<string>} Promise resolving to the uri of the chanel
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
-    const tStampCode = +new Date;
-    const msgUri = chatFileUri + '#Msg' + tStampCode;
+    const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
     const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
     const msgUriSym = this.store.sym(msgUri);
     const indexUriSym = this.store.sym(indexUri);
@@ -539,6 +538,46 @@ export class RdfService {
     const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
 
     this.sendNotifNewMessage(message.webId, chatFolder, msgUri);
+  }
+
+  /**
+  * Removes the specified message from the given chat file
+  * @param {string} chatFileUri uri of the chat file from which we want to delete the message
+  * @param {ChatMessage} message Chat message we want to delete
+  * @return {Promise}
+  */
+  async deleteMessage(chatFileUri: string, message: ChatMessage) {
+    const msgUri = message.uri;
+    const indexUri = chatFileUri.split('/').slice(0, 5).join('/') + '/index.ttl#this';
+    const msgUriSym = this.store.sym(msgUri);
+    const indexUriSym = this.store.sym(indexUri);
+
+    const cFile = this.store.sym(chatFileUri);
+    this.fetcher.load(cFile.doc());
+    const dels = this.store.statementsMatching(msgUriSym, null, null, cFile.doc());
+
+    this.store.statementsMatching(indexUriSym, null, msgUriSym, cFile.doc()).forEach(element => {
+      dels.push(element);
+    });
+
+    this.updateManager.update(dels, [], (uri, ok, msg, response) => {
+      if (ok) {
+        console.log('Message deleted: ' + message.message + ' (' + message.timeSent + ')');
+      } else {
+        console.log(msg, response);
+      }
+    });
+  }
+
+  /**
+   * Builds the URI of the message from the URI of its chat and the sent date 
+   * @param {string} chatFileUri uri of the chat to which the message belongs
+   * @param {Date} timeSent Date in which the message was sent
+   * @return {string} the uri of the message
+   */
+  buildMsgUri(chatFileUri: string, timeSent: Date) {
+    var msgUri = chatFileUri + "#Msg" + timeSent.getTime();
+    return msgUri.substring(0, msgUri.length - 3);
   }
 
   /**
