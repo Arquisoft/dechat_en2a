@@ -52,6 +52,10 @@
   box-shadow: #DAE0E6 1px 1px 6px;
 }
 
+.registration .provider-card a {
+  text-decoration: none;
+}
+
 .registration .provider-card .provider-logo {
   height: 44px;
   width: 44px;
