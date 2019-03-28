@@ -3,8 +3,12 @@
 
 module.exports = function (config) {
   config.set({
+    //base path from which karma looks for tests.
     basePath: "",
+    //this array is used to specify the test files to load in the browser
+
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
+
     plugins: [
       require("karma-jasmine"),
       require("karma-chrome-launcher"),
@@ -35,6 +39,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    singleRun: false
+    singleRun: true
   });
 };

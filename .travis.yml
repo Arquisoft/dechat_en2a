@@ -10,10 +10,10 @@ addons:
       
 cache:
   directories:
-    - $HOME/.npm
+     - ./node_modules
 
 install:
-  - npm ci
+   - npm install
  
 script:
   - npm install
