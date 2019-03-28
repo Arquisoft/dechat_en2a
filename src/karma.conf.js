@@ -3,8 +3,12 @@
 
 module.exports = function (config) {
   config.set({
+    //base path from which karma looks for tests.
     basePath: "",
+    //this array is used to specify the test files to load in the browser
+
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
+
     plugins: [
       require("karma-jasmine"),
       require("karma-chrome-launcher"),
@@ -17,10 +21,13 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require("path").join(__dirname, "../coverage"),
-      reports: ["html", "lcovonly"],
-      fixWebpackSourcePaths: true
+      reports: ["html", "lcovonly", "text-summary"],
+      fixWebpackSourcePaths: true,
+      combineBrowserReports: true,
+      skipFilesWithNoCoverage: true,
+      verbose: true
     },
-    reporters: ["progress", "kjhtml"],
+    reporters: ["progress","kjhtml" , "coverage-istanbul"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -32,6 +39,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    singleRun: false
+    singleRun: true
   });
 };
