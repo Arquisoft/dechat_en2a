@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PermissionsComponent } from './permissions.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('PermissionsComponent', () => {
   let component: PermissionsComponent;
@@ -8,7 +10,8 @@ describe('PermissionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PermissionsComponent ]
+      declarations: [ PermissionsComponent ],
+      imports: [ RouterTestingModule , ToastrModule.forRoot() ]
     })
     .compileComponents();
   }));
