@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SolidSession } from '../models/solid-session.model';
 import { ChatMessage } from '../models/chat-message.model';
+import { Notification } from '../models/notification.model';
+import { ChatService } from '../services/chat.service';
 import * as fileClient from 'solid-file-client';
 declare let solid: any;
 declare let $rdf: any;
@@ -8,8 +10,9 @@ declare let $rdf: any;
 // TODO: Remove any UI interaction from this service
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { NamedNode } from 'src/assets/types/rdflib';
+import { NamedNode, uri } from 'src/assets/types/rdflib';
 import { stringify } from '@angular/core/src/util';
+import { e } from '@angular/core/src/render3';
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
@@ -24,6 +27,10 @@ const UI = $rdf.Namespace('http://www.w3.org/ns/ui#');
 const DCEL = $rdf.Namespace('http://purl.org/dc/elements/1.1/');
 const NONE = $rdf.Namespace('http://example.org/ns/none#');
 const ACL = $rdf.Namespace('http://www.w3.org/ns/auth/acl#');
+const PL = $rdf.Namespace('http://www.w3.org/ns/iana/media-types/text/plain#');
+
+// Maintain log of checked notification
+const alreadychecked = [];
 /**
  * A service layer for RDF data manipulation using rdflib.js
  * @see https://solid.inrupt.com/docs/manipulating-ld-with-rdflib
@@ -457,7 +464,7 @@ export class RdfService {
   async getMessageMaker(msgUri: string, chatFileUri: string) {
     const subject = this.store.sym(msgUri);
     const chatFile = this.store.sym(chatFileUri);
-    await this.fetcher.load(chatFile.doc());
+    await this.fetcher.load(chatFile.doc(), {force: true, clearPreviousData: true});
     const msgMaker = await this.store.match(subject, FOAF('maker'), null, chatFile.doc());
     return msgMaker[0].object.value;
   }
@@ -508,7 +515,7 @@ export class RdfService {
   * Adds the new message to the given chat file
   * @param {string} chatFileUri uri of the chat file where we want to append the message
   * @param {ChatMessage} message Chat message we want to append
-  * @return {Promise<string>} Promise resolving to the uri of the chanel
+  * @return {Promise<string>} Promise resolving to the uri of the message
   */
   async appendMessage(chatFileUri: string, message: ChatMessage) {
     const msgUri = this.buildMsgUri(chatFileUri, message.timeSent);
@@ -537,7 +544,8 @@ export class RdfService {
 
     const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
 
-    this.sendNotifNewMessage(message.webId, chatFolder, msgUri);
+    this.sendNotifNewMessage(message.other, chatFolder, msgUri);
+    return msgUri;
   }
 
   /**
@@ -570,13 +578,13 @@ export class RdfService {
   }
 
   /**
-   * Builds the URI of the message from the URI of its chat and the sent date 
+   * Builds the URI of the message from the URI of its chat and the sent date
    * @param {string} chatFileUri uri of the chat to which the message belongs
    * @param {Date} timeSent Date in which the message was sent
    * @return {string} the uri of the message
    */
   buildMsgUri(chatFileUri: string, timeSent: Date) {
-    var msgUri = chatFileUri + "#Msg" + timeSent.getTime();
+    const msgUri = chatFileUri + '#Msg' + timeSent.getTime();
     return msgUri.substring(0, msgUri.length - 3);
   }
 
@@ -680,7 +688,7 @@ export class RdfService {
       }
     });
 
-    // this.sendNotifNewConv(myWebId, chatFolder);  // Commented to avoid spamming the other person while testing
+    this.sendNotifNewConv(otherWebId, chatFolder);  // Commented to avoid spamming the other person while testing
   }
 
   /**
@@ -776,6 +784,20 @@ export class RdfService {
     const notiFile = this.store.sym(notiUri);
     const inboxFolder = this.store.sym(inboxUrl);
 
+
+    solid.auth.fetch(inboxUrl, {
+      method: 'POST',
+      body: ins[0]
+    });
+
+    /*
+    console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] NOT FOUND, creating it...`);
+      await this.updateManager.put(notiFile.doc(), ins, 'text/turtle', function (o, s, c) { });
+      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] CREATED`);
+    */
+
+
+    /*
     await this.fetcher.load(inboxFolder.doc());
     const matches = await this.store.match(inboxFolder, LDP('contains'), notiFile, inboxFolder.doc());
 
@@ -796,6 +818,7 @@ export class RdfService {
                         ` FAILED UPDATED with message [${message}].`);
       }
     });
+    */
   }
 
   /**  WARNING: UNTESTED
@@ -804,7 +827,7 @@ export class RdfService {
    * @param {string} webId the user that is getting access rights
    */
   async setPermissions(resourceUri: string, webId: string) {
-    const aclUri = resourceUri + '.acl';
+    const aclUri = resourceUri + '/.acl';
     const aclFile = this.store.sym(aclUri);
     const file = this.store.sym(resourceUri);
     const webIdFile = this.store.sym(webId);
@@ -827,6 +850,106 @@ export class RdfService {
       } else {
         console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
                         ` FAILED CREATION with message [${message}].`);
+      }
+    });
+
+  }
+
+  /**
+   * Checks the inbox for notifications, processes them and returns them to the chat service using the given callback
+   * @param {string} webId The webIf of the owner of the inbox of intrest (usually the logged in user)
+   * @param {function} callback The callback function in chatservice that we have to call whenever we find and interesting notification
+   */
+  async checkInbox(webId: string, caller: ChatService) {
+    console.log('Checking inbox...');
+    console.log(webId);
+    const inboxUri = await this.getInboxUrl(webId);
+    const inboxUriSym = this.store.sym(inboxUri);
+
+    const processed: Array<Notification> = [];
+    await this.fetcher.load(inboxUriSym.doc(), {force: true, clearPreviousData: true});
+    const contentUris = (await this.store.match(null, RDFSYN('type'), PL('Resource'), inboxUriSym.doc())).map(e => e.subject);
+    console.log(`    Elements found: ${contentUris.length}`);
+    await contentUris.forEach(async element => {
+      if (alreadychecked.indexOf(element) === -1) {
+        console.log(`    Checking: ${element}`);
+        this.processNotification(element).then(result => {
+          if (result.type !== 'none') {
+            processed.push(result);
+            this.deleteNotification(element).then(end => {
+              caller.callbackForNotificationProcessing(result);
+            });
+          } else {
+            alreadychecked.push(element); // Only save on checked the ones we have not deleted.
+          }
+        });
+      }
+    });
+    console.log(`    All ${contentUris.length} elements checked`);
+  }
+
+  /**
+   * This method parses the text and processes the contents returning a Notification object containing the information
+   * @param {string} notificationUri URI of the notification we want to process
+   * @return {Notification} The Notification extracted from the URI
+   */
+  async processNotification(notificationUri: string): Promise<Notification> {
+    console.log(`    Processing: ${notificationUri}`);
+    let notification: Notification;
+
+    await this.store.fetcher.webOperation('GET', notificationUri).then(async res => {
+      if (res.status === 404) {
+      } else {
+        const body = res.responseText;
+        const doc = $rdf.sym(notificationUri);
+        try {
+          await $rdf.parse(body, this.store, doc.uri, 'text/turtle');
+          let content = await this.store.match(null, NONE('NewMessage'), null, doc.doc());
+          if (content.length > 0) {
+            notification = new Notification(content[0].subject.value, 'NewMessage', content[0].object.value);
+          } else {
+            content = await this.store.match(null, MEE('LongChat'), null, doc.doc());
+            if (content.length > 0) {
+              notification = new Notification(content[0].subject.value, 'LongChat', content[0].object.value);
+            } else {
+              notification = new Notification('error', 'none', 'error');
+            }
+          }
+        } catch (error) {
+          notification = new Notification('error', 'none', 'error');
+          console.log(`    Unable to parse: ${notificationUri}`);
+        }
+      }
+    });
+    return notification;
+  }
+
+  /**
+   * This method deletes a notification once it has been consumed.
+   * @param {string} notificationUri URI of the notification we want to delete.
+   */
+  async deleteNotification(notificationUri: string) {
+    console.log(`    Deleting: ${notificationUri}`);
+    await this.store.fetcher.webOperation('DELETE', notificationUri)
+                      .then(e => {
+                        console.log(`    Deleted: ${notificationUri}`);
+                      });
+  }
+
+  async addChatToCard(myWebId: string, otherWebId: string, chatFolder: string) {
+    const myCardFile = this.store.sym(myWebId.replace('#me', '#'));
+    const chatFolderFile = this.store.sym(chatFolder);
+    const otherWebIdFile = this.store.sym(otherWebId);
+
+    this.fetcher.load(myCardFile.doc(), {force: true, clearPreviousData: true});
+
+    const cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherWebIdFile, myCardFile.doc());
+
+    await this.updateManager.update([], cardNote, (uri, ok, message, response) => {
+      if (ok) {
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] UPDATED with message [${message}].`);
+      } else {
+        console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`);
       }
     });
 

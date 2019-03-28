@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FriendItemComponent } from './friend-item.component';
+import { ChatService } from '../../services/chat.service';
+import { User } from '../../models/user.model';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('FriendItemComponent', () => {
   let component: FriendItemComponent;
@@ -8,7 +11,9 @@ describe('FriendItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FriendItemComponent ]
+      declarations: [ FriendItemComponent ],
+      imports: [ ToastrModule.forRoot() ],
+      providers: [ ChatService ]
     })
     .compileComponents();
   }));

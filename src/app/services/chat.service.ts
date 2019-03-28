@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { ChatMessage } from '../models/chat-message.model';
 import { RdfService } from './rdf.service';
 import { User } from '../models/user.model';
+import { Notification } from '../models/notification.model';
 
 @Injectable()
 export class ChatService {
@@ -13,16 +14,21 @@ export class ChatService {
 
   currentChannelUri: string;
   currentChatFileUri: string;
+  interval: any;
+  inboxDaemonTimer = 3000;
 
   me: User;
   other: User;
 
   constructor(private rdf: RdfService) {
-    this.loadUserData();
+    this.loadUserData().then(() => {
+      // this.notificationsDaemon(rdf, this.me.webId);
+    });
     this.loadFriends();
     // Temporary
     this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
     // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
+    this.startNotificationsDaemon();
 
   }
 
@@ -59,13 +65,15 @@ export class ChatService {
   }
 
   async sendMessage(msg: string) {
-    this.rdf.appendMessage(await this.getCurrentChatUri(this.currentChannelUri), new ChatMessage(this.me.username, msg, this.me.webId));
-    this.reloadMessages();
+    const m = new ChatMessage(this.me.username, msg, this.me.webId, this.other.webId);
+    m.uri = await this.rdf.appendMessage(await this.getCurrentChatUri(this.currentChannelUri), m);
+    this.addMessage(m);
   }
 
   async deleteMessage(message: ChatMessage) {
     this.rdf.deleteMessage(await this.getCurrentChatUri(this.currentChannelUri), message);
-    this.reloadMessages();
+    this.messages.splice(this.messages.indexOf(message), 1);
+    //this.reloadMessages();
   }
 
   getMessages(): Observable<ChatMessage[]> {
@@ -82,7 +90,7 @@ export class ChatService {
 
   private async reloadMessages() {
     this.messages.length = 0;
-    this.reloadChatData().then(() => this.loadMessages());
+    this.checkInbox().then(() => this.reloadChatData().then(() => this.loadMessages()));
   }
 
   private async reloadChatData() {
@@ -124,7 +132,6 @@ export class ChatService {
     });
     // this.setupListener();  Not supported by server
   }
-
 
   private addMessage(msg: ChatMessage) {
     this.messages.push(msg);
@@ -171,6 +178,42 @@ export class ChatService {
 
   urlLogFilter(url: string) {
     return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
+  }
+
+  async checkInbox() {
+    await this.rdf.checkInbox(this.me.webId, this);
+  }
+
+  async startNotificationsDaemon() {
+    this.interval = setInterval(() => {
+      this.checkInbox();
+    }, this.inboxDaemonTimer); // Executes checkInbox every 5 seconds
+  }
+
+  async callbackForNotificationProcessing(notification: Notification) {
+    console.log('Notification callback executed:');
+    console.log(notification);
+    if (notification.type === 'NewMessage') {
+      const maker = await this.rdf.getMessageMaker(notification.fromWebId, this.currentChatFileUri);
+        const m = new ChatMessage(this.getUsernameFromWebID(maker),
+                                  await this.rdf.getMessageContent(notification.fromWebId, this.currentChatFileUri),
+                                  maker);
+        m.uri = notification.fromWebId;
+        m.timeSent = await this.rdf.getMessageDate(notification.fromWebId, this.currentChatFileUri);
+        this.addMessage(m);
+    }
+    if (notification.type === 'LongChat') {
+      this.rdf.addChatToCard(this.me.webId, notification.resourceUri, notification.fromWebId);
+      // Add to my card
+    }
+  }
+
+  stopNotificationsDaemon() {
+    clearInterval(this.interval);
+  }
+
+  testSendReference() {
+    this.rdf.addChatToCard(this.me.webId, 'https://josecurioso.inrupt.net/profile/card#me', 'https://josecurioso.inrupt.net/public/chatDePruebas.ttl');
   }
 
 }
