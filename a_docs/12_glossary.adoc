@@ -18,4 +18,6 @@ Should you happen to be interested in a further reading and understanding, usefu
 | Pod     | A repository on which the user's data is stored. I can be located where the user decides, even in her/his own device. | https://solid.inrupt.com/get-a-solid-pod[Getting your own pod]
 | JavaScript     | Interpreted programming language designed to provide dynamic behaviour to web pages which otherwise would be static documents. | https://developer.mozilla.org/es/docs/Web/JavaScript[Mozilla JavaScript reference]
 | Angular     | JavaScript framework to develop web pages offering the functionality of desktop programs. An example of this could be Google Docs. | https://angularjs.org/[Angular's web page]
+| Travis     | Travis is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub. | https://travis-ci.org/[Travis's web page]
+| Cucumber     | Cucumber is a software tool used for testing other software. It runs automated acceptance tests written in a behavior-driven development style (BDD). | https://cucumber.io/[Cucumber's web page]
 |===
