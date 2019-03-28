@@ -4,8 +4,6 @@ import { ChatMessage } from '../models/chat-message.model';
 import { Notification } from '../models/notification.model';
 import { ChatService } from '../services/chat.service';
 import * as fileClient from 'solid-file-client';
-declare let solid: any;
-declare let $rdf: any;
 
 // TODO: Remove any UI interaction from this service
 import { NgForm } from '@angular/forms';
@@ -13,6 +11,9 @@ import { ToastrService } from 'ngx-toastr';
 import { NamedNode, uri } from 'src/assets/types/rdflib';
 import { stringify } from '@angular/core/src/util';
 import { e } from '@angular/core/src/render3';
+
+declare let solid: any;
+declare let $rdf: any;
 
 const VCARD = $rdf.Namespace('http://www.w3.org/2006/vcard/ns#');
 const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');

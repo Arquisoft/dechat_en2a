@@ -17,7 +17,7 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require("path").join(__dirname, "../coverage"),
-      reports: ["html", "lcovonly"],
+      reports: ["html", "lcovonly", "text-summary"],
       fixWebpackSourcePaths: true,
       combineBrowserReports: true,
       skipFilesWithNoCoverage: true,
@@ -35,6 +35,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    singleRun: true
+    singleRun: false
   });
 };

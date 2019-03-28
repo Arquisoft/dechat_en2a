@@ -26,7 +26,7 @@ export class AuthService {
     body: '',
   };
 
-  constructor(private router: Router, private rdf: RdfService) {
+  constructor(private router: Router) {
     this.isSessionActive();
   }
 
