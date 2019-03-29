@@ -94,6 +94,7 @@
             ],
             "codeCoverageExclude": [
                 "src/app/services/auth.guard.service.ts",
+                "src/app/services/rdf.service.ts",
                 "src/app/services/solid.auth.service.ts"
             ]
           }
