@@ -1,9 +1,10 @@
 export class ChatMessage {
 
-    constructor(userName, message, webId) {
+    constructor(userName: string, message: string, webId: string, other: string = 'none') {
         this.userName = userName;
         this.message = message;
         this.webId = webId;
+        this.other = other;
     }
 
     uri?: string;
@@ -11,4 +12,5 @@ export class ChatMessage {
     webId?: string;
     message?: string;
     timeSent?: Date = new Date();
+    other?: string;
 }

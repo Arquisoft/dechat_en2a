@@ -27,7 +27,7 @@ module.exports = function (config) {
       skipFilesWithNoCoverage: true,
       verbose: true
     },
-    reporters: ["progress","kjhtml" , "coverage-istanbul"],
+    reporters: ["progress", "kjhtml" , "coverage-istanbul"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -39,6 +39,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    singleRun: true
+    singleRun: false
   });
 };

@@ -16,17 +16,19 @@ export class MessageComponent implements OnInit {
   isOwnMessage: boolean;
   ownEmail: string;
 
-  constructor(private chatService: ChatService) {
-    chatService.getUser().subscribe(user => {
-      this.userName = user.username;
-    });
-  }
+  constructor(private chatService: ChatService) { }
 
   delete() {
     this.chatService.deleteMessage(this.chatMessage);
   }
 
   ngOnInit(chatMessage = this.chatMessage) {
+    if (!chatMessage) {
+      chatMessage = new ChatMessage('username', 'Can\'t load', 'http://webid.com');
+    }
+    this.chatService.getUser().subscribe(user => {
+      this.userName = user.username;
+    });
     this.messageContent = chatMessage.message;
     this.timeStamp = chatMessage.timeSent;
     this.isOwnMessage = (this.userName === chatMessage.userName);

@@ -84,7 +84,10 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/solid-auth-client/dist-lib/solid-auth-client.bundle.js",
+              "src/assets/js/libs/rdflib.min.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
