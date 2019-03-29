@@ -91,6 +91,10 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+            ],
+            "codeCoverageExclude": [
+                "src/app/services/auth.guard.service.ts",
+                "src/app/services/solid.auth.service.ts"
             ]
           }
         },
