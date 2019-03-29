@@ -9,7 +9,7 @@ import { User } from '../../models/user.model';
 })
 export class FriendItemComponent implements OnInit {
 
-  @Input() user: User;
+  @Input() user: User = new User('userdepruebas', 'Pruebas User', 'http://prueba.user/webid');
 
   constructor(private cService: ChatService) { }
 

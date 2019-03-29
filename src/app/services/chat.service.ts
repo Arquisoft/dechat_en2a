@@ -22,18 +22,20 @@ export class ChatService {
 
   constructor(private rdf: RdfService) {
     this.loadUserData().then(() => {
-      // this.notificationsDaemon(rdf, this.me.webId);
+      this.loadFriends();
+      this.startNotificationsDaemon();
+      this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
     });
-    this.loadFriends();
     // Temporary
-    this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
     // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
-    this.startNotificationsDaemon();
 
   }
 
   async loadUserData() {
     await this.rdf.getSession();
+    if (!this.rdf.session) {
+      return;
+    }
     this.me = new User(this.getUsernameFromWebID(this.rdf.session.webId), this.rdf.getName(this.rdf.session.webId), this.rdf.session.webId);
   }
 
@@ -53,6 +55,9 @@ export class ChatService {
   }
 
   setOther(other: User) {
+    if (!this.rdf.session) {
+      return;
+    }
     if (this.other != null) {
       this.other.isCurrent = false;
     }
@@ -82,6 +87,9 @@ export class ChatService {
 
   private async loadFriends() {
     await this.rdf.getSession();
+    if (!this.rdf.session) {
+      return;
+    }
     this.rdf.getFriends().then(res => res.map(e => e.value).forEach(async webId => {
       this.friends.push(new User(this.getUsernameFromWebID(webId), (await this.rdf.getName(webId)).value, webId));
       this.setOther(this.friends[0]);
@@ -185,6 +193,9 @@ export class ChatService {
   }
 
   async startNotificationsDaemon() {
+    if (!this.rdf.session) {
+      return;
+    }
     this.interval = setInterval(() => {
       this.checkInbox();
     }, this.inboxDaemonTimer); // Executes checkInbox every 5 seconds
