@@ -822,13 +822,22 @@ export class RdfService {
     */
   }
 
+  
+
+   async setPermissions2(resourceUri: string, webId: string) {
+    const fileClient = require('solid-file-client');
+    fileClient.readFile(resourceUri).then(  body => {
+      console.log(`File content is : ${body}.`);
+    }, err => console.log(err) );
+  }
+
   /**  WARNING: UNTESTED
    * Sets the edit permissions on a given URI for a given WebId
    * @param {string} resourceUri the URI of the resource we want to grant permissions of
    * @param {string} webId the user that is getting access rights
    */
   async setPermissions(resourceUri: string, webId: string) {
-    const aclUri = resourceUri + '/.acl';
+    const aclUri = resourceUri + '.acl';
     const aclFile = this.store.sym(aclUri);
     const file = this.store.sym(resourceUri);
     const webIdFile = this.store.sym(webId);
