@@ -23,7 +23,7 @@ export class PermissionsComponent implements OnInit {
     if(this.auth.isSessionActive())
     {
 
-      this.rdf.setPermissions(fileUrl,"https://luispastrana.inrupt.net/profile/card#me");
+      //this.rdf.setPermissions(fileUrl,"https://luispastrana.inrupt.net/profile/card#me");
     }
   }
 
