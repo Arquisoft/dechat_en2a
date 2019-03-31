@@ -24,7 +24,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ### Getting started
 
-First of all install node (& npm) and then execute `npm run setup:install` to install all the dependencies needed from now on. To view a live version of the app check out the Development Server section.
+First of all install node (& npm) and then execute `npm install` to install all the dependencies needed from now on. To view a live version of the app check out the Development Server section.
 
 ### Generating the documentation
 
