@@ -4,7 +4,7 @@ import { ChatFormComponent } from './chat-form.component';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
 import { RdfService } from '../../services/rdf.service';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
 
 describe('ChatFormComponent', () => {
@@ -15,16 +15,15 @@ describe('ChatFormComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ChatFormComponent],
             imports: [ FormsModule , ToastrModule.forRoot() ],
-            providers: [ ChatService, RdfService ]
-        })
-            .compileComponents();
+            providers: [ 
+                { provide: ChatService, useClass: ChatService }
+            ]
+        }).compileComponents().then(() => {
+            fixture = TestBed.createComponent(ChatFormComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        });
     }));
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(ChatFormComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -39,12 +38,32 @@ describe('ChatFormComponent', () => {
         }));
 
         it('calls the service send function', async(() => {
-            const chatServiceStub: ChatService = fixture.debugElement.injector.get(ChatService);
-            spyOn(chatServiceStub, "sendMessage");
+            const chatService: ChatService = fixture.debugElement.injector.get(ChatService);
+            spyOn(chatService, "sendMessage");
             component.message = "Hello from chat form test to chat service";
             component.send();
-            expect(chatServiceStub.sendMessage).toHaveBeenCalledTimes(1);
+            expect(chatService.sendMessage).toHaveBeenCalledTimes(1);
         }));
+    });
+
+    describe('Notifications daemon', () => {
+        let chatService: ChatService;
+
+        beforeEach(async(() => {
+            chatService = fixture.debugElement.injector.get(ChatService);
+        }));
+
+        it('calls the service start function', async(() => {
+            spyOn(chatService, "startNotificationsDaemon");
+            component.start();
+            expect(chatService.startNotificationsDaemon).toHaveBeenCalledTimes(1);
+        }));
+
+        it('calls the service stop function', () => {
+            spyOn(chatService, "stopNotificationsDaemon");
+            component.stop();
+            expect(chatService.stopNotificationsDaemon).toHaveBeenCalledTimes(1);
+        });
     });
 
     it('send button should call the send function', async(() => {
