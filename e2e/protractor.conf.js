@@ -3,7 +3,7 @@
 
 exports.config = {
   allScriptsTimeout: 11000,
-  specs: ['./src/features/**/*.feature'],
+  specs: ["./src/features/**/*.feature"],
   capabilities: {
     "browserName": "chrome",
     "chromeOptions": {
@@ -12,15 +12,14 @@ exports.config = {
   },
   directConnect: true,
   baseUrl: "http://localhost:4200/",
-  framework: 'custom',
-  frameworkPath: require.resolve('protractor-cucumber-framework'),
+  framework: "custom",
+  frameworkPath: require.resolve("protractor-cucumber-framework"),
   onPrepare() {
     require("ts-node").register({
       project: require("path").join(__dirname, "./tsconfig.e2e.json")
     });
-
   },
   cucumberOpts: {
-    require: ['./src/steps/**/*.steps.ts'],
+    require: ["./src/steps/**/*.steps.ts"],
   },
 };
