@@ -3,8 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatFormComponent } from './chat-form.component';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
-import { RdfService } from '../../services/rdf.service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
 
 describe('ChatFormComponent', () => {
@@ -30,12 +29,12 @@ describe('ChatFormComponent', () => {
     });
 
     describe('Send message', () => {
-        it('calls the component send function', async(() => {
+        it('calls the component send function', () => {
             spyOn(component, "send");
             component.message = "Hello from chat form test";
             component.send();
             expect(component.send).toHaveBeenCalledTimes(1);
-        }));
+        });
 
         it('calls the service send function', async(() => {
             const chatService: ChatService = fixture.debugElement.injector.get(ChatService);
@@ -66,11 +65,11 @@ describe('ChatFormComponent', () => {
         });
     });
 
-    it('send button should call the send function', async(() => {
+    it('send button should call the send function', () => {
         spyOn(component, "send");
         let button = fixture.debugElement.query(By.css('#send')).nativeElement;
         component.message = "Hello";
         button.click();
         expect(component.send).toHaveBeenCalledTimes(1);
-    }));
+    });
 });
