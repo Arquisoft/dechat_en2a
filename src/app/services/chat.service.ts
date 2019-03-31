@@ -190,6 +190,9 @@ export class ChatService {
   }
 
   async checkInbox() {
+    if (!this.rdf.session) {
+      return;
+    }
     await this.rdf.checkInbox(this.me.webId, this);
   }
 
