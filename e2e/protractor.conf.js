@@ -7,20 +7,20 @@ exports.config = {
   capabilities: {
     "browserName": "chrome",
     "chromeOptions": {
-       "args": ["--headless", "--no-sandbox"]
+      "args": ["--headless", "--no-sandbox"]
     }
   },
   directConnect: true,
   baseUrl: "http://localhost:4200/",
-    framework: 'custom',
-    frameworkPath: require.resolve('protractor-cucumber-framework'),
+  framework: 'custom',
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
   onPrepare() {
     require("ts-node").register({
       project: require("path").join(__dirname, "./tsconfig.e2e.json")
     });
 
   },
-    cucumberOpts: {
-        require: ['./src/steps/**/*.steps.ts'],
-    },
+  cucumberOpts: {
+    require: ['./src/steps/**/*.steps.ts'],
+  },
 };
