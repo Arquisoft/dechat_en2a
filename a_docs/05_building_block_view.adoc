@@ -20,14 +20,16 @@ image::images/05_Major_Scope.png[]
 We will begin unveiling the application's parts.
 
 .Message management: +
-image::images/05_level1.png[]
+image::images/05_level01.png[]
 
 .Legend
 [options="header",cols="1a,2"]
 |===
 |Item | Meaning 
-|image::images/Arrow.png[] | Information being transmitted
-|image::images/user.png[] | User
-|image::images/user_pod.png[] | User's POD
-|image::images/doc.png[] | Document generated
+|image::images/Arrow.png[] | Information being transmitted.
+|image::images/user.png[] | User of the application.
+|image::images/user_pod.png[] | User's POD.
+|image::images/Message.png[] | Message being sent by the user.
+|image::images/MessageNot.png[] | Notification of the message being sent to the recievers.
+|image::images/doc.png[] | Information being sent to the owner of the conversation POD.
 |===
