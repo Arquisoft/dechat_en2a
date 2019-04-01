@@ -13,6 +13,7 @@
     order: 1;
     padding: 1.250em 0.000em 2.500em 1.875em;
     border-right: 1px solid #222;
+    overflow: auto;
 }
 
 .feedWrapper {
@@ -24,13 +25,14 @@
     font-size: 1.200em;
     flex: 5;
     order: 2;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 1.250em 0.000em 0.000em 1.500em;
 }
 
 .chatFormWrapper {
     height: 3.125em;
     background-color: rgb(20, 96, 236);
+    overflow: hidden;
 }
 
 #scroll-style::-webkit-scrollbar-track
