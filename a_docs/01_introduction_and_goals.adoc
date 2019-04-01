@@ -3,7 +3,7 @@
 
 [role="arc42help"]
 ****
-This is a decentralized Chat Proyect based on Solid in which no central sever is required to run or set up a conversation and all the personal data is stored in your POD.
+This is a decentralized Chat Proyect based on Solid on which no central sever is required to run or set up a conversation and all the personal data is stored in your POD.
 ****
 
 === Requirements Overview

@@ -3,17 +3,21 @@
 
 == Building Block View
 
+We will have a block based view of the application, decomposing into a higher technical view.
+
 .Major view of the system: +
-image::images/05_Major_Scope.png[]
+image::images/05_Major_Scope.png[]  
 
 .Legend
 [options="header",cols="1a,2"]
 |===
 |Item | Meaning 
-|image::images/red_arrow.png[] | Information being transmitted
-|image::images/user.png[] | User
-|image::images/user_pod.png[] | User's POD
+|image::images/Arrow.png[] | Information being transmitted.
+|image::images/user.png[] | User of the application.
+|image::images/user_pod.png[] | User's POD.
 |===
+
+We will begin unveiling the application's parts.
 
 .Message management: +
 image::images/05_level1.png[]
@@ -22,7 +26,7 @@ image::images/05_level1.png[]
 [options="header",cols="1a,2"]
 |===
 |Item | Meaning 
-|image::images/red_arrow.png[] | Information being transmitted
+|image::images/Arrow.png[] | Information being transmitted
 |image::images/user.png[] | User
 |image::images/user_pod.png[] | User's POD
 |image::images/doc.png[] | Document generated
