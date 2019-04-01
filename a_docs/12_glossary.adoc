@@ -20,4 +20,7 @@ Should you happen to be interested in a further reading and understanding, usefu
 | Angular     | JavaScript framework to develop web pages offering the functionality of desktop programs. An example of this could be Google Docs. | https://angularjs.org/[Angular's web page]
 | Travis     | Travis is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub. | https://travis-ci.org/[Travis's web page]
 | Cucumber     | Cucumber is a software tool used for testing other software. It runs automated acceptance tests written in a behavior-driven development style (BDD). | https://cucumber.io/[Cucumber's web page]
+| Docker     | A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings. | https://www.docker.com[Docker's web page]
+| Gherkin     | Gherkin is the language that Cucumber uses to define test cases. It is designed to be non-technical and human readable, and collectively describes use cases relating to a software system. | https://docs.cucumber.io/gherkin/reference/[Gherkin reference]
+| Protractor     | Protractor is an end-to-end test framework for Angular and AngularJS applications. Protractor runs tests against your application running in a real browser, interacting with it as a user would. | https://www.protractortest.org/#/[Protractor's web page]
 |===
