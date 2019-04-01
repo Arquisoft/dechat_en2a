@@ -3,59 +3,57 @@
   text-align: center;
   font-family: 'Roboto', sans-serif;
   color: #666;
-
   position: absolute;
   margin: auto;
   top: 0;
   right: 0;
-  bottom: 100px;
+  bottom: 6.250em;
   left: 0;
-  width: 500px;
-  height: 500px;
+  width: 31.250em;
+  height: 31.250em;
 }
 
 .login-page h1 {
-  font-size: 38px;
+  font-size: 2.375em;
   text-transform: uppercase;
   font-weight: bold;
-  line-height: 50px;
-  letter-spacing: 1.9px;
-  padding-top: 12px;
-  margin-top: 0px;
+  line-height: 3.125em;
+  letter-spacing: 0.119em;
+  padding-top: 0.750em;
+  margin-top: 0.000em;
 }
 
 .login-page h2 {
   color: #666;
-
-  font-size: 16px;
+  font-size: 1.000em;
   font-weight: 500;
-  letter-spacing: 1px;
-  line-height: 21px;
-  margin-top: 48px;
+  letter-spacing: 0.063em;
+  line-height: 1.313em;
+  margin-top: 3.000em;
 }
 
 .login-page .small-link {
-  font-size: 12px;
+  font-size: 0.750em;
   color: #666;
   letter-spacing: 0.75px;
-  line-height: 16px;
+  line-height: 1.000em;
 }
 
 .login-page .registration-link {
-  margin-top: 38px;
+  margin-top: 2.375em;
 }
 
 .login-page .registration-link p {
-  font-size: 16px;
+  font-size: 1.000em;
   color: #666;
-  letter-spacing: 1px;
+  letter-spacing: 0.063em;
 }
 
 .login-page .item-divider {
   box-sizing:border-box;
-  height: 1px;
-  width: 354px;
-  border-bottom: 1px solid #E0E0E0;
+  height: 0.063em;
+  width: 22.125em;
+  border-bottom: 0.063em solid #E0E0E0;
   position: absolute;
-  bottom:-8px; left:-9px;
+  bottom: -0.500em; left: -0.563em;
 }
