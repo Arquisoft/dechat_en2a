@@ -1,6 +1,6 @@
 .mainContent{
     display: flex;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 6.250em);
 }
 
 .userListWrapper {
@@ -8,10 +8,10 @@
     color: #fff;
     display: flex;
     font-family: "Open Sans", sans-serif;
-    font-size: 1.2em;
+    font-size: 1.200em;
     flex: 1;
     order: 1;
-    padding:20px 0px 40px 30px;
+    padding: 1.250em 0.000em 2.500em 1.875em;
     border-right: 1px solid #222;
 }
 
@@ -21,21 +21,21 @@
         linear-gradient(181deg, rgba(100,200,255,0.6), rgba(0, 0, 0, 0.9)),
         url('../../../assets/images/Solid_Pattern.png') center center no-repeat;
     font-family: "Open Sans", sans-serif;
-    font-size: 1.2em;
+    font-size: 1.200em;
     flex: 5;
     order: 2;
     overflow-y: scroll;
-    padding:20px 0px 0px 24px;
+    padding: 1.250em 0.000em 0.000em 1.500em;
 }
 
 .chatFormWrapper {
-    height: 50px;
+    height: 3.125em;
     background-color: rgb(20, 96, 236);
 }
 
 #scroll-style::-webkit-scrollbar-track
 {
-	border-radius: 10px;
+	border-radius: 0.625em;
 	background-color: #F5F5F5;
 }
 

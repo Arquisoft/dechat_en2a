@@ -4,9 +4,9 @@
 }
 
 .registration .header-bar {
-  margin: 0px;
-  height: 44px;
-  width: calc(100% + 16px);
+  margin: 0.000em;
+  height: 2.750em;
+  width: calc(100% + 1.000em);
   background-color: #3D6DEB;
   color: #fff;
   position: absolute;
@@ -18,38 +18,38 @@
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  font-size: 14px;
-  letter-spacing: 1px;
-  line-height: 15px;
+  font-size: 0.875em;
+  letter-spacing: 0.063em;
+  line-height: 0.938em;
 }
 
 .registration .header-text {
-  margin-top:92px;
-  width: 360px;
+  margin-top: 5.750em;
+  width: 22.500em;
   margin-left: auto;
   margin-right: auto;
-  font-size: 14px;
+  font-size: 0.875em;
   color: #666;
 }
 
 .registration .header-text a {
   color: #666;
-  font-size: 12px;
+  font-size: 0.750em;
 }
 
 .registration .provider-card-container {
-  margin-top: 28px;
+  margin-top: 1.750em;
 }
 
 .registration .provider-card {
-  height: 140px;
-  width: 320px;
-  border: 1px solid #DAE0E6;
-  border-radius: 2px;
+  height: 8.750em;
+  width: 21.875em;
+  border: 0.063em solid #DAE0E6;
+  border-radius: 0.125em;
   background-color: #fff;
-  margin: 10px;
+  margin: 0.625em;
   display: inline-block;
-  box-shadow: #DAE0E6 1px 1px 6px;
+  box-shadow: #DAE0E6 0.063em 0.063em 0.375em;
 }
 
 .registration .provider-card a {
@@ -57,22 +57,22 @@
 }
 
 .registration .provider-card .provider-logo {
-  height: 44px;
-  width: 44px;
+  height: 2.750em;
+  width: 2.750em;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 16px;
+  margin-top: 1.000em;
 }
 
 .registration .provider-card h2 {
   color: #656E75;
-  font-size: 18px;
-  margin-top: -2px;
-  letter-spacing: 0.9px;
-  line-height: 24px;
+  font-size: 1.125em;
+  margin-top: -0.125em;
+  letter-spacing: 0.056em;
+  line-height: 1.500em;
 }
 .registration .provider-card p {
   color: #656E75;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 0.750em;
+  line-height: 1.000em;
 }

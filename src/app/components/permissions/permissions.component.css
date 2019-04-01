@@ -1,23 +1,21 @@
 section{
     background-color: #2A2845;
     color: #fff;
-   
     font-family: "Open Sans", sans-serif;
-    font-size: 1.2em;
-    padding:20px 0px 40px 30px;
-    
+    font-size: 1.200em;
+    padding: 1.250em 0.000em 2.500em 1.875em;
 }
 
 h2{
-    padding: 10px;
-    margin:10px;
+    padding: 0.625em;
+    margin: 0.625em;
 }
 
 div{
-    margin:20px;
+    margin:1.250em;
 }
-button{
-    padding: 10px;
-    margin: 10px 0px 0px 120px;
 
+button{
+    padding: 0.625em;
+    margin: 0.625em 0.000em 0.000em 7.500em;
 }
