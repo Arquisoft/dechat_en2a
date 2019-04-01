@@ -1,8 +1,11 @@
 .chatInput{
-    width: 80%;
+    width: 85%;
     border-radius: 0.313em;
-    margin: 0.313em;
-    padding: 0.313em;
+    position: relative;
+    top: 10%;
+    left: 2%;
+    margin: 0.100em;
+    padding: 0.100em;
     font-size: 1.300em;
     font-family: 'Open Sans', sans-serif;
     background-color: #eee;
@@ -17,12 +20,16 @@
 }
 
 .chatButton{
+    position: relative;
+    right: 2%; 
+    left: 3%;
+    top: 10%; 
     min-width: 6.875em;
-    width: 15%;
+    width: 10%;
     border-radius: 0.313em;
     margin: 0.000em;
-    padding: 0.625em;
-    padding: 0.500em 1.500em;
+    padding: 0.325em;
+    padding: 0.300em 1.300em;
     font-size: 1.300em;
     font-family: 'Droid Sans', sans-serif;
     background-color: #2A2845;
