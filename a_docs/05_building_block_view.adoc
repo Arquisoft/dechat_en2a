@@ -3,27 +3,51 @@
 
 == Building Block View
 
+We will have a block based view of the application, decomposing into a higher technical view.
+
 .Major view of the system: +
-image::images/05_Major_Scope.png[]
+image::images/05_Major_Scope.png[]  
 
 .Legend
 [options="header",cols="1a,2"]
 |===
 |Item | Meaning 
-|image::images/red_arrow.png[] | Information being transmitted
-|image::images/user.png[] | User
-|image::images/user_pod.png[] | User's POD
+|image::images/Arrow.png[] | Information being transmitted.
+|image::images/user.png[] | User of the application.
+|image::images/user_pod.png[] | User's POD.
 |===
 
-.Message management: +
-image::images/05_level1.png[]
+We will begin unveiling the application's parts.
+
+.Message/Notification management: +
+image::images/05_level01.png[]
 
 .Legend
 [options="header",cols="1a,2"]
 |===
 |Item | Meaning 
-|image::images/red_arrow.png[] | Information being transmitted
-|image::images/user.png[] | User
-|image::images/user_pod.png[] | User's POD
-|image::images/doc.png[] | Document generated
+|image::images/Arrow.png[] | Information being transmitted.
+|image::images/user.png[] | User of the application.
+|image::images/user_pod.png[] | User's POD.
+|image::images/Message.png[] | Message being sent by the user.
+|image::images/MessageNot.png[] | Notification of the message being sent to the recievers.
+|image::images/doc.png[] | Information being sent to the owner of the conversation POD.
+|image::images/User_app.png[] | Application being used by the user. User interface to communicate with our application.
+|===
+
+.Inside of the application: +
+image::images/05_level02.png[]
+
+.Legend
+[options="header",cols="1a,2"]
+|===
+|Item | Meaning 
+|image::images/Arrow.png[] | Information being transmitted.
+|image::images/user.png[] | User of the application.
+|image::images/user_pod.png[] | User's POD.
+|image::images/Message.png[] | Message being sent by the user.
+|image::images/MessageNot.png[] | Notification of the message being sent to the recievers. Also contains the message.
+|image::images/doc.png[] | Information being sent to the owner of the conversation POD.
+|image::images/User_app.png[] | Application being used by the user. User interface to communicate with our application.
+|image::images/Process.png[] | Process being done inside the application.
 |===

@@ -319,6 +319,9 @@
                                 <div class="sect1">
 <h2 id="section-building-block-view">Building Block View</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>We will have a block based view of the application, decomposing into a higher technical view.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/05_Major_Scope.png" alt="05 Major Scope.png">
@@ -341,10 +344,10 @@
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
 <div class="content">
-<img src="images/red_arrow.png" alt="red arrow.png">
+<img src="images/Arrow.png" alt="Arrow.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information being transmitted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information being transmitted.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
@@ -352,7 +355,7 @@
 <img src="images/user.png" alt="user.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User of the application.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
@@ -360,15 +363,18 @@
 <img src="images/user_pod.png" alt="user pod.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User&#x2019;s POD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User&#x2019;s POD.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>We will begin unveiling the application&#x2019;s parts.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/05_level1.png" alt="05 level1.png">
+<img src="images/05_level01.png" alt="05 level01.png">
 </div>
-<div class="title">Figure 2. Message management:<br></div>
+<div class="title">Figure 2. Message/Notification management:<br></div>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 2. Legend</caption>
@@ -386,10 +392,10 @@
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
 <div class="content">
-<img src="images/red_arrow.png" alt="red arrow.png">
+<img src="images/Arrow.png" alt="Arrow.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information being transmitted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information being transmitted.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
@@ -397,7 +403,7 @@
 <img src="images/user.png" alt="user.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User of the application.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
@@ -405,7 +411,23 @@
 <img src="images/user_pod.png" alt="user pod.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User&#x2019;s POD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User&#x2019;s POD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/Message.png" alt="Message.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message being sent by the user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/MessageNot.png" alt="MessageNot.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notification of the message being sent to the recievers.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div><div class="imageblock">
@@ -413,7 +435,100 @@
 <img src="images/doc.png" alt="doc.png">
 </div>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Document generated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information being sent to the owner of the conversation POD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/User_app.png" alt="User app.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application being used by the user. User interface to communicate with our application.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/05_level02.png" alt="05 level02.png">
+</div>
+<div class="title">Figure 3. Inside of the application:<br></div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Legend</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/Arrow.png" alt="Arrow.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information being transmitted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/user.png" alt="user.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User of the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/user_pod.png" alt="user pod.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User&#x2019;s POD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/Message.png" alt="Message.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message being sent by the user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/MessageNot.png" alt="MessageNot.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notification of the message being sent to the recievers. Also contains the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/doc.png" alt="doc.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information being sent to the owner of the conversation POD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/User_app.png" alt="User app.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application being used by the user. User interface to communicate with our application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="images/Process.png" alt="Process.png">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Process being done inside the application.</p></td>
 </tr>
 </tbody>
 </table>
@@ -461,7 +576,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Building Block View","level":"1.6","depth":1,"next":{"title":"Runtime View","level":"1.7","depth":1,"path":"06_runtime_view.adoc","ref":"06_runtime_view.adoc","articles":[]},"previous":{"title":"Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"05_building_block_view.adoc","mtime":"2019-03-18T00:59:34.499Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-03-18T08:57:04.734Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Building Block View","level":"1.6","depth":1,"next":{"title":"Runtime View","level":"1.7","depth":1,"path":"06_runtime_view.adoc","ref":"06_runtime_view.adoc","articles":[]},"previous":{"title":"Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"05_building_block_view.adoc","mtime":"2019-04-01T10:12:31.712Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-01T10:19:23.838Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
