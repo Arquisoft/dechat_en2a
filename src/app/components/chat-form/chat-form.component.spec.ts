@@ -45,26 +45,6 @@ describe('ChatFormComponent', () => {
         }));
     });
 
-    describe('Notifications daemon', () => {
-        let chatService: ChatService;
-
-        beforeEach(async(() => {
-            chatService = fixture.debugElement.injector.get(ChatService);
-        }));
-
-        it('calls the service start function', async(() => {
-            spyOn(chatService, "startNotificationsDaemon");
-            component.start();
-            expect(chatService.startNotificationsDaemon).toHaveBeenCalledTimes(1);
-        }));
-
-        it('calls the service stop function', () => {
-            spyOn(chatService, "stopNotificationsDaemon");
-            component.stop();
-            expect(chatService.stopNotificationsDaemon).toHaveBeenCalledTimes(1);
-        });
-    });
-
     it('send button should call the send function', () => {
         spyOn(component, "send");
         let button = fixture.debugElement.query(By.css('#send')).nativeElement;
