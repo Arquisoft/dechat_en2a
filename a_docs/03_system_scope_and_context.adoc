@@ -30,7 +30,7 @@ This section shows a representation of the communication partners and stakeholde
 
 Simple diagram representing the business context:
 
-image:images/03_business_context.png[]
+image:images/03_business_context_v2.png[]
 
 .DeChat
 [%header, cols="2, 5, 5"]
