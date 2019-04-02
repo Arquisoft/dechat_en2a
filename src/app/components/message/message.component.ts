@@ -27,7 +27,11 @@ export class MessageComponent implements OnInit {
       chatMessage = new ChatMessage('username', 'Can\'t load', 'http://webid.com');
     }
     this.chatService.getUser().subscribe(user => {
-      this.userName = user.username;
+      if (user !== undefined) { // A better way of solving this
+        this.userName = user.username;
+      } else {
+        this.userName = "MockName";
+      }
     });
     this.messageContent = chatMessage.message;
     this.timeStamp = chatMessage.timeSent;
