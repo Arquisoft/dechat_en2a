@@ -3,22 +3,22 @@
 }
 
 .profile-container h1 {
-  font-size: 24px;
+  font-size: 1.500em;
   color: rgb(20, 96, 236);
   font-weight: bold;
-  line-height: 32px;
-  letter-spacing: 1.2px;
+  line-height: 2.000em;
+  letter-spacing: 0.075em;
   text-align: center;
-  margin-top: 82px;
+  margin-top: 5.125em;
   text-transform: uppercase;
 }
 
 .profile-fields-container {
-  max-width: 740px;
-  min-height: 500px;
+  max-width: 46.250em;
+  min-height: 33.750em;
   margin: 0 auto;
-  border: 1px solid #ccc;
-  box-shadow: #ccc 1px 1px 4px;
+  border: 0.063em solid #ccc;
+  box-shadow: #ccc 0.063em 0.063em 0.250em;
   position: relative;
 }
 
@@ -30,29 +30,29 @@
 }
 
 .profile-fields-container .profile-image-container img {
-  height: 128px;
+  height: 8.000em;
   border-radius: 50%;
   margin-left: auto;
   margin-right:auto;
   position: relative;
-  top:40px;
+  top: 2.500em;
   display: block;
 }
 
 .profile-fields-container i {
-  font-size: 14px;
+  font-size: 0.875em;
   color: #89969F;
-  padding-left: 26px;
-  padding-right: 10px;
-  margin-top: 24px;
+  padding-left: 1.625em;
+  padding-right: 0.625em;
+  margin-top: 1.500em;
 }
 
 .profile-fields-container input[type=text].field-text {
-  height: 12px;
-  width: 280px;
-  border: 1px solid #89969F;
-  border-radius: 4px;
-  padding: 10px;
+  height: 0.750em;
+  width: 17.500em;
+  border: 0.063em solid #89969F;
+  border-radius: 0.250em;
+  padding: 0.625em;
 }
 
 .profile-fields-container input[type=text].field-text::placeholder {
@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   margin-bottom: auto;
-  height: 100px;
+  height: 6.250em;
   flex-direction: column;
   justify-content: flex-end;
 }
@@ -72,7 +72,7 @@
   background-color: rgb(20, 96, 236);
   margin-left: auto;
   margin-right: auto;
-  width: 280px;
+  width: 17.500em;
 }
 
 .profile-save-button:disabled {
@@ -83,11 +83,11 @@
 
 .loading-image {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 3.125em;
 }
 
 .addfriends {
-  margin: 20px;
+  margin: 1.250em;
 }
 
 .addfriends h2 {
@@ -95,5 +95,5 @@
 }
 
 .addfriends input {
-  margin-right: 10px;
+  margin-right: 0.625em;
 }

@@ -8,9 +8,8 @@ import * as fileClient from 'solid-file-client';
 // TODO: Remove any UI interaction from this service
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { NamedNode, uri } from 'src/assets/types/rdflib';
+import { NamedNode } from 'src/assets/types/rdflib';
 import { stringify } from '@angular/core/src/util';
-import { e } from '@angular/core/src/render3';
 
 declare let solid: any;
 declare let $rdf: any;
@@ -688,8 +687,8 @@ export class RdfService {
         console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`);
       }
     });
-
-    this.sendNotifNewConv(otherWebId, chatFolder);  // Commented to avoid spamming the other person while testing
+    this.setPermissions(chatFolder, otherWebId, myWebId);
+    this.sendNotifNewConv(myWebId, chatFolder, otherWebId);  // Commented to avoid spamming the other person while testing
   }
 
   /**
@@ -741,8 +740,8 @@ export class RdfService {
    * @param {string} webId webId of the other person
    * @param {string} chatFolderUri URI of the folder containing the chat
    */
-  async sendNotifNewConv(webId: string, chatFolderUri: string) {
-    const inboxUrl = (await this.getInboxUrl(webId)).value;
+  async sendNotifNewConv(webId: string, chatFolderUri: string, otherWebId: string) {
+    const inboxUrl = (await this.getInboxUrl(otherWebId)).value;
     const notiFile = this.store.sym(inboxUrl + 'dechatnotifications.ttl');
 
     const chatFolderFile = this.store.sym(chatFolderUri);
@@ -822,38 +821,56 @@ export class RdfService {
     */
   }
 
-  /**  WARNING: UNTESTED
-   * Sets the edit permissions on a given URI for a given WebId
+  /**
+   * Adds the edit permissions on a given URI for a given WebId
    * @param {string} resourceUri the URI of the resource we want to grant permissions of
    * @param {string} webId the user that is getting access rights
    */
-  async setPermissions(resourceUri: string, webId: string) {
+  async setPermissions(resourceUri: string, webId: string, ownerWebId: string) {
     const aclUri = resourceUri + '/.acl';
+    const crwUri = aclUri + '#ControlReadWrite';
+    const rUri = aclUri + '#Read';
+    const rwUri = aclUri + '#ReadWrite';
     const aclFile = this.store.sym(aclUri);
-    const file = this.store.sym(resourceUri);
+    const crwFile = this.store.sym(crwUri);
+    const rFile = this.store.sym(rUri);
+    const rwFile = this.store.sym(rwUri);
+    const file = this.store.sym(resourceUri + '/');
     const webIdFile = this.store.sym(webId);
+    const ownerWebIdFile = this.store.sym(ownerWebId);
 
     const ins = [];
 
-    ins.push($rdf.st(webIdFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc()));
-    ins.push($rdf.st(webIdFile, ACL('agent'), webIdFile, aclFile.doc()));
-    ins.push($rdf.st(webIdFile, ACL('accessTo'), file, aclFile.doc()));
-    ins.push($rdf.st(webIdFile, ACL('mode'), ACL('Read'), aclFile.doc()));
-    ins.push($rdf.st(webIdFile, ACL('mode'), ACL('Write'), aclFile.doc()));
+    this.store.add(crwFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc());
+    this.store.add(crwFile, ACL('agent'), ownerWebIdFile, aclFile.doc());
+    this.store.add(crwFile, ACL('accessTo'), file, aclFile.doc());
+    this.store.add(crwFile, ACL('defaultForNew'), file, aclFile.doc());
+    this.store.add(crwFile, ACL('mode'), ACL('Control'), aclFile.doc());
+    this.store.add(crwFile, ACL('mode'), ACL('Read'), aclFile.doc());
+    this.store.add(crwFile, ACL('mode'), ACL('Write'), aclFile.doc());
+
+    this.store.add(rFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc());
+    this.store.add(rFile, ACL('agentClass'), FOAF('Agent'), aclFile.doc());
+    this.store.add(rFile, ACL('accessTo'), file, aclFile.doc());
+    this.store.add(rFile, ACL('defaultForNew'), file, aclFile.doc());
+    this.store.add(rFile, ACL('mode'), ACL('Read'), aclFile.doc());
+
+    this.store.add(rwFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc());
+    this.store.add(rwFile, ACL('agent'), webIdFile, aclFile.doc());
+    this.store.add(rwFile, ACL('accessTo'), file, aclFile.doc());
+    this.store.add(rwFile, ACL('defaultForNew'), file, aclFile.doc());
+    this.store.add(rwFile, ACL('mode'), ACL('Read'), aclFile.doc());
+    this.store.add(rwFile, ACL('mode'), ACL('Write'), aclFile.doc());
 
 
-    await this.updateManager.put(aclFile.doc(), ins, 'text/turtle', function (o, s, c) { });
-    await this.fetcher.load(aclFile.doc());
-    await this.updateManager.update([], ins, (uri, ok, message, response) => {
+    const contents = $rdf.serialize(aclFile.doc(), this.store, aclUri, 'text/turtle');
+    await this.updateManager.put(aclFile.doc(), contents, 'text/turtle', (uri, ok, message, response) => {
       if (ok) {
-        console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
-                        ` CREATED with message [${message}].`);
+        console.log(`File [${this.urlLogFilter(uri)}] PUT with message [${message}].`);
       } else {
-        console.log(`    File [${this.urlLogFilter(resourceUri)}] has permissions [${this.urlLogFilter(aclUri)}]` +
-                        ` FAILED CREATION with message [${message}].`);
+        console.error(`File [${this.urlLogFilter(uri)}] failed PUT with message [${message}].`);
       }
     });
-
   }
 
   /**
@@ -874,12 +891,11 @@ export class RdfService {
     await contentUris.forEach(async element => {
       if (alreadychecked.indexOf(element) === -1) {
         console.log(`    Checking: ${element}`);
-        this.processNotification(element).then(result => {
+        await this.processNotification(element).then(async result => {
           if (result.type !== 'none') {
             processed.push(result);
-            this.deleteNotification(element).then(end => {
-              caller.callbackForNotificationProcessing(result);
-            });
+            this.deleteNotification(element);
+            await caller.callbackForNotificationProcessing(result);
           } else {
             alreadychecked.push(element); // Only save on checked the ones we have not deleted.
           }
@@ -942,7 +958,7 @@ export class RdfService {
     const chatFolderFile = this.store.sym(chatFolder);
     const otherWebIdFile = this.store.sym(otherWebId);
 
-    this.fetcher.load(myCardFile.doc(), {force: true, clearPreviousData: true});
+    await this.fetcher.load(myCardFile.doc(), {force: true, clearPreviousData: true});
 
     const cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherWebIdFile, myCardFile.doc());
 

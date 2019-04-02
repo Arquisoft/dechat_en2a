@@ -3,13 +3,14 @@
 .topnav {
     width: 100%;
     background-color: rgb(20, 96, 236);
-    height: 50px;
+    height: 3.125em;
     color: #fff;
   }
 
   .topnav a {
     text-decoration: none;
     color: inherit;
+    height: 100%;
   }
 
   .topnav a:hover {
@@ -17,8 +18,7 @@
   }
 
   .topnav a:active {
-    background-color: rgba(0,0,0,0.5);
-    box-shadow: inset 0px 0px 15px 6px rgba(0,0,0,0.25);
+    background-color: rgba(0,0,0,0.25);
   }
 
   .topnav a:focus {
@@ -28,46 +28,29 @@
   .topnav .logo {
     display: inline-block;
     font-family: 'Roboto Slab', serif;
-    font-size: 24px;
+    font-size: 1.500em;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 32px;
-    padding-right: 80px;
+    line-height: 90%;
+    padding-right: 5.000em;
     position: relative;
-    top: 0px;
-    left: 28px;
+    top: 0.000em;
+    left: 1.750em;
   }
   
   .topnav .menu-item {
     display: inline-block;
-    font-size: 10px;
-    line-height: 13px;
-    width: 100px;
-    height: 100%;
+    width: 6.250em;
+    margin: auto;
     text-align: center;
+
   }
   
   .topnav .menu-item i {
-    font-size: 24px;
-    margin-top:12px;
-    margin-bottom: 2px;
+    font-size: 2em;
+    margin-top: 0.2em;
   }
   
   .topnav .profile-menu {
     float: right;
-  }
-  
-  .topnav .profile-menu img {
-    display: block;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    margin: 0 auto;
-    margin-top:10px;
-    cursor: pointer;
-  }
-  
-  .loading-image {
-    text-align: center;
-    margin-top: 50px;
   }

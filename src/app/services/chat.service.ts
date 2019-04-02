@@ -23,15 +23,17 @@ export class ChatService {
   constructor(private rdf: RdfService) {
     this.loadUserData().then(() => {
       this.loadFriends();
+      this.checkInbox().then(() => {
+        this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
+      });
       this.startNotificationsDaemon();
-      this.setOther(new User('yerayv3', 'Yeray', 'https://yerayv3.inrupt.net/profile/card#me'));
     });
     // Temporary
     // this.setOther(new User('migarve55', 'Miguel Garnacho Velez', 'https://migarve55.solid.community/profile/card#me'));
 
   }
 
-  async loadUserData() {
+  private async loadUserData() {
     await this.rdf.getSession();
     if (!this.rdf.session) {
       return;
@@ -78,7 +80,6 @@ export class ChatService {
   async deleteMessage(message: ChatMessage) {
     this.rdf.deleteMessage(await this.getCurrentChatUri(this.currentChannelUri), message);
     this.messages.splice(this.messages.indexOf(message), 1);
-    //this.reloadMessages();
   }
 
   getMessages(): Observable<ChatMessage[]> {
@@ -111,7 +112,7 @@ export class ChatService {
     } catch (error) {
       console.log('Chat not initialised, initializing...');
 
-      this.currentChannelUri = this.getNewChannelUri();
+      this.currentChannelUri = this.getChannelUri();
       this.currentChatFileUri = this.getCurrentChatUri(this.currentChannelUri);
       await this.rdf.createStructure(this.currentChatFileUri);
       await this.rdf.createNewChat(this.me.webId, this.other.webId, this.currentChannelUri);
@@ -145,9 +146,8 @@ export class ChatService {
     this.messages.push(msg);
   }
 
-
-  getTimeStamp() {
-    const now = new Date();
+  /* UNUSED
+  getTimeStamp(now: Date) {
     const date = now.getUTCFullYear() + '/' +
       (now.getUTCMonth() + 1) + '/' +
       now.getUTCDate();
@@ -157,8 +157,9 @@ export class ChatService {
 
     return (date + ' ' + time);
   }
+  */
 
-  getCurrentChatUri(channelUri: string) {
+  private getCurrentChatUri(channelUri: string) {
     const now = new Date();
     return channelUri + '/' +
       now.getUTCFullYear() + '/' +
@@ -176,19 +177,22 @@ export class ChatService {
     return username.split('.')[0];
   }
 
-  getNewChannelUri() {
+  private getChannelUri() {
     return this.me.webId.replace('profile/card#me', 'public/' + this.getChannelCode(this.me, this.other));
   }
 
-  getChannelCode(me: User, other: User) {
+  private getChannelCode(me: User, other: User) {
     return me.username + '_' + other.username;
   }
 
-  urlLogFilter(url: string) {
+  private urlLogFilter(url: string) {
     return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
   }
 
   async checkInbox() {
+    if (!this.rdf.session) {
+      return;
+    }
     await this.rdf.checkInbox(this.me.webId, this);
   }
 
@@ -199,6 +203,10 @@ export class ChatService {
     this.interval = setInterval(() => {
       this.checkInbox();
     }, this.inboxDaemonTimer); // Executes checkInbox every 5 seconds
+  }
+
+  stopNotificationsDaemon() {
+    clearInterval(this.interval);
   }
 
   async callbackForNotificationProcessing(notification: Notification) {
@@ -214,17 +222,8 @@ export class ChatService {
         this.addMessage(m);
     }
     if (notification.type === 'LongChat') {
-      this.rdf.addChatToCard(this.me.webId, notification.resourceUri, notification.fromWebId);
-      // Add to my card
+      await this.rdf.addChatToCard(this.me.webId, notification.resourceUri, notification.fromWebId);
     }
-  }
-
-  stopNotificationsDaemon() {
-    clearInterval(this.interval);
-  }
-
-  testSendReference() {
-    this.rdf.addChatToCard(this.me.webId, 'https://josecurioso.inrupt.net/profile/card#me', 'https://josecurioso.inrupt.net/public/chatDePruebas.ttl');
   }
 
 }
