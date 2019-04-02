@@ -1,10 +1,9 @@
-
-
 .topnav {
     width: 100%;
     background-color: rgb(20, 96, 236);
     height: 3.125em;
     color: #fff;
+    overflow: hidden;
   }
 
   .topnav a {

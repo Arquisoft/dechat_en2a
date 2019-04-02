@@ -14,6 +14,7 @@
     padding: 1.250em 0.000em 2.500em 1.875em;
     border-right: 1px solid #222;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .feedWrapper {
@@ -33,10 +34,10 @@
     height: 3.125em;
     background-color: rgb(20, 96, 236);
     overflow: hidden;
+    position: sticky;
 }
 
-#scroll-style::-webkit-scrollbar-track
-{
+#scroll-style::-webkit-scrollbar-track{
 	border-radius: 0.625em;
 	background-color: #F5F5F5;
 }
