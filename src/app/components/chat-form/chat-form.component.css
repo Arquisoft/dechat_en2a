@@ -1,5 +1,5 @@
 .chatInput{
-    width: 85%;
+    width: 81%;
     border-radius: 0.313em;
     position: relative;
     top: 10%;
@@ -25,7 +25,7 @@
     left: 3%;
     top: 10%; 
     min-width: 6.875em;
-    width: 10%;
+    width: 12%;
     border-radius: 0.313em;
     margin: 0.000em;
     padding: 0.325em;
@@ -40,4 +40,12 @@
 
 .chatButton:hover{
     background-color: #444;
+}
+
+.divForm{
+    position: sticky;
+    width: 100%;
+    top: 10%;
+    padding: 0.325em;
+    padding: 0.300em 1.300em;
 }
