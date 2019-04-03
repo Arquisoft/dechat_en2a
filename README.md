@@ -54,6 +54,20 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+### Docker 
+
+Run `docker build --rm -f "Dockerfile" -t dechat_en2a:latest .` to build the container with tag "dechat_en2a:latest".
+
+Run `docker run --rm -d -p 81:81 dechat_en2a:latest` to run in the address configured by docker.
+
+Run `docker tag tag1 tag2` to change the name of the tag
+
+To upload it on https://hub.docker.com/ :
+
+* Enter `docker login` and introduce your credentials.
+
+* Run `docker push nametag` to push it to the docker repository.
+
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
