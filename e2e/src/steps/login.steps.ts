@@ -10,7 +10,7 @@ Before(() => {
     page = new LoginPage();
 });
 
-Given(/^ I open the app and I am not logged in$/, async () => {
+Given(/^I open the app and I am not logged in$/, async () => {
     await page.navigateTo();
 });
 
@@ -18,7 +18,7 @@ When(/^I enter credentials$/, async () => {
     await page.openCombobox();
     await page.selectSolidCommunity();
     await page.pressButtonGo();
-    
+
     await page.fillUpForm();
 });
 

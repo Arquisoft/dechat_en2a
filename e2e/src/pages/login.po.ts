@@ -1,34 +1,34 @@
 import { browser, by, element } from 'protractor';
 
-export class LoginPage{
-    readonly userName = 'mortadelo'
-    readonly password = 'elSupereselnumero1!'
+export class LoginPage {
+    readonly userName = 'mortadelo';
+    readonly password = 'elSupereselnumero1!';
     navigateTo() {
         browser.get('/');
         element(by.className('fas fa-sign-out-alt')).click();
         return browser.get('/');
     }
 
-    openCombobox(){
-        return element(by.partialLinkText('Provider')).click();
+    openCombobox() {
+        return element(by.partialLinkText('DE-CHAT')).click();
     }
 
-    selectSolidCommunity(){
+    selectSolidCommunity() {
         return element(by.partialLinkText('Community')).click();
     }
 
-    pressButtonGo(){
+    pressButtonGo() {
         return element(by.buttonText('GO')).click();
     }
 
-    fillUpForm(){
+    fillUpForm() {
         element(by.id('username')).sendKeys(this.userName);
         element(by.id('password')).sendKeys(this.password);
         element(by.id('login')).click();
-        
+
     }
 
-    getChatInput(){
+    getChatInput() {
         return element(by.className('chatInput ng-pristine ng-valid ng-touched'));
     }
 }
