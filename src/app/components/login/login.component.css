@@ -3,14 +3,14 @@
   text-align: center;
   font-family: 'Roboto', sans-serif;
   color: #666;
-  position: absolute;
   margin: auto;
-  top: 0;
+  margin-top: 4.500em;
   right: 0;
-  bottom: 6.250em;
+  bottom: 3.250em;
   left: 0;
   width: 31.250em;
   height: 31.250em;
+  position: sticky;
 }
 
 .login-page h1 {
@@ -21,6 +21,7 @@
   letter-spacing: 0.119em;
   padding-top: 0.750em;
   margin-top: 0.000em;
+  position: sticky;
 }
 
 .login-page h2 {
@@ -30,6 +31,7 @@
   letter-spacing: 0.063em;
   line-height: 1.313em;
   margin-top: 3.000em;
+  position: sticky;
 }
 
 .login-page .small-link {
@@ -37,16 +39,19 @@
   color: #666;
   letter-spacing: 0.75px;
   line-height: 1.000em;
+  position: sticky;
 }
 
 .login-page .registration-link {
   margin-top: 2.375em;
+  position: sticky;
 }
 
 .login-page .registration-link p {
   font-size: 1.000em;
   color: #666;
   letter-spacing: 0.063em;
+  position: sticky;
 }
 
 .login-page .item-divider {
@@ -54,6 +59,6 @@
   height: 0.063em;
   width: 22.125em;
   border-bottom: 0.063em solid #E0E0E0;
-  position: absolute;
+  position: sticky;
   bottom: -0.500em; left: -0.563em;
 }
