@@ -5,30 +5,37 @@ export class LoginPage {
     readonly password = 'elSupereselnumero1!';
     navigateTo() {
         browser.get('/');
-        element(by.className('fas fa-sign-out-alt')).click();
         return browser.get('/');
     }
 
     openCombobox() {
-        return element(by.partialLinkText('DE-CHAT')).click();
+        return element(by.className('ng-select-container')).click();
     }
 
     selectSolidCommunity() {
-        return element(by.partialLinkText('Community')).click();
+        var comboBox = element(by.className('ng-dropdown-panel login-select ng-select-bottom'));
+        var options = comboBox.findElements(by.tagName('option')).
+        then(function(options) {
+            options[1].click();
+        });
+        //Check it it is the correct option
+        expect(element(by.class('ng-option ng-option-marked')).getText()).toEqual('Solid Community');
     }
 
-    pressButtonGo() {
-        return element(by.buttonText('GO')).click();
+    clickGoButton() {
+        return element(by.id('btn-go')).click();
     }
 
     fillUpForm() {
         element(by.id('username')).sendKeys(this.userName);
         element(by.id('password')).sendKeys(this.password);
-        element(by.id('login')).click();
+    }
 
+    clickLoginButton() {
+        element(by.id('login')).click();
     }
 
     getChatInput() {
-        return element(by.className('chatInput ng-pristine ng-valid ng-touched'));
+        return element(by.className('logo')).getText();
     }
 }
