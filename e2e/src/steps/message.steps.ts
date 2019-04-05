@@ -1,7 +1,6 @@
 import {Before, Given, Then, When } from 'cucumber';
 import { expect } from 'chai';
 import { MessagePage } from '../pages/message.po';
-import { AppPage } from '../pages/app.po';
 
 let page: MessagePage;
 let msg: string = "Hello cucumber can you work pls";
