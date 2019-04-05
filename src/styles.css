@@ -1,20 +1,15 @@
-
-body {
-  margin : 0.000em;
-}
-
 /* You can add global styles to this file, and also import other style files */
 button.wide-button {
-  width: 22.500em;
-  height: 2.500em;
-  border-radius: 0.250em;
+  width: 360px;
+  height: 40px;
+  border-radius: 4px;
   background-color: #3D6DEB;
-  font-size: 0.875em;
+  font-size: 14px;
   color: #fff;
   font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.078em;
-  line-height: 1.000em;
+  letter-spacing: 1.25px;
+  line-height: 16px;
   cursor: pointer;
 }
 
@@ -25,11 +20,11 @@ button.wide-button:disabled {
 }
 
 input[type=text].wide-text {
-  width: 22.500em;
-  height: 2.500em;
-  border-radius: 0.250em;
-  border: 0.063em solid #89969F;
-  font-size: 0.875em;
+  width: 360px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #89969F;
+  font-size: 14px;
   color: #666;
 }
 
@@ -43,33 +38,34 @@ input[type=text].wide-text {
 
 /* This selector is for the actual dropdown container (aka border, arrow, etc) */
 .ng-select.login-select .ng-select-container {
-  border: 0.125em solid #3D6DEB;
+  border: 2px solid #3D6DEB;
 }
 .ng-select.login-select.ng-select-opened>.ng-select-container {
-  border: 0.125em solid #3D6DEB;
-  border-radius: 0.250em;
+  border: 2px solid #3D6DEB;
+  border-radius: 4px;
 }
 
 
 .ng-select.login-select.ng-select-single .ng-select-container {
-  height: 3.000em;
+  height: 48px;
 }
 
 /* This selector is for the dropdown selection items container */
 .ng-select.login-select .ng-dropdown-panel {
-  margin-left: -11.250em;
-  margin-top: -0.125em;
-  border: 0.125em solid #3D6DEB;
+  margin-left: -180px;
+  margin-top: -2px;
+  border: 2px solid #3D6DEB;
 }
 
 .ng-select.login-select .ng-input input {
   font-family: 'Roboto', sans-serif;
-  font-size: 1.000em;
+  font-size: 16px;
   color: #666;
-  margin-top: 0.375em;
+  margin-top: 6px;
 }
 
 /* This selector is for the dropdown arrow */
 .ng-select.login-select .ng-arrow:after {
 
 }
+

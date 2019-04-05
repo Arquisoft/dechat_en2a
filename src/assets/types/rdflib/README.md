@@ -1,18 +1,16 @@
-# rdflib
-
-## Installation
+# Installation
 > `npm install --save @types/rdflib`
 
-## Summary
-This package contains type definitions for [rdflib](https://github.com/linkeddata/rdflib.js).
+# Summary
+This package contains type definitions for rdflib (https://github.com/linkeddata/rdflib.js).
 
-## Details
-Files were exported from [here](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/rdflib).
+# Details
+Files were exported from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/rdflib
 
 Additional Details
-*   Last updated: Sat, 04 Aug 2018 00:56:31 GMT
-*   Dependencies: none
-*   Global values: none
+ * Last updated: Sat, 04 Aug 2018 00:56:31 GMT
+ * Dependencies: none
+ * Global values: none
 
-## Credits
+# Credits
 These definitions were written by Cénotélie <https://github.com/cenotelie>.

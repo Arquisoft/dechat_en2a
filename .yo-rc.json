@@ -1,0 +1,7 @@
+{
+  "@inrupt/generator-solid-angular": {
+    "promptValues": {
+      "name": "testingApp"
+    }
+  }
+}

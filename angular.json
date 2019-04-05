@@ -84,18 +84,10 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [
-              "node_modules/solid-auth-client/dist-lib/solid-auth-client.bundle.js",
-              "src/assets/js/libs/rdflib.min.js"
-            ],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ],
-            "codeCoverageExclude": [
-                "src/app/services/auth.guard.service.ts",
-                "src/app/services/rdf.service.ts",
-                "src/app/services/solid.auth.service.ts"
             ]
           }
         },

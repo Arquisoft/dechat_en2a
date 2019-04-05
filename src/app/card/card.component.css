@@ -1,0 +1,143 @@
+.profile-container {
+  font-family: 'Roboto', sans-serif;
+}
+
+.profile-container h1 {
+  font-size: 24px;
+  color: #7C55FB;
+  font-weight: bold;
+  line-height: 32px;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-top: 82px;
+  text-transform: uppercase;
+}
+
+.profile-fields-container {
+  max-width: 740px;
+  min-height: 500px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  box-shadow: #ccc 1px 1px 4px;
+  position: relative;
+}
+
+.profile-fields-container .profile-image-container {
+  height: 200px;
+  width: 100%;
+  background-size: cover !important;
+  background: url('/assets/images/Solid_Pattern.png');
+}
+
+.profile-fields-container .profile-image-container img {
+  height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right:auto;
+  position: relative;
+  top:40px;
+  display: block;
+}
+
+.profile-fields-container i {
+  font-size: 14px;
+  color: #89969F;
+  padding-left: 26px;
+  padding-right: 10px;
+  margin-top: 24px;
+}
+
+.profile-fields-container input[type=text].field-text {
+  height: 12px;
+  width: 280px;
+  border: 1px solid #89969F;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.profile-fields-container input[type=text].field-text::placeholder {
+  color: rgba(102,102,102,0.2);
+}
+
+.profile-save-button-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: auto;
+  height: 100px;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.profile-save-button {
+  background-color: #7C55FB;
+  margin-left: auto;
+  margin-right: auto;
+  width: 280px;
+}
+
+.profile-save-button:disabled {
+  background-color: #F0EEEB;
+  border-color: #F0EEEB;
+  cursor: not-allowed;
+}
+
+.topnav {
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  background-color: #7C4DFF;
+  height: 50px;
+  color: #fff;
+}
+
+.topnav .logo {
+  display: inline-block;
+  font-family: 'Roboto Slab', serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 32px;
+  padding-right: 80px;
+  position: relative;
+  top: -8px;
+  left: 28px;
+}
+
+.topnav .menu-item {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 13px;
+  width: 100px;
+  height: 100%;
+  text-align: center;
+}
+
+.topnav .menu-item i {
+  font-size: 24px;
+  margin-top:8px;
+  margin-bottom: 2px;
+}
+
+.topnav .profile-menu {
+  float: right;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0,0,0,0.25);
+}
+
+.topnav .profile-menu img {
+  display: block;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top:10px;
+  cursor: pointer;
+}
+
+.loading-image {
+  text-align: center;
+  margin-top: 50px;
+}
