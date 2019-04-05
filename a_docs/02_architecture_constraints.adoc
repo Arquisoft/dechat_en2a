@@ -35,8 +35,10 @@ In this section the constraints put on the project are shown subdivided in the t
 |=========================================================
 ||Constraint |Background/motivation
 
-|C1 | Documentation | Usage of the arc42 templates written in AsciiDoc.
+|C1 | Documentation | Usage of the arc42 templates written in AsciiDoc and document each of the services functions in the code itself.
 
 |C2 | Language | All the project resources be it code, comments, documentation or GitHub issues must be written in english.
+
+|C3 | Linting | We will use TSLint (VS Code) or the equivalent in each IDE for linting the code acording to conventions.
 
 |=========================================================

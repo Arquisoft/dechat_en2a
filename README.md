@@ -36,7 +36,9 @@ You can also use `npm run docs:watch` if you want a local version served on `htt
 
 ### Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server or alternatively `npm run start:https` for an https version with self signed certificates. <br>
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. <br>
+*Note: the https version is provided so it can be accessed from a different machine and not trigger problems when logging in.*
 
 ### Code scaffolding
 
@@ -62,11 +64,12 @@ Run `docker run --rm -d -p 81:81 dechat_en2a:latest` to run in the address confi
 
 Run `docker tag tag1 tag2` to change the name of the tag
 
-To upload it on https://hub.docker.com/ :
+To upload it on [here](https://hub.docker.com/) :
 
-* Enter `docker login` and introduce your credentials.
+  * Enter `docker login` and introduce your credentials.
+  * Run `docker push nametag` to push it to the docker repository.
 
-* Run `docker push nametag` to push it to the docker repository.
+*Note: currently there is a problem with deploying the container (related to the https issue mentioned before).*
 
 ### Further help
 
