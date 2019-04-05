@@ -92,6 +92,10 @@ include::11_technical_risks.adoc[]
 include::12_glossary.adoc[]
 
 <<<<
+// 13. Project Structure
+include::13_project_structure.adoc[]
+
+<<<<
 // About
 include::about-arc42.adoc[]
 

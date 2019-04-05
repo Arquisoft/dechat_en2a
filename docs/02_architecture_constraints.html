@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Architecture Constraints · GitBook</title>
+        <title>2. Architecture Constraints · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -94,7 +94,7 @@
                 <a href="./">
             
                     
-                    Introduction
+                    0. Introduction
             
                 </a>
             
@@ -107,7 +107,7 @@
                 <a href="01_introduction_and_goals.html">
             
                     
-                    Introduction and Goals
+                    1. Introduction and Goals
             
                 </a>
             
@@ -120,7 +120,7 @@
                 <a href="02_architecture_constraints.html">
             
                     
-                    Architecture Constraints
+                    2. Architecture Constraints
             
                 </a>
             
@@ -133,7 +133,7 @@
                 <a href="03_system_scope_and_context.html">
             
                     
-                    Context and scope
+                    3. Context and scope
             
                 </a>
             
@@ -146,7 +146,7 @@
                 <a href="04_solution_strategy.html">
             
                     
-                    Solution Strategy
+                    4. Solution Strategy
             
                 </a>
             
@@ -159,7 +159,7 @@
                 <a href="05_building_block_view.html">
             
                     
-                    Building Block View
+                    5. Building Block View
             
                 </a>
             
@@ -172,7 +172,7 @@
                 <a href="06_runtime_view.html">
             
                     
-                    Runtime View
+                    6. Runtime View
             
                 </a>
             
@@ -185,7 +185,7 @@
                 <a href="07_deployment_view.html">
             
                     
-                    Deployment View
+                    7. Deployment View
             
                 </a>
             
@@ -198,7 +198,7 @@
                 <a href="08_concepts.html">
             
                     
-                    Crosscutting Concepts
+                    8. Crosscutting Concepts
             
                 </a>
             
@@ -211,7 +211,7 @@
                 <a href="09_design_decisions.html">
             
                     
-                    Architecture Decisions
+                    9. Architecture Decisions
             
                 </a>
             
@@ -224,7 +224,7 @@
                 <a href="10_quality_scenarios.html">
             
                     
-                    Quality Requirements
+                    10. Quality Requirements
             
                 </a>
             
@@ -237,7 +237,7 @@
                 <a href="11_technical_risks.html">
             
                     
-                    Risks and Technical Debt
+                    11. Risks and Technical Debt
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="12_glossary.html">
             
                     
-                    Glossary
+                    12. Glossary
             
                 </a>
             
@@ -258,12 +258,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="about-arc42.html">
+        <li class="chapter " data-level="1.14" data-path="13_project_structure.html">
+            
+                <a href="13_project_structure.html">
+            
+                    
+                    13. Project Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="about-arc42.html">
             
                 <a href="about-arc42.html">
             
                     
-                    About arc42
+                    14. About arc42
             
                 </a>
             
@@ -301,7 +314,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Architecture Constraints</a>
+        <a href="." >2. Architecture Constraints</a>
     </h1>
 </div>
 
@@ -399,12 +412,17 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">C1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Usage of the arc42 templates written in AsciiDoc.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usage of the arc42 templates written in AsciiDoc and document each of the services functions in the code itself.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">C2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Language</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All the project resources be it code, comments, documentation or GitHub issues must be written in english.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">C3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We will use TSLint (VS Code) or the equivalent in each IDE for linting the code acording to conventions.</p></td>
 </tr>
 </tbody>
 </table>
@@ -436,12 +454,12 @@
 
             
                 
-                <a href="01_introduction_and_goals.html" class="navigation navigation-prev " aria-label="Previous page: Introduction and Goals">
+                <a href="01_introduction_and_goals.html" class="navigation navigation-prev " aria-label="Previous page: 1. Introduction and Goals">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="03_system_scope_and_context.html" class="navigation navigation-next " aria-label="Next page: Context and scope">
+                <a href="03_system_scope_and_context.html" class="navigation navigation-next " aria-label="Next page: 3. Context and scope">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -452,7 +470,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Architecture Constraints","level":"1.3","depth":1,"next":{"title":"Context and scope","level":"1.4","depth":1,"path":"03_system_scope_and_context.adoc","ref":"03_system_scope_and_context.adoc","articles":[]},"previous":{"title":"Introduction and Goals","level":"1.2","depth":1,"path":"01_introduction_and_goals.adoc","ref":"01_introduction_and_goals.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"02_architecture_constraints.adoc","mtime":"2019-03-18T09:48:49.747Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-01T10:19:23.838Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2. Architecture Constraints","level":"1.3","depth":1,"next":{"title":"3. Context and scope","level":"1.4","depth":1,"path":"03_system_scope_and_context.adoc","ref":"03_system_scope_and_context.adoc","articles":[]},"previous":{"title":"1. Introduction and Goals","level":"1.2","depth":1,"path":"01_introduction_and_goals.adoc","ref":"01_introduction_and_goals.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"02_architecture_constraints.adoc","mtime":"2019-04-05T15:25:02.940Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-05T16:54:44.769Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
