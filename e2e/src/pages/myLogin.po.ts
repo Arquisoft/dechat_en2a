@@ -1,7 +1,9 @@
 import {browser, by, element, until} from 'protractor';
 import elementsLocated = until.elementsLocated;
+
 const userName1 = 'mortadelo';
 const password1 = 'elSupereselnumero1!';
+
 export class MyLoginPo {
 
 

@@ -1,10 +1,20 @@
 import { browser, by, element } from 'protractor';
 
 export class LoginPage {
-    readonly userName = 'mortadelo';
-    readonly password = 'elSupereselnumero1!';
+    //readonly userName = 'mortadelo';
+    //readonly password = 'elSupereselnumero1!';
+
+    userName: string;
+    password: string;
+
+    constructor(name: string, pass: string){
+        this.userName = name;
+        this.password = pass;
+    }
+
     navigateTo() {
         browser.get('/');
+        element(by.className('fas fa-sign-out-alt')).click();
         return browser.get('/');
     }
 
@@ -13,6 +23,7 @@ export class LoginPage {
     }
 
     selectSolidCommunity() {
+        this.openCombobox();
         var comboBox = element(by.className('ng-dropdown-panel login-select ng-select-bottom'));
         var options = comboBox.findElements(by.tagName('option')).
         then(function(options) {
@@ -20,7 +31,9 @@ export class LoginPage {
         });
         //Check it it is the correct option
         expect(element(by.class('ng-option ng-option-marked')).getText()).toEqual('Solid Community');
+        this.clickGoButton();
     }
+
 
     clickGoButton() {
         return element(by.id('btn-go')).click();
@@ -29,6 +42,7 @@ export class LoginPage {
     fillUpForm() {
         element(by.id('username')).sendKeys(this.userName);
         element(by.id('password')).sendKeys(this.password);
+        this.clickLoginButton();
     }
 
     clickLoginButton() {

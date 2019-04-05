@@ -3,22 +3,23 @@ import { expect } from 'chai';
 
 import { AppPage } from '../pages/app.po';
 import {ProfilePage} from '../pages/profile.po';
-import {MyLoginPo} from '../pages/myLogin.po';
+import {LoginPage} from '../pages/login.po';
 
 let page: AppPage;
 let profilePage: ProfilePage;
-let loginPage: MyLoginPo;
+let login: LoginPage;
 
 
 Before(() => {
     page = new AppPage();
     profilePage = new ProfilePage();
-    loginPage = new MyLoginPo();
+    login = new LoginPage('mortadelo', 'elSupereselnumero1');
 });
 
 Given(/^I open the app and I am logged in$/, async () => {
     await page.navigateTo();
-    await loginPage.fillform();
+    await login.selectSolidCommunity();
+    await login.fillUpForm();
 });
 
 When(/^I navigate to the profile page$/, async () => {
