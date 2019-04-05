@@ -7,12 +7,19 @@ export class MessagePage {
     login() {
         browser.get('/');
         element(by.css('.login-select')).click();
-        //element(by.css('???')).click(); Get the provider
+        element(by.xpath('(//div[@class="provider"])[2]')).click();
         element(by.css('#btn-go')).click();
+        //this.waitForLoginPage(); //times out
         element(by.css('#username')).sendKeys(this.userName);
         element(by.css('#password')).sendKeys(this.password);
         element(by.css('#login')).click();
         return browser.get('/chat');
+    }
+
+    waitForLoginPage() {
+        return browser.wait(() => {
+            browser.isElementPresent(by.css('#username'));
+        });
     }
 
     writeMessage(msg: string) {
