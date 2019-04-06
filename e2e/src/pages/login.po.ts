@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ExpectedConditions } from 'protractor';
 
 export class LoginPage {
     //readonly userName = 'mortadelo';
@@ -6,10 +6,12 @@ export class LoginPage {
 
     userName = 'mortadelo';
     password = 'elSupereselnumero1!';
+    ec = ExpectedConditions;
 
     constructor(name?: string, pass?: string){
         this.userName = name;
         this.password = pass;
+        browser.ignoreSynchronization = true;
     }
 
     navigateTo() {
@@ -19,8 +21,8 @@ export class LoginPage {
     }
 
     private openCombobox() {
-        //return element(by.className('ng-select-container')).click();
-        return element(by.xpath('/html/body/app-root/div/app-login/div/div[2]/ng-select/div')).click();
+        browser.wait(this.ec.visibilityOf(element(by.css('h1'))), 5000);
+        return element(by.className('ng-select-container')).click();
     }
 
     selectSolidCommunity() {
@@ -36,19 +38,20 @@ export class LoginPage {
     }
 
 
-    private clickGoButton() {
-        return element(by.id('btn-go')).click();
+    private async clickGoButton() {
+        return await element(by.id('btn-go')).click();
     }
 
     fillUpForm() {
-        var form = element(by.className('form-group'))
-        form.findElement(by.name('username')).sendKeys(this.userName);
-        element(by.id('password')).sendKeys(this.password);
+        element(by.xpath('//*[@id="username"]'))
+        .sendKeys(this.userName);
+        element(by.xpath('//*[@id="password"]'))
+        .sendKeys(this.password);
         this.clickLoginButton();
     }
 
-    private clickLoginButton() {
-        element(by.id('login')).click();
+    private async clickLoginButton() {
+        await element(by.id('login')).click();
     }
 
     getChatInput() {
