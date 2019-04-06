@@ -18,7 +18,7 @@ export class LoginPage {
         return browser.get('/');
     }
 
-    openCombobox() {
+    private openCombobox() {
         return element(by.className('ng-select-container')).click();
     }
 
@@ -35,7 +35,7 @@ export class LoginPage {
     }
 
 
-    clickGoButton() {
+    private clickGoButton() {
         return element(by.id('btn-go')).click();
     }
 
@@ -45,7 +45,7 @@ export class LoginPage {
         this.clickLoginButton();
     }
 
-    clickLoginButton() {
+    private clickLoginButton() {
         element(by.id('login')).click();
     }
 
