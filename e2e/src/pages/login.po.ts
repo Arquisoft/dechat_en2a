@@ -19,7 +19,8 @@ export class LoginPage {
     }
 
     private openCombobox() {
-        return element(by.className('ng-select-container')).click();
+        //return element(by.className('ng-select-container')).click();
+        return element(by.xpath('/html/body/app-root/div/app-login/div/div[2]/ng-select/div')).click();
     }
 
     selectSolidCommunity() {
@@ -40,7 +41,8 @@ export class LoginPage {
     }
 
     fillUpForm() {
-        element(by.id('username')).sendKeys(this.userName);
+        var form = element(by.className('form-group'))
+        form.findElement(by.name('username')).sendKeys(this.userName);
         element(by.id('password')).sendKeys(this.password);
         this.clickLoginButton();
     }

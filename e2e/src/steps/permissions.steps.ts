@@ -13,10 +13,6 @@ Before(() => {
     permissionsPage = new PermissionsPage();
 });
 
-Given(/^I open the app and I am not logged in$/, async () => {
-    await page.navigateTo();
-});
-
 When(/^I navigate to the permissions page$/, async () => {
     await permissionsPage.navigateTo();
 });

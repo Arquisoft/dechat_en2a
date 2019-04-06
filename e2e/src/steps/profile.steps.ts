@@ -16,12 +16,6 @@ Before(() => {
     login = new LoginPage();
 });
 
-Given(/^I open the app and I am logged in$/, async () => {
-    await page.navigateTo();
-    await login.selectSolidCommunity();
-    await login.fillUpForm();
-});
-
 When(/^I navigate to the profile page$/, async () => {
     await profilePage.navigateTo();
 

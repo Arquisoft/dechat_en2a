@@ -13,12 +13,6 @@ Before(() => {
     chatPage = new ChatPage();
 });
 
-Given(/^I open the app and I am log in$/, async () => {
-    await page.navigateTo();
-    await page.selectSolidCommunity();
-   
-});
-
 When(/^I succesfully introduce my data and register$/, async () => {
     await page.fillUpForm();
 });
