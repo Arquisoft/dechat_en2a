@@ -13,7 +13,7 @@ let login: LoginPage;
 Before(() => {
     page = new AppPage();
     profilePage = new ProfilePage();
-    login = new LoginPage('mortadelo', 'elSupereselnumero1');
+    login = new LoginPage();
 });
 
 Given(/^I open the app and I am logged in$/, async () => {

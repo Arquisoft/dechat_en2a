@@ -7,7 +7,7 @@ let page: LoginPage;
 const welcomeMsg = 'DE-CHAT';
 
 Before(() => {
-    page = new LoginPage('mortadelo', 'elSupereselnumero1');
+    page = new LoginPage();
 });
 
 Given(/^I open the app and I am not logged in$/, async () => {

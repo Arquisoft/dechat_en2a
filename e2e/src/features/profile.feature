@@ -4,4 +4,4 @@ Feature: Go to profile
   Scenario: Home Page and Profile Page
     Given I open the app and I am logged in
     When I navigate to the profile page
-    Then I should see the profile´s components
+    Then I should see the profile´s page components

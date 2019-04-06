@@ -4,10 +4,10 @@ export class LoginPage {
     //readonly userName = 'mortadelo';
     //readonly password = 'elSupereselnumero1!';
 
-    userName: string;
-    password: string;
+    userName = 'mortadelo';
+    password = 'elSupereselnumero1!';
 
-    constructor(name: string, pass: string){
+    constructor(name?: string, pass?: string){
         this.userName = name;
         this.password = pass;
     }
