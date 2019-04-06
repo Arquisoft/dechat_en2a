@@ -9,7 +9,7 @@ Before(() => {
     page = new MessagePage();
 });
 
-Given(/^I am logged in$/, async () => {
+Given(/^I am logged in$/, {timeout: 10000}, async () => {
     await page.login();
 });
 
@@ -18,6 +18,6 @@ When(/^I send a message$/, async () => {
     await page.clickSend();
 });
 
-Then(/^I can see the new message$/, async () => {
+Then(/^I can see the new message$/, {timeout: 5000}, async () => {
     expect(await page.getMessageText()).to.equal(msg);
 });
