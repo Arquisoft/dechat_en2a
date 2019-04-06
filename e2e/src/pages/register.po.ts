@@ -9,11 +9,12 @@ export class RegisterPage {
         return element(by.css('#btn-register')).click();
     }
 
-    selectInrupt() {
-        return element(by.xpath('(//div/a[@class="provider-register"])[1]')).click();
+    selectSC() {
+        return element(by.xpath('(//div/a[@class="provider-register"])[2]')).click()
+        .then(() => browser.sleep(1000));
     }
 
     getRegisterText(){
-        return element(by.xpath('//div[@class="header-bar"]/p')).getText();
+        return browser.driver.findElement(by.tagName('h1')).getText();
     }
 }

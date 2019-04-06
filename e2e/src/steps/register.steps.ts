@@ -14,9 +14,9 @@ Given(/^I am not logged in$/, async () => {
 
 When(/^I try to register$/, async () => {
     await page.clickRegister();
-    //await page.selectInrupt(); //Doesnt look like protractor can work on non-angular sites
+    await page.selectSC(); 
 });
 
 Then(/^I see the register page$/, async () => {
-    expect(await page.getRegisterText()).to.equal("Select Solid Identity Provider");
+    expect(await page.getRegisterText()).to.equal("Welcome to the Solid Prototype");
 });
