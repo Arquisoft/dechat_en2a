@@ -8,18 +8,11 @@ export class MessagePage {
         browser.get('/');
         element(by.css('.login-select')).click();
         element(by.xpath('(//div[@class="provider"])[2]')).click();
-        element(by.css('#btn-go')).click();
-        //this.waitForLoginPage(); //times out
-        element(by.css('#username')).sendKeys(this.userName);
-        element(by.css('#password')).sendKeys(this.password);
-        element(by.css('#login')).click();
+        element(by.css('#btn-go')).click().then(() => browser.sleep(1000));
+        browser.driver.findElement(by.id('username')).sendKeys(this.userName);
+        browser.driver.findElement(by.id('password')).sendKeys(this.password);
+        browser.driver.findElement(by.id('login')).click();
         return browser.get('/chat');
-    }
-
-    waitForLoginPage() {
-        return browser.wait(() => {
-            browser.isElementPresent(by.css('#username'));
-        });
     }
 
     writeMessage(msg: string) {
@@ -27,10 +20,10 @@ export class MessagePage {
     }
 
     clickSend() {
-        element(by.css('.chatButton')).click();
+        element(by.id('send')).click();//.then(() => browser.sleep(1000));
     }
 
     getMessageText() {
-        return element(by.css('.messageContent')).getText();
+        return browser.driver.findElement(by.css('.messageContent')).getText();
     }
 }
