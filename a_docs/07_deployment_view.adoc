@@ -3,4 +3,6 @@
 
 == Deployment View
 
-*TO-DO*
+The deployment view is very simple due to it is a decentralized web application.
+It only manages the communication between users of the app, all the information is stored in pods outsourcing this part to SOLID.
+The hardware cannot be specified, since it depends of the users and Solid.
