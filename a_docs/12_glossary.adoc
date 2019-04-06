@@ -20,4 +20,6 @@ Should you happen to be interested in a further reading and understanding, usefu
 | Angular     | JavaScript framework to develop web pages offering the functionality of desktop programs. An example of this could be Google Docs. | https://angularjs.org/[Angular's web page]
 | Travis     | Travis is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub. | https://travis-ci.org/[Travis's web page]
 | Cucumber     | Cucumber is a software tool used for testing other software. It runs automated acceptance tests written in a behavior-driven development style (BDD). | https://cucumber.io/[Cucumber's web page]
+| Jasmine     |  Unit test framework, used to test low level features of the application. | https://jasmine.github.io/[Jasmine's documentation]
+| Karma | Tool to run the tests written with Jasmine. | https://karma-runner.github.io/[Karma's web page]
 |===
