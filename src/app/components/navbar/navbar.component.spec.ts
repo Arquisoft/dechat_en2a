@@ -12,8 +12,8 @@ describe('NavbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NavbarComponent ],
-      imports: [ RouterTestingModule , ToastrModule.forRoot() ]//,
-      //providers: [ AuthService ]
+      imports: [ RouterTestingModule , ToastrModule.forRoot() ]
+      // providers: [ AuthService ]
     })
     .compileComponents();
   }));

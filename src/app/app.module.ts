@@ -15,8 +15,6 @@ import { MessageComponent } from './components/message/message.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FriendItemComponent } from './components/friend-item/friend-item.component';
 import { FriendListComponent } from './components/friend-list/friend-list.component';
-import { TestingComponent } from './components/testing/testing.component';
-import { PermissionsComponent } from './components/permissions/permissions.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
@@ -51,19 +49,12 @@ const routes: Routes = [
     component: ChatComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'settings',
-    component: TestingComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'register',
     component: RegisterComponent
-  },
-  {
-    path: 'permissions',
-    component: PermissionsComponent
   }
+
 ];
 
 @NgModule({
@@ -79,9 +70,7 @@ const routes: Routes = [
     MessageComponent,
     NavbarComponent,
     FriendItemComponent,
-    FriendListComponent,
-    TestingComponent,
-    PermissionsComponent
+    FriendListComponent
   ],
   imports: [
     BrowserModule,

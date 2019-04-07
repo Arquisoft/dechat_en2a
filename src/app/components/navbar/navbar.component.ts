@@ -9,13 +9,13 @@ import { SolidSession } from '../../models/solid-session.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  
+
   user: Observable<SolidSession>;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-   
+
   }
 
   logout() {
