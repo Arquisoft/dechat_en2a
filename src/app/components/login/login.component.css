@@ -57,7 +57,6 @@
   color: #666;
   letter-spacing: 0.75px;
   line-height: 1.000em;
-  border-bottom: 2em;
   position: sticky;
 }
 
@@ -77,7 +76,6 @@
   box-sizing:border-box;
   height: 0.063em;
   width: 22.125em;
-  border-bottom: 0.063em solid #E0E0E0;
   position: sticky;
   bottom: -0.500em; left: -0.563em;
 }
