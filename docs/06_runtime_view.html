@@ -333,22 +333,37 @@
 <h2 id="section-runtime-view">Runtime View</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section will offer a view of the system at runtime, representing the flow in time of the different interactions between the building blocks of our system.</p>
+<p>This section will offer a view of the system at runtime in different scenarios, representing the flow in time of the various interactions between the building blocks of our system.</p>
 </div>
 <div class="paragraph">
 <p>First of all, in a one-to-one text message scenario, the user that wishes to send a message would type into the DeChat application.</p>
 </div>
 <div class="paragraph">
-<p>The application would then store the new messages in the user&#x2019;s personal storage, namely his/her POD. It would also send the data to the receiver&#x2019;s user inbox and a notification that someone has sent a message.</p>
+<p>The application would then store the new messages in the user&#x2019;s personal storage, namely his/her POD (creating and configuring its permissions if a storage for the chat does not exist yet). It would also send the data to the receiver&#x2019;s user inbox and a notification that someone has sent a message.</p>
 </div>
 <div class="paragraph">
-<p>The receiver user would check the application for new messages, so it would read the inbox and load the conversation in order to show it to the user. The receiver user would read the messages and the process would be finished.</p>
+<p>The application of the receiver would be constantly checking the inbox for notifications (*) until it finds the notification of a new message. Then, the application would read the message from the receiver&#x2019;s inbox and show it.</p>
 </div>
 <div class="paragraph">
-<p>Here is a sequence diagram representing the runtime process:</p>
+<p>The receiver would then be able to read the messages and the process would be finished.</p>
+</div>
+<div class="sect2">
+<h3 id="_when_the_chat_already_exists">When the chat already exists:</h3>
+<div class="paragraph">
+<p>Here is a sequence diagram representing the runtime process of sending a message to an already existing chat:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/06_runtime_view.png" alt="06 runtime view.png"></span></p>
+<p><span class="image"><img src="images/06_runtime_view_01.png" alt="06 runtime view 01.png"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_creating_a_new_chat">When creating a new chat:</h3>
+<div class="paragraph">
+<p>This sequence diagram represents the process of creating a new chat:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/06_runtime_view_02.png" alt="06 runtime view 02.png"></span></p>
+</div>
 </div>
 </div>
 </div>
@@ -394,7 +409,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"6. Runtime View","level":"1.7","depth":1,"next":{"title":"7. Deployment View","level":"1.8","depth":1,"path":"07_deployment_view.adoc","ref":"07_deployment_view.adoc","articles":[]},"previous":{"title":"5. Building Block View","level":"1.6","depth":1,"path":"05_building_block_view.adoc","ref":"05_building_block_view.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"06_runtime_view.adoc","mtime":"2019-03-23T10:11:11.444Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-07T10:18:43.246Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6. Runtime View","level":"1.7","depth":1,"next":{"title":"7. Deployment View","level":"1.8","depth":1,"path":"07_deployment_view.adoc","ref":"07_deployment_view.adoc","articles":[]},"previous":{"title":"5. Building Block View","level":"1.6","depth":1,"path":"05_building_block_view.adoc","ref":"05_building_block_view.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"06_runtime_view.adoc","mtime":"2019-04-07T19:43:35.983Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-07T19:44:17.982Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -402,6 +417,10 @@
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
