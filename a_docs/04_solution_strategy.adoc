@@ -4,5 +4,9 @@
 
 [role="arc42help"]
 ****
-During our allotted four months of development time we plan to build our decentralized chat application through an agile style of development, allowing for an iterative methodology with time to consider testing and improvements in functionality, aesthetics, and security. Through weekly meetings in designated laboratory sessions as well as additional meetings called as the team sees fit, we will be able to meet and collaborate in person as well as over the internet through GitHub and WhatsApp. As the application's development progresses and a functional prototype is developed, we will draw upon each individual team member's personal strengths (security, back end logic, UI design, etc) to push the project into a release stage.
+During our allotted four months of development time we plan to build our decentralized chat application through an agile style of development, allowing for an iterative methodology with time to consider testing and improvements in functionality, aesthetics, and security. Through weekly meetings in designated laboratory sessions as well as additional meetings called as the team sees fit, we will be able to meet and collaborate in person as well as over the internet through GitHub and WhatsApp. 
+
+As the application's development progresses and a functional prototype is developed, we will draw upon each individual team member's personal strengths (security, back end logic, UI design, etc) to push the project into a release stage.
+
+In order to ensure in a measurable manner that our application is functioning correctly, we will write and deploy tests to evaluate certain features. These tests will be completed using the Cucumber tool for software testing.
 ****
