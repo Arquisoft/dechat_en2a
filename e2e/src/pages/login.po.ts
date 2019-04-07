@@ -27,22 +27,17 @@ export class LoginPage {
 
     selectSolidCommunity() {
         this.openCombobox();
-        var comboBox = element(by.className('ng-dropdown-panel login-select ng-select-bottom'));
-        var options = comboBox.findElements(by.tagName('option')).
-        then(function(options) {
-            options[1].click();
-        });
-        //Check it it is the correct option
-        expect(element(by.class('ng-option ng-option-marked')).getText()).toEqual('Solid Community');
+        element(by.cssContainingText('.ng-option', 'Solid Community')).click();
         this.clickGoButton();
     }
 
 
-    private async clickGoButton() {
-        return await element(by.id('btn-go')).click();
+    private clickGoButton() {
+        return element(by.id('btn-go')).click();
     }
 
     fillUpForm() {
+        browser.wait(this.ec.visibilityOf(element(by.css('h4'))));
         element(by.xpath('//*[@id="username"]'))
         .sendKeys(this.userName);
         element(by.xpath('//*[@id="password"]'))
