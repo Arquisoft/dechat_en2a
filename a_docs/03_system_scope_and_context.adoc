@@ -1,32 +1,25 @@
 [[section-system-scope-and-context]]
-== System Scope and Context
+= System Scope and Context
 
 
-[role="arc42help"]
-**** 
-.What are the goals of the system?
+== What are the goals of the system?
 
-The main idea of this project is to create a decentralised chat, in other words, creating a plamtform independent of someone or something that stores the data of the users. This concept focuses on the idea of nobody obtaining or taking advantage of the information that they manage, the users must take control of who is allowed to use and see their data and where it is stored.
+The main idea of this project is to create a decentralised chat, in other words, we are creating an application capable of conecting to SOLID and allow their users to communicate between them. In order to be a decentralised chat we use SOLID's pods. The whole idea is using our application
+as a point where you can access your data stored in SOLID and manage it in order to send messages and other data to other users. Our application is completely transparent to the user and SOLID as we don't store any user informatio, we just allow them to send it. Also our applicatio is completely compatible with the
+existing SOLID chat avaible making our application also capable of interact with the orginal chat available on the platform.
 
-As software engineers we must contribute to create a platform that fulfils this axiom. The communication between users is done via pods, a sort of personal folder where the users can store the data they want, then they can select using the SOLID platform who can access that data and then the platform allows the other users access that data, we can consider that the platform acts as a keyring and each user lends their own keys, these keys grant access to the data to certain user/s.
-
-Our main goal is to allow this communication process posible. In order to do so, we must use some sort of secure communication system and adapt it to the point it can be usable. We also must take into account other systems that may interact with the platform such as other storage systems such as image hosting services.
-
-.Use case
+=== Use case
 
 image:images/03_CaseOfUse.png[]
       
-As we can see our application validates the permissions of the receiver to show the data to the receiver and after that check, if passed then the data is displayed.
+The communication is done through the user's pods. Everytime a user sends a mesage it is communicated to his/her pod and then that change is notifiyed to the other user De-chat, that is when the read of the pod is done. As we can see all the data is stored safely on the pods and can be
+deleared at any time by the user.
 
-****
+
+== Business Context
+
 
 This section shows a representation of the communication partners and stakeholders in our system, offering a graphic view of the business and technical context of it and specifying its external interfaces.
-
-
-=== Business Context
-
-[role="arc42help"]
-****
 
 Simple diagram representing the business context:
 
@@ -44,13 +37,10 @@ image:images/03_business_context_v2.png[]
 |Receiver|Received messages (from DeChat)|None
 |===
 
-****
 
-=== Technical Context
 
-[role="arc42help"]
-****
+== Technical Context
 
-*At this stage of the project we can't describe the technical context, this page will be modified in another moment.*
+For this application we are using a bunch of techlogies, such as SOLID, Angular, TypeScript ... The idea is building with these resources a working application that allows SOLID users to communicate between then, for this purpose we use WebRTC to send the messages. We also use SOLID authentication
+services and some other libraries in order manage the pods for reading and writing the data there. Algular framework is used for simplicity as it is a one page application. 
 
-****
