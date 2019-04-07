@@ -6,7 +6,6 @@ import { ChatPage } from '../pages/chat.po';
 
 let page: LoginPage;
 let chatPage: ChatPage;
-const message = 'Write message here...';
 
 Before(() => {
     page = new LoginPage();
@@ -18,5 +17,5 @@ When(/^I succesfully introduce my data and register$/, async () => {
 });
 
 Then(/^I should see the chat window$/, async () => {
-    expect(await chatPage.getProof()).to.equal(message);
+    expect(await chatPage.getProof());
 });

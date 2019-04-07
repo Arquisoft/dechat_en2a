@@ -11,8 +11,8 @@ export class ChatPage {
 
     getProof() {
         browser.wait(this.ec.visibilityOf(element(by.className('logo'))));
-        return element(by.xpath('/html/body/app-root/div/app-chatroom/div[2]/app-chat-form'))
-        .getText();
+        element(by.className('logo'));
+        return element(by.className('userListWrapper')).isDisplayed();
     }
 
 }

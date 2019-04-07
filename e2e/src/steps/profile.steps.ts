@@ -3,17 +3,14 @@ import { expect } from 'chai';
 
 import { AppPage } from '../pages/app.po';
 import {ProfilePage} from '../pages/profile.po';
-import {LoginPage} from '../pages/login.po';
 
 let page: AppPage;
 let profilePage: ProfilePage;
-let login: LoginPage;
 
 
 Before(() => {
     page = new AppPage();
     profilePage = new ProfilePage();
-    login = new LoginPage();
 });
 
 When(/^I navigate to the profile page$/, async () => {
@@ -21,6 +18,6 @@ When(/^I navigate to the profile page$/, async () => {
 
 });
 
-Then(/^I should see the profile´s components$/, async () => {
+Then(/^I should see the profile´s page components$/, async () => {
     expect(await profilePage.getH1()).to.equal('Profile');
 });

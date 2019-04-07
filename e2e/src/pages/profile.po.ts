@@ -1,13 +1,11 @@
-import { browser, by, element, ExpectedConditions } from 'protractor';
+import { browser, by, element, WebDriver } from 'protractor';
 
 export class ProfilePage {
 
-    ec = ExpectedConditions;
-
     navigateTo() {
         browser.ignoreSynchronization = true;
-        browser.wait(this.ec.visibilityOf(element(by.className('chatHeaderWrapper'))));
-        element(by.xpath('a[starts-with(@href, \'/profile\')]')).click();
+        var profile = element(by.xpath('/html/body/app-root/div/div/app-navbar/div/div/a[2]'));
+        browser.actions().mouseMove(profile).click();
         return browser.get('/profile');
     }
 
