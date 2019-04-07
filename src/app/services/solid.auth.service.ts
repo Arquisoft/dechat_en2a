@@ -3,21 +3,15 @@ import { Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
 import { RdfService } from './rdf.service';
 import { SolidProvider } from '../models/solid-provider.model';
+
 declare let solid: any;
 
-interface SolidSession {
-  accessToken: string;
-  clientId: string;
-  idToken: string;
-  sessionKey: string;
-  webId: string;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  session: Observable<SolidSession>;
+  session;
   fechInit = {
     method: 'PATCH',
     headers: {
