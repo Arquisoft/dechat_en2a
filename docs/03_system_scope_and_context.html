@@ -329,35 +329,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div class="sect1">
-<h2 id="section-system-scope-and-context">System Scope and Context</h2>
+                                <h1 id="section-system-scope-and-context">System Scope and Context</h1>
+<div class="sect1">
+<h2 id="_what_are_the_goals_of_the_system">What are the goals of the system?</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
-<p>The main idea of this project is to create a decentralised chat, in other words, creating a plamtform independent of someone or something that stores the data of the users. This concept focuses on the idea of nobody obtaining or taking advantage of the information that they manage, the users must take control of who is allowed to use and see their data and where it is stored.</p>
+<p>The main idea of this project is to create a decentralised chat, in other words, we are creating an application capable of conecting to SOLID and allow their users to communicate between them. In order to be a decentralised chat we use SOLID&#x2019;s pods. The whole idea is using our application
+as a point where you can access your data stored in SOLID and manage it in order to send messages and other data to other users. Our application is completely transparent to the user and SOLID as we don&#x2019;t store any user informatio, we just allow them to send it. Also our applicatio is completely compatible with the
+existing SOLID chat avaible making our application also capable of interact with the orginal chat available on the platform.</p>
 </div>
-<div class="paragraph">
-<p>As software engineers we must contribute to create a platform that fulfils this axiom. The communication between users is done via pods, a sort of personal folder where the users can store the data they want, then they can select using the SOLID platform who can access that data and then the platform allows the other users access that data, we can consider that the platform acts as a keyring and each user lends their own keys, these keys grant access to the data to certain user/s.</p>
-</div>
-<div class="paragraph">
-<p>Our main goal is to allow this communication process posible. In order to do so, we must use some sort of secure communication system and adapt it to the point it can be usable. We also must take into account other systems that may interact with the platform such as other storage systems such as image hosting services.</p>
-</div>
+<div class="sect2">
+<h3 id="_use_case">Use case</h3>
 <div class="paragraph">
 <p><span class="image"><img src="images/03_CaseOfUse.png" alt="03 CaseOfUse.png"></span></p>
 </div>
 <div class="paragraph">
-<p>As we can see our application validates the permissions of the receiver to show the data to the receiver and after that check, if passed then the data is displayed.</p>
+<p>The communication is done through the user&#x2019;s pods. Everytime a user sends a mesage it is communicated to his/her pod and then that change is notifiyed to the other user De-chat, that is when the read of the pod is done. As we can see all the data is stored safely on the pods and can be
+deleared at any time by the user.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_business_context">Business Context</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>This section shows a representation of the communication partners and stakeholders in our system, offering a graphic view of the business and technical context of it and specifying its external interfaces.</p>
 </div>
-<div class="sect2">
-<h3 id="_business_context">Business Context</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
 <p>Simple diagram representing the business context:</p>
 </div>
@@ -413,16 +411,12 @@
 </table>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_technical_context">Technical Context</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
+<div class="sect1">
+<h2 id="_technical_context">Technical Context</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>At this stage of the project we can&#x2019;t describe the technical context, this page will be modified in another moment.</strong></p>
-</div>
-</div>
-</div>
+<p>For this application we are using a bunch of techlogies, such as SOLID, Angular, TypeScript &#x2026;&#x200B; The idea is building with these resources a working application that allows SOLID users to communicate between then, for this purpose we use WebRTC to send the messages. We also use SOLID authentication
+services and some other libraries in order manage the pods for reading and writing the data there. Algular framework is used for simplicity as it is a one page application.</p>
 </div>
 </div>
 </div>
@@ -468,7 +462,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. Context and scope","level":"1.4","depth":1,"next":{"title":"4. Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"previous":{"title":"2. Architecture Constraints","level":"1.3","depth":1,"path":"02_architecture_constraints.adoc","ref":"02_architecture_constraints.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"03_system_scope_and_context.adoc","mtime":"2019-04-05T15:15:51.719Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-07T10:18:43.246Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. Context and scope","level":"1.4","depth":1,"next":{"title":"4. Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"previous":{"title":"2. Architecture Constraints","level":"1.3","depth":1,"path":"02_architecture_constraints.adoc","ref":"02_architecture_constraints.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"03_system_scope_and_context.adoc","mtime":"2019-04-07T19:43:35.980Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-07T19:44:17.982Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -476,6 +470,10 @@
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
