@@ -13,11 +13,18 @@ Given(/^I am logged in$/, {timeout: 10000}, async () => {
     await page.login();
 });
 
-When(/^I send a message$/, async () => {
+When(/^I select a friend$/, async () => {
+    await page.selectFriend();
+});
+
+When(/^I write a message$/, async () => {
     await page.writeMessage(msg);
+});
+
+When(/^I click send$/, async () => {
     await page.clickSend();
 });
 
-Then(/^I can see the new message$/, {timeout: 5000}, async () => {
+Then(/^I can see the new message$/, async () => {
     expect(await page.getMessageText()).to.equal(msg);
 });

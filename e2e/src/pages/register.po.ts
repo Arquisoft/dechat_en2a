@@ -1,16 +1,20 @@
 import { browser, by, element } from 'protractor';
 
 export class RegisterPage {
-    goToHomePage() {
-        return browser.get('/');
+    clickDc() {
+        element(by.css('.profile-menu')).click().then(() => browser.sleep(1000));
     }
 
-    clickRegister(){
-        return element(by.css('#btn-register')).click();
+    goToHomePage() {
+        browser.get('/');
+    }
+
+    clickRegister() {
+        element(by.css('#btn-register')).click();
     }
 
     selectSC() {
-        return element(by.xpath('(//div/a[@class="provider-register"])[2]')).click()
+        element(by.xpath('(//div/a[@class="provider-register"])[2]')).click()
         .then(() => browser.sleep(1000));
     }
 

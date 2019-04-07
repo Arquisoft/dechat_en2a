@@ -15,12 +15,16 @@ export class MessagePage {
         return browser.get('/chat');
     }
 
+    selectFriend() {
+        element(by.tagName('app-friend-item')).click();
+    }
+
     writeMessage(msg: string) {
         element(by.css('.chatInput')).sendKeys(msg);
     }
 
     clickSend() {
-        element(by.id('send')).click();//.then(() => browser.sleep(1000));
+        browser.driver.findElement(by.id('send')).click();
     }
 
     getMessageText() {
