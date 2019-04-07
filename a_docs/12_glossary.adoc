@@ -22,4 +22,14 @@ Should you happen to be interested in a further reading and understanding, usefu
 | Cucumber     | Cucumber is a software tool used for testing other software. It runs automated acceptance tests written in a behavior-driven development style (BDD). | https://cucumber.io/[Cucumber's web page]
 | Jasmine     |  Unit test framework, used to test low level features of the application. | https://jasmine.github.io/[Jasmine's documentation]
 | Karma | Tool to run the tests written with Jasmine. | https://karma-runner.github.io/[Karma's web page]
+| Docker     | A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings. | https://www.docker.com[Docker's web page]
+| Gherkin     | Gherkin is the language that Cucumber uses to define test cases. It is designed to be non-technical and human readable, and collectively describes use cases relating to a software system. | https://docs.cucumber.io/gherkin/reference/[Gherkin reference]
+| Protractor     | Protractor is an end-to-end test framework for Angular and AngularJS applications. Protractor runs tests against your application running in a real browser, interacting with it as a user would. | https://www.protractortest.org/#/[Protractor's web page]
+| Store (rdflib) | A place where all the fetched documents are dumped, it takes car of the graph as it is in its local form and can be queried and edited before sending an update to the remote server using the local data. | 
+| Fetch (rdflib) | The fetcher loads a document given its uri and dumps it in the store to be used, edited and then remotely updated |
+| URI | Uniform Resource Identifier is a string (usually of the URL form) that locates a resource (be it a container, a ttl file or any other kind of file) inside a data store. |
+| Turtle | One of the serialization formats supported by RDF. It is very human-friendly and readable. Other supported formats are: N-Triples, N-Quads, JSON-LD, N3, RDF/XML or RDF/JSON. a| * https://www.w3.org/TR/turtle/[Standard]
+* https://en.wikipedia.org/wiki/Turtle_(syntax)[Wikipedia Page]
+| Angular Router | The router is in charge of the routes in the app, Angular apps are SPA (Single Page Application) and therefore simulate navigation by changing the url when there is only one index.html file. | https://angular.io/guide/router[Router documentation]
+| Promise<Whatever> | An async function can return the 'Promise' that in the future there will be a 'Whatever' in its place but it has not been obtained yet. That way your program can continue passing that Promise around until you actually need the value which is when you wait for the Promise to resolve if it hasn't yet. | https://developers.google.com/web/fundamentals/primers/promises?hl=es-419[Promises basics]
 |===
