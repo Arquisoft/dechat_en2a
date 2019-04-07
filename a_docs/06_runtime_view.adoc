@@ -7,7 +7,8 @@ First of all, in a one-to-one text message scenario, the user that wishes to sen
 
 The application would then store the new messages in the user's personal storage, namely his/her POD. It would also send the data to the receiver's user inbox and a notification that someone has sent a message. 
 
-The receiver user would check the application for new messages, so it would read the inbox and load the conversation in order to show it to the user. The receiver user would read the messages and the process would be finished.
+The application of the receiver would be constantly checking the inbox for notifications (*) until it finds the notification of a new message. Then, the application would read the message from the receiver's inbox and show it. 
+The receiver would then be able to read the messages and the process would be finished.
 
 Here is a sequence diagram representing the runtime process:
 
