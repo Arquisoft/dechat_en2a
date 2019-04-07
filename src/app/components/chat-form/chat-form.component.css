@@ -32,7 +32,7 @@
     padding: 0.300em 1.300em;
     font-size: 1.300em;
     font-family: 'Droid Sans', sans-serif;
-    background-color: #2A2845;
+    background-color: rgb(13, 6, 104);
     color: white;
     transition: 0.2s ease-out;
     min-width: 3.125em;
