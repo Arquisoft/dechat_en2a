@@ -4,7 +4,7 @@
 }
 
 .userListWrapper {
-    background-color: #2A2845;
+    background-color: rgb(45, 72, 107);
     color: #fff;
     display: flex;
     font-family: "Open Sans", sans-serif;
@@ -20,7 +20,7 @@
 .feedWrapper {
     background-color: #fff;
     background: 
-        linear-gradient(181deg, rgba(100,200,255,0.6), rgba(0, 0, 0, 0.9)),
+        linear-gradient(181deg, rgba(40, 180, 255, 0.6), rgba(1, 15, 78, 0.9)),
         url('../../../assets/images/Solid_Pattern.png') center center no-repeat;
     font-family: "Open Sans", sans-serif;
     font-size: 1.200em;
