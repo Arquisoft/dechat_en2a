@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Architecture Decisions · GitBook</title>
+        <title>9. Architecture Decisions · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -94,7 +94,7 @@
                 <a href="./">
             
                     
-                    Introduction
+                    0. Introduction
             
                 </a>
             
@@ -107,7 +107,7 @@
                 <a href="01_introduction_and_goals.html">
             
                     
-                    Introduction and Goals
+                    1. Introduction and Goals
             
                 </a>
             
@@ -120,7 +120,7 @@
                 <a href="02_architecture_constraints.html">
             
                     
-                    Architecture Constraints
+                    2. Architecture Constraints
             
                 </a>
             
@@ -133,7 +133,7 @@
                 <a href="03_system_scope_and_context.html">
             
                     
-                    Context and scope
+                    3. Context and scope
             
                 </a>
             
@@ -146,7 +146,7 @@
                 <a href="04_solution_strategy.html">
             
                     
-                    Solution Strategy
+                    4. Solution Strategy
             
                 </a>
             
@@ -159,7 +159,7 @@
                 <a href="05_building_block_view.html">
             
                     
-                    Building Block View
+                    5. Building Block View
             
                 </a>
             
@@ -172,7 +172,7 @@
                 <a href="06_runtime_view.html">
             
                     
-                    Runtime View
+                    6. Runtime View
             
                 </a>
             
@@ -185,7 +185,7 @@
                 <a href="07_deployment_view.html">
             
                     
-                    Deployment View
+                    7. Deployment View
             
                 </a>
             
@@ -198,7 +198,7 @@
                 <a href="08_concepts.html">
             
                     
-                    Crosscutting Concepts
+                    8. Crosscutting Concepts
             
                 </a>
             
@@ -211,7 +211,7 @@
                 <a href="09_design_decisions.html">
             
                     
-                    Architecture Decisions
+                    9. Architecture Decisions
             
                 </a>
             
@@ -224,7 +224,7 @@
                 <a href="10_quality_scenarios.html">
             
                     
-                    Quality Requirements
+                    10. Quality Requirements
             
                 </a>
             
@@ -237,7 +237,7 @@
                 <a href="11_technical_risks.html">
             
                     
-                    Risks and Technical Debt
+                    11. Risks and Technical Debt
             
                 </a>
             
@@ -250,7 +250,7 @@
                 <a href="12_glossary.html">
             
                     
-                    Glossary
+                    12. Glossary
             
                 </a>
             
@@ -258,12 +258,25 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="about-arc42.html">
+        <li class="chapter " data-level="1.14" data-path="13_project_structure.html">
+            
+                <a href="13_project_structure.html">
+            
+                    
+                    13. Project Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="about-arc42.html">
             
                 <a href="about-arc42.html">
             
                     
-                    About arc42
+                    14. About arc42
             
                 </a>
             
@@ -301,7 +314,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Architecture Decisions</a>
+        <a href="." >9. Architecture Decisions</a>
     </h1>
 </div>
 
@@ -328,7 +341,7 @@
 </div>
 <div class="sect2">
 <h3 id="_development_tools">Development Tools</h3>
-<div class="sidebarblock arc42help">
+<div class="sidebarblock">
 <div class="content">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -367,6 +380,28 @@
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_syntax_for_the_storage">Syntax for the storage</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Storing the conversations is one of the biggest hurdles for this project. At first we were pointing at a JSON file stored in a POD and reading/writing the whole file each acces.
+This not only proved hard and resource-intensive but, after more deliberation, we realised it broke the &quot;data reusability&quot; SOLID principle.
+This prompted us to look for a different way and we ended up with turtle and a structure equivalent to that used by the native data browser.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_namespaces">Namespaces</h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>We mainly use the basic RDF syntax, ical for &quot;LongChat&quot;, meeting for the participants section and flow to manage the message flow. We will also need to use acl for editing permissions on the POD.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
                                 
@@ -395,12 +430,12 @@
 
             
                 
-                <a href="08_concepts.html" class="navigation navigation-prev " aria-label="Previous page: Crosscutting Concepts">
+                <a href="08_concepts.html" class="navigation navigation-prev " aria-label="Previous page: 8. Crosscutting Concepts">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="10_quality_scenarios.html" class="navigation navigation-next " aria-label="Next page: Quality Requirements">
+                <a href="10_quality_scenarios.html" class="navigation navigation-next " aria-label="Next page: 10. Quality Requirements">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -411,7 +446,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Architecture Decisions","level":"1.10","depth":1,"next":{"title":"Quality Requirements","level":"1.11","depth":1,"path":"10_quality_scenarios.adoc","ref":"10_quality_scenarios.adoc","articles":[]},"previous":{"title":"Crosscutting Concepts","level":"1.9","depth":1,"path":"08_concepts.adoc","ref":"08_concepts.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"09_design_decisions.adoc","mtime":"2019-03-18T00:50:28.188Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-07T19:02:49.106Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"9. Architecture Decisions","level":"1.10","depth":1,"next":{"title":"10. Quality Requirements","level":"1.11","depth":1,"path":"10_quality_scenarios.adoc","ref":"10_quality_scenarios.adoc","articles":[]},"previous":{"title":"8. Crosscutting Concepts","level":"1.9","depth":1,"path":"08_concepts.adoc","ref":"08_concepts.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"09_design_decisions.adoc","mtime":"2019-03-23T10:11:11.469Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-07T10:18:43.246Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
