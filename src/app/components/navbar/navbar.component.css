@@ -27,10 +27,10 @@
   .topnav .logo {
     display: inline-block;
     font-family: 'Roboto Slab', serif;
-    font-size: 1.500em;
+    font-size: 1.750em;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 90%;
+    line-height: 100%;
     padding-right: 5.000em;
     position: relative;
     top: 0.000em;
@@ -47,7 +47,7 @@
   
   .topnav .menu-item i {
     font-size: 2em;
-    margin-top: 0.2em;
+    margin-top: 0.25em;
   }
   
   .topnav .profile-menu {

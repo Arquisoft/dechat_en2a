@@ -13,13 +13,20 @@
   position: sticky;
 }
 
+.login-page img {
+  max-width: 100%;
+  height: auto;
+}
+
 .login-page h1 {
-  font-size: 2.375em;
+  font-family: 'Roboto Slab', serif;
+  color: rgb(20, 96, 236);
+  font-size: 4em;
   text-transform: uppercase;
   font-weight: bold;
   line-height: 3.125em;
   letter-spacing: 0.119em;
-  padding-top: 0.750em;
+  padding-top: 0.0em;
   margin-top: 0.000em;
   position: sticky;
 }
@@ -34,16 +41,28 @@
   position: sticky;
 }
 
+.login-page h3 {
+  color: #666;
+  font-size: 1.250em;
+  font-weight: 500;
+  max-width: 100%;
+  letter-spacing: 0.063em;
+  line-height: 1.313em;
+  margin-top: -3.5em;
+  position: sticky;
+}
+
 .login-page .small-link {
   font-size: 0.750em;
   color: #666;
   letter-spacing: 0.75px;
   line-height: 1.000em;
+  border-bottom: 2em;
   position: sticky;
 }
 
 .login-page .registration-link {
-  margin-top: 2.375em;
+  margin-top: 2em;
   position: sticky;
 }
 
