@@ -1,20 +1,20 @@
 [[section-technical-risks]]
-== Risks and Technical Debts
+= Risks and Technical Debts
 
-When we are talking about technical concepts, usually, we are defining a mature system or technology.
-This is not the case of our decentralised chat, we are dealing with some experimental our unfinished projects:
+In this project we are dealing with a bunch of different technologies working alltogther causing some risk and problems:
 
-*SOLID: Solid is a platform in continous change and evolving everyday, this makes developing our application
-quite difficult, we have to manage many concepts and changes quite fast.
+* SOLID: Solid is a platform in continous change and evolving everyday, this makes developing our application
+quite difficult, we have to manage many concepts and changes quite fast. Also the lack of documentation of some moodules add some programming risks and algo makes the task more difficult.
 
-*JavaScript: A web language in which we are not native, most of our group is Java native,we had to
-use JavaScript in order to optimize our compatibility with most of the code available in the SOLID platform.
+* TypeScript: A web language in which we are not native, most of our group is Java native,we had to
+use JavaScript (compatible with TypeScript) in order to optimize our compatibility with most of the code available in the SOLID platform and other modules.
+Using TypeScript also adds the problem that most of the examples that we can try to use are not writen in TS and oly on JavaScript.
 
-*Rdf: Another technology we did not know until we arrived at this project.
+* RDF: Usede for modeling our data, this is a techlogy that we are not familiar with.
 
-*Turtle: A container for RDF data, this allows to focus only on turtle leaving some concepts of rdf forgotten.
+* Turtle: A container for RDF data, this allows to focus only on Turtle but add the risk of not knowing "what is under the hood".
 
-*Angular: Web framework written in TypeSrpit another language that we have not used before this project.
+* Angular: Web framework, this allows a faster development but also adds the complexity of managing the framework.
 
 As we can conclude this project requires many technologies working alltogether to 
-create this chat.
+create this decentralised chat.
