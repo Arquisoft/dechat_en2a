@@ -18,6 +18,8 @@ As the project progresses, it is possible that the tools we initially decide to 
 | TypeScript | TypeScript will act as the primary development language for the project. The language interfaces well with the other tools the team has elected to use, ensuring a simplified and efficient development process.
 | HTML/CSS | With tools provided by Angular 6, HTML and CSS will allow for the development of the design and functionality of the web-application.
 | Arc42 | Arc42 will act as the documentation framework, allowing for ease and organization in the process of continually updating the documentation for the project as it progresses.
+| Turtle | Turtle is a syntax format for expressing data in the RDF data model. This specific syntax allows us to efficiently represent data that will be sent to and from users over the web.
+| Cucumber | Cucumber will serve as our tool for automatically testing our software. Its use is advised by our professors and it serves as a simple and concise framework for creating tests to measurably examine our software.
 |===
 ****
 
