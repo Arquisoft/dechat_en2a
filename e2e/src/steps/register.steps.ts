@@ -9,6 +9,10 @@ Before(() => {
 });
 
 Given(/^I am not logged in$/, async () => {
+    await page.clickDc();
+});
+
+When(/^I go to the home page$/, async () => {
     await page.goToHomePage();
 });
 
