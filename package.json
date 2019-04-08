@@ -12,8 +12,8 @@
     "postinstall": "node patch.js",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "docs:prepare": "npm install -g gitbook-cli && gitbook install",
-    "docs:watch": "gitbook serve ./a_docs ./docs --open",
-    "docs:build": "gitbook build ./a_docs ./docs"
+    "docs:watch": "gitbook serve ./a_docs ./docs/docs --open",
+    "docs:build": "gitbook build ./a_docs ./docs/docs"
   },
   "browser": {
     "crypto": false,
