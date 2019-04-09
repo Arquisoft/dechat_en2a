@@ -13,7 +13,7 @@
 }
 
 .userItem:hover{
-    background-color: #2c3a68;
+    background-color: #0527968e;
     color: #ddd;
     transition: ease-in 0.1s;
 }
@@ -53,6 +53,6 @@
     box-shadow: 0 0.188em 0.375em rgba(0,0,0,0.16), 0 0.188em 0.375em rgba(0,0,0,0.23);
     border-radius: 0.500em;
     transition: ease-in 0.2s;
-    background-color: #1f2f8a;
+    background-color: #0224e4;
     color: #ddd;
 }
