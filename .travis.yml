@@ -18,8 +18,9 @@ install:
 script:
   - npm install
   - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  - npm run e2e
   - npm run docs:prepare
-  - npm run docs:build
+  - npm run ghpages:build
   
 after_success:
   - npm run coverage
