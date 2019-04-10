@@ -13,7 +13,7 @@
     "postinstall": "node patch.js",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "docs:prepare": "npm install -g gitbook-cli && gitbook install",
-    "int:extract": "ng xi18n --output-path locales"
+    "int:extract": "ng xi18n --output-path locales",
     "docs:watch": "gitbook serve ./a_docs ./docs/docs --open",
     "docs:build": "gitbook build ./a_docs ./docs/docs",
     "ghpages:build": "ng build --prod --base-href \"https://arquisoft.github.io/dechat_en2a/\" --output-path \"docs/\" && npm run docs:build"
