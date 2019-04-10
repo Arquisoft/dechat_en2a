@@ -2,11 +2,15 @@
   <div class="topnav">
     <div class="logo">DE-CHAT</div>
     <a class="menu-item" [routerLink]="['/chat']">
-        <i class="far fa-comment"></i>
+        <i class="far fa-comment-dots"></i>
     </a>
 
     <a class="menu-item" [routerLink]="['/profile']">
       <i class="fas fa-user"></i>
+    </a>
+
+    <a class="menu-item profile-menu" href="https://arquisoft.github.io/dechat_en2a/docs">
+      <i class="far fa-file-alt"></i>
     </a>
 
     <a class="menu-item profile-menu" (click)="logout()">
