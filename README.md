@@ -59,6 +59,12 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+### Internationalization
+
+Run `npm run int:extract` to extract from the html(ej: `<h3 i18n="Login description@@LoginDescription"></h3>`) to the xml internationalization file. 
+
+Run `npm run start:es` to use the app in Spanish.
+
 ### Docker 
 
 Run `docker build --rm -f "Dockerfile" -t dechat_en2a:latest .` to build the container with tag "dechat_en2a:latest".
