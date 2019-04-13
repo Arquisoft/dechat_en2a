@@ -26,5 +26,5 @@ When(/^I click send$/, async () => {
 });
 
 Then(/^I can see the new message$/, async () => {
-    page.getMessageText().then((msg) => expect(msg).to.equal(true));
+    page.isMessageSent().then((sent) => expect(sent).to.equal(true));
 });
