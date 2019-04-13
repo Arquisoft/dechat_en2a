@@ -27,7 +27,7 @@ export class MessagePage {
         await browser.driver.findElement(by.id('send')).click();
     }
 
-    async getMessageText() {
+    async isMessageSent() {
         return (await browser.driver.findElement(by.css('.messageContent')).isDisplayed());
     }
 }
