@@ -14,17 +14,17 @@ Given(/^I am logged in$/, {timeout: 10000}, async () => {
 });
 
 When(/^I select a friend$/, async () => {
-    await page.selectFriend();
+    page.selectFriend();
 });
 
 When(/^I write a message$/, async () => {
-    await page.writeMessage(msg);
+    page.writeMessage(msg);
 });
 
 When(/^I click send$/, async () => {
-    await page.clickSend();
+    page.clickSend();
 });
 
 Then(/^I can see the new message$/, async () => {
-    expect(await page.getMessageText()).to.equal(msg);
+    page.getMessageText().then((msg) => expect(msg).to.equal(true));
 });
