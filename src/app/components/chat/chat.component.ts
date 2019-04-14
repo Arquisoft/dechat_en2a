@@ -7,7 +7,7 @@ import { FeedComponent } from '../feed/feed.component';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
-  @ViewChild('scroller', {read: ElementRef}) private feedContainer: any;
+  @ViewChild('scroller', { read: ElementRef }) private feedContainer: any;
 
   constructor() { }
 
@@ -17,12 +17,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.scrollToBottom();
   }
 
- async scrollToBottom() {
-  try {
+  async scrollToBottom() {
     this.feedContainer.nativeElement.scrollTop = this.feedContainer.nativeElement.scrollHeight;
-  } catch (err) {
-    console.log(err);
-   }
-}
+  }
 
 }
