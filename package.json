@@ -16,7 +16,7 @@
     "int:extract": "ng xi18n --output-path locales",
     "docs:watch": "gitbook serve ./a_docs ./docs/docs --open",
     "docs:build": "gitbook build ./a_docs ./docs/docs",
-    "ghpages:build": "ng build --prod --base-href \"https://arquisoft.github.io/dechat_en2a/\" --output-path \"docs/\" && npm run docs:build"
+    "ghpages:build": "ng build --prod --output-path \"docs/\" && npm run docs:build && node patch_build.js"
   },
   "browser": {
     "crypto": false,
@@ -26,11 +26,13 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.2.12",
+    "@angular/cdk": "^7.3.7",
     "@angular/common": "^7.2.12",
     "@angular/compiler": "^7.2.12",
     "@angular/core": "^7.2.12",
     "@angular/forms": "^7.2.12",
     "@angular/http": "^7.2.12",
+    "@angular/material": "^7.3.7",
     "@angular/platform-browser": "^7.2.12",
     "@angular/platform-browser-dynamic": "^7.2.12",
     "@angular/router": "^7.2.12",
@@ -39,6 +41,7 @@
     "@solid/query-ldflex": "^1.1.1",
     "@types/chai": "^4.1.7",
     "@types/cucumber": "^4.0.5",
+    "angular2-multiselect-dropdown": "^4.2.1",
     "chai": "^4.2.0",
     "core-js": "^2.5.4",
     "crypto-js": "^3.1.9-1",
@@ -58,6 +61,7 @@
     "q": "^1.5.1",
     "rdflib": "^0.19.0",
     "rxjs": "^6.4.0",
+    "short-hash": "^1.0.0",
     "solid-auth-client": "^2.2.10",
     "solid-file-client": "^0.4.9",
     "stdio": "^0.2.7",

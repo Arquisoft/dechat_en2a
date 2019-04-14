@@ -1,4 +1,4 @@
-<div class="messageContainer"
+<!--<div class="messageContainer"
     [ngClass]="{'isOwnMessageContainer':isOwnMessage}">
     <div class="messageData"
         [ngClass]="{'isOwnMessageData':isOwnMessage}">
@@ -21,3 +21,35 @@
         </button>
     </div>
 </div>
+-->
+
+<mat-card class="messageContainer" [ngClass]="{'isOwnMessageContainer':isOwnMessage}">
+
+    <ng-template [ngIf]="!isOwnMessage">
+        <mat-card-header class="messageData" [ngClass]="{'isOwnMessageData':isOwnMessage}">
+            <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + chatMessage.maker?.photoUrl + ')'}"></div>
+            <!--<div mat-card-avatar class="example-header-image" [ngStyle]="getImageStyle()"></div>-->
+            <mat-card-title class="sender" [ngClass]="{'isOwnSender':isOwnMessage}">{{ userName }}</mat-card-title>
+            <mat-card-subtitle class="timestamp" [ngClass]="{'isOwnTimestamp':isOwnMessage}">
+                {{ timeStamp | date:'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+    </ng-template>
+
+    <mat-card-content class="messageContent" [ngClass]="{'isOwnMessageContent':isOwnMessage}">
+        <p>
+            {{ messageContent }}
+        </p>
+    </mat-card-content>
+    <ng-template [ngIf]="isOwnMessage">
+        <mat-card-header class="messageData" [ngClass]="{'isOwnMessageData':isOwnMessage}">
+            <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + chatMessage.maker?.photoUrl + ')'}"></div>
+            <!--<div mat-card-avatar class="example-header-image" [ngStyle]="getImageStyle()"></div>-->
+            <mat-card-title class="sender" [ngClass]="{'isOwnSender':isOwnMessage}">{{ userName }}</mat-card-title>
+            <mat-card-subtitle class="timestamp" [ngClass]="{'isOwnTimestamp':isOwnMessage}">
+                {{ timeStamp | date:'medium' }}</mat-card-subtitle>
+            <button mat-icon-button color="warn" id="del" matTooltip="Delete the message" (click)='delete()'>
+                <mat-icon style="font-size: 36px">delete_forever</mat-icon>
+            </button>
+        </mat-card-header>
+    </ng-template>
+</mat-card>

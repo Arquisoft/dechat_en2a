@@ -1,10 +1,14 @@
+import { Chat } from './chat.model';
+import { User } from './user.model';
+
 export class ChatMessage {
 
-    constructor(userName: string, message: string, webId: string, other: string = 'none') {
+    constructor(userName: string, message: string, webId: string, maker: User, chat: Chat = null) {
         this.userName = userName;
         this.message = message;
         this.webId = webId;
-        this.other = other;
+        this.chat = chat;
+        this.maker = maker;
     }
 
     uri?: string;
@@ -12,5 +16,6 @@ export class ChatMessage {
     webId?: string;
     message?: string;
     timeSent?: Date = new Date();
-    other?: string;
+    chat?: Chat;
+    maker?: User;
 }

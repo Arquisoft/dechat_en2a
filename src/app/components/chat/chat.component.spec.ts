@@ -1,14 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatComponent } from './chat.component';
-import { FriendListComponent } from '../friend-list/friend-list.component';
+import { ChatListComponent } from '../chat-list/chat-list.component';
 import { FeedComponent } from '../feed/feed.component';
 import { ChatFormComponent } from '../chat-form/chat-form.component';
 import { ChatService } from '../../services/chat.service';
-import { FriendItemComponent } from '../friend-item/friend-item.component';
+import { ChatItemComponent } from '../chat-item/chat-item.component';
 import { MessageComponent } from '../message/message.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Material
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -16,8 +27,18 @@ describe('ChatComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChatComponent, FriendListComponent, FeedComponent, ChatFormComponent, FriendItemComponent , MessageComponent ],
-      imports: [ FormsModule , ToastrModule.forRoot()  ],
+      declarations: [ ChatComponent, ChatListComponent, FeedComponent, ChatFormComponent, ChatItemComponent , MessageComponent ],
+      imports: [ FormsModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        MatInputModule,
+        MatCardModule,
+        MatDialogModule,
+        AngularMultiSelectModule,
+        BrowserAnimationsModule,
+         ToastrModule.forRoot()  ],
       providers: [ ChatService ]
     })
     .compileComponents();

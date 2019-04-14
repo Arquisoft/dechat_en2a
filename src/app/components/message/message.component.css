@@ -1,19 +1,4 @@
-.messageContainer{
-    display: flex;
-    height: auto;
-    width: 70%;
-    min-width: 25.000em;
-    border-radius: 0.313em;
-    align-items:stretch;
-    background-color: #eee;
-    box-shadow: 0 0.188em 0.375em rgba(0,0,0,0.26), 0 0.188em 0.375em rgba(0,0,0,0.23);
-}
 
-.isOwnMessageContainer{
-    background-color: #01579B;
-    float: right;
-    margin-right: 0.625em;
-}
 
 .messageData{
     flex: 1;
@@ -25,41 +10,41 @@
     display: block;
     color: #222;
     font-weight: bold;
+    font-size: 1.3em;
 }
 
 .isOwnSender{
-    color: #E1F5FE;
+    color: white;
 }
 
 .timestamp {
-    color: #555;
     font-style: italic;
+    font-size: 1.2em;
 }
 
 .isOwnTimestamp{
-    color: #4FC3F7;
+  color: white;
 }
 
 .messageContent{
     height: auto;
-    flex: 9;
-    background-color: #fff;
+    flex: 2;
     padding: 0.625em;
+    font-size: 1.3em;
 }
 
 .isOwnMessageContent{
-    background-color: #E3F2FD;
-    color: #01579B;
+    color: white;
 }
 
 .messageDelete {
-    background-color: #01579B;
+    flex: 3;
     border-top-right-radius: 0.313em;
     border-bottom-right-radius: 0.313em;
+    font-size: 1.3em;
 }
 
 .deleteButton {
-    background-color: #01579B;
     border: none;
     border-top-right-radius: 0.313em;
 }
@@ -69,3 +54,31 @@
     height: 2.000em;
     margin-top: 0.500em;
 }
+
+
+
+
+.messageContainer{
+    display: flex;
+    height: auto;
+    width: 70%;
+    min-width: 25.000em;
+    border-radius: 0.313em;
+    align-items: stretch;
+    background-color: #aee571;
+    margin: 10px;
+}
+
+.isOwnMessageContainer{
+    background-color: #6f74dd;
+    float: right;
+}
+
+.example-card {
+    max-width: 50%;
+    margin: 10px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }

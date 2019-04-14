@@ -4,7 +4,7 @@
 
 .profile-container h1 {
   font-size: 1.500em;
-  color: rgb(20, 96, 236);
+  color: #3f51b5;
   font-weight: bold;
   line-height: 2.000em;
   letter-spacing: 0.075em;
@@ -26,7 +26,7 @@
   height: 200px;
   width: 100%;
   background-size: cover;
-  background: rgb(20, 96, 236);
+  background: #3f51b5;
 }
 
 .profile-fields-container .profile-image-container img {
@@ -69,7 +69,7 @@
 }
 
 .profile-save-button {
-  background-color: rgb(20, 96, 236);
+  background-color: #3f51b5;
   margin-left: auto;
   margin-right: auto;
   width: 17.500em;
@@ -91,7 +91,7 @@
 }
 
 .addfriends h2 {
-  color: rgb(20, 96, 236);
+  color: #3f51b5;
 }
 
 .addfriends input {
