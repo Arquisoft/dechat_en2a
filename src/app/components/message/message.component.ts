@@ -32,15 +32,15 @@ export class MessageComponent implements OnInit {
       if (user !== undefined) { // A better way of solving this
         this.userName = user.username;
       } else {
-        this.userName = "MockName";
+        this.userName = 'MockName';
       }
     });
     if (!chatMessage) {
       this.isOwnMessage = true;
       this.chatMessage = new ChatMessage('username', 'Can\'t load', 'http://webid.com',
         new User('', '', '', 'https://material.angular.io/assets/img/examples/shiba1.jpg'));
-        chatMessage = new ChatMessage('username', 'Can\'t load', 'http://webid.com',
-          new User('', '', '', 'https://material.angular.io/assets/img/examples/shiba1.jpg'));
+      chatMessage = new ChatMessage('username', 'Can\'t load', 'http://webid.com',
+        new User('', '', '', 'https://material.angular.io/assets/img/examples/shiba1.jpg'));
     } else {
       this.isOwnMessage = (this.userName === chatMessage.userName);
     }

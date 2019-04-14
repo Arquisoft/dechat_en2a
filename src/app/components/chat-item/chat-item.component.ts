@@ -11,7 +11,7 @@ export class ChatItemComponent implements OnInit {
 
   @Input() chat: Chat = new Chat('Titulo Pruebas', 'conversacion pruebas', ['http://prueba.user/webid']);
 
-  constructor(private cService: ChatService) {  }
+  constructor(private cService: ChatService) { }
 
   ngOnInit() {
   }

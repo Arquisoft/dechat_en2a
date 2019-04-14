@@ -522,7 +522,6 @@ export class RdfService {
     const chats = await this.getConversations(myWebId);
     chats.forEach(chat => {
       if (chat.others.includes(otherWebId)) {
-        console.log(otherWebId)
         return chat.chatFileUri;
       }
     });
@@ -742,35 +741,35 @@ export class RdfService {
   }
 
 
- /**
-  * Creates the folder structure
-  * @param {string} uri the uri of the chat file that needs the structure
-  */
- async createStructure(uri: string) {
-  console.log('Creating folder structure');
-  const splitted = uri.split('/');
-  const uris = [];
+  /**
+   * Creates the folder structure
+   * @param {string} uri the uri of the chat file that needs the structure
+   */
+  async createStructure(uri: string) {
+    console.log('Creating folder structure');
+    const splitted = uri.split('/');
+    const uris = [];
 
-  let chatfile = false;
+    let chatfile = false;
 
-  await fileClient.readFile(uri).then(body => {
-    console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
-    chatfile = true;
-  }, async err => chatfile = false);
+    await fileClient.readFile(uri).then(body => {
+      console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
+      chatfile = true;
+    }, async err => chatfile = false);
 
 
-  if (!chatfile) {
-    for (let i = 4; i > 0; i--) {
-      uris.push(splitted.slice(0, splitted.length - i).join('/'));
+    if (!chatfile) {
+      for (let i = 4; i > 0; i--) {
+        uris.push(splitted.slice(0, splitted.length - i).join('/'));
+      }
+      for (let i = 0; i < 4; i++) {
+        console.log(`    Creating folder [${this.urlLogFilter(uris[i])}]`);
+        await fileClient.createFolder(uris[i]);
+      }
+      console.log('Folder structure done, proceeding with chat file.');
+      await this.createChatFileForDay(uri);
     }
-    for (let i = 0; i < 4; i++) {
-      console.log(`    Creating folder [${this.urlLogFilter(uris[i])}]`);
-      await fileClient.createFolder(uris[i]);
-    }
-    console.log('Folder structure done, proceeding with chat file.');
-    await this.createChatFileForDay(uri);
   }
-}
 
 
 
@@ -779,56 +778,56 @@ export class RdfService {
   * Creates the folder structure
   * @param {string} uri the uri of the chat file that needs the structure
   */
- /*
-  async createStructure(uri: string) {
-    console.log('Creating folder structure');
-    console.log(uri)
-    const splitted = uri.split('/');
-    const uris = [];
+  /*
+   async createStructure(uri: string) {
+     console.log('Creating folder structure');
+     console.log(uri)
+     const splitted = uri.split('/');
+     const uris = [];
 
-    for (let i = 4; i > 0; i--) {
-      uris.push(splitted.slice(0, splitted.length - i).join('/'));
-    }
-    console.log(uris)
+     for (let i = 4; i > 0; i--) {
+       uris.push(splitted.slice(0, splitted.length - i).join('/'));
+     }
+     console.log(uris)
 
-    fileClient.readFile(uri).then(body => {
-      console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
-    }, async err => {
-      fileClient.readFolder(uris[3]).then(folder => { }, async err => {
-        console.log(`    Creating folder [${this.urlLogFilter(uris[2])}]`);
-        fileClient.createFolder(uris[3]).then(() => {
-          console.log('Folder structure done, proceeding with chat file.');
-        }
-        );
-      });
-      await this.createChatFileForDay(uri)
-    });
+     fileClient.readFile(uri).then(body => {
+       console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
+     }, async err => {
+       fileClient.readFolder(uris[3]).then(folder => { }, async err => {
+         console.log(`    Creating folder [${this.urlLogFilter(uris[2])}]`);
+         fileClient.createFolder(uris[3]).then(() => {
+           console.log('Folder structure done, proceeding with chat file.');
+         }
+         );
+       });
+       await this.createChatFileForDay(uri)
+     });
 
 
     await fileClient.readFolder(uris[0]).then(folder => { }, async err => {
-      console.log(`    Creating folder [${this.urlLogFilter(uris[0])}]`);
-      fileClient.createFolder(uris[0]).then(() => {
-        fileClient.readFolder(uris[1]).then(folder => { }, async err => {
-          console.log(`    Creating folder [${this.urlLogFilter(uris[1])}]`);
-          fileClient.createFolder(uris[1]).then(() => {
-            fileClient.readFolder(uris[2]).then(folder => { }, async err => {
-              console.log(`    Creating folder [${this.urlLogFilter(uris[2])}]`);
-              fileClient.createFolder(uris[2]).then(() => {
-                console.log('Folder structure done, proceeding with chat file.');
-                fileClient.readFile(uri).then(body => {
-                  console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
-                }, async err => await this.createChatFileForDay(uri));
-              }
-              );
-            });
-          }
-          );
-        });
-      }
-      );
-    });
-  }
-*/
+       console.log(`    Creating folder [${this.urlLogFilter(uris[0])}]`);
+       fileClient.createFolder(uris[0]).then(() => {
+         fileClient.readFolder(uris[1]).then(folder => { }, async err => {
+           console.log(`    Creating folder [${this.urlLogFilter(uris[1])}]`);
+           fileClient.createFolder(uris[1]).then(() => {
+             fileClient.readFolder(uris[2]).then(folder => { }, async err => {
+               console.log(`    Creating folder [${this.urlLogFilter(uris[2])}]`);
+               fileClient.createFolder(uris[2]).then(() => {
+                 console.log('Folder structure done, proceeding with chat file.');
+                 fileClient.readFile(uri).then(body => {
+                   console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
+                 }, async err => await this.createChatFileForDay(uri));
+               }
+               );
+             });
+           }
+           );
+         });
+       }
+       );
+     });
+   }
+ */
 
 
 
@@ -865,8 +864,8 @@ export class RdfService {
     ins.push($rdf.st(chatFolderFile, FLOW('participant'), meWebIdFile, notiFile.doc()));
     otherWebIds.forEach(e => {
       if (e !== otherWebId) {
-        const otherWebId = this.store.sym(e);
-        ins.push($rdf.st(chatFolderFile, FLOW('participant'), otherWebId, notiFile.doc()));
+        const oWebId = this.store.sym(e);
+        ins.push($rdf.st(chatFolderFile, FLOW('participant'), oWebId, notiFile.doc()));
       }
     });
     console.log(ins);
@@ -1051,7 +1050,8 @@ export class RdfService {
             if (content.length > 0) {
               const participants = await this.store.match(null, FLOW('participant'), null, doc.doc());
               const titles = await this.store.match(null, DCEL('title'), null, doc.doc());
-              notification = new ChatNotification('LongChat', titles[0].object.value, content[0].subject.value, participants.map(e => e.object.value));
+              notification = new ChatNotification('LongChat', titles[0].object.value, content[0].subject.value,
+                participants.map(e => e.object.value));
             } else {
               content = await this.store.match(null, NONE('DeletedMessage'), null, doc.doc());
               if (content.length > 0) {

@@ -43,7 +43,8 @@ export class ChatService {
     }
     const name = (await this.rdf.getName(this.rdf.session.webId));
     const picUrl = (await this.rdf.getPicture(this.rdf.session.webId));
-    this.me = new User(this.getUsernameFromWebID(this.rdf.session.webId), name ? name.value : 'NoName', this.rdf.session.webId, picUrl ? picUrl.value : 'https://material.angular.io/assets/img/examples/shiba1.jpg');
+    this.me = new User(this.getUsernameFromWebID(this.rdf.session.webId), name ? name.value : 'NoName',
+      this.rdf.session.webId, picUrl ? picUrl.value : 'https://material.angular.io/assets/img/examples/shiba1.jpg');
   }
 
   /* DEPRECATED
@@ -112,7 +113,8 @@ export class ChatService {
     this.rdf.getFriends().then(res => res.map(e => e.value).forEach(async webId => {
       const name = (await this.rdf.getName(webId));
       const picUrl = (await this.rdf.getPicture(webId));
-      this.friends.push(new User(this.getUsernameFromWebID(webId), name ? name.value : 'NoName', webId, picUrl ? picUrl.value : 'https://material.angular.io/assets/img/examples/shiba1.jpg'));
+      this.friends.push(new User(this.getUsernameFromWebID(webId), name ? name.value : 'NoName',
+        webId, picUrl ? picUrl.value : 'https://material.angular.io/assets/img/examples/shiba1.jpg'));
     }));
   }
 
@@ -161,13 +163,13 @@ export class ChatService {
 
   private async loadMessages() {
     console.log(`Getting messages from file [${this.urlLogFilter(this.currentChatFileUri)}]` +
-                ` in channel [${this.urlLogFilter(this.currentChat.chatFileUri)}]`);
+      ` in channel [${this.urlLogFilter(this.currentChat.chatFileUri)}]`);
     this.rdf.getMessageUrisForFile(this.currentChatFileUri, this.currentChat.chatFileUri).then(res => {
       res.forEach(async el => {
         const maker = await this.rdf.getMessageMaker(el.value, this.currentChatFileUri);
         const m = new ChatMessage(this.getUsernameFromWebID(maker),
-                                  await this.rdf.getMessageContent(el.value, this.currentChatFileUri),
-                                  maker, await this.getUserByWebId(maker));
+          await this.rdf.getMessageContent(el.value, this.currentChatFileUri),
+          maker, await this.getUserByWebId(maker));
         m.uri = el.value;
         m.timeSent = await this.rdf.getMessageDate(el.value, this.currentChatFileUri);
         this.addMessage(m);
@@ -184,7 +186,7 @@ export class ChatService {
         return this.friends[i];
       }
     }
-    return new User('', '', '', 'https://material.angular.io/assets/img/examples/shiba1.jpg')
+    return new User('', '', '', 'https://material.angular.io/assets/img/examples/shiba1.jpg');
   }
 
   private addMessage(msg: ChatMessage) {
@@ -249,21 +251,21 @@ export class ChatService {
     console.log('Notification callback executed:');
     console.log(notification);
     if (notification instanceof NewMessageNotification) {
-      const localNoti = <NewMessageNotification> notification;
+      const localNoti = <NewMessageNotification>notification;
       const maker = await this.rdf.getMessageMaker(localNoti.messageUri, this.currentChatFileUri);
-        const m = new ChatMessage(this.getUsernameFromWebID(maker),
-                                  await this.rdf.getMessageContent(localNoti.messageUri, this.currentChatFileUri),
-                                  maker, this.getUserByWebId(maker));
-        m.uri = localNoti.messageUri;
-        m.timeSent = await this.rdf.getMessageDate(localNoti.messageUri, this.currentChatFileUri);
-        this.addMessage(m);
+      const m = new ChatMessage(this.getUsernameFromWebID(maker),
+        await this.rdf.getMessageContent(localNoti.messageUri, this.currentChatFileUri),
+        maker, this.getUserByWebId(maker));
+      m.uri = localNoti.messageUri;
+      m.timeSent = await this.rdf.getMessageDate(localNoti.messageUri, this.currentChatFileUri);
+      this.addMessage(m);
     }
     if (notification instanceof DeletedMessageNotification) {
-      const localNoti = <DeletedMessageNotification> notification;
-        this.deleteMessageFromUri(localNoti.messageUri);
+      const localNoti = <DeletedMessageNotification>notification;
+      this.deleteMessageFromUri(localNoti.messageUri);
     }
     if (notification instanceof ChatNotification) {
-      const localNoti = <ChatNotification> notification;
+      const localNoti = <ChatNotification>notification;
       this.rdf.addChatToCard(this.me.webId, localNoti.participants, localNoti.chatUri);
       this.addConversation(new Chat(localNoti.chatName, localNoti.chatUri, localNoti.participants));
     }
