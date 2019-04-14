@@ -1,0 +1,12 @@
+.container-sidenav-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.new-coversation-button {
+    margin: 10px;
+    align-self: center;
+}
+

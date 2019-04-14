@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SolidSession } from '../models/solid-session.model';
+import { Chat } from '../models/chat.model';
 import { ChatMessage } from '../models/chat-message.model';
 import { Notification } from '../models/notification.model';
+import { NewMessageNotification } from '../models/new-message-notification.model';
+import { DeletedMessageNotification } from '../models/deleted-message-notification.model';
+import { ChatNotification } from '../models/chat-notification.model';
 import { ChatService } from '../services/chat.service';
 import * as fileClient from 'solid-file-client';
 
@@ -10,6 +14,8 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NamedNode } from 'src/assets/types/rdflib';
 import { stringify } from '@angular/core/src/util';
+import { WebAnimationsDriver } from '@angular/animations/browser/src/render/web_animations/web_animations_driver';
+import * as shortHash from 'short-hash';
 
 declare let solid: any;
 declare let $rdf: any;
@@ -367,7 +373,7 @@ export class RdfService {
   * Returns an array of NamedNode objects matching the term in a uri
   * @param {any} term term to look for in the document
   * @param {string} uri uri where you want to look (defaults to your webId)
-  * @return {Promise<Array<NamedNode>>} A promise cntaining the array of NamedNode objects
+  * @return {Promise<Array<NamedNode>>} A promise containing the array of NamedNode objects
   */
   async getArray(term: any, uri: string = this.session.webId): Promise<Array<NamedNode>> {
     try {
@@ -384,7 +390,7 @@ export class RdfService {
   * Returns a NamedNode object matching the term in a uri
   * @param {any} term term to look for in the document
   * @param {string} uri uri where you want to look (defaults to your webId)
-  * @return {Promise<NamedNode>} A promise cntaining the NamedNode object
+  * @return {Promise<NamedNode>} A promise containing the NamedNode object
   */
   async getSingle(term: any, uri: string = this.session.webId): Promise<NamedNode> {
     const d = this.store.sym(uri);
@@ -395,7 +401,7 @@ export class RdfService {
   /**
   * Returns an array of NamedNode objects of your friends
   * @param {string} uri webId where you want to look (defaults to your webId)
-  * @return {Promise<Array<NamedNode>>} A promise cntaining the array of NamedNode objects
+  * @return {Promise<Array<NamedNode>>} A promise containing the array of NamedNode objects
   */
   async getFriends(uri: string = this.session.webId): Promise<Array<NamedNode>> {
     return this.getArray(FOAF('knows'), uri);
@@ -404,16 +410,25 @@ export class RdfService {
   /**
   * Returns a NamedNode object containing the name of a webId
   * @param {string} uri webId where you want to look (defaults to your webId)
-  * @return {Promise<Array<NamedNode>>} A promise cntaining the NamedNode object
+  * @return {Promise<NamedNode>} A promise containing the NamedNode object
   */
   async getName(uri: string = this.session.webId): Promise<NamedNode> {
     return this.getSingle(VCARD('fn'), uri);
   }
 
   /**
+   * Returns a NamedNode object containing the url of the profile picture
+   * @param {string} uri webId of the card where you want to look (defaults to your webId)
+  * @return {Promise<NamedNode>} A promise containing the NamedNode object
+   */
+  async getPicture(uri: string = this.session.webId): Promise<NamedNode> {
+    return this.getSingle(VCARD('hasPhoto'), uri);
+  }
+
+  /**
   * Returns a NamedNode object containing the url of the inbox of a webId
   * @param {string} webId webId where you want to look (defaults to your webId)
-  * @return {Promise<Array<NamedNode>>} A promise cntaining the NamedNode object
+  * @return {Promise<Array<NamedNode>>} A promise containing the NamedNode object
   */
   async getInboxUrl(webId: string = this.session.webId): Promise<NamedNode> {
     return this.getSingle(LDP('inbox'), webId);
@@ -422,7 +437,7 @@ export class RdfService {
   /**
   * Returns an array of NamedNode objects with the contents of the inbox
   * @param {string} webId webId where you want to look (defaults to your webId)
-  * @return {Promise<Array<NamedNode>>} A promise cntaining the array of NamedNode objects
+  * @return {Promise<Array<NamedNode>>} A promise containing the array of NamedNode objects
   */
   async getInboxContents(webId: string = this.session.webId): Promise<Array<NamedNode>> {
     return this.getArray(LDP('contains'), (await this.getInboxUrl(webId)).value);
@@ -464,7 +479,7 @@ export class RdfService {
   async getMessageMaker(msgUri: string, chatFileUri: string) {
     const subject = this.store.sym(msgUri);
     const chatFile = this.store.sym(chatFileUri);
-    await this.fetcher.load(chatFile.doc(), {force: true, clearPreviousData: true});
+    await this.fetcher.load(chatFile.doc(), { force: true, clearPreviousData: true });
     const msgMaker = await this.store.match(subject, FOAF('maker'), null, chatFile.doc());
     return msgMaker[0].object.value;
   }
@@ -504,11 +519,14 @@ export class RdfService {
   * @return {Promise<string>} Promise resolving to the uri of the chanel
   */
   async getChannelUri(myWebId: string, otherWebId: string): Promise<string> {
-    const d = this.store.sym(myWebId.replace('#me', ''));
-    await this.fetcher.load(d.doc());
-    const other = this.store.sym(otherWebId);
-    const coinc = await this.store.match(null, MEE('LongChat'), other, d.doc());
-    return coinc[0].subject.value;
+    const chats = await this.getConversations(myWebId);
+    chats.forEach(chat => {
+      if (chat.others.includes(otherWebId)) {
+        console.log(otherWebId)
+        return chat.chatFileUri;
+      }
+    });
+    return 'none';
   }
 
   /**
@@ -544,7 +562,7 @@ export class RdfService {
 
     const chatFolder = chatFileUri.split('/').slice(0, 5).join('/') + '/';
 
-    this.sendNotifNewMessage(message.other, chatFolder, msgUri);
+    this.sendNotifsNewMessage(message.chat.others, chatFolder, msgUri); // comment to avoid spam
     return msgUri;
   }
 
@@ -575,6 +593,7 @@ export class RdfService {
         console.log(msg, response);
       }
     });
+    this.sendNotifsDeletedMessage(message.chat.others, chatFileUri, msgUri); // comment to avoid spam
   }
 
   /**
@@ -637,7 +656,8 @@ export class RdfService {
   * @param {string} otherWebId the other person webId
   * @param {string} chatFolder folder to contain the chat data
   */
-  async createNewChat(myWebId: string, otherWebId: string, chatFolder: string) {
+  async createNewChat(myWebId: string, otherWebIds: Array<string>, chatName: string) {
+    const chatFolder = myWebId.replace('profile/card#me', 'public/' + shortHash(otherWebIds.join() + myWebId + new Date()));
     const indexFileUri = chatFolder + '/index.ttl';
     const pId = 'id' + (+new Date);
 
@@ -645,7 +665,6 @@ export class RdfService {
     const thisUriSym = this.store.sym(indexFileUri + '#this');
     const sPrefUriSym = this.store.sym(indexFileUri + '#SharedPreferences');
     const meUriSym = this.store.sym(myWebId);
-    const otherUiSym = this.store.sym(otherWebId);
 
     const currDate = new Date();
 
@@ -659,13 +678,18 @@ export class RdfService {
 
     ins.push($rdf.st(pIdUriSym, ICAL('dtstart'), currDate, indexFile.doc()));
     ins.push($rdf.st(pIdUriSym, FLOW('participant'), meUriSym, indexFile.doc()));
-    ins.push($rdf.st(pIdUriSym, FLOW('participant'), otherUiSym, indexFile.doc()));
+
+    otherWebIds.forEach(element => {
+      const otherUiSym = this.store.sym(element);
+      ins.push($rdf.st(pIdUriSym, FLOW('participant'), otherUiSym, indexFile.doc()));
+    });
+
     ins.push($rdf.st(pIdUriSym, UI('backgroundColor'), '#f0d3e3', indexFile.doc()));
 
     ins.push($rdf.st(thisUriSym, RDFSYN('type'), MEE('LongChat'), indexFile.doc()));
     ins.push($rdf.st(thisUriSym, DCEL('author'), meUriSym, indexFile.doc()));
     ins.push($rdf.st(thisUriSym, DCEL('created'), currDate, indexFile.doc()));
-    ins.push($rdf.st(thisUriSym, DCEL('title'), 'Chat Channel', indexFile.doc()));
+    ins.push($rdf.st(thisUriSym, DCEL('title'), chatName, indexFile.doc()));
     ins.push($rdf.st(thisUriSym, FLOW('participation'), pIdUriSym, indexFile.doc()));
     ins.push($rdf.st(thisUriSym, UI('sharedPreferences'), sPrefUriSym, indexFile.doc()));
 
@@ -678,7 +702,12 @@ export class RdfService {
       }
     });
 
-    const cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherUiSym, myCardFile.doc());
+    const cardNote = [];
+    cardNote.push($rdf.st(chatFolderFile, RDFSYN('type'), MEE('LongChat'), myCardFile.doc()));
+    otherWebIds.forEach(element => {
+      const otherUiSym = this.store.sym(element);
+      cardNote.push($rdf.st(chatFolderFile, FLOW('participant'), otherUiSym, myCardFile.doc()));
+    });
 
     await this.updateManager.update([], cardNote, (uri, ok, message, response) => {
       if (ok) {
@@ -687,8 +716,9 @@ export class RdfService {
         console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`);
       }
     });
-    this.setPermissions(chatFolder, otherWebId, myWebId);
-    this.sendNotifNewConv(myWebId, chatFolder, otherWebId);  // Commented to avoid spamming the other person while testing
+    this.setPermissions(chatFolder, otherWebIds, myWebId);
+    this.sendNotifsNewConv(myWebId, chatFolder, chatName, otherWebIds);  // Commented to avoid spamming the other person while testing
+    return chatFolder;
   }
 
   /**
@@ -711,21 +741,96 @@ export class RdfService {
     }
   }
 
-  /**
+
+ /**
   * Creates the folder structure
   * @param {string} uri the uri of the chat file that needs the structure
   */
-  async createStructure(uri: string) {
-    console.log('Creating folder structure');
-    const splitted = uri.split('/');
+ async createStructure(uri: string) {
+  console.log('Creating folder structure');
+  const splitted = uri.split('/');
+  const uris = [];
+
+  let chatfile = false;
+
+  await fileClient.readFile(uri).then(body => {
+    console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
+    chatfile = true;
+  }, async err => chatfile = false);
+
+
+  if (!chatfile) {
     for (let i = 4; i > 0; i--) {
-      const newUri = splitted.slice(0, splitted.length - i).join('/');
-      console.log(`    Creating folder [${this.urlLogFilter(newUri)}]`);
-      await fileClient.createFolder(newUri);
+      uris.push(splitted.slice(0, splitted.length - i).join('/'));
+    }
+    for (let i = 0; i < 4; i++) {
+      console.log(`    Creating folder [${this.urlLogFilter(uris[i])}]`);
+      await fileClient.createFolder(uris[i]);
     }
     console.log('Folder structure done, proceeding with chat file.');
     await this.createChatFileForDay(uri);
   }
+}
+
+
+
+
+  /**
+  * Creates the folder structure
+  * @param {string} uri the uri of the chat file that needs the structure
+  */
+ /*
+  async createStructure(uri: string) {
+    console.log('Creating folder structure');
+    console.log(uri)
+    const splitted = uri.split('/');
+    const uris = [];
+
+    for (let i = 4; i > 0; i--) {
+      uris.push(splitted.slice(0, splitted.length - i).join('/'));
+    }
+    console.log(uris)
+
+    fileClient.readFile(uri).then(body => {
+      console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
+    }, async err => {
+      fileClient.readFolder(uris[3]).then(folder => { }, async err => {
+        console.log(`    Creating folder [${this.urlLogFilter(uris[2])}]`);
+        fileClient.createFolder(uris[3]).then(() => {
+          console.log('Folder structure done, proceeding with chat file.');
+        }
+        );
+      });
+      await this.createChatFileForDay(uri)
+    });
+
+
+    await fileClient.readFolder(uris[0]).then(folder => { }, async err => {
+      console.log(`    Creating folder [${this.urlLogFilter(uris[0])}]`);
+      fileClient.createFolder(uris[0]).then(() => {
+        fileClient.readFolder(uris[1]).then(folder => { }, async err => {
+          console.log(`    Creating folder [${this.urlLogFilter(uris[1])}]`);
+          fileClient.createFolder(uris[1]).then(() => {
+            fileClient.readFolder(uris[2]).then(folder => { }, async err => {
+              console.log(`    Creating folder [${this.urlLogFilter(uris[2])}]`);
+              fileClient.createFolder(uris[2]).then(() => {
+                console.log('Folder structure done, proceeding with chat file.');
+                fileClient.readFile(uri).then(body => {
+                  console.log(`    Chat file done [${this.urlLogFilter(uri)}]`);
+                }, async err => await this.createChatFileForDay(uri));
+              }
+              );
+            });
+          }
+          );
+        });
+      }
+      );
+    });
+  }
+*/
+
+
 
   /**
   * Formats the uris for the console output, removing unnecesary parts
@@ -735,12 +840,18 @@ export class RdfService {
     return url.replace('https://josecuriosoalternativo.inrupt.net', '').replace('https://josecurioso.solid.community', '');
   }
 
+  async sendNotifsNewConv(webId: string, chatFolderUri: string, chatName: string, otherWebIds: Array<string>) {
+    otherWebIds.forEach(e => {
+      this.sendNotifNewConv(webId, chatFolderUri, e, chatName, otherWebIds);
+    });
+  }
+
   /**
    * Sends a notification to the webId's inbox informing of the newly created chat
    * @param {string} webId webId of the other person
    * @param {string} chatFolderUri URI of the folder containing the chat
    */
-  async sendNotifNewConv(webId: string, chatFolderUri: string, otherWebId: string) {
+  async sendNotifNewConv(webId: string, chatFolderUri: string, otherWebId: string, chatName: string, otherWebIds: Array<string>) {
     const inboxUrl = (await this.getInboxUrl(otherWebId)).value;
     const notiFile = this.store.sym(inboxUrl + 'dechatnotifications.ttl');
 
@@ -749,10 +860,24 @@ export class RdfService {
 
     const ins = [];
 
-    ins.push($rdf.st(meWebIdFile, MEE('LongChat'), chatFolderFile, notiFile.doc()));
-
+    ins.push($rdf.st(chatFolderFile, RDFSYN('type'), MEE('LongChat'), notiFile.doc()));
+    ins.push($rdf.st(chatFolderFile, DCEL('title'), chatName, notiFile.doc()));
+    ins.push($rdf.st(chatFolderFile, FLOW('participant'), meWebIdFile, notiFile.doc()));
+    otherWebIds.forEach(e => {
+      if (e !== otherWebId) {
+        const otherWebId = this.store.sym(e);
+        ins.push($rdf.st(chatFolderFile, FLOW('participant'), otherWebId, notiFile.doc()));
+      }
+    });
+    console.log(ins);
     this.pushNotification(inboxUrl, ins);
 
+  }
+
+  async sendNotifsNewMessage(otherWebIds: Array<string>, chatFolderUri: string, messageUri: string) {
+    otherWebIds.forEach(e => {
+      this.sendNotifNewMessage(e, chatFolderUri, messageUri);
+    });
   }
 
   /**
@@ -773,6 +898,31 @@ export class RdfService {
 
     this.pushNotification(inboxUrl, ins);
   }
+
+  async sendNotifsDeletedMessage(otherWebIds: Array<string>, chatFolderUri: string, messageUri: string) {
+    otherWebIds.forEach(e => {
+      this.sendNotifDeletedMessage(e, chatFolderUri, messageUri);
+    });
+  }
+
+  /**
+   * Sends a notification to the webId's inbox about a new message being received
+   * @param {string} webId webId of the other person
+   * @param {string} chatFolderUri URI of the folder containing the chat
+   * @param {string} messageUri URI of the message the wbId is being notified of
+   */
+  async sendNotifDeletedMessage(webId: string, chatFolderUri: string, messageUri: string) {
+    const inboxUrl = (await this.getInboxUrl(webId)).value;
+    const notiFile = this.store.sym(inboxUrl + 'dechatnotifications.ttl');
+    const messageUriFile = this.store.sym(messageUri);
+    const chatFolderFile = this.store.sym(chatFolderUri);
+
+    const ins = [];
+
+    ins.push($rdf.st(chatFolderFile, NONE('DeletedMessage'), messageUriFile, notiFile.doc()));
+
+    this.pushNotification(inboxUrl, ins);
+  }
   /**
    * Pushes a given notification to the given user with the given content
    * @param {inboxUrl} chatUri Uri of the inbox of the recipient
@@ -787,38 +937,8 @@ export class RdfService {
 
     solid.auth.fetch(inboxUrl, {
       method: 'POST',
-      body: ins[0]
+      body: ins.join('')
     });
-
-    /*
-    console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] NOT FOUND, creating it...`);
-      await this.updateManager.put(notiFile.doc(), ins, 'text/turtle', function (o, s, c) { });
-      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] CREATED`);
-    */
-
-
-    /*
-    await this.fetcher.load(inboxFolder.doc());
-    const matches = await this.store.match(inboxFolder, LDP('contains'), notiFile, inboxFolder.doc());
-
-    if (matches.length === 0) {
-      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] NOT FOUND, creating it...`);
-      await this.updateManager.put(notiFile.doc(), '', 'text/turtle', function (o, s, c) { });
-      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] CREATED`);
-    } else {
-      console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}] FOUND, updating it...`);
-    }
-    await this.fetcher.load(notiFile.doc());
-    await this.updateManager.update([], ins, (uri, ok, message, response) => {
-      if (ok) {
-        console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}]` +
-                        ` UPDATED with message [${message}].`);
-      } else {
-        console.log(`    File [${this.urlLogFilter(notiUri)}] in folder [${this.urlLogFilter(inboxUrl)}]` +
-                        ` FAILED UPDATED with message [${message}].`);
-      }
-    });
-    */
   }
 
   /**
@@ -826,7 +946,7 @@ export class RdfService {
    * @param {string} resourceUri the URI of the resource we want to grant permissions of
    * @param {string} webId the user that is getting access rights
    */
-  async setPermissions(resourceUri: string, webId: string, ownerWebId: string) {
+  async setPermissions(resourceUri: string, webIds: Array<string>, ownerWebId: string) {
     const aclUri = resourceUri + '/.acl';
     const crwUri = aclUri + '#ControlReadWrite';
     const rUri = aclUri + '#Read';
@@ -836,7 +956,6 @@ export class RdfService {
     const rFile = this.store.sym(rUri);
     const rwFile = this.store.sym(rwUri);
     const file = this.store.sym(resourceUri + '/');
-    const webIdFile = this.store.sym(webId);
     const ownerWebIdFile = this.store.sym(ownerWebId);
 
     const ins = [];
@@ -856,7 +975,11 @@ export class RdfService {
     this.store.add(rFile, ACL('mode'), ACL('Read'), aclFile.doc());
 
     this.store.add(rwFile, RDFSYN('type'), ACL('Authorization'), aclFile.doc());
-    this.store.add(rwFile, ACL('agent'), webIdFile, aclFile.doc());
+    webIds.forEach(element => {
+      const webIdFile = this.store.sym(element);
+      this.store.add(rwFile, ACL('agent'), webIdFile, aclFile.doc());
+    });
+
     this.store.add(rwFile, ACL('accessTo'), file, aclFile.doc());
     this.store.add(rwFile, ACL('defaultForNew'), file, aclFile.doc());
     this.store.add(rwFile, ACL('mode'), ACL('Read'), aclFile.doc());
@@ -880,12 +1003,11 @@ export class RdfService {
    */
   async checkInbox(webId: string, caller: ChatService) {
     console.log('Checking inbox...');
-    console.log(webId);
     const inboxUri = await this.getInboxUrl(webId);
     const inboxUriSym = this.store.sym(inboxUri);
 
     const processed: Array<Notification> = [];
-    await this.fetcher.load(inboxUriSym.doc(), {force: true, clearPreviousData: true});
+    await this.fetcher.load(inboxUriSym.doc(), { force: true, clearPreviousData: true });
     const contentUris = (await this.store.match(null, RDFSYN('type'), PL('Resource'), inboxUriSym.doc())).map(e => e.subject);
     console.log(`    Elements found: ${contentUris.length}`);
     await contentUris.forEach(async element => {
@@ -923,17 +1045,24 @@ export class RdfService {
           await $rdf.parse(body, this.store, doc.uri, 'text/turtle');
           let content = await this.store.match(null, NONE('NewMessage'), null, doc.doc());
           if (content.length > 0) {
-            notification = new Notification(content[0].subject.value, 'NewMessage', content[0].object.value);
+            notification = new NewMessageNotification('NewMessage', content[0].subject.value, content[0].object.value);
           } else {
-            content = await this.store.match(null, MEE('LongChat'), null, doc.doc());
+            content = await this.store.match(null, RDFSYN('type'), MEE('LongChat'), doc.doc());
             if (content.length > 0) {
-              notification = new Notification(content[0].subject.value, 'LongChat', content[0].object.value);
+              const participants = await this.store.match(null, FLOW('participant'), null, doc.doc());
+              const titles = await this.store.match(null, DCEL('title'), null, doc.doc());
+              notification = new ChatNotification('LongChat', titles[0].object.value, content[0].subject.value, participants.map(e => e.object.value));
             } else {
-              notification = new Notification('error', 'none', 'error');
+              content = await this.store.match(null, NONE('DeletedMessage'), null, doc.doc());
+              if (content.length > 0) {
+                notification = new DeletedMessageNotification('DeletedMessage', content[0].subject.value, content[0].object.value);
+              } else {
+                notification = new Notification('error');
+              }
             }
           }
         } catch (error) {
-          notification = new Notification('error', 'none', 'error');
+          notification = new Notification('error');
           console.log(`    Unable to parse: ${notificationUri}`);
         }
       }
@@ -948,19 +1077,23 @@ export class RdfService {
   async deleteNotification(notificationUri: string) {
     console.log(`    Deleting: ${notificationUri}`);
     await this.store.fetcher.webOperation('DELETE', notificationUri)
-                      .then(e => {
-                        console.log(`    Deleted: ${notificationUri}`);
-                      });
+      .then(e => {
+        console.log(`    Deleted: ${notificationUri}`);
+      });
   }
 
-  async addChatToCard(myWebId: string, otherWebId: string, chatFolder: string) {
+  async addChatToCard(myWebId: string, otherWebIds: Array<string>, chatFolder: string) {
     const myCardFile = this.store.sym(myWebId.replace('#me', '#'));
     const chatFolderFile = this.store.sym(chatFolder);
-    const otherWebIdFile = this.store.sym(otherWebId);
+    await this.fetcher.load(myCardFile.doc(), { force: true, clearPreviousData: true });
 
-    await this.fetcher.load(myCardFile.doc(), {force: true, clearPreviousData: true});
+    const cardNote = [];
 
-    const cardNote = $rdf.st(chatFolderFile, MEE('LongChat'), otherWebIdFile, myCardFile.doc());
+    cardNote.push($rdf.st(chatFolderFile, RDFSYN('type'), MEE('LongChat'), myCardFile.doc()));
+    otherWebIds.forEach(element => {
+      const otherUiSym = this.store.sym(element);
+      cardNote.push($rdf.st(chatFolderFile, FLOW('participant'), otherUiSym, myCardFile.doc()));
+    });
 
     await this.updateManager.update([], cardNote, (uri, ok, message, response) => {
       if (ok) {
@@ -969,7 +1102,43 @@ export class RdfService {
         console.log(`Reference set on card [${this.urlLogFilter(uri)}] failed UPDATE with message [${message}].`);
       }
     });
+  }
 
+  testingMethod(myWebId: string, otherWebIds: Array<string>, chatName: string) {
+    /*
+    fileClient.readFolder(uri).then(folder => {
+      console.log(`Read ${folder.name}, it has ${folder.files.length} files.`);
+    }, err => fileClient.createFolder(uri));
+    */
+
+    this.createNewChat(myWebId, otherWebIds, chatName);
+  }
+
+
+  /**
+  * Returns the list of conversations your pod is aware of
+  * @param {string} myWebId My webId
+  * @return {Promise<string>} Promise resolving to the array of Chat objects
+  */
+  async getConversations(myWebId: string): Promise<Array<Chat>> {
+    const ret = new Array<Chat>();
+    const d = this.store.sym(myWebId.replace('#me', ''));
+    await this.fetcher.load(d.doc());
+    const coinc = await this.store.match(null, RDFSYN('type'), MEE('LongChat'), d.doc());
+    await coinc.forEach(async element => {
+      const d2 = this.store.sym(element.subject.value);
+      const participants = await this.store.match(d2, FLOW('participant'), null, d.doc());
+      ret.push(new Chat('', element.subject.value, participants.map(e => e.object.value)));
+    });
+    return ret;
+  }
+
+  async getConversationTitle(convUri: string) {
+    const indexFileSym = this.store.sym(convUri + '/index.ttl');
+    const indexThisFileSym = this.store.sym(convUri + '/index.ttl#this');
+    await this.fetcher.load(indexFileSym.doc());
+    const titles = await this.store.match(indexThisFileSym, DCEL('title'), null, indexFileSym.doc());
+    return titles[0].object.value;
   }
 
 }

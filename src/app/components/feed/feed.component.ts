@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, AfterViewChecked } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { Observable } from 'rxjs';
 import { ChatMessage } from '../../models/chat-message.model';
@@ -22,5 +22,4 @@ export class FeedComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.feed = this.chat.getMessages();
   }
-
 }

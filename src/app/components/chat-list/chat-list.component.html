@@ -1,0 +1,11 @@
+<div class="container-sidenav-contents">
+  <mat-action-list>
+    <div *ngFor="let chat of chats">
+        <app-chat-item [chat]=chat> </app-chat-item>
+    </div>
+  </mat-action-list>
+
+
+  <button mat-fab matTooltip="Create a new conversation" color="primary" type="submit"
+    class="new-coversation-button" (click)="newConversation()"><mat-icon style="font-size: 24px">add</mat-icon></button>
+</div>

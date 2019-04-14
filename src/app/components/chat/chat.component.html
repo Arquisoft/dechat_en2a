@@ -1,12 +1,10 @@
-<div class="mainContent">
-  <div class="userListWrapper">
-    <app-friend-list></app-friend-list>
-  </div>
-  <div #scroller class="feedWrapper">
-    <app-feed></app-feed>
-  </div>
-</div>
-
-<div class="chatFormWrapper">
-  <app-chat-form></app-chat-form>
-</div>
+<mat-sidenav-container class="chat-container">
+  <mat-sidenav #sidenav mode="side" opened class="chat-sidenav mat-elevation-z4" [fixedInViewport]="false" fixedTopGap=0
+    fixedBottomGap=0>
+    <app-chat-list></app-chat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+        <app-feed #scroller ></app-feed>
+      <app-chat-form></app-chat-form>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,47 +1,45 @@
-.mainContent{
-    display: flex;
-    height: calc(100vh - 6.250em);
+.chat-container {
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.userListWrapper {
-    background-color: rgb(45, 72, 107);
-    color: #fff;
-    display: flex;
-    font-family: "Open Sans", sans-serif;
-    font-size: 1.200em;
-    flex: 1;
-    order: 1;
-    padding: 1.250em 0.000em 2.500em 1.875em;
-    border-right: 1px solid #222;
-    overflow: auto;
-    overflow-x: hidden;
+.chat-sidenav {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  min-width: 250px;
+  background: rgb(36, 41, 46);
+  overflow: hidden;
 }
 
-.feedWrapper {
-    background-color: #fff;
-    background: 
-        linear-gradient(181deg, rgba(40, 180, 255, 0.6), rgba(1, 15, 78, 0.9)),
-        url('../../../assets/images/Solid_Pattern.png') center center no-repeat;
-    font-family: "Open Sans", sans-serif;
-    font-size: 1.200em;
-    flex: 5;
-    order: 2;
-    overflow-y: auto;
-    padding: 1.250em 0.000em 0.000em 1.500em;
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  justify-content: space-between;
 }
 
-.chatFormWrapper {
-    height: 3.125em;
-    background-color: rgb(20, 96, 236);
-    overflow: hidden;
-    position: sticky;
+app-feed {
+  order: 1;
+  flex-grow: 1;
+  overflow: auto;
+  background: rgb(238, 238, 238);
 }
 
-#scroll-style::-webkit-scrollbar-track{
-	border-radius: 0.625em;
-	background-color: #F5F5F5;
+app-chat-form {
+  order: 2;
 }
 
-app-user-list {
-    width: 100%;
+@media all and (max-width: 1250px) {
+  app-chat-form{
+      left: 250px;
+  }
+  app-feed{
+    left: 250px;
+  }
 }

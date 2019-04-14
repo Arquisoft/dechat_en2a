@@ -75,8 +75,8 @@ Run `docker tag tag1 tag2` to change the name of the tag
 
 To upload it on [here](https://hub.docker.com/) :
 
-  * Enter `docker login` and introduce your credentials.
-  * Run `docker push nametag` to push it to the docker repository.
+*   Enter `docker login` and introduce your credentials.
+*   Run `docker push nametag` to push it to the docker repository.
 
 *Note: currently there is a problem with deploying the container (related to the https issue mentioned before).*
 

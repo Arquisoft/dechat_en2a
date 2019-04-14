@@ -4,6 +4,11 @@ import { MessageComponent } from './message.component';
 import { ChatService } from '../../services/chat.service';
 import { ToastrModule } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Material
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 describe('MessageComponent', () => {
   let component: MessageComponent;
@@ -12,7 +17,10 @@ describe('MessageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MessageComponent],
-      imports: [ToastrModule.forRoot()],
+      imports: [MatCardModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot()],
       providers: [ChatService]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(MessageComponent);
@@ -42,7 +50,7 @@ describe('MessageComponent', () => {
 
   it('delete button works', () => {
     spyOn(component, "delete");
-        let button = fixture.debugElement.query(By.css('.deleteButton')).nativeElement;
+        let button = fixture.debugElement.query(By.css('#del')).nativeElement;
         button.click();
         expect(component.delete).toHaveBeenCalledTimes(1);
   });
