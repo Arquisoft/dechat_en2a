@@ -3,7 +3,7 @@
 
 [role="arc42help"]
 ****
-This is a decentralized Chat Proyect based on Solid in which no central sever is required to run or set up a conversation and all the personal data is stored in your POD.
+This is a decentralized Chat Proyect based on Solid on which no central sever is required to run or set up a conversation and all the personal data is stored in your POD.
 ****
 
 === Requirements Overview
@@ -27,7 +27,7 @@ This is a decentralized Chat Proyect based on Solid in which no central sever is
 |Goal|Scenarios
 | Privacy | As a user you should be able to have a full control of your data in every moment in order to know who can or cannot access to it.
 | Usability | The app should be intuitive, it should be designed for any kind of user providing them a friendly interface to interact with.
-| Availability | The app should always work even if there is no Internet conexion, in this case it should create a draft, that would be sended when conexion come back.
+| Availability | The app should always work if it has Internet connection and the Solid server is available.
 |===
 ****
 

@@ -5,6 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
 import { ToastrModule } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Material
+import {MatInputModule} from '@angular/material/input';
 
 describe('ChatFormComponent', () => {
     let component: ChatFormComponent;
@@ -13,8 +17,11 @@ describe('ChatFormComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ChatFormComponent],
-            imports: [ FormsModule , ToastrModule.forRoot() ],
-            providers: [ 
+            imports: [ FormsModule,
+                MatInputModule,
+                BrowserAnimationsModule,
+                ToastrModule.forRoot() ],
+            providers: [
                 { provide: ChatService, useClass: ChatService }
             ]
         }).compileComponents().then(() => {

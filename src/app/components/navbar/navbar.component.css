@@ -1,56 +1,21 @@
+.navbar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+  background: #3f51b5;
+  color: white;
+}
 
+.logo {
+  font-family: Roboto Slab, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-right: 10px;
+}
 
-.topnav {
-    width: 100%;
-    background-color: rgb(20, 96, 236);
-    height: 3.125em;
-    color: #fff;
-  }
-
-  .topnav a {
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
-  }
-
-  .topnav a:hover {
-    background-color: rgba(0,0,0,0.25);
-  }
-
-  .topnav a:active {
-    background-color: rgba(0,0,0,0.25);
-  }
-
-  .topnav a:focus {
-    background-color: rgba(0,0,0,0.25);
-  }
-
-  .topnav .logo {
-    display: inline-block;
-    font-family: 'Roboto Slab', serif;
-    font-size: 1.500em;
-    font-weight: bold;
-    text-transform: uppercase;
-    line-height: 90%;
-    padding-right: 5.000em;
-    position: relative;
-    top: 0.000em;
-    left: 1.750em;
-  }
-  
-  .topnav .menu-item {
-    display: inline-block;
-    width: 6.250em;
-    margin: auto;
-    text-align: center;
-
-  }
-  
-  .topnav .menu-item i {
-    font-size: 2em;
-    margin-top: 0.2em;
-  }
-  
-  .topnav .profile-menu {
-    float: right;
-  }
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}

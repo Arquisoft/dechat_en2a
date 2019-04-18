@@ -17,6 +17,9 @@ image:images/10_quality_requirements_tree.png[]
 |===
 |Quality Type|Source of Stimulus|Stimulus|Artifact|Environment|Response|Response Measure
 |Availability|Internet Connection|Internet connection failure|Communication channel|Normal environment|Save data state|Data is recovered and available upon internet reconnection
+|Privacy|Data Exchange|Data leak from exchange|Communication channel|Normal environment|Warning issued and communication channel closed|Data is impossible to leak from communication channel
+|Usability|User Interaction|Using the application|User interface|Normal environment|User is able to navigate application smoothly and without interruption|Application is fully navigable and simple to use
+|Performance|Internet connection; functionality|User interaction|User interface|Normal environment|Immediate user interface reaction|User interaction is reflected to UI within 1 second
 |===
 
 ****

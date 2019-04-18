@@ -17,28 +17,31 @@ There two main reasons for this:
 * Facilitate the migration from other chat systems easy for any kind of user.
 * Prove that it is posible to have the very same services that we currently enjoy using the SOLID system
 
-[arch_patterns]
-===Architecture and design patterns
+[arch-patterns]
+=== Architecture and design patterns
 Up until know, the de_chat is an Angular-based system, therefore following the Model View Controller architectural pattern.
 However, all our application would not store any of the user's data. It will access it via SOLID pods.
 
 [pers]
 === Persistency
-On the current stage of the project, persistency is secondary, although it will supported in the future. All users' data will be avaliable in their pods 
+The persistency has been achieved using the RTC and turtle (.ttl) files. Thus, making use of the standard already in place in SOLID, and allowing the interaction of DE_CHAT and the SOLID chat system.
 
 [session]
 === Session handling
-No session handling is implemented whatsoever, as the information is ultimately retrieved from the pods themselves.
+The session is managed using the SOLID session itself, as it is that platform the one in charge of storing the user's data.
 
 [Communication]
 === Communication
-Two chats would not communicate directly. I will occur via SOLID pods, which are the ones storing the messages.
+Two chats would not communicate directly. I will occur via SOLID pods, which are the ones storing the messages. The application provides a realtime notification daemon to allow users to talk fluently.
 
 [test]
 === Testing
-No proper testing is currently being performed.
+Two types of testing are currently in place:
+
+* Unit testing: in charge of testing the low level features of the system.
+* End to end: in charge of testing the general behavior of the system by mocking a real user.
 
 [build]
 === Building
 The building of the project, considering that it is an Angular application, is done via the Node.js package manages, *npm*.
-*TO-DO*
+It is expected to be built using the docker platform, in order to avoid dependencies and enviorment issues.

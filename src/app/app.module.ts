@@ -13,10 +13,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { MessageComponent } from './components/message/message.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FriendItemComponent } from './components/friend-item/friend-item.component';
-import { FriendListComponent } from './components/friend-list/friend-list.component';
-import { TestingComponent } from './components/testing/testing.component';
-import { PermissionsComponent } from './components/permissions/permissions.component';
+import { ChatItemComponent } from './components/chat-item/chat-item.component';
+import { ChatListComponent, NewChatDialogComponent } from './components/chat-list/chat-list.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
@@ -26,6 +24,19 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+
+
+// Material
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 const routes: Routes = [
@@ -51,18 +62,10 @@ const routes: Routes = [
     component: ChatComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'settings',
-    component: TestingComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'register',
     component: RegisterComponent
-  },
-  {
-    path: 'permissions',
-    component: PermissionsComponent
   }
 ];
 
@@ -78,10 +81,9 @@ const routes: Routes = [
     FeedComponent,
     MessageComponent,
     NavbarComponent,
-    FriendItemComponent,
-    FriendListComponent,
-    TestingComponent,
-    PermissionsComponent
+    ChatItemComponent,
+    ChatListComponent,
+    NewChatDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -89,8 +91,19 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgSelectModule,
     ToastrModule.forRoot(),
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatInputModule,
+    MatListModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatDialogModule,
+    AngularMultiSelectModule,
     BrowserAnimationsModule // required for toastr
   ],
+  entryComponents: [NewChatDialogComponent],
   providers: [AuthService , ChatService],
   bootstrap: [AppComponent]
 })

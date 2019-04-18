@@ -1,0 +1,501 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3. Context and scope · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="04_solution_strategy.html" />
+    
+    
+    <link rel="prev" href="02_architecture_constraints.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    0. Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="01_introduction_and_goals.html">
+            
+                <a href="01_introduction_and_goals.html">
+            
+                    
+                    1. Introduction and Goals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="02_architecture_constraints.html">
+            
+                <a href="02_architecture_constraints.html">
+            
+                    
+                    2. Architecture Constraints
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="03_system_scope_and_context.html">
+            
+                <a href="03_system_scope_and_context.html">
+            
+                    
+                    3. Context and scope
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="04_solution_strategy.html">
+            
+                <a href="04_solution_strategy.html">
+            
+                    
+                    4. Solution Strategy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="05_building_block_view.html">
+            
+                <a href="05_building_block_view.html">
+            
+                    
+                    5. Building Block View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="06_runtime_view.html">
+            
+                <a href="06_runtime_view.html">
+            
+                    
+                    6. Runtime View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="07_deployment_view.html">
+            
+                <a href="07_deployment_view.html">
+            
+                    
+                    7. Deployment View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="08_concepts.html">
+            
+                <a href="08_concepts.html">
+            
+                    
+                    8. Crosscutting Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="09_design_decisions.html">
+            
+                <a href="09_design_decisions.html">
+            
+                    
+                    9. Architecture Decisions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="10_quality_scenarios.html">
+            
+                <a href="10_quality_scenarios.html">
+            
+                    
+                    10. Quality Requirements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="11_technical_risks.html">
+            
+                <a href="11_technical_risks.html">
+            
+                    
+                    11. Risks and Technical Debt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="12_glossary.html">
+            
+                <a href="12_glossary.html">
+            
+                    
+                    12. Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="13_project_structure.html">
+            
+                <a href="13_project_structure.html">
+            
+                    
+                    13. Project Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="about-arc42.html">
+            
+                <a href="about-arc42.html">
+            
+                    
+                    14. About arc42
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >3. Context and scope</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="section-system-scope-and-context">System Scope and Context</h1>
+<div class="sect1">
+<h2 id="_what_are_the_goals_of_the_system">What are the goals of the system?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The main idea of this project is to create a decentralised chat, in other words, we are creating an application capable of conecting to SOLID and allow their users to communicate between them. In order to be a decentralised chat we use SOLID&#x2019;s pods. The whole idea is using our application
+as a point where you can access your data stored in SOLID and manage it in order to send messages and other data to other users. Our application is completely transparent to the user and SOLID as we don&#x2019;t store any user informatio, we just allow them to send it. Also our applicatio is completely compatible with the
+existing SOLID chat avaible making our application also capable of interact with the orginal chat available on the platform.</p>
+</div>
+<div class="sect2">
+<h3 id="_use_case">Use case</h3>
+<div class="paragraph">
+<p><span class="image"><img src="images/03_CaseOfUse.png" alt="03 CaseOfUse.png"></span></p>
+</div>
+<div class="paragraph">
+<p>The communication is done through the user&#x2019;s pods. Everytime a user sends a mesage it is communicated to his/her pod and then that change is notifiyed to the other user De-chat, that is when the read of the pod is done. As we can see all the data is stored safely on the pods and can be
+deleared at any time by the user.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_business_context">Business Context</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows a representation of the communication partners and stakeholders in our system, offering a graphic view of the business and technical context of it and specifying its external interfaces.</p>
+</div>
+<div class="paragraph">
+<p>Simple diagram representing the business context:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/03_business_context_v2.png" alt="03 business context v2.png"></span></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. DeChat</caption>
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 41.6666%;">
+<col style="width: 41.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Inputs</th>
+<th class="tableblock halign-left valign-top">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sender</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages (to DeChat)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeChat (Sender part)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sent messages (from Sender)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New data (to Sender Pod), Sent messages (to Receiver Pod inbox)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sender Pod</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New data (from DeChat)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Receiver Pod</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages (from sender DeChat)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Messages (to receiver DeChat)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeChat (Receiver part)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received messages (from Receiver Pod)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received messages (show visually to Receiver)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Receiver</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received messages (from DeChat)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_context">Technical Context</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For this application we are using a bunch of techlogies, such as SOLID, Angular, TypeScript &#x2026;&#x200B; The idea is building with these resources a working application that allows SOLID users to communicate between then, for this purpose we use WebRTC to send the messages. We also use SOLID authentication
+services and some other libraries in order manage the pods for reading and writing the data there. Algular framework is used for simplicity as it is a one page application.</p>
+</div>
+</div>
+</div>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="02_architecture_constraints.html" class="navigation navigation-prev " aria-label="Previous page: 2. Architecture Constraints">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="04_solution_strategy.html" class="navigation navigation-next " aria-label="Next page: 4. Solution Strategy">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3. Context and scope","level":"1.4","depth":1,"next":{"title":"4. Solution Strategy","level":"1.5","depth":1,"path":"04_solution_strategy.adoc","ref":"04_solution_strategy.adoc","articles":[]},"previous":{"title":"2. Architecture Constraints","level":"1.3","depth":1,"path":"02_architecture_constraints.adoc","ref":"02_architecture_constraints.adoc","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"03_system_scope_and_context.adoc","mtime":"2019-04-11T12:19:02.299Z","type":"asciidoc"},"gitbook":{"version":"3.2.3","time":"2019-04-14T16:43:27.431Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

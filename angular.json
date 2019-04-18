@@ -1,3 +1,4 @@
+    
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
@@ -36,6 +37,14 @@
             ]
           },
           "configurations": {
+            "es": {
+              "aot": true,
+              "outputPath": "dist/internacionalization-es/",
+              "i18nFile": "src/locales/messages.es.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es",
+              "i18nMissingTranslation": "error"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -63,6 +72,8 @@
           "configurations": {
             "production": {
               "browserTarget": "solid-app:build:production"
+            },"es": {
+              "browserTarget": "solid-app:build:es"
             }
           }
         },

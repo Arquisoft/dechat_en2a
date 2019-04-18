@@ -1,43 +1,24 @@
-.chatInput{
-    width: 85%;
-    border-radius: 0.313em;
-    position: relative;
-    top: 10%;
-    left: 2%;
-    margin: 0.100em;
-    padding: 0.100em;
-    font-size: 1.300em;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #eee;
-    color: #000;
-    transition: 0.1s ease-out;
+.form-container {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+  justify-content: space-between;
+  background: #3f51b5;
 }
 
-.chatInput:focus{
-    background-color: #E4F1FE;
-    color: #222;
-    transition: 0.2s ease-in;
+.full-width {
+  flex-grow: 1;
+  padding: 0 10px;
+  align-self: center;
 }
 
-.chatButton{
-    position: relative;
-    right: 2%; 
-    left: 3%;
-    top: 10%; 
-    min-width: 6.875em;
-    width: 10%;
-    border-radius: 0.313em;
-    margin: 0.000em;
-    padding: 0.325em;
-    padding: 0.300em 1.300em;
-    font-size: 1.300em;
-    font-family: 'Droid Sans', sans-serif;
-    background-color: #2A2845;
-    color: white;
-    transition: 0.2s ease-out;
-    min-width: 3.125em;
+.chatInput {
+  width: 100%;
+  margin: 10px;
+  color: white;
 }
 
-.chatButton:hover{
-    background-color: #444;
+.chatButton {
+  margin: 10px;
+  align-self: center;
 }

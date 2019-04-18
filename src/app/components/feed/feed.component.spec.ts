@@ -4,6 +4,11 @@ import { FeedComponent } from './feed.component';
 import { MessageComponent } from '../message/message.component';
 import { ChatService } from '../../services/chat.service';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Material
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -12,7 +17,10 @@ describe('FeedComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FeedComponent, MessageComponent ],
-      imports: [ ToastrModule.forRoot() ],
+      imports: [ MatCardModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot() ],
       providers: [ ChatService ]
     })
     .compileComponents();
