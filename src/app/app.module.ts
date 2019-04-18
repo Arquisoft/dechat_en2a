@@ -37,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CustomizationComponent } from './components/customization/customization.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'login-popup',
     component: LoginPopupComponent
+  },
+  {
+    path: 'customization',
+    component: CustomizationComponent
   },
   {
     path: 'profile',
@@ -83,7 +88,8 @@ const routes: Routes = [
     NavbarComponent,
     ChatItemComponent,
     ChatListComponent,
-    NewChatDialogComponent
+    NewChatDialogComponent,
+    CustomizationComponent
   ],
   imports: [
     BrowserModule,
