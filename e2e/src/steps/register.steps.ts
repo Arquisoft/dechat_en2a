@@ -9,18 +9,18 @@ Before(() => {
 });
 
 Given(/^I am not logged in$/, async () => {
-    page.clickDc();
+    await page.clickDc();
 });
 
 When(/^I go to the home page$/, async () => {
-    page.goToHomePage();
+    await page.goToHomePage();
 });
 
 When(/^I try to register$/, async () => {
-    page.clickRegister();
-    page.selectSC(); 
+    await page.clickRegister();
+    await page.selectSC(); 
 });
 
 Then(/^I see the register page$/, async () => {
-    page.getRegisterText().then((msg) => expect(msg).to.equal("Welcome to the Solid Prototype"));
+    expect(await page.getRegisterText()).to.equal("Welcome to the Solid Prototype");
 });
