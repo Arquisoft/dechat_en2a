@@ -4,7 +4,7 @@ export class MessagePage {
     userName: string = 'mortadelo';
     password: string = 'elSupereselnumero1!';
 
-    async login() {
+    async solidLogin() {
         await browser.driver.get('localhost:4200');
         await element(by.css('.login-select')).click();
         await element(by.xpath('(//div[@class="provider"])[2]')).click();
@@ -16,7 +16,7 @@ export class MessagePage {
     }
 
     async selectFriend() {
-        return await browser.driver.findElement(by.tagName('app-friend-item')).click();
+        return await browser.driver.findElement(by.tagName('app-chat-item')).click();
     }
 
     async writeMessage(msg: string) {

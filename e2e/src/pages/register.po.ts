@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class RegisterPage {
     async clickDc() {
-        return await browser.driver.findElement(by.css('.profile-menu')).click().then(() => browser.sleep(1000));
+        return await browser.driver.findElement(by.css('#logout')).click().then(() => browser.sleep(1000));
     }
 
     async goToHomePage() {
