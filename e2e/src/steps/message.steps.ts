@@ -10,7 +10,7 @@ Before(() => {
 });
 
 Given(/^I am logged in$/, {timeout: 10000}, async () => {
-    await page.login();
+    await page.solidLogin();
 });
 
 When(/^I select a friend$/, async () => {
