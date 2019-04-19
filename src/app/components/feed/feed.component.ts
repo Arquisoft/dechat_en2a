@@ -22,4 +22,15 @@ export class FeedComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.feed = this.chat.getMessages();
   }
+
+  getParticipants() {
+     let initial = '';
+     if (this.chat.getCurrentChat() !== undefined) {
+     this.chat.getCurrentChat().others.forEach(function(cardMeUri) {initial += cardMeUri.split('//')[1].split('.')[0] + '  '; });
+     } else {
+       console.log('There is no chat selected');
+     }
+     return initial;
+  }
+
 }
