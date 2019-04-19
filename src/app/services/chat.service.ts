@@ -69,6 +69,9 @@ export class ChatService {
   getConversations(): Observable<Chat[]> {
     return of(this.conversations);
   }
+  getCurrentChat(): Chat {
+    return this.currentChat;
+  }
 
   openChat(chat: Chat) {
     if (!this.rdf.session) {
