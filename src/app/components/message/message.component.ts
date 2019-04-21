@@ -3,6 +3,7 @@ import { ChatService } from '../../services/chat.service';
 import { ChatMessage } from '../../models/chat-message.model';
 import { User } from 'src/app/models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-message',
@@ -19,9 +20,9 @@ export class MessageComponent implements OnInit {
   ownEmail: string;
   imageStyle: any;
   imageURl: string;
-  videoUrl: any ;
+  videoUrl;
 
-  constructor(private chatService: ChatService, private sanitizer: DomSanitizer , private snackBar: MatSnackBar) {
+  constructor(private chatService: ChatService, private sanitizer: DomSanitizer, private snackBar: MatSnackBar) {
   }
 
   delete() {
@@ -29,7 +30,7 @@ export class MessageComponent implements OnInit {
     this.snackBar.open('Message successfully deleted', '', {
       duration: 2000,
       panelClass: ['snackbar-success']
-    })
+    });
   }
 
   ngOnInit(chatMessage = this.chatMessage) {
@@ -54,18 +55,24 @@ export class MessageComponent implements OnInit {
     this.userName = chatMessage.userName;
   }
 
+  isLink() {
+    if (this.messageContent.includes('.es')) {
+      return true;
+    } else { return false; }
+  }
 
+    isImg() {
+        if (this.messageContent.includes('.png')) {
+            return true;
+        } else { return false; }
+    }
 
-    checkUrl() {
-          if (/[.](jpg|png|gif)/.test(this.messageContent)) {
-                return 1;
-        } else if (this.messageContent.includes('www.youtube')) {
+    isVideo() {
+        if (this.messageContent.includes('www.youtube')) {
             this.messageContent = this.messageContent.replace('watch?v=', 'embed/');
-            this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
-                return 2;
-         } else if (/[.](es|com|net)/.test(this.messageContent )) {
-            return 0;
-        }
+          this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
+            return true;
+        } else { return false; }
 
     }
 }
