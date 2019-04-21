@@ -26,6 +26,7 @@
 <mat-card class="messageContainer" [ngClass]="{'isOwnMessageContainer':isOwnMessage}">
 
     <ng-template [ngIf]="!isOwnMessage">
+
         <mat-card-header class="messageData" [ngClass]="{'isOwnMessageData':isOwnMessage}">
             <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + chatMessage.maker?.photoUrl + ')'}"></div>
             <!--<div mat-card-avatar class="example-header-image" [ngStyle]="getImageStyle()"></div>-->
@@ -36,9 +37,15 @@
     </ng-template>
 
     <mat-card-content class="messageContent" [ngClass]="{'isOwnMessageContent':isOwnMessage}">
-        <p>
-            {{ messageContent }}
+        <p *ngIf="isLink()">
+            <a href="{{ messageContent }}"> {{ messageContent }}</a>
         </p>
+        <p *ngIf="isImg()">
+            <img src="{{ messageContent }}" alt="Couldn´t load:{{ messageContent }}" >
+        </p>
+        <iframe *ngIf="isVideo()" width="420" height="315"[src]="videoUrl"></iframe>
+
+
     </mat-card-content>
     <ng-template [ngIf]="isOwnMessage">
         <mat-card-header class="messageData" [ngClass]="{'isOwnMessageData':isOwnMessage}">
