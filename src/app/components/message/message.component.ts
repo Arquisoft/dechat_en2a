@@ -4,6 +4,7 @@ import { ChatMessage } from '../../models/chat-message.model';
 import { User } from 'src/app/models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {DomSanitizer} from '@angular/platform-browser';
+import {__await} from 'tslib';
 
 @Component({
   selector: 'app-message',
@@ -20,7 +21,7 @@ export class MessageComponent implements OnInit {
   ownEmail: string;
   imageStyle: any;
   imageURl: string;
-  videoUrl;
+  videoUrl: any ;
 
   constructor(private chatService: ChatService, private sanitizer: DomSanitizer, private snackBar: MatSnackBar) {
   }
@@ -55,24 +56,18 @@ export class MessageComponent implements OnInit {
     this.userName = chatMessage.userName;
   }
 
-  isLink() {
-    if (this.messageContent.includes('.es')) {
-      return true;
-    } else { return false; }
-  }
 
-    isImg() {
-        if (this.messageContent.includes('.png')) {
-            return true;
-        } else { return false; }
-    }
 
-    isVideo() {
-        if (this.messageContent.includes('www.youtube')) {
+    checkUrl() {
+          if (/[.](jpg|png|gif)/.test(this.messageContent)) {
+                return 1;
+        } else if (this.messageContent.includes('www.youtube')) {
             this.messageContent = this.messageContent.replace('watch?v=', 'embed/');
-          this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
-            return true;
-        } else { return false; }
+            this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
+                return 2;
+         } else if (/[.](es|com|net)/.test(this.messageContent )) {
+            return 0;
+        }
 
     }
 }
