@@ -1,6 +1,6 @@
 <div class="form-container mat-elevation-z3">
     <mat-form-field color="accent" class="full-width">
-        <input matInput [(ngModel)]="message" class="chatInput" (keydown)="handleSubmit($event)">
+        <input matInput [(ngModel)]="message" class="chatInput" (keydown)="handleSubmit($event)" placeholder="Write your message here...">
     </mat-form-field>
     <button mat-raised-button matTooltipPosition="above" color="accent" matTooltip="Send a new message"
         class="chatButton" id="send" (click)=send()>Send</button>
