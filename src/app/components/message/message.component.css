@@ -1,5 +1,3 @@
-
-
 .messageData{
     flex: 1;
     padding: 0.625em;
@@ -54,9 +52,6 @@
     height: 2.000em;
     margin-top: 0.500em;
 }
-
-
-
 
 .messageContainer{
     display: flex;
