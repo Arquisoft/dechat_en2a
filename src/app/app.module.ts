@@ -38,6 +38,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CustomizationComponent } from './components/customization/customization.component';
+import {AboutComponent } from './components/about/about.component';
 
 
 const routes: Routes = [
@@ -67,7 +68,10 @@ const routes: Routes = [
     component: ChatComponent,
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
   {
     path: 'register',
     component: RegisterComponent
@@ -89,7 +93,8 @@ const routes: Routes = [
     ChatItemComponent,
     ChatListComponent,
     NewChatDialogComponent,
-    CustomizationComponent
+    CustomizationComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

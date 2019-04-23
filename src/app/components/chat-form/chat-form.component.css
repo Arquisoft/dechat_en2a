@@ -18,6 +18,10 @@
   color: white;
 }
 
+::placeholder {
+  color: white;
+}
+
 .chatButton {
   margin: 10px;
   align-self: center;
