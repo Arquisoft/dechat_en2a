@@ -8,5 +8,5 @@ During our allotted four months of development time we plan to build our decentr
 
 As the application's development progresses and a functional prototype is developed, we will draw upon each individual team member's personal strengths (security, back end logic, UI design, etc) to push the project into a release stage.
 
-In order to ensure in a measurable manner that our application is functioning correctly, we will write and deploy tests to evaluate certain features. These tests will be completed using the Cucumber tool for software testing.
+In order to ensure in a measurable manner that our application is functioning correctly, we will write and deploy tests to evaluate certain features. These tests will be completed using the Cucumber tool for software testing. The team has decided to forego end-to-end testing in favor of unit testing for the application in order to ensure a smooth and accessible testing methodology and ensure code coverage is at an appropriate percentage by the deliverable date. 
 ****
