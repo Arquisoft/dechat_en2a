@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Material
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('MessageComponent', () => {
   let component: MessageComponent;
@@ -19,6 +20,7 @@ describe('MessageComponent', () => {
       declarations: [MessageComponent],
       imports: [MatCardModule,
         MatIconModule,
+        MatSnackBarModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot()],
       providers: [ChatService]
