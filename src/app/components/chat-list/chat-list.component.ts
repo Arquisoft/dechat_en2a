@@ -3,7 +3,7 @@ import { Chat } from '../../models/chat.model';
 import { User } from '../../models/user.model';
 import { ChatService } from '../../services/chat.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
   chatName: string;
