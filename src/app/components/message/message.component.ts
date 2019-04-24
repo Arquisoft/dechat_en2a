@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { ChatMessage } from '../../models/chat-message.model';
 import { User } from 'src/app/models/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-message',
@@ -20,11 +21,15 @@ export class MessageComponent implements OnInit {
   imageURl: string;
 
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private snackBar: MatSnackBar) {
   }
 
   delete() {
     this.chatService.deleteMessage(this.chatMessage);
+    this.snackBar.open('Message successfully deleted', '', {
+      duration: 2000,
+      panelClass: ['snackbar-success']
+    })
   }
 
   ngOnInit(chatMessage = this.chatMessage) {
