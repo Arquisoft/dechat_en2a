@@ -15,6 +15,8 @@ import { MessageComponent } from './components/message/message.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChatItemComponent } from './components/chat-item/chat-item.component';
 import { ChatListComponent, NewChatDialogComponent } from './components/chat-list/chat-list.component';
+import { CustomizationComponent } from './components/customization/customization.component';
+import {AboutComponent } from './components/about/about.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
@@ -37,8 +39,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import { CustomizationComponent } from './components/customization/customization.component';
-import {AboutComponent } from './components/about/about.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 const routes: Routes = [
@@ -112,7 +113,8 @@ const routes: Routes = [
     MatIconModule,
     MatDialogModule,
     AngularMultiSelectModule,
-    BrowserAnimationsModule // required for toastr
+    BrowserAnimationsModule, // required for toastr
+    MatSnackBarModule
   ],
   entryComponents: [NewChatDialogComponent],
   providers: [AuthService , ChatService],

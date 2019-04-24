@@ -20,6 +20,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -38,6 +39,7 @@ describe('ChatComponent', () => {
         MatDialogModule,
         AngularMultiSelectModule,
         BrowserAnimationsModule,
+        MatSnackBarModule,
          ToastrModule.forRoot()  ],
       providers: [ ChatService ]
     })

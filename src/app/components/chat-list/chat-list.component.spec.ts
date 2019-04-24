@@ -11,6 +11,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 describe('ChatListComponent', () => {
   let component: ChatListComponent;
@@ -24,6 +25,7 @@ describe('ChatListComponent', () => {
         MatDialogModule,
         BrowserAnimationsModule,
         AngularMultiSelectModule,
+        MatSnackBarModule,
         ToastrModule.forRoot() ],
       providers: [ ChatService ]
     })
