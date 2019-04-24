@@ -6,7 +6,7 @@ export class RegisterPage {
     }
 
     async goToHomePage() {
-        return await browser.driver.get('localhost:4200');
+        return await browser.driver.get('localhost:4200').then(() => browser.sleep(2000));
     }
 
     async clickRegister() {
