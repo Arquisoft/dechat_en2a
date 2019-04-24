@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SolidProfile } from '../../models/solid-profile.model';
 import { RdfService } from '../../services/rdf.service';
 import { AuthService } from '../../services/solid.auth.service';
@@ -21,7 +22,7 @@ export class ProfileComponent implements OnInit  {
   @ViewChild('f') cardForm: NgForm;
 
   constructor(private rdf: RdfService,
-    private route: ActivatedRoute, private auth: AuthService) {}
+    private route: ActivatedRoute, private auth: AuthService, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.loadingProfile = true;
@@ -79,8 +80,16 @@ export class ProfileComponent implements OnInit  {
   async addFriend() {
     try{
       this.rdf.addFriend(this.addWebId);
+      this.snackBar.open('Friend successfully added', '', {
+        duration: 2000,
+        panelClass: ['snackbar-success']
+      });
     }catch {
-      console.log("The URI provided is not well-formed or does not point to a profile")
+      console.log("The URI provided is not well-formed or does not point to a profile");
+      this.snackBar.open('Friend does not exist or could not be added', '', {
+        duration: 2000,
+        panelClass: ['snackbar-error']
+      });
     }
   }
 }
