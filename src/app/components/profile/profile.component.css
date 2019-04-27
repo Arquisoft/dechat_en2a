@@ -97,3 +97,9 @@
 .addfriends input {
   margin-right: 0.625em;
 }
+
+.friendText{
+  margin: 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
