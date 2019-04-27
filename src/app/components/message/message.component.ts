@@ -3,6 +3,8 @@ import { ChatService } from '../../services/chat.service';
 import { ChatMessage } from '../../models/chat-message.model';
 import { User } from 'src/app/models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {DomSanitizer} from '@angular/platform-browser';
+import {__await} from 'tslib';
 
 @Component({
   selector: 'app-message',
@@ -19,9 +21,9 @@ export class MessageComponent implements OnInit {
   ownEmail: string;
   imageStyle: any;
   imageURl: string;
+  videoUrl: any ;
 
-
-  constructor(private chatService: ChatService, private snackBar: MatSnackBar) {
+  constructor(private chatService: ChatService, private sanitizer: DomSanitizer , private snackBar: MatSnackBar) {
   }
 
   delete() {
@@ -29,7 +31,7 @@ export class MessageComponent implements OnInit {
     this.snackBar.open('Message successfully deleted', '', {
       duration: 2000,
       panelClass: ['snackbar-success']
-    })
+    });
   }
 
   ngOnInit(chatMessage = this.chatMessage) {
@@ -53,4 +55,21 @@ export class MessageComponent implements OnInit {
     this.timeStamp = chatMessage.timeSent;
     this.userName = chatMessage.userName;
   }
+
+
+
+    checkUrl() {
+          if (/[.](jpg|png|gif)/.test(this.messageContent)) {
+                return 1;
+        } else
+          /*if (this.messageContent.includes('www.youtube')) {
+            this.messageContent = this.messageContent.replace('watch?v=', 'embed/');
+            this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
+                return 2;
+         } else */
+          if (/[.](es|com|net)/.test(this.messageContent )) {
+            return 0;
+        }
+
+    }
 }
