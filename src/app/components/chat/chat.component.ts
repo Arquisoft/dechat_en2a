@@ -29,16 +29,18 @@ export class ChatComponent implements OnInit {
   }
 
   async scrollToBottom() {
-      this.feedContainer.nativeElement.scrollTop = this.feedContainer.nativeElement.scrollHeight;
+    this.feedContainer.nativeElement.scrollTop = this.feedContainer.nativeElement.scrollHeight;
   }
 
   getParticipants() {
-     let initial = '';
-     if (this.chat.getCurrentChat() !== undefined) {
-     this.chat.getCurrentChat().others.forEach(function(cardMeUri) {initial += cardMeUri.split('//')[1].split('.')[0] + '  '; });
-     } else {
-     }
-     return initial;
+    const usrs = [];
+    let initial = '';
+    if (this.chat.currentChat !== undefined) {
+      this.chat.currentChat.others.forEach(function(cardMeUri) {usrs.push(cardMeUri.split('//')[1].split('.')[0] + '  ' ); });
+      initial = usrs.join(', ');
+    } else {
+    }
+    return initial;
   }
 
 }
