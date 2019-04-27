@@ -16,7 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChatItemComponent } from './components/chat-item/chat-item.component';
 import { ChatListComponent, NewChatDialogComponent } from './components/chat-list/chat-list.component';
 import { CustomizationComponent } from './components/customization/customization.component';
-import {AboutComponent } from './components/about/about.component';
+import { AboutComponent } from './components/about/about.component';
 
 // Services
 import { AuthService } from './services/solid.auth.service';
