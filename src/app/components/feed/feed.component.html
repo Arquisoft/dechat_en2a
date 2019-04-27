@@ -1,6 +1,6 @@
 <div>
-  <mat-card class="participants-box" >{{getParticipants()}} </mat-card>
   <div *ngFor="let message of feed | async">
+    
     <app-message [chatMessage]=message></app-message>
   </div>
 </div>
