@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 // Material
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -36,6 +37,7 @@ describe('AppComponent', () => {
         MatDialogModule,
         AngularMultiSelectModule,
         BrowserAnimationsModule,
+        FormsModule,
         ToastrModule.forRoot()
       ]
     }).compileComponents();
