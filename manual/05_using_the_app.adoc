@@ -25,11 +25,11 @@ Plus, you can also add new friends by writing their SOLID web id's in the panel 
 
 You can return to the chat using the _Chat_ option on the top left corner.
 
-== Seeing my friends
-
 == Selecting an existing chat
+The list of chats that you have created will be avaliable just on hte left-hand side of the screen.
 
 == Deleting messages
+If you watch carefully, you will see a paper bin on the left of your messages. Just by clicking it you will delete your message.
 
 == Creating new chats
-
+There is an orb with a + symbol just below your list of friends. CLick on it to open a new dialog, where you can select the friends that you want to chat with.
