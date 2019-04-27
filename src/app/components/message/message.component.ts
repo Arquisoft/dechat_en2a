@@ -61,11 +61,13 @@ export class MessageComponent implements OnInit {
     checkUrl() {
           if (/[.](jpg|png|gif)/.test(this.messageContent)) {
                 return 1;
-        } else if (this.messageContent.includes('www.youtube')) {
+        } else
+          /*if (this.messageContent.includes('www.youtube')) {
             this.messageContent = this.messageContent.replace('watch?v=', 'embed/');
             this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
                 return 2;
-         } else if (/[.](es|com|net)/.test(this.messageContent )) {
+         } else */
+          if (/[.](es|com|net)/.test(this.messageContent )) {
             return 0;
         }
 
