@@ -22,7 +22,7 @@ export class MessageComponent implements OnInit {
   imageURl: string;
   videoUrl: any ;
 
-  constructor(private chatService: ChatService, private sanitizer: DomSanitizer) {
+  constructor(private chatService: ChatService, private sanitizer: DomSanitizer , private snackBar: MatSnackBar) {
   }
 
   delete() {
