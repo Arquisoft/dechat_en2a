@@ -55,4 +55,10 @@ describe('ChatComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return an empty list of participants', () => {
+    spyOn(component, "getParticipants").and.callThrough();
+    expect(component.getParticipants()).toBe('');
+    expect(component.getParticipants).toHaveBeenCalledTimes(1);
+  });
 });
