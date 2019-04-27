@@ -49,7 +49,7 @@ export class ChatListComponent {
       this.snackBar.open('Conversation successfully created', '', {
         duration: 2000,
         panelClass: ['snackbar-success']
-      })
+      });
     });
   }
 
