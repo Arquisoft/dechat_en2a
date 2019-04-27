@@ -1,0 +1,25 @@
+.about-container {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  width: 60.00em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-container h1 {
+  font-family: 'Roboto Slab', serif;
+  color: rgb(20, 96, 236);
+  font-size: 4em;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.075em;
+  text-align: center;
+  margin-top: 1.125em;
+}
+
+.about-container p {
+    margin-bottom: 3.0em;
+    width: 45.0em;
+    margin-left: auto;
+    margin-right: auto;
+}
