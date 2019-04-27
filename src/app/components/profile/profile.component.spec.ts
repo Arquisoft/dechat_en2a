@@ -5,6 +5,7 @@ import { RdfService } from '../../services/rdf.service';
 import { AuthService } from '../../services/solid.auth.service';
 import { ProfileComponent } from './profile.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -23,7 +24,8 @@ describe('ProfileComponent', () => {
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [ProfileComponent],
-      imports: [MatSnackBarModule],
+      imports: [MatSnackBarModule,
+        BrowserAnimationsModule],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: RdfService, useValue: rdfServiceStub },
