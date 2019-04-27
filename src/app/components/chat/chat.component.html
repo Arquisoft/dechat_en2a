@@ -5,7 +5,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
         <mat-card class="mat-elevation-z6" class="participants-box" > {{getParticipants()}} </mat-card>
-        <app-feed #scroller (updated)="onUpdatedFeed($event)"></app-feed>
+        <app-feed #scroller ></app-feed>
       <app-chat-form></app-chat-form>
   </mat-sidenav-content>
 </mat-sidenav-container>
