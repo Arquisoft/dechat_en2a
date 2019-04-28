@@ -10,7 +10,7 @@ image::login.png[]
 === Seeing my profile
 There is a _Profile_ option. There you will be prompted with the following screen:
 
-**TODO:** add the screen shot
+image::profile.png[]
 
 Here, you can configure some options of your SOLID profile. From up-down, left to right:
 
