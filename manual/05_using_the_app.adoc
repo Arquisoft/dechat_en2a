@@ -5,7 +5,7 @@ Here, you will be given the necessary instructions to use the various functional
 === Loging in 
 To use DE_CHAT you need to have an account on a SOLID provider. You will be given the option to select from the various providers, and the either logging in to an existing account, or creating a new one.
 
-**TODO:** add the image of the login
+image::images/login.png
 
 == Seeing my profile
 There is a _Profile_ option. There you will be prompted with the following screen:
