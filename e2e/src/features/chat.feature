@@ -8,4 +8,3 @@ Feature: Send a message
         When I write a message
         When I click send
         Then I can see the new message
-        Then I can delete the message

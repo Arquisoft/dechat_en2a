@@ -33,9 +33,11 @@ Then(/^I can see the new message$/, async () => {
     expect(await page.getMessageText()).to.equal(msg);
 });
 
+/*
 Then(/^I can delete the message$/, async () => {
     var before = await page.getNumberOfMessages();
     await page.clickDelete();
     var after = await page.getNumberOfMessages();
     expect(before).equal(after + 1);
 })
+*/

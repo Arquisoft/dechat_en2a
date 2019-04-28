@@ -100,8 +100,8 @@ export class ChatService {
 
   async deleteMessage(message: ChatMessage) {
     message.chat = this.currentChat;
-    this.rdf.deleteMessage(await this.getCurrentChatUri(this.currentChat.chatFileUri), message);
     this.messages.splice(this.messages.indexOf(message), 1);
+    this.rdf.deleteMessage(await this.getCurrentChatUri(this.currentChat.chatFileUri), message);
   }
 
   getMessages(): Observable<ChatMessage[]> {
