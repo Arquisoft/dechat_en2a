@@ -1,9 +1,7 @@
 == Re-decentralizing the World Wide Web
 
-[, Sir Tim Berners Lee]
-""
+[quote, Sir Tim Berners Lee]
 The Web as I envisaged it, we have not seen it yet. The future is still so much bigger than the past.
-""
 
 The web, as it was originally conceived, is decentralized. Menaing that there is no central hub o authority to rule its behavior. It was intended to be a place of equality, where each service and user would be ultimately equal on its capabilities.
 

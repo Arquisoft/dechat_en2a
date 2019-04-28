@@ -1,1 +1,10 @@
 == Meet the team
+
+This are the people that has made this project possible.
+
+=== Thomas Perry
+image::thomas.png[]
+
+image::github.png[link="https://github.com/tgperry"]
+
+My name is *Thomas Perry* and I am a second year student from the United States studying for a semester at the University of Oviedo Software Engineering campus. While in the States, I attend Colorado School of Mines and study Computer Science and Analytical Statistics with a focus on Data Science. On this project, I focused mainly on front-end development in order to ensure a smooth user experience while using the application. When not in front of the computer, I enjoy camping, cooking, and shooting landscape photography worldwide, but especially in my home state of Washington.
