@@ -24,7 +24,7 @@ image::kike.png[]
 
 image::github.png[link="https://github.com/EnriqueJRodriguez"]
 
-Kike's description
+I am *Enrique-José Rodriguez Martín*. My name migth sound like the one of a soap opera protagonist, but the truth is that I am a Software Engineering student at the University of Oviedo. I am responsable for the look and feel and CSS workarrounds, appart from the not yet working terminal implementation of DE_CHAT. Appart from studying, I am also into sports and member of the Communist Party of the Workers of Spain.
 
 === Jose Manuel Estrada Muñoz
 
