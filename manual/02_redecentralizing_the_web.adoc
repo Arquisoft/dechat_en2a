@@ -10,6 +10,6 @@ The web, as it was originally conceived, is decentralized. Menaing that there is
 However, over the years, the tendency has been the opposite. Nowadays, the web is increasingly centralizing around certain infrastructures and corporations, like Facebook, Google or Microsoft, corrupting the original ideas of TBL. Believe it or not, there are even institutions that have a Facebook page instead of a web portal.
 This is specially concerning with data, which has become a valuable product, and is generally in the hands of this corporations and services instead of the people who should own them.
 
-image::images/pod.png
+image::pod.png[]
 
 That is the reason why Tim Berners Lee, alongside MIT and other professionals, have started the development of platform, a technology, a project to Bring back that original conception of the web. The SOLID project.

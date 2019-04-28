@@ -5,9 +5,9 @@ Here, you will be given the necessary instructions to use the various functional
 === Loging in 
 To use DE_CHAT you need to have an account on a SOLID provider. You will be given the option to select from the various providers, and the either logging in to an existing account, or creating a new one.
 
-image::images/login.png
+image::login.png[]
 
-== Seeing my profile
+=== Seeing my profile
 There is a _Profile_ option. There you will be prompted with the following screen:
 
 **TODO:** add the screen shot
@@ -25,11 +25,11 @@ Plus, you can also add new friends by writing their SOLID web id's in the panel 
 
 You can return to the chat using the _Chat_ option on the top left corner.
 
-== Selecting an existing chat
+=== Selecting an existing chat
 The list of chats that you have created will be avaliable just on hte left-hand side of the screen.
 
-== Deleting messages
+=== Deleting messages
 If you watch carefully, you will see a paper bin on the left of your messages. Just by clicking it you will delete your message.
 
-== Creating new chats
+=== Creating new chats
 There is an orb with a + symbol just below your list of friends. CLick on it to open a new dialog, where you can select the friends that you want to chat with.

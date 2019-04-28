@@ -1,4 +1,7 @@
 = User manual
+:toc: left
+
+include::config.adoc[]
 
 Welcome to the official user manual of the DE_CHAT application. Here, you will learn how to use it, meet the team behind it, and understand the implications behind it.
 
