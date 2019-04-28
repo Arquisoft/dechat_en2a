@@ -51,18 +51,5 @@
         <i class="fas fa-user"></i><input type="text" class="field-text form-control" name="webIdAdd" placeholder="WebId" [(ngModel)]="addWebId" />
         <button mat-raised-button color="primary" type="submit" class="wide-button profile-save-button" (click)="addFriend()">Add Friend</button>
       </div>
-      <div class="addfriends">
-      <h2>List of friends</h2>
-          <mat-list >
-            <mat-list-item *ngFor="let f of friends">
-              <p matLine >
-                <img matListAvatar src="{{f.photoUrl}}" alt="Foto">
-                <span class="friendText">{{f.fullName}} </span>
-              </p>
-            </mat-list-item>
-
-          </mat-list>
-      </div>
-
   </div>
 </div>

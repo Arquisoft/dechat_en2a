@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>Create new chat</h1>
+<h1 mat-dialog-title>Crear nuevo Chat</h1>
 <div mat-dialog-content style="overflow: visible">
   <mat-form-field style="width: 100%">
-    <input matInput placeholder="What is the name of the new chat?" [(ngModel)]="data.chatName">
+    <input matInput placeholder="Como se va a llamar el chat?" [(ngModel)]="data.chatName">
   </mat-form-field>
   <angular2-multiselect style="width: 95.9%" [data]="data.items" [(ngModel)]="data.selectedItems" 
     [settings]="dropdownSettings" 
@@ -11,6 +11,6 @@
     (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button class="ok-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

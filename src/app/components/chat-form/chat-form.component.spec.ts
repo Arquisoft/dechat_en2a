@@ -45,7 +45,7 @@ describe('ChatFormComponent', () => {
 
         it('calls the service send function', async(() => {
             const chatService: ChatService = fixture.debugElement.injector.get(ChatService);
-            spyOn(chatService, "sendMessage").and.callThrough();
+            spyOn(chatService, "sendMessage");
             component.message = "Hello from chat form test to chat service";
             component.send();
             expect(chatService.sendMessage).toHaveBeenCalledTimes(1);

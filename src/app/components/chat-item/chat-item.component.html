@@ -1,9 +1,7 @@
-<div [ngClass]="{userItemCurrent: (chat.isCurrent), userItem: (!chat.isCurrent)}">
-  <mat-list-item (click)="chatClicked()">
-    <div>
-      <span class="chatTitle">
-        {{chat.chatTitle}}
-      </span>
-    </div>
-  </mat-list-item>
-</div>
+<mat-list-item (click)="chatClicked()">
+  <div [ngClass]="{userItemCurrent: (chat.isCurrent), userItem: (!chat.isCurrent)}">
+    <span class="chatTitle">
+      {{chat.chatTitle}}
+    </span>
+  </div>
+</mat-list-item>

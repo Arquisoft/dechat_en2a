@@ -3,7 +3,6 @@ import { Chat } from '../../models/chat.model';
 import { User } from '../../models/user.model';
 import { ChatService } from '../../services/chat.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
   chatName: string;
@@ -23,7 +22,7 @@ export class ChatListComponent {
   selectedOthers: Array<User>;
   selectedItems: Array<any>;
 
-  constructor(private cService: ChatService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private cService: ChatService, public dialog: MatDialog) {
     cService.getConversations().subscribe(chats => {
       this.chats = chats;
     });
@@ -46,10 +45,6 @@ export class ChatListComponent {
         this.chatName = result.selectedItems[0].item.fullName;
       }
       this.cService.newConversation(this.selectedItems, this.chatName);
-      this.snackBar.open('Conversation successfully created', '', {
-        duration: 2000,
-        panelClass: ['snackbar-success']
-      });
     });
   }
 
@@ -88,9 +83,9 @@ export class NewChatDialogComponent implements OnInit {
   ngOnInit() {
     this.dropdownSettings = {
       singleSelection: false,
-      text: 'Select friends',
-      selectAllText: 'Select all',
-      unSelectAllText: 'Deselect all',
+      text: 'Seleccionar amigos',
+      selectAllText: 'Seleccionar todos',
+      unSelectAllText: 'Deseleccionar todos',
       enableSearchFilter: true
     };
   }

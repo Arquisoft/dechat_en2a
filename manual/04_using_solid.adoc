@@ -1,0 +1,12 @@
+== Using SOLID
+
+SOLID, as defined by the project itself _Solid (derived from "social linked data") is a proposed set of conventions and tools for building decentralized social applications based on Linked Data principles_.
+Translated into english, we could say that it is a platform/standard to store pieces of data, linked between them.
+
+image::Solid.png[]
+
+In Solid, you have what is called a *POD*. Think of it as a box for your data. Webpages, services and apps will access the data stored there, but they will not own it. You do. And you let them have a look at your box, or maybe not. Maybe you just allow them to see certain things. The important thing is that *you are in control*.
+
+image::decentralization.png[]
+
+Following this approach, you will need a SOLID account from a provider. And the chats you create will be stored there. DE_CHAT will just display them nicely. As long as you let it do it. 

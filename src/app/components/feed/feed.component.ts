@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit, OnChanges, Output, ViewChild, AfterViewChecked, Optional } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, AfterViewChecked } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { Observable } from 'rxjs';
 import { ChatMessage } from '../../models/chat-message.model';
-import { ChatComponent } from '../chat/chat.component';
 
 @Component({
   selector: 'app-feed',
@@ -12,14 +11,15 @@ import { ChatComponent } from '../chat/chat.component';
 export class FeedComponent implements OnInit, OnChanges {
   feed: Observable<ChatMessage[]>;
 
-  constructor(private chat: ChatService) {
-  }
+  constructor(private chat: ChatService) {}
 
   ngOnInit() {
+
     this.feed = this.chat.getMessages();
+
   }
 
   ngOnChanges() {
+    this.feed = this.chat.getMessages();
   }
-
 }

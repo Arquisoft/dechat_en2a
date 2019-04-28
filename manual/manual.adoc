@@ -1,0 +1,16 @@
+= User manual
+:toc: left
+
+include::config.adoc[]
+
+Welcome to the official user manual of the DE_CHAT application. Here, you will learn how to use it, meet the team behind it, and understand the implications behind it.
+
+include::01_what_is_dechat.adoc[]
+
+include::02_redecentralizing_the_web.adoc[]
+
+include::03_meet_the_team.adoc[]
+
+include::04_using_solid.adoc[]
+
+include::05_using_the_app.adoc[]

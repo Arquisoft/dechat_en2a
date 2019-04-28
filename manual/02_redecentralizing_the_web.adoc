@@ -1,0 +1,13 @@
+== Re-decentralizing the World Wide Web
+
+[quote, Sir Tim Berners Lee]
+The Web as I envisaged it, we have not seen it yet. The future is still so much bigger than the past.
+
+The web, as it was originally conceived, is decentralized. Menaing that there is no central hub o authority to rule its behavior. It was intended to be a place of equality, where each service and user would be ultimately equal on its capabilities.
+
+However, over the years, the tendency has been the opposite. Nowadays, the web is increasingly centralizing around certain infrastructures and corporations, like Facebook, Google or Microsoft, corrupting the original ideas of TBL. Believe it or not, there are even institutions that have a Facebook page instead of a web portal.
+This is specially concerning with data, which has become a valuable product, and is generally in the hands of this corporations and services instead of the people who should own them.
+
+image::pod.png[]
+
+That is the reason why Tim Berners Lee, alongside MIT and other professionals, have started the development of platform, a technology, a project to Bring back that original conception of the web. The SOLID project.

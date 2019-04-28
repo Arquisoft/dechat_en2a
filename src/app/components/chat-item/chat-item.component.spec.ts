@@ -5,8 +5,6 @@ import { ChatService } from '../../services/chat.service';
 import { User } from '../../models/user.model';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 
 // Material
 import {MatListModule} from '@angular/material/list';
@@ -20,8 +18,7 @@ describe('ChatItemComponent', () => {
       declarations: [ ChatItemComponent ],
       imports: [ MatListModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot(),
-        FormsModule ],
+        ToastrModule.forRoot() ],
       providers: [ ChatService ]
     })
     .compileComponents();
@@ -36,27 +33,4 @@ describe('ChatItemComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-
-  describe('Open a chat', () => {
-    it('calls the component chatClicked function', () => {
-        spyOn(component, "chatClicked");
-        component.chatClicked();
-        expect(component.chatClicked).toHaveBeenCalledTimes(1);
-    });
-
-    it('calls the service openChat function', async(() => {
-        const chatService: ChatService = fixture.debugElement.injector.get(ChatService);
-        spyOn(chatService, "openChat");
-        component.chatClicked();
-        expect(chatService.openChat).toHaveBeenCalledTimes(1);
-    }));
-  });
-
-  it('clicking a chat should call the chatClicked function', () => {
-      spyOn(component, "chatClicked");
-      let button = fixture.debugElement.query(By.css('.mat-list-item')).nativeElement;
-      button.click();
-      expect(component.chatClicked).toHaveBeenCalledTimes(1);
-  });
-
 });

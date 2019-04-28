@@ -1,3 +1,5 @@
+
+
 .messageData{
     flex: 1;
     padding: 0.625em;
@@ -25,14 +27,6 @@
 }
 
 .messageContent{
-    white-space: -moz-pre-wrap; /* Mozilla */
-    white-space: -hp-pre-wrap; /* HP printers */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    white-space: -pre-wrap; /* Opera 4-6 */
-    white-space: pre-wrap; /* CSS 2.1 */
-    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
-    word-wrap: break-word; /* IE */
-    word-break: break-all;
     height: auto;
     flex: 2;
     padding: 0.625em;
@@ -60,6 +54,9 @@
     height: 2.000em;
     margin-top: 0.500em;
 }
+
+
+
 
 .messageContainer{
     display: flex;

@@ -135,11 +135,3 @@ body {
   border: 1px solid #ccc;
   color: #fff;
 }
-
-.snackbar-success {
-  background: #2dc466;
-}
-
-.snackbar-error {
-  background: #dd2c2c;
-}
