@@ -10,7 +10,7 @@ image::login.png[]
 === Seeing my profile
 There is a _Profile_ option. There you will be prompted with the following screen:
 
-**TODO:** add the screen shot
+image::profile.png[]
 
 Here, you can configure some options of your SOLID profile. From up-down, left to right:
 
@@ -31,5 +31,14 @@ The list of chats that you have created will be avaliable just on hte left-hand 
 === Deleting messages
 If you watch carefully, you will see a paper bin on the left of your messages. Just by clicking it you will delete your message.
 
+image::delete.png[]
+
 === Creating new chats
-There is an orb with a + symbol just below your list of friends. CLick on it to open a new dialog, where you can select the friends that you want to chat with.
+There is an orb with a *+* symbol just below your list of friends. Click on it to open a new dialog, where you can select the friends that you want to chat with.
+
+image::chat.png[]
+
+=== Sharing images and videos
+To send messages with multimedia, the file must be *previously uploaded to your personal POD*. Once It is uploaded, just write its URI and it will be displayed to the other users in the chat.
+
+image::multimedia.png[]
