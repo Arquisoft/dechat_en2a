@@ -32,7 +32,6 @@ image::images/05_level01.png[]
 |image::images/Message.png[] | Message being sent by the user.
 |image::images/MessageNot.png[] | Notification of the message being sent to the recievers.
 |image::images/doc.png[] | Information being sent to the owner of the conversation POD.
-|image::images/User_app.png[] | Application being used by the user. User interface to communicate with our application.
 |===
 
 .Inside of the application: +
@@ -48,6 +47,5 @@ image::images/05_level02.png[]
 |image::images/Message.png[] | Message being sent by the user.
 |image::images/MessageNot.png[] | Notification of the message being sent to the recievers. Also contains the message.
 |image::images/doc.png[] | Information being sent to the owner of the conversation POD.
-|image::images/User_app.png[] | Application being used by the user. User interface to communicate with our application.
 |image::images/Process.png[] | Process being done inside the application.
 |===
