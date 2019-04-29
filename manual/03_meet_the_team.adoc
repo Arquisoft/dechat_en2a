@@ -32,7 +32,9 @@ image::jose.png[]
 
 image::github.png[link="https://github.com/josecurioso"]
 
-Jose's description
+My name is *Jose Manuel*, josecurioso on everything important in life (mainly Steam and the internet). My hobbies include but are not limited to reading, long bike rides (like weeks long), climbing, mountaineering, playing video games and travelling (who doesn't like travelling). I never turn down a crazy adventure be it a trip to wherever we end up or a vivac night in the middle of nowhere.
+Regarding the project I have taken on the coordination role of the team, I enjoy learning about new technologies and I have discovered a new world with the Javascript/Typescript-based stacks.
+(Disclaimer: the resolution and orientation of the photo are intentional)
 
 === Luis Pastrana García
 
@@ -40,7 +42,11 @@ image::luis.png[]
 
 image::github.png[link="https://github.com/pastrana98"]
 
-Luis' description
+My name is *Luis*, third year student at the University of Oviedo.
+In west Asturias studied and raised.
+On the Pc was where I spent most of my days.
+Chillin out, maxin', relaxin' all cool
+And writing some code 4 the school.
 
 === Thomas Perry
 
