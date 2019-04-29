@@ -16,6 +16,11 @@
 .login-page img {
   max-width: 100%;
   height: auto;
+}
+
+.app-logo {
+  max-width: 100%;
+  height: auto;
   margin-bottom: 5em;
 }
 
