@@ -22,6 +22,9 @@
   max-width: 100%;
   height: auto;
   margin-bottom: 5em;
+  border-color: black;
+  border-style: solid;
+  border-radius: 1.35em;
 }
 
 .login-page h1 {
@@ -84,4 +87,18 @@
   width: 22.125em;
   position: sticky;
   bottom: -0.500em; left: -0.563em;
+}
+
+.wide-button {
+  padding: 0.8em 3em;
+  border-radius: 0.5em;
+  font-size: 100%;
+  transition-duration: 0.4s; 
+  font-weight: bolder;
+  letter-spacing: 0.2em;
+}
+
+.wide-button:hover {
+  background-color: rgb(24, 25, 107);
+  color: white;
 }

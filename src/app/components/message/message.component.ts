@@ -66,7 +66,8 @@ export class MessageComponent implements OnInit {
             this.messageContent = this.messageContent.replace('watch?v=', 'embed/');
             this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
                 return 2;
-         } else */
+          
+         } else */ 
           if (/[.](es|com|net)/.test(this.messageContent )) {
             return 0;
         }

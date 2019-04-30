@@ -39,7 +39,7 @@
     <mat-card-content class="messageContent" [ngClass]="{'isOwnMessageContent':isOwnMessage}" >
     <ng-container [ngSwitch]="checkUrl()">
 
-       <!-- <iframe *ngSwitchCase=2 width="420" height="315"[src]="videoUrl"></iframe> -->
+       <iframe *ngSwitchCase=2  [src]="videoUrl" width="560" height="315"></iframe>
 
         <a *ngSwitchCase=0 href="{{ messageContent }}"> {{ messageContent }}</a>
 
