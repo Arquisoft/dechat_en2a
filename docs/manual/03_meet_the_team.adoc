@@ -1,0 +1,65 @@
+== Meet the team
+
+This are the people that has made this project possible.
+
+=== Álvaro Sánchez García
+
+image::alvaro.png[]
+
+image::github.png[link="https://github.com/AlvasanG"]
+
+My name is *Alvaro Sanchez*, third year student at the University of Oviedo. Even if this project lands really outside of my comfort zone I have discovered a whole new world on my future field of expertise. I love computers as a whole, videogames, spending time with my friends and my music. My beside book is Sun Tzu's Art of War.
+
+=== Ángel García Menéndez
+
+image::angel.png[]
+
+image::github.png[link="https://github.com/flecktarn121"]
+
+I am *Ángel García*, third year student at the School of Computer Engineering of Oviedo. Proud member of the Free Software Foundation as an associate student, I am one of those who will say __GNU/Linux__. The testing infraestructure, frameworks and this manual has beeen parts of my contribution to DE_CHAT. Regarding engineering capabilities, I am also the one who though that a loop of 168 repetitions with SQL queries to a single database was a good idea.
+
+=== Enrique José Rodriguez Martín
+
+image::kike.png[]
+
+image::github.png[link="https://github.com/EnriqueJRodriguez"]
+
+I am *Enrique-José Rodriguez Martín*. My name migth sound like the one of a soap opera protagonist, but the truth is that I am a Software Engineering student at the University of Oviedo. I am responsable for the look and feel and CSS workarrounds, appart from the not yet working terminal implementation of DE_CHAT. Appart from studying, I am also into sports and quite interested in history and politics.
+
+=== Jose Manuel Estrada Muñoz
+
+image::jose.png[]
+
+image::github.png[link="https://github.com/josecurioso"]
+
+My name is *Jose Manuel*, josecurioso on everything important in life (mainly Steam and the internet). My hobbies include but are not limited to reading, long bike rides (like weeks long), climbing, mountaineering, playing video games and travelling (who doesn't like travelling). I never turn down a crazy adventure be it a trip to wherever we end up or a vivac night in the middle of nowhere.
+Regarding the project I have taken on the coordination role of the team, I enjoy learning about new technologies and I have discovered a new world with the Javascript/Typescript-based stacks.
+(Disclaimer: the resolution and orientation of the photo are intentional)
+
+=== Luis Pastrana García
+
+image::luis.png[]
+
+image::github.png[link="https://github.com/pastrana98"]
+
+My name is *Luis*, third year student at the University of Oviedo.
+In west Asturias studied and raised.
+On the Pc was where I spent most of my days.
+Chillin out, maxin', relaxin' all cool
+And writing some code 4 the school.
+
+=== Thomas Perry
+
+image::thomas.png[]
+
+image::github.png[link="https://github.com/tgperry"]
+
+My name is *Thomas Perry* and I am a second year student from the United States studying for a semester at the University of Oviedo Software Engineering campus. While in the States, I attend Colorado School of Mines and study Computer Science and Analytical Statistics with a focus on Data Science. On this project, I focused mainly on front-end development in order to ensure a smooth user experience while using the application. When not in front of the computer, I enjoy camping, cooking, and shooting landscape photography worldwide, but especially in my home state of Washington.
+
+=== Yeray Galán López
+
+image::yeray.png[]
+
+image::github.png[link="https://github.com/YerayG"]
+
+My name is *Yeray* and I am a third year Software Engineering student at the University of Oviedo. I have been working on this project of ours for some months, mainly focusing on functionality features and testing. Besides computers and technology, I love sports, language learning, playing and listening to music and experiencing other forms of art such as videogames, books and movies.

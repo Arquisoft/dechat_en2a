@@ -1,0 +1,11 @@
+== What is DE_CHAT?
+
+DE_CHAT stands for Decentralized Chat. It is simply what its name indicates: a chat application which not centralized arround a single provider, but distributed arround its users.
+
+Its development began as the practical assigment for the https://arquisoft.github.io[Software Architecture] course from the degree on Software Engineering of the University of Oviedo. 
+
+No longer will you be preocupied about what facebook or whatsapp do with your messages. They are yours, controlled by you, and you are the only responsible for them. 
+
+All of this is based on the SOLID project, a software platform and specification by https://www.w3.org/People/Berners-Lee/card#i[Sir Tim Berners Lee] and the MIT, which is further discussed in the present document.
+
+image::logo.png[]
