@@ -1,4 +1,4 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber';
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 
 body {
@@ -142,4 +142,17 @@ body {
 
 .snackbar-error {
   background: #dd2c2c;
+}
+
+.mat-accent .mat-input-element{
+  caret-color:white;
+}
+
+.mat-fab.mat-primary {
+  background-color:  royalblue;
+}
+
+.mat-input-element {
+  caret-color: white;
+  background-color: white;
 }
