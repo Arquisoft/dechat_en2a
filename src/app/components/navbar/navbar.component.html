@@ -10,32 +10,11 @@
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
 
-    <button mat-button onclick="location.href='https://enriquejrodriguez.github.io/DechatManual/'">Manual</button>
-
-    <button mat-button onclick="location.href='https://arquisoft.github.io/dechat_en2a/docs'">Docs</button>
-
     <button mat-button [routerLink]="['/about']">About</button>
+  
+    <button mat-button onclick="location.href='docs'">Docs</button>
+
+    <button mat-button onclick="location.href='https://enriquejrodriguez.github.io/DechatManual/'">Manual</button>
 
     <button mat-button (click)="logout()" id="logout">Logout</button>
 </nav>
-
-<!--
-
-
-
-<mat-toolbar color="primary" class="topnav ">
-    <span>DE-CHAT</span>
-
-    <button mat-button [routerLink]="['/chat']">Chat</button>
-
-    <button mat-button [routerLink]="['/profile']">Profile</button>
-  
-    <span class="example-fill-remaining-space"></span>
-  
-    <button mat-button onclick="location.href='https://arquisoft.github.io/dechat_en2a/docs'">Docs</button>
-
-    <button mat-button (click)="logout()">Logout</button>
-  </mat-toolbar>
-
-
--->
