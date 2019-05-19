@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 @Component({
   selector: 'app-chat-form',
@@ -7,7 +8,8 @@ import { ChatService } from '../../services/chat.service';
   styleUrls: ['./chat-form.component.css']
 })
 export class ChatFormComponent implements OnInit {
-  message: string;
+  message: string = '';
+  displayEmojiPane = false;
 
   constructor(private chat: ChatService) { }
 
@@ -24,4 +26,13 @@ export class ChatFormComponent implements OnInit {
       this.send();
     }
   }
+
+  selectEmoji($event) {
+    this.message = this.message + $event.emoji.native;
+  }
+
+  updateDisplay() {
+    this.displayEmojiPane = !this.displayEmojiPane;
+  }
+
 }

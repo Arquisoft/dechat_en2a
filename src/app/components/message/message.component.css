@@ -72,19 +72,6 @@
     margin: 10px;
 }
 
-.messageData{
-    position: sticky;
-    object-fit: cover;
-}
-
-.messageContainer img{
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-}
-
 .isOwnMessageContainer{
     background-color: #6f74dd;
     float: right;

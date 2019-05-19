@@ -6,9 +6,11 @@ import { ChatService } from '../../services/chat.service';
 import { ToastrModule } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 // Material
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('ChatFormComponent', () => {
     let component: ChatFormComponent;
@@ -20,6 +22,8 @@ describe('ChatFormComponent', () => {
             imports: [ FormsModule,
                 MatInputModule,
                 BrowserAnimationsModule,
+                PickerModule,
+                MatIconModule,
                 ToastrModule.forRoot() ],
             providers: [
                 { provide: ChatService, useClass: ChatService }

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 // Material
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -40,6 +41,7 @@ describe('ChatComponent', () => {
         AngularMultiSelectModule,
         BrowserAnimationsModule,
         MatSnackBarModule,
+        PickerModule,
          ToastrModule.forRoot()  ],
       providers: [ ChatService ]
     })

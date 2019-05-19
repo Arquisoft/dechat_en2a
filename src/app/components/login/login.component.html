@@ -2,8 +2,12 @@
 
   <!-- APP LOGO -->
   <div style="margin-top:0.000em;">
-    <img class="app-logo" src="assets/images/Dechat.png">
   </div>
+
+  <!-- APP NAME -->
+   <h1>
+   <img class="app-logo" src="assets/images/Dechat.png">
+  </h1>
 
   <!-- LOGIN DESCRIPTION -->
   <h3 i18n="Login description@@LoginDescription">
@@ -37,19 +41,30 @@
       </ng-template>
 
     </ng-select>
-    <input type="text"
-           class="wide-text"
-           *ngIf="selectedProviderUrl===null"
-           placeholder="Enter WebID"
-           style="margin-top:10px; padding: 12px 10px; width: 340px; height: 16px; display: block; margin-left: auto; margin-right: auto;"
-           [(ngModel)]="customProviderUrl" />
-    <button id="btn-go" class="wide-button" (click)="onLogin()" *ngIf="selectedProviderUrl !== undefined || customProviderUrl !== undefined" [disabled]="selectedProviderUrl===null && !customProviderUrl" style="margin-top:10px;">Go</button>
+
+
+    <mat-form-field *ngIf="selectedProviderUrl===null" color="accent" class="full-width">
+
+      <input matInput type="text"
+            placeholder="Enter WebID"
+            [(ngModel)]="customProviderUrl" />
+    </mat-form-field>
+
+    <button mat-raised-button matTooltipPosition="below" 
+    *ngIf="selectedProviderUrl !== undefined || customProviderUrl !== undefined" 
+    [disabled]="selectedProviderUrl===null && !customProviderUrl"
+    color="primary" matTooltip="Login with solid identity"
+    id="btn-go" (click)=onLogin()>Go</button>
+
+
   </div>
 
   <!-- REGISTRATION -->
   <div class="registration-link">
     <p style="margin: 12px;">Don't have a Solid Identity?</p>
-    <button id="btn-register" class="wide-button" (click)="goToRegistration()">Register</button>
+
+    <button mat-raised-button matTooltipPosition="below" color="primary" matTooltip="Register for a solid identity" id="btn-register" (click)=goToRegistration()>Register</button>
+
   </div>
 
   <!-- HELP -->

@@ -59,39 +59,17 @@ export class MessageComponent implements OnInit {
 
 
     checkUrl() {
-        if (/[.](jpg|png|gif)/.test(this.messageContent)) {
+          if (/[.](jpg|png|gif)/.test(this.messageContent)) {
                 return 1;
-        }else{
+        } else
           /*if (this.messageContent.includes('www.youtube')) {
             this.messageContent = this.messageContent.replace('watch?v=', 'embed/');
             this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.messageContent);
                 return 2;
-          
-         } else */ 
+         } else */
           if (/[.](es|com|net)/.test(this.messageContent )) {
             return 0;
-          }
-          else{
-            this.checkEmoji();
-          }
         }
 
-    }
-
-    checkEmoji(){
-      this.messageContent = this.messageContent.replace('(:smile)','😄');
-      this.messageContent = this.messageContent.replace('(:sweat)','😅');
-      this.messageContent = this.messageContent.replace('(:laugh)','😂');
-      this.messageContent = this.messageContent.replace('(:wink)','😉');
-      this.messageContent = this.messageContent.replace('(:kiss)','😘');
-      this.messageContent = this.messageContent.replace('(:hug)','🤗');
-      this.messageContent = this.messageContent.replace('(:surprise)','😮');
-      this.messageContent = this.messageContent.replace('(:flushed)','😳');
-      this.messageContent = this.messageContent.replace('(:crying)','😢');
-      this.messageContent = this.messageContent.replace('(:angry)','😠');
-      this.messageContent = this.messageContent.replace('(:heart)','❤');
-      this.messageContent = this.messageContent.replace('(:ok)','👌');
-      this.messageContent = this.messageContent.replace('(:thumbup)','👍');
-      this.messageContent = this.messageContent.replace('(:thumbdown)','👎');
     }
 }

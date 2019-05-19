@@ -1,7 +1,24 @@
 <div class="form-container mat-elevation-z3">
+
+
+
     <mat-form-field color="accent" class="full-width">
-        <input matInput [(ngModel)]="message" class="chatInput" (keydown)="handleSubmit($event)" placeholder="Write your message here...">
+        <input matInput [(ngModel)]="message" class="chatInput" (keydown)="handleSubmit($event)"
+            placeholder="Write your message here...">
     </mat-form-field>
+    <button mat-icon-button class="chatButton" color="accent" (click)=updateDisplay()>
+        <mat-icon aria-label="Emoticons buton">tag_faces</mat-icon>
+    </button>
+    <div *ngIf="displayEmojiPane">
+        <emoji-mart 
+            set="emojione"
+            emoji="point_up"
+            title="Pick your emoji..."
+            class="emojipane" 
+            (emojiSelect)="selectEmoji($event)">
+        </emoji-mart>
+    </div>
     <button mat-raised-button matTooltipPosition="above" color="accent" matTooltip="Send a new message"
         class="chatButton" id="send" (click)=send()>Send</button>
+
 </div>

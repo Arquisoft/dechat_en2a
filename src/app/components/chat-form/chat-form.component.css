@@ -25,10 +25,12 @@
 .chatButton {
   margin: 10px;
   align-self: center;
-  background-color: royalblue;
-  color: white;
-  font-weight: bold;
-  font-size: 1.35em;
-  width: 5em;
 }
 
+
+.emojipane {
+  float: right;
+  position: absolute;
+  right: 20px;
+  bottom: 100px;
+}
